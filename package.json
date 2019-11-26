@@ -1,0 +1,31 @@
+{
+  "name": "spontaneous.ly",
+  "version": "1.0.0",
+  "description": "Sponatenous.ly is an app that is designed for users that want to partake in a spontaneous adventure.  Users can: - Search by zip code - Filter results based on level of adventure, cost, and distance from their zipcode - Select an activity to commit to in their area - Reserve a spot at that activity - Gain points for completing the activity - Meet new people at the activity - Request to be a friend of other guests at that activity - View ther Spontaneity Points - View their friends list - View their pending friend requests - Send and receive messages from friends - View past activities and more",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinakahoshi/spontaneous.ly.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinakahoshi/spontaneous.ly/issues"
+  },
+  "homepage": "https://github.com/kevinakahoshi/spontaneous.ly#readme",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-transform-react-jsx": "^7.7.4",
+    "babel-loader": "^8.0.6",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
