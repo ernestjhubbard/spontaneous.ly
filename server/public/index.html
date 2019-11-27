@@ -4,10 +4,72 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css"
+    integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css"
+      integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="style.css">
   <title>Spontaneous.ly</title>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">
+
+    <div class="header-bar sticky-top">
+      <img class="logo-alone mt-3 ml-4" src="assets/images/logo-alone.png">
+      <i class="menu-bar fas fa-bars float-right mt-3 mr-4"></i>
+    </div>
+
+    <div class="center-nav">
+      <div class="gradient-bg"></div>
+      <div class="logo-text logo-title">Spontaneous.ly</div>
+      <div class="logo-text logo-motto">Get connected. Be spontaneous</div>
+      <input class="input-field" type="text" placeholder="Enter your zip"></input>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="bottom-text">Spontaneous Adventures for Any Interest</div>
+      <div class="d-flex flex-row horizontal-scroll">
+
+        <div class="col-sm-3">
+          <div class="card card-size">
+            <img src="assets/images/selective-focus-photography-of-paintbrush-near-paint-pallet-1047540.jpg" class="img-info card-img-top" alt="Wine and Paint">
+            <div class="card-footer">
+              <small class="text-muted">Wine and Paint</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card card-size">
+            <img src="assets/images/action-backlit-ball-basketball-1152853.jpg"
+              class="img-info card-img-top" alt="Backetball Leagues">
+            <div class="card-footer">
+              <small class="text-muted">Basketball Leagues</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          <div class="card card-size">
+            <img src="assets/images/backlit-beach-dawn-dusk-588561.jpg" class="img-info card-img-top" alt="Yoga">
+            <div class="card-footer">
+              <small class="text-muted">Yoga</small>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card card-size">
+            <img src="assets/images/sunset-beach-summer-hd-wallpaper-33443.jpg" class="img-info card-img-top"
+              alt="Parasailing">
+            <div class="card-footer">
+              <small class="text-muted">Parasailing</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
   <script src="main.js"></script>
 </body>
 </html>
