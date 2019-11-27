@@ -10,6 +10,6 @@ function check_connection($link)
   $sql = 'select 1';
   $link->query($sql);
   return [
-    'message' => 'Successfully connected to MySQL!'
+    'message' => 'Spontaneous.ly'
   ];
 }
