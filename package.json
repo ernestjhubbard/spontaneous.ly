@@ -1,14 +1,103 @@
 {
-  "name": "spontaneous.ly",
+  "name": "Spontaneous.ly",
   "version": "1.0.0",
-  "description": "Sponatenous.ly is an app that is designed for users that want to partake in a spontaneous adventure.  Users can: - Search by zip code - Filter results based on level of adventure, cost, and distance from their zipcode - Select an activity to commit to in their area - Reserve a spot at that activity - Gain points for completing the activity - Meet new people at the activity - Request to be a friend of other guests at that activity - View ther Spontaneity Points - View their friends list - View their pending friend requests - Send and receive messages from friends - View past activities and more",
-  "main": "index.js",
+  "description": "",
+  "private": true,
+  "main": "webpack.config.js",
   "scripts": {
     "build": "webpack --mode=production",
-    "dev": "npm-run-all --silent --parallel start client",
-    "db:export": "",
-    "db:import": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm-run-all --silent --parallel dev:*",
+    "dev:client": "webpack-dev-server",
+    "dev:server": "php -S '0.0.0.0:9000' -t server/public -c php.ini",
+    "db:export": "php database/export.php",
+    "db:import": "php database/import.php"
+  },
+  "devDependencies": {
+    "@babel/core": "7.7.4",
+    "@babel/plugin-transform-react-jsx": "7.7.4",
+    "babel-eslint": "10.0.3",
+    "babel-loader": "8.0.6",
+    "eslint": "6.7.0",
+    "eslint-config-standard": "14.1.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-node": "10.0.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-react": "7.16.0",
+    "eslint-plugin-standard": "4.0.1",
+    "husky": "3.1.0",
+    "lint-staged": "9.4.3",
+    "npm-run-all": "4.1.5",
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.9.0"
+  },
+  "dependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "eslintIgnore": [
+    "server/public/main.js"
+  ],
+  "eslintConfig": {
+    "env": {
+      "browser": true,
+      "node": true
+    },
+    "parser": "babel-eslint",
+    "extends": [
+      "plugin:react/recommended",
+      "eslint:recommended",
+      "standard"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "padded-blocks": 0,
+      "arrow-parens": [
+        "error",
+        "as-needed"
+      ],
+      "curly": [
+        "error",
+        "multi-line"
+      ],
+      "no-console": [
+        "error",
+        {
+          "allow": [
+            "warn",
+            "error"
+          ]
+        }
+      ],
+      "space-before-function-paren": [
+        "error",
+        {
+          "anonymous": "always",
+          "named": "never",
+          "asyncArrow": "always"
+        }
+      ],
+      "react/prop-types": 0
+    }
   },
   "repository": {
     "type": "git",
@@ -20,16 +109,5 @@
   "bugs": {
     "url": "https://github.com/kevinakahoshi/spontaneous.ly/issues"
   },
-  "homepage": "https://github.com/kevinakahoshi/spontaneous.ly#readme",
-  "dependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.7.4",
-    "@babel/plugin-transform-react-jsx": "^7.7.4",
-    "babel-loader": "^8.0.6",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10"
-  }
+  "homepage": "https://github.com/kevinakahoshi/spontaneous.ly#readme"
 }
