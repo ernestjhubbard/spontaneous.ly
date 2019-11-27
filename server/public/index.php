@@ -8,7 +8,8 @@ switch ($request['path']) {
     exit;
   case '/api/users':
   case '/api/reservations':
-  case '/api/activities':
+  case '/api/all-activities':
+  case '/api/activity-details':
   case '/api/health-check':
     require_once "..${request['path']}.php";
   default:
