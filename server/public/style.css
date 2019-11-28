@@ -17,7 +17,6 @@ body{
 .header-bar{
   background-color: #F07070;
   height: 10vh;
-  display: flex;
   justify-content: space-between;
 }
 
