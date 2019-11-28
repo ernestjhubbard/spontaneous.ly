@@ -17,15 +17,13 @@ body{
 .header-bar{
   background-color: #F07070;
   height: 10vh;
+  display: flex;
+  justify-content: space-between;
 }
 
 .logo-alone{
   height: 60%;
-}
-
-.menu-bar{
-  font-size: 3rem;
-  color: white;
+  margin: auto 0 auto 1rem;
 }
 
 .top-banner{
@@ -257,4 +255,95 @@ button:focus {
   display: inline-block;
   transition: .3s all;
   cursor: pointer;
+}
+
+.shut {
+  font-size: 2rem;
+  padding-bottom: .333em;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: .25s all;
+  overflow: hidden;
+  display: block;
+}
+
+.menu-closed {
+  opacity: 0%;
+  visibility: hidden;
+}
+
+.menu-open {
+  opacity: 100%;
+  background-image: linear-gradient(#00000050, #00000050);
+}
+
+.nav-drawer {
+  padding: 3.8rem 2rem;
+  position: absolute;
+  height: 100%;
+  background: #fff;
+  top: 0px;
+  right: 0px;
+  width: 80%;
+  transition: .25s all;
+}
+
+.hamburger {
+  font-size: 2rem;
+  text-align: right;
+  cursor: pointer;
+  transform: scaleX(1.5);
+  color: white;
+}
+
+.nav-closed {
+  transform: translateX(100%);
+}
+
+.nav-open {
+  transform: translateX(0px);
+}
+
+.nav-drawer h3 {
+  font-size: 3rem;
+  margin-block-start: .333em;
+}
+
+.nav-drawer a {
+  font-size: 1rem;
+  margin: 1rem 0em;
+  display: block;
+  color: #f07070;
+  transition: .25s all;
+  text-decoration: none;
+}
+
+.nav-drawer a:hover {
+  color: #e76c6c
+}
+
+ul {
+  padding-inline-start: 0px;
+  list-style-type: none;
+}
+
+.shut {
+  color: #000;
+}
+
+.closeIcon {
+  cursor: pointer;
+}
+
+.menu-nav-bar{
+  margin: auto 1.5rem auto 0;
 }
