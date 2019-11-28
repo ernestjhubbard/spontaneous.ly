@@ -5,6 +5,13 @@
 
 body{
   font-family: 'Roboto Mono';
+  margin: 0;
+}
+
+.container{
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .header-bar{
@@ -21,6 +28,15 @@ body{
   color: white;
 }
 
+.top-banner{
+  height: 30vh;
+  background-image: url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: .8;
+}
+
 .center-nav{
   height: 57vh;
   background-image: url(assets/images/action-adult-balance-balancing-415176.jpg);
@@ -34,6 +50,24 @@ body{
   background-image: linear-gradient(purple, pink);
   height: 100%;
   opacity: .5;
+}
+
+.text{
+  color: white;
+  position: absolute;
+}
+
+.banner-text {
+  font-size: 2rem;
+  top: 16%;
+  left: 17%;
+  text-align: center;
+  width: 67%;
+}
+
+.location-text{
+  top: 28%;
+  left:37%;
 }
 
 .logo-text{
@@ -78,4 +112,149 @@ body{
 
 .horizontal-scroll{
   overflow-x: scroll;
+}
+
+.outer {
+  margin: auto;
+  position: relative;
+}
+
+.inner {
+  width: 360px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.slides {
+  display: flex;
+  width: fit-content;
+  transition: .3s all;
+}
+
+.indicator {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  transition: .3s all;
+  background: #fff;
+}
+
+.active {
+  background: #ccc;
+}
+
+.carousel-container {
+  height: 350px;
+  width: 360px;
+  display: flex;
+}
+
+.inner-card {
+  margin: auto;
+}
+
+.image-title {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+  color: #fff;
+  margin: 0rem auto .75rem auto;
+}
+
+.learn-more-cta {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background: #f07070;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: .3s all;
+}
+
+.learn-more-cta:hover {
+  background: #e76c6c;
+}
+
+#number-one {
+  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/2062637/pexels-photo-2062637.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-size: cover;
+  background-position: center;
+}
+
+#number-two {
+  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-size: cover;
+  background-position: center;
+}
+
+#number-three {
+  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-size: cover;
+  background-position: center;
+}
+
+#number-four {
+  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/1037993/pexels-photo-1037993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-size: cover;
+  background-position: center;
+}
+
+#number-five {
+  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/673857/pexels-photo-673857.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-size: cover;
+  background-position: center;
+}
+
+#number-six {
+  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/1407305/pexels-photo-1407305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+  background-size: cover;
+  background-position: center;
+}
+
+.arrow {
+  height: 40px;
+  width: 40px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  top: 50%;
+  position: absolute;
+  transition: .3s all;
+  cursor: pointer;
+}
+
+.arrow:hover {
+  background: #f07070;
+  border-color: #f07070;
+  color: #fff;
+}
+
+.left {
+  transform: translate(-50%, -50%);
+  left: 4%;
+  z-index: 1;
+}
+
+.right {
+  transform: translate(50%, -50%);
+  right: 6%;
+  z-index: 1;
+}
+
+button:focus {
+  outline: none;
+}
+
+.current-image {
+  width: 50px;
+  height: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  transition: .3s all;
+  cursor: pointer;
 }
