@@ -6,18 +6,18 @@ class Carousel extends React.Component {
     this.state = {
       currentCard: 1,
       position: 0,
-      maxCards: 6,
-      interval: 0
+      maxCards: 6
     };
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.moveBackward = this.moveBackward.bind(this);
     this.moveForward = this.moveForward.bind(this);
     this.getPosition = this.getPosition.bind(this);
+    this.startTimer();
   }
 
   startTimer() {
-    setInterval(this.moveForward, this.state.interval);
+    setInterval(this.moveForward, 5000);
   }
 
   stopTimer() {
@@ -77,43 +77,43 @@ class Carousel extends React.Component {
   render() {
     const currentPosition = this.getPosition();
     return (
-      <div className="outer mt-3 ml-2">
+      <div className="outer">
         <div className="inner">
-          <div className="slides" style={{ transform: `translateX(${currentPosition.position}px)` }}>
-            <div className="carousel-container" id="number-one">
+          <div className="slides" style={{ transform: `translateY(${currentPosition.position}px)` }}>
+            <div className="carousel-container w-100" id="number-one">
               <div className="inner-card">
-                <h3 className="image-title">Title 1</h3>
-                <button className="learn-more-cta">Learn More</button>
+                <h3 className="text-white text-center mb-3">Title 1</h3>
+                <button className="learn-more-cta m-auto">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-two">
+            <div className="carousel-container w-100" id="number-two">
               <div className="inner-card">
-                <h3 className="image-title">Title 2</h3>
-                <button className="learn-more-cta">Learn More</button>
+                <h3 className="text-white text-center mb-3">Title 2</h3>
+                <button className="learn-more-cta m-auto">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-three">
+            <div className="carousel-container w-100" id="number-three">
               <div className="inner-card">
-                <h3 className="image-title">Title 3</h3>
-                <button className="learn-more-cta">Learn More</button>
+                <h3 className="text-white text-center mb-3">Title 3</h3>
+                <button className="learn-more-cta m-auto">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-four">
+            <div className="carousel-container w-100" id="number-four">
               <div className="inner-card">
-                <h3 className="image-title">Title 4</h3>
-                <button className="learn-more-cta">Learn More</button>
+                <h3 className="text-white text-center mb-3">Title 4</h3>
+                <button className="learn-more-cta m-auto">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-five">
+            <div className="carousel-container w-100" id="number-five">
               <div className="inner-card">
-                <h3 className="image-title">Title 5</h3>
-                <button className="learn-more-cta">Learn More</button>
+                <h3 className="text-white text-center mb-3">Title 5</h3>
+                <button className="learn-more-cta m-auto">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-six">
+            <div className="carousel-container w-100" id="number-six">
               <div className="inner-card">
-                <h3 className="image-title">Title 6</h3>
-                <button className="learn-more-cta">Learn More</button>
+                <h3 className="text-white text-center mb-3">Title 6</h3>
+                <button className="learn-more-cta m-auto">Learn More</button>
               </div>
             </div>
           </div>

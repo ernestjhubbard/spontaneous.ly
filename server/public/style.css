@@ -5,61 +5,34 @@
 
 body{
   font-family: 'Roboto Mono';
-  margin: 0;
-}
-
-.container{
-  width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 .header-bar{
   background-color: #F07070;
-  height: 10vh;
   justify-content: space-between;
+  padding: 15px;
 }
 
 .logo-alone{
-  height: 60%;
-  margin: auto 0 auto 1rem;
+  height: 2.8rem;
 }
 
 .top-banner{
   height: 30vh;
-  background-image: url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
+  background-image: linear-gradient(#801d8080, #ffc0cb80),
+  url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: .8;
 }
 
-.center-nav{
+.center-nav {
   height: 57vh;
-  background-image: url(assets/images/action-adult-balance-balancing-415176.jpg);
-  background-size: 110%;
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url('assets/images/action-adult-balance-balancing-415176.jpg');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: .8;
-}
-
-.gradient-bg{
-  background-image: linear-gradient(purple, pink);
-  height: 100%;
-  opacity: .5;
-}
-
-.text{
-  color: white;
-  position: absolute;
-}
-
-.banner-text {
-  font-size: 2rem;
-  top: 16%;
-  left: 17%;
-  text-align: center;
-  width: 67%;
+  color: #fff;
 }
 
 .location-text{
@@ -67,43 +40,18 @@ body{
   left:37%;
 }
 
-.logo-text{
-  position: absolute;
-}
-
-.logo-title{
-  top: 31%;
-  left: 5%;
-  color: white;
-  font-size: 2.5rem;
-}
-
-.logo-motto{
-  top: 38%;
-  left: 15%;
-  color: white;
-}
-
-.input-field{
-  position: absolute;
-  border-radius: 10px;
-  text-align: center;
-  top: 43%;
-  left: 11%;
-  height: 7%;
-  width: 80%;
-}
-
-.bottom-text{
-  font-size: 1.5rem;
-}
-
 .card-size{
-  width: 200px;
+  width: 100%;
+  min-width: 200px;
+  align-items: stretch;
 }
 
-.img-info{
-  height: 17vh;
+.adventure-card a {
+  color: #f07070;
+}
+
+.img-info {
+  height: 20vh;
   object-fit: cover;
 }
 
@@ -117,7 +65,6 @@ body{
 }
 
 .inner {
-  width: 360px;
   height: 350px;
   overflow: hidden;
   border-radius: 5px;
@@ -125,8 +72,6 @@ body{
 }
 
 .slides {
-  display: flex;
-  width: fit-content;
   transition: .3s all;
 }
 
@@ -144,20 +89,11 @@ body{
 
 .carousel-container {
   height: 350px;
-  width: 360px;
   display: flex;
 }
 
 .inner-card {
   margin: auto;
-}
-
-.image-title {
-  font-size: 2rem;
-  font-weight: 300;
-  text-align: center;
-  color: #fff;
-  margin: 0rem auto .75rem auto;
 }
 
 .learn-more-cta {
@@ -232,13 +168,13 @@ body{
 
 .left {
   transform: translate(-50%, -50%);
-  left: 4%;
+  left: 15px;
   z-index: 1;
 }
 
 .right {
   transform: translate(50%, -50%);
-  right: 6%;
+  right: 15px;
   z-index: 1;
 }
 
@@ -258,7 +194,6 @@ button:focus {
 
 .shut {
   font-size: 2rem;
-  padding-bottom: .333em;
   display: block;
   border-bottom: 1px solid #ccc;
 }
@@ -298,7 +233,6 @@ button:focus {
 
 .hamburger {
   font-size: 2rem;
-  text-align: right;
   cursor: pointer;
   transform: scaleX(1.5);
   color: white;
@@ -344,5 +278,5 @@ ul {
 }
 
 .menu-nav-bar{
-  margin: auto 1.5rem auto 0;
+  margin: auto 8px auto auto;
 }
