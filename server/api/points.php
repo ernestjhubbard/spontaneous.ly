@@ -5,7 +5,6 @@ if ($request['method'] === 'POST') {
   $user_id = 1;
   $transaction_type = $request['body']['transactionType'];
   if($transaction_type ==="reservation" && isset($request['body']['activityId'])){
-    print('what the fuck');
       $activity_id = $request['body']['activityId'];
       $transaction = "reservation";
       $sql_points = "SELECT points 

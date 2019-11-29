@@ -11,3 +11,9 @@ if ($request['method'] === 'GET') {
     $response['body'] = $output;
     send($response);
 }
+if ($request['method'] === 'POST'){
+    $user_request = $request['body'];
+    if(isset($user_request['firstName'])){
+      
+    }
+}
