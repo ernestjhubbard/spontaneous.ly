@@ -53,7 +53,7 @@ class Carousel extends React.Component {
     });
   }
 
-  getPosition() {
+  getPosition(props) {
     const position = {
       currentCard: this.state.currentCard,
       position: this.state.position,
@@ -62,11 +62,11 @@ class Carousel extends React.Component {
     for (let index = 0; index < this.state.maxCards; index++) {
       const id = index + 1;
       if (index + 1 === position.currentCard) {
-        position.currentImageArray.push(<div className="current-image active" id={id} key={id} onClick={() => {
+        position.currentImageArray.push(<div className="current-image active" id={this.props.id} key={id} onClick={() => {
           this.setPosition(id);
         }}></div>);
       } else {
-        position.currentImageArray.push(<div className="current-image" id={id} key={id} onClick={() => {
+        position.currentImageArray.push(<div className="current-image" id={this.props.id} key={id} onClick={() => {
           this.setPosition(id);
         }}></div>);
       }
@@ -79,50 +79,79 @@ class Carousel extends React.Component {
     return (
       <div className="outer mt-3 ml-2">
         <div className="inner">
-          <div className="slides" style={{ transform: `translateX(${currentPosition.position}px)` }}>
-            <div className="carousel-container" id="number-one">
+          <div
+            className="slides"
+            style={{ transform: `translateX(${currentPosition.position}px)` }}
+          >
+            <div
+              className="carousel-container"
+              style={{ backgroundImage: `url(${this.props.image})` }}
+              id={this.props.id}
+            >
               <div className="inner-card">
-                <h3 className="image-title">Title 1</h3>
+                <h3 className="image-title">{this.props.name}</h3>
                 <button className="learn-more-cta">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-two">
+            <div
+              className="carousel-container"
+              style={{ backgroundImage: `url(${this.props.image})` }}
+              id={this.props.id}
+            >
               <div className="inner-card">
-                <h3 className="image-title">Title 2</h3>
+                <h3 className="image-title">{this.props.name}</h3>
                 <button className="learn-more-cta">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-three">
+            <div
+              className="carousel-container"
+              style={{ backgroundImage: `url(${this.props.image})` }}
+              id={this.props.id}
+            >
               <div className="inner-card">
-                <h3 className="image-title">Title 3</h3>
+                <h3 className="image-title">{this.props.name}</h3>
                 <button className="learn-more-cta">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-four">
+            <div
+              className="carousel-container"
+              style={{ backgroundImage: `url(${this.props.image})` }}
+              id={this.props.id}
+            >
               <div className="inner-card">
-                <h3 className="image-title">Title 4</h3>
+                <h3 className="image-title">{this.props.name}</h3>
                 <button className="learn-more-cta">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-five">
+            <div
+              className="carousel-container"
+              style={{ backgroundImage: `url(${this.props.image})` }}
+              id={this.props.id}
+            >
               <div className="inner-card">
-                <h3 className="image-title">Title 5</h3>
+                <h3 className="image-title">{this.props.name}</h3>
                 <button className="learn-more-cta">Learn More</button>
               </div>
             </div>
-            <div className="carousel-container" id="number-six">
+            <div
+              className="carousel-container"
+              style={{ backgroundImage: `url(${this.props.image})` }}
+              id={this.props.id}
+            >
               <div className="inner-card">
-                <h3 className="image-title">Title 6</h3>
+                <h3 className="image-title">{this.props.name}</h3>
                 <button className="learn-more-cta">Learn More</button>
               </div>
             </div>
           </div>
         </div>
-        <div className="indicator">
-          {currentPosition.currentImageArray}
-        </div>
-        <button className="arrow left" onClick={this.moveBackward}>←</button>
-        <button className="arrow right" onClick={this.moveForward}>→</button>
+        <div className="indicator">{currentPosition.currentImageArray}</div>
+        <button className="arrow left" onClick={this.moveBackward}>
+          ←
+        </button>
+        <button className="arrow right" onClick={this.moveForward}>
+          →
+        </button>
       </div>
     );
   }
