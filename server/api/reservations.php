@@ -5,7 +5,7 @@ $link = get_db_link();
 if ($request['method'] === 'POST') {
   $activity_id = $request['body']['activityId'];
   if (!isset($activity_id) || !is_numeric($activity_id) || intval($activity_id) === 0) {
-    throw new ApiError('Valid ActivityId Required', 400);
+    throw new ApiError('Valid Activity ID Required', 400);
   } else {
     $sql_activity = "SELECT activityId
                        FROM activities
@@ -29,9 +29,9 @@ if ($request['method'] === 'POST') {
     } else {
       $reservation_status = mysqli_fetch_assoc($is_cancelled_query);
       $sql_reservation = "UPDATE reservations
-                           SET isCancelled = 1
-                         WHERE userId = $user_id
-                           AND activityId = $activity_id";
+                             SET isCancelled = 1
+                           WHERE userId = $user_id
+                             AND activityId = $activity_id";
       mysqli_query($link, $sql_reservation);
       $response['body'] = "req updated";
       send($response);

@@ -11,9 +11,14 @@ if ($request['method'] === 'GET') {
     $response['body'] = $output;
     send($response);
 }
-if ($request['method'] === 'POST'){
-    $user_request = $request['body'];
-    if(isset($user_request['firstName'])){
-      
+
+if ($request['method'] === 'POST') {
+    $query =   "SELECT * FROM users";
+    $result = mysqli_query($link, $query);
+    $output = [];
+    while($row = mysqli_fetch_assoc($result)){
+      $output[] = $row;
     }
+    $response['body'] = $output;
+    send($response);
 }
