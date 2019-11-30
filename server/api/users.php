@@ -1,15 +1,18 @@
 <?php
 $link = get_db_link();
-
 if ($request['method'] === 'GET') {
-    $user_session = $_SESSION['userId'];
-    $query =  "SELECT * FROM users WHERE userId = $user_session";
-    $result = mysqli_query($link, $query);
-    $output = mysqli_fetch_assoc($result);
+    $user_session = $_SESSION['user_id'];
+    $id = $user_session;
+    $sql_login = "SELECT userId FROM `logins` ORDER BY `logins`.`loginId` DESC";
+    $login_query = mysqli_query($link, $sql_login);
+    $user_fetch = mysqli_fetch_assoc($login_query);
+    $user_id = $user_fetch['userId'];
+    $user_query =  "SELECT * FROM users AS u WHERE $user_id = u.`userId`";
+    $user_result = mysqli_query($link, $user_query);
+    $output = mysqli_fetch_assoc($user_result);
     $response['body'] = $output;
     send($response);
-}
-
+  }
 if ($request['method'] === 'POST') {
     $user_email = $request['body']['email'];
     if(!isset($user_email)){
@@ -18,7 +21,10 @@ if ($request['method'] === 'POST') {
     $user_query = "SELECT userId from users WHERE '$user_email' = email";
     $user_id = mysqli_query($link, $user_query);
     $id = mysqli_fetch_assoc($user_id);
-    $_SESSION = $id;
-    $response['body']= $id;
+    $login_id = $id['userId'];
+    $sql_login = "INSERT INTO logins (userId) VALUES ($login_id)";
+    mysqli_query($link, $sql_login);
+    $_SESSION['user_id'] = $id['userId'];
+    $response['body']= $_SESSION['user_id'];
     send($response);
   }

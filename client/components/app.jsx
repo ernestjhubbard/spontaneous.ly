@@ -8,23 +8,28 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'home',
+      view: 'profilePage',
       user: {
         firstName: '',
         lastName: '',
         image: '',
         email: '',
-        spontaneityPoints: 0,
+        points: 0,
         friends: []
       }
     };
     this.setView = this.setView.bind(this);
+    this.fetchUser = this.fetchUser.bind(this);
   }
 
   setView(name) {
     this.setState({
       view: name
     });
+  }
+
+  componentDidMount() {
+    this.fetchUser();
   }
 
   fetchUser() {
@@ -36,7 +41,16 @@ class App extends React.Component {
     };
     fetch('/api/users', userConfig)
       .then(results => results.json())
-      .then(data => this.setState({ cart: this.state.cart.concat(data) }));
+      .then(data => this.setState({
+        user: {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          image: data.image,
+          email: data.email,
+          points: 0
+        }
+      })
+      );
   }
 
   render() {

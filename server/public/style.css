@@ -244,12 +244,16 @@ ul {
   margin: auto 8px auto auto;
 }
 
-<<<<<<< HEAD
 .profile-center {
   height: 57vh;
 }
-=======
+
+.user-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 input::placeholder {
   color: #ccc;
 }
->>>>>>> f1e30fdb6831c965d88da371cb5bcbc1a06f4f94
