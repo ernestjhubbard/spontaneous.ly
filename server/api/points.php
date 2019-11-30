@@ -3,7 +3,7 @@
 $link = get_db_link();
 
 if ($request['method'] === 'POST') {
-  $user_id = 1;
+  $user_id = 4;
   $transaction_type = $request['body']['transactionType'];
   if ($transaction_type === "reservation" && isset($request['body']['activityId'])){
       $activity_id = $request['body']['activityId'];
