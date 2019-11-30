@@ -6,13 +6,15 @@ class Carousel extends React.Component {
     this.state = {
       currentCard: 1,
       position: 0,
-      maxCards: 6
+      maxCards: 6,
+      activities: []
     };
     this.startTimer = this.startTimer.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
     this.moveBackward = this.moveBackward.bind(this);
     this.moveForward = this.moveForward.bind(this);
     this.getPosition = this.getPosition.bind(this);
+    this.getAllActivities = this.getAllActivities.bind(this);
     this.startTimer();
   }
 
@@ -28,8 +30,8 @@ class Carousel extends React.Component {
     newState.currentCard--;
     newState.position = newState.position + 350;
     if (newState.currentCard === 0) {
-      newState.currentCard = 6;
-      newState.position = -1750;
+      newState.currentCard = this.state.activities.length;
+      newState.position = -((this.state.activities.length - 1) * 350);
     }
     this.setState(newState);
   }
@@ -38,7 +40,7 @@ class Carousel extends React.Component {
     const newState = this.state;
     newState.currentCard++;
     newState.position = newState.position - 350;
-    if (newState.currentCard === 7) {
+    if (newState.currentCard === this.state.activities.length + 1) {
       newState.currentCard = 1;
       newState.position = 0;
     }
@@ -59,7 +61,7 @@ class Carousel extends React.Component {
       position: this.state.position,
       currentImageArray: []
     };
-    for (let index = 0; index < this.state.maxCards; index++) {
+    for (let index = 0; index < this.state.activities.length; index++) {
       const id = index + 1;
       if (index + 1 === position.currentCard) {
         position.currentImageArray.push(<div className="current-image active" id={this.props.id} key={id} onClick={() => {
@@ -74,66 +76,41 @@ class Carousel extends React.Component {
     return position;
   }
 
+  componentDidMount() {
+    this.getAllActivities();
+  }
+
+  getAllActivities() {
+    fetch('api/all-activities')
+      .then(response => response.json())
+      .then(activityList => {
+        const listedActivities = this.state.activities.concat(activityList);
+        this.setState({ activities: listedActivities });
+      })
+      .catch(error => console.error('Fetch error: ', error));
+  }
+
   render() {
     const currentPosition = this.getPosition();
+    var activityCard = this.state.activities.map(activity => {
+      return (
+        <div
+          className="carousel-container w-100"
+          style={{ backgroundImage: `linear-gradient(#00000033, #00000033), url(${activity.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+          id={activity.activityId}
+          key={activity.activityId}>
+          <div className="inner-card text-center">
+            <h3 className="text-white text-center mb-3">{activity.activity}</h3>
+            <button className="learn-more-cta m-auto">Learn More</button>
+          </div>
+        </div>
+      );
+    });
     return (
       <div className="outer">
         <div className="inner">
           <div className="slides" style={{ transform: `translateY(${currentPosition.position}px)` }}>
-            <div
-              className="carousel-container w-100"
-              style={{ backgroundImage: `url(${this.props.image})` }}
-              id={this.props.id} >
-              <div className="inner-card">
-                <h3 className="text-white text-center mb-3">{this.props.name}</h3>
-                <button className="learn-more-cta m-auto">Learn More</button>
-              </div>
-            </div>
-            <div
-              className="carousel-container w-100"
-              style={{ backgroundImage: `url(${this.props.image})` }}
-              id={this.props.id} >
-              <div className="inner-card">
-                <h3 className="text-white text-center mb-3">{this.props.name}</h3>
-                <button className="learn-more-cta m-auto">Learn More</button>
-              </div>
-            </div>
-            <div
-              className="carousel-container w-100"
-              style={{ backgroundImage: `url(${this.props.image})` }}
-              id={this.props.id} >
-              <div className="inner-card">
-                <h3 className="text-white text-center mb-3">{this.props.name}</h3>
-                <button className="learn-more-cta m-auto">Learn More</button>
-              </div>
-            </div>
-            <div
-              className="carousel-container w-100"
-              style={{ backgroundImage: `url(${this.props.image})` }}
-              id={this.props.id} >
-              <div className="inner-card">
-                <h3 className="text-white text-center mb-3">{this.props.name}</h3>
-                <button className="learn-more-cta m-auto">Learn More</button>
-              </div>
-            </div>
-            <div
-              className="carousel-container w-100"
-              style={{ backgroundImage: `url(${this.props.image})` }}
-              id={this.props.id} >
-              <div className="inner-card">
-                <h3 className="text-white text-center mb-3">{this.props.name}</h3>
-                <button className="learn-more-cta m-auto">Learn More</button>
-              </div>
-            </div>
-            <div
-              className="carousel-container w-100"
-              style={{ backgroundImage: `url(${this.props.image})` }}
-              id={this.props.id}>
-              <div className="inner-card">
-                <h3 className="text-white text-center mb-3">{this.props.name}</h3>
-                <button className="learn-more-cta m-auto">Learn More</button>
-              </div>
-            </div>
+            {activityCard}
           </div>
         </div>
         <div className="indicator">{currentPosition.currentImageArray}</div>
