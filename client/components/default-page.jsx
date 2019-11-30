@@ -7,8 +7,8 @@ function DefaultPage(props) {
         <div className="m-auto">
           <h1 className="text-center h2">Spontaneous.ly</h1>
           <p className="text-center">Get connected. Be spontaneous</p>
-          <form action="" onSubmit={() => props.setView('activityList')}>
-            <input className="form-control form-control-lg border text-center"
+          <form onSubmit={() => props.setView('activityList')}>
+            <input className="form-control-lg border text-center"
               type="text"
               placeholder="Enter your zip"></input>
           </form>
