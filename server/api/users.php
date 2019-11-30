@@ -13,12 +13,14 @@ if ($request['method'] === 'GET') {
 }
 
 if ($request['method'] === 'POST') {
-    $query =   "SELECT * FROM users";
-    $result = mysqli_query($link, $query);
-    $output = [];
-    while($row = mysqli_fetch_assoc($result)){
-      $output[] = $row;
+    $user_email = $request['body']['email'];
+    if(!isset($user_email)){
+      throw new ApiError('User email is required', 400);
     }
-    $response['body'] = $output;
+    $user_query = "SELECT userId from users WHERE '$user_email' = email";
+    $user_id = mysqli_query($link, $user_query);
+    $id = mysqli_fetch_assoc($user_id);
+    $_SESSION = $id;
+    $response['body']= $id;
     send($response);
-}
+  }
