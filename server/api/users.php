@@ -13,18 +13,21 @@ if ($request['method'] === 'GET') {
   }
 if ($request['method'] === 'POST') {
     $user_email = $request['body']['email'];
-    // $user_first_name = $request['body']['firstName'];
-    // $user_last_name = $request['body']['lastName'];
-    // $user_password = $request['body']['password'];
-    // $user_image = $request['body']['image'];
+    $user_first_name = $request['body']['firstName'];
+    $user_last_name = $request['body']['lastName'];
+    $user_password = $request['body']['password'];
+    $user_image = $request['body']['image'];
     if(!isset($user_email)){
       throw new ApiError('User email is required', 400);
     }
-    // if(isset($user_first_name)){
-    //   $create_user = "INSERT INTO users (`email`, `firstName`, `lastName`, `image`) VALUES (?,?,?,?)";
-    //   $sql_prepare_user = mysqli_prepare($link, $create_user);
-    //   mysqli_stmt_bind_param($sql_prepare_user, 'ssss', $user_email, $user_first_name, $user_last_name, $user_image);
-    // }
+    if(isset($user_first_name)){
+      $create_user = "INSERT INTO users (`email`, `firstName`, `lastName`, `image`, `password`) VALUES (?,?,?,?,?)";
+      $sql_prepare_user = mysqli_prepare($link, $create_user);
+      mysqli_stmt_bind_param($sql_prepare_user, 'sssss', $user_email, $user_first_name, $user_last_name, $user_image, $user_password);
+      mysqli_stmt_execute($sql_prepare_user);
+      $insert = mysqli_insert_id($link);
+    }
+    else{
     $user_query = "SELECT userId from users WHERE '$user_email' = email";
     $user_id = mysqli_query($link, $user_query);
     $id = mysqli_fetch_assoc($user_id);
@@ -34,4 +37,5 @@ if ($request['method'] === 'POST') {
     $_SESSION['user_id'] = $id['userId'];
     $response['body']= $_SESSION['user_id'];
     send($response);
+    }
   }
