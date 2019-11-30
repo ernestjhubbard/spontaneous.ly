@@ -66,7 +66,7 @@ class App extends React.Component {
     };
     fetch('/api/users', config)
       .then(results => results.json())
-      .then(data => this.setState({ view: 'home' }));
+      .then(data => this.setView('home'));
     this.fetchUser();
   }
 
@@ -82,6 +82,7 @@ class App extends React.Component {
     fetch('/api/users', config)
       .then(results => results.json())
       .then(data => data);
+    this.setView('signIn');
   }
 
   render() {

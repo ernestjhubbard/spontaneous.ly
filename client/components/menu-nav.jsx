@@ -25,6 +25,15 @@ class MenuNav extends React.Component {
   }
 
   render() {
+    const view = this.props.currentView;
+    const viewBoolean = view === 'signIn' || view === 'createAccount';
+    const signIn = <button
+      className="spon-button rounded text-white"
+      onClick={() => this.props.setView('signIn')}>Sign In</button>;
+    const createAccount = <button
+      className="spon-button rounded text-white"
+      onClick={() => this.props.setView('createAccount')}>Create Account</button>;
+    const pageOrSignIn = viewBoolean ? 'signIn' : 'profilePage';
     return (
       <div className="menu-nav-bar">
         <i className="fas fa-bars hamburger" onClick={this.changeDrawer}></i>
@@ -33,25 +42,25 @@ class MenuNav extends React.Component {
             <div className="shut mb-3">
               <i className="fas fa-times close-icon" onClick={this.changeDrawer}></i>
             </div>
-            <h6 className="text-center">Welcome Back</h6>
+            {viewBoolean ? null : <h6 className="text-center">Welcome Back</h6>}
             <ul>
-              <li onClick={() => this.props.setView('profilePage')}>
-                {this.props.currentView === 'home' ? <a href="#">View Profile</a> : null}
+              <li onClick={() => this.props.setView(pageOrSignIn)}>
+                {viewBoolean ? signIn : <a href="#">View Profile</a>}
               </li>
               <li>
-                <a href="#">Account Settings</a>
+                {viewBoolean ? createAccount : <a href="#">Account Settings</a>}
               </li>
               <li>
-                <a href="#">Upcoming Adventures</a>
+                {viewBoolean ? null : <a href="#">Upcoming Adventures</a>}
               </li>
               <li>
-                <a href="#">Past Adventures</a>
+                {viewBoolean ? null : <a href="#">Past Adventures</a>}
               </li>
               <li>
-                <a href="#">View Friends</a>
+                {viewBoolean ? null : <a href="#">View Friends</a>}
               </li>
               <li>
-                <a href="#">Read Messages</a>
+                {viewBoolean ? null : <a href="#">Read Messages</a>}
               </li>
             </ul>
           </div>
