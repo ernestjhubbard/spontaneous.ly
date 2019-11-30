@@ -2,12 +2,10 @@
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-    $query =   "SELECT * FROM users";
+    $user_session = $_SESSION['userId'];
+    $query =  "SELECT firstName FROM users WHERE userId = $user_session";
     $result = mysqli_query($link, $query);
-    $output = [];
-    while($row = mysqli_fetch_assoc($result)){
-      $output[] = $row;
-    }
+    $output = mysqli_fetch_assoc($result);
     $response['body'] = $output;
     send($response);
 }

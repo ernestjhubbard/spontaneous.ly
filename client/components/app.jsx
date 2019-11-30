@@ -27,9 +27,17 @@ class App extends React.Component {
     });
   }
 
-  fetchUser() {
-
-  }
+  // fetchUser(userId) {
+  //   const userConfig = {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     }
+  //   };
+  //   fetch(`/api/cart/${userId}`, userConfig)
+  //     .then(results => results.json())
+  //     .then(data => this.setState({ cart: this.state.cart.concat(data) }));
+  // }
 
   render() {
     let differentPage;
