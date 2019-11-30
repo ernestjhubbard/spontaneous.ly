@@ -8,7 +8,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'profilePage',
+      view: 'home',
       user: {
         firstName: '',
         lastName: '',
