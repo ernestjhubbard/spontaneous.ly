@@ -30,10 +30,10 @@ class MenuNav extends React.Component {
         <i className="fas fa-bars hamburger" onClick={this.changeDrawer}></i>
         <div className={`menu menu-${this.checkIfOpen()}`}>
           <div className={`nav-drawer nav-${this.checkIfOpen()}`}>
-            <div className={'shut'}>
+            <div className="shut mb-3">
               <i className="fas fa-times close-icon" onClick={this.changeDrawer}></i>
             </div>
-            <h3>Welcome Back</h3>
+            <h6 className="text-center">Welcome Back</h6>
             <ul>
               <li>
                 <a href="#">View Profile</a>

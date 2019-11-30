@@ -32,13 +32,14 @@ class ActivityList extends React.Component {
       );
     });
     return (
-      <div className="container">
-        <div className="top-banner">
-          <div className="gradient-bg"/>
-          <div className="banner-text text">Adventures in Your Area</div>
-          <div className="location-text text">Irvine, CA</div>
+      <div className="">
+        <div className="top-banner d-flex">
+          <div className="m-auto p-3">
+            <h2 className="text-center text-white">Adventures in Your Area</h2>
+            <p className="text-center text-white">Irvine, CA</p>
+          </div>
         </div>
-        <div>
+        <div className="container-fluid my-5">
           {activityCard}
         </div>
       </div>

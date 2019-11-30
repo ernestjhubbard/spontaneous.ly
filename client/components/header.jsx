@@ -4,7 +4,7 @@ import MenuNav from './menu-nav.jsx';
 function Header(props) {
   return (
     <div className="header-bar d-flex position-static">
-      <img className="logo-alone mt-3 ml-4"
+      <img className="logo-alone"
         src="assets/images/logo-alone.png"
         onClick={() => props.setView('home')}/>
       <MenuNav/>
