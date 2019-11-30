@@ -35,7 +35,7 @@ class MenuNav extends React.Component {
             </div>
             <h6 className="text-center">Welcome Back</h6>
             <ul>
-              <li>
+              <li onClick={() => this.props.setView('profilePage')}>
                 <a href="#">View Profile</a>
               </li>
               <li>

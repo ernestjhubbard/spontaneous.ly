@@ -2,12 +2,21 @@ import React from 'react';
 import Header from './header';
 import DefaultPage from './default-page';
 import ActivityList from './activity-list';
+import ProfilePage from './profile-page';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'home'
+      view: 'home',
+      user: {
+        firstName: '',
+        lastName: '',
+        image: '',
+        email: '',
+        spontaneityPoints: 0,
+        friends: []
+      }
     };
     this.setView = this.setView.bind(this);
   }
@@ -18,17 +27,23 @@ class App extends React.Component {
     });
   }
 
+  fetchUser() {
+
+  }
+
   render() {
     let differentPage;
     const stateName = this.state.view;
     if (stateName === 'home') {
-      differentPage = <DefaultPage setView={this.setView}/>;
+      differentPage = <DefaultPage setView={this.setView} />;
     } else if (stateName === 'activityList') {
-      differentPage = <ActivityList setView={this.setView}/>;
+      differentPage = <ActivityList setView={this.setView} />;
+    } else if (stateName === 'profilePage') {
+      differentPage = <ProfilePage user={this.state.user} />;
     }
     return (
       <div>
-        <Header setView={this.setView}/>
+        <Header setView={this.setView} />
         {differentPage}
       </div>
     );
