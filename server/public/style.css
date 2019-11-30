@@ -244,15 +244,33 @@ ul {
   margin: auto 8px auto auto;
 }
 
+/* PROFILE PAGE BELOW - CHANGE AS NEEDED */
+
 .profile-center {
   height: 57vh;
 }
 
-.user-image {
+.profile-user-image {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+.profile-point-value {
+  font-size: 4rem;
+  color: #F07070;
+}
+
+.profile-footer {
+  height: 23vh;
+}
+
+.profile-button {
+  background-color: #F07070;
+  border: none;
+}
+
+/* PROFILE PAGE ABOVE - CHANGE AS NEEDED */
 
 input::placeholder {
   color: #ccc;
