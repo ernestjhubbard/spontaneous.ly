@@ -1,26 +1,25 @@
-@font-face{
+@font-face {
   font-family: Roboto Mono;
   src: url(assets/font/RobotoMono-Regular.ttf);
 }
 
-body{
+body {
   font-family: 'Roboto Mono';
 }
 
-.header-bar{
+.header-bar {
   background-color: #F07070;
   justify-content: space-between;
   padding: 15px;
 }
 
-.logo-alone{
+.logo-alone {
   height: 2.8rem;
 }
 
-.top-banner{
+.top-banner {
   height: 30vh;
-  background-image: linear-gradient(#801d8080, #ffc0cb80),
-  url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -35,12 +34,12 @@ body{
   color: #fff;
 }
 
-.location-text{
+.location-text {
   top: 28%;
-  left:37%;
+  left: 37%;
 }
 
-.card-size{
+.card-size {
   width: 100%;
   min-width: 200px;
   align-items: stretch;
@@ -55,7 +54,7 @@ body{
   object-fit: cover;
 }
 
-.horizontal-scroll{
+.horizontal-scroll {
   overflow-x: scroll;
 }
 
@@ -241,8 +240,18 @@ ul {
   cursor: pointer;
 }
 
-.menu-nav-bar{
+.menu-nav-bar {
   margin: auto 8px auto auto;
+}
+
+.profile-center {
+  height: 57vh;
+}
+
+.user-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 input::placeholder {

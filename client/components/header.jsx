@@ -6,8 +6,8 @@ function Header(props) {
     <div className="header-bar d-flex position-static">
       <img className="logo-alone"
         src="assets/images/logo-alone.png"
-        onClick={() => props.setView('home')}/>
-      <MenuNav/>
+        onClick={() => props.setView('home')} />
+      <MenuNav setView={props.setView} />
     </div>
   );
 }
