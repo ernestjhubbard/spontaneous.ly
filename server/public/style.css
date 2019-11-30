@@ -275,3 +275,7 @@ ul {
 input::placeholder {
   color: #ccc;
 }
+
+::-webkit-scrollbar {
+  display: none;
+}
