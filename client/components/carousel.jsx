@@ -28,10 +28,10 @@ class Carousel extends React.Component {
   moveBackward() {
     const newState = this.state;
     newState.currentCard--;
-    newState.position = newState.position + 350;
+    newState.position = newState.position + 100;
     if (newState.currentCard === 0) {
       newState.currentCard = this.state.activities.length;
-      newState.position = -((this.state.activities.length - 1) * 350);
+      newState.position = -((this.state.activities.length - 1) * 100);
     }
     this.setState(newState);
   }
@@ -39,7 +39,7 @@ class Carousel extends React.Component {
   moveForward() {
     const newState = this.state;
     newState.currentCard++;
-    newState.position = newState.position - 350;
+    newState.position = newState.position - 100;
     if (newState.currentCard === this.state.activities.length + 1) {
       newState.currentCard = 1;
       newState.position = 0;
@@ -48,7 +48,7 @@ class Carousel extends React.Component {
   }
 
   setPosition(id) {
-    const position = (id - 1) * -350;
+    const position = (id - 1) * -100;
     this.setState({
       currentCard: id,
       position: position
@@ -95,7 +95,7 @@ class Carousel extends React.Component {
     var activityCard = this.state.activities.map(activity => {
       return (
         <div
-          className="carousel-container w-100"
+          className="carousel-container w-100 col-12"
           style={{ backgroundImage: `linear-gradient(#00000033, #00000033), url(${activity.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
           id={activity.activityId}
           key={activity.activityId}>
@@ -109,7 +109,7 @@ class Carousel extends React.Component {
     return (
       <div className="outer">
         <div className="inner">
-          <div className="slides" style={{ transform: `translateY(${currentPosition.position}px)` }}>
+          <div className="slides d-flex" style={{ transform: `translateX(${currentPosition.position}%)` }}>
             {activityCard}
           </div>
         </div>
