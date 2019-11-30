@@ -41,16 +41,17 @@ class App extends React.Component {
     };
     fetch('/api/users', userConfig)
       .then(results => results.json())
-      .then(data => this.setState({
-        user: {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          image: data.image,
-          email: data.email,
-          points: 0,
-          userId: null
-        }
-      })
+      .then(data =>
+        this.setState({
+          user: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            image: data.image,
+            email: data.email,
+            points: 5,
+            userId: null
+          }
+        })
       );
   }
 
