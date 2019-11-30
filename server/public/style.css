@@ -7,6 +7,13 @@ body {
   font-family: 'Roboto Mono';
 }
 
+.spon-button {
+  background-color: #F07070;
+  border: none;
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+}
+
 .header-bar {
   background-color: #F07070;
   justify-content: space-between;
@@ -15,6 +22,7 @@ body {
 
 .logo-alone {
   height: 2.8rem;
+  cursor: pointer;
 }
 
 .top-banner {
@@ -247,13 +255,14 @@ ul {
 /* PROFILE PAGE BELOW - CHANGE AS NEEDED */
 
 .profile-center {
-  height: 57vh;
 }
 
 .profile-user-image {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 200px;
+  width: 200px;
 }
 
 .profile-point-value {
@@ -261,17 +270,27 @@ ul {
   color: #F07070;
 }
 
-.profile-footer {
-  height: 23vh;
+.calc-button-50 {
+  display: flex;
+  justify-content: space-between;
 }
 
-.profile-button {
-  background-color: #F07070;
-  border: none;
+.calc-button-50 button {
+  width: calc(50% - 8px);
 }
 
 /* PROFILE PAGE ABOVE - CHANGE AS NEEDED */
 
 input::placeholder {
   color: #ccc;
+}
+
+.email-input,
+.password-input,
+.zip-input {
+  font-size: 1rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

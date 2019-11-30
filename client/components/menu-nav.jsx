@@ -35,7 +35,10 @@ class MenuNav extends React.Component {
             </div>
             <h6 className="text-center">Welcome Back</h6>
             <ul>
-              <li onClick={() => this.props.setView('profilePage')}>
+              <li onClick={() => {
+                this.props.setView('profilePage');
+                this.changeDrawer();
+              }}>
                 <a href="#">View Profile</a>
               </li>
               <li>

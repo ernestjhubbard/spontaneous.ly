@@ -15,25 +15,23 @@ class SignIn extends React.Component {
       <div className="container align-center">
         <h4 className="text-center mt-3 font-weight-bold">Sign In</h4>
         <form onSubmit={() => this.props.signIn(this.state)}>
-          <div className="form-group" >
-            <label htmlFor="email">Email</label>
-            <input className="form-control form-control-sm"
-              name="email"
-              onChange={this.handleChange}
-              value={this.state.email}
-              type="text"
-            ></input>
-          </div>
-          <div className="form-group">
-            <label htmlFor="password">Password</label>
-            <input className="form-control form-control-sm"
-              name="password"
-              onChange={this.handleChange}
-              value={this.state.password}
-              type="password"
-            ></input>
-          </div>
-          <button type="submit" className="btn btn-primary" value="Submit">Submit</button>
+          <label htmlFor="email">Email</label>
+          <input className="email-input form-control form-control-lg text-center mb-3"
+            name="email"
+            onChange={this.handleChange}
+            value={this.state.email}
+            type="text"
+            placeholder="Email Address"
+          ></input>
+          <label htmlFor="password">Password</label>
+          <input className="password-input form-control form-control-lg text-center"
+            name="password"
+            onChange={this.handleChange}
+            value={this.state.password}
+            type="password"
+            placeholder="Password"
+          ></input>
+          <button type="submit" className="spon-button rounded text-white w-100" value="Submit">Submit</button>
         </form>
       </div>
     );

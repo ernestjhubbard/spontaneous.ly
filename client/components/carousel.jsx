@@ -96,12 +96,12 @@ class Carousel extends React.Component {
       return (
         <div
           className="carousel-container w-100 col-12"
-          style={{ backgroundImage: `linear-gradient(#00000033, #00000033), url(${activity.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+          style={{ backgroundImage: `linear-gradient(#00000033, #00000033), url(assets/images/activity/${activity.image})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
           id={activity.activityId}
           key={activity.activityId}>
           <div className="inner-card text-center">
             <h3 className="text-white text-center mb-3">{activity.activity}</h3>
-            <button className="learn-more-cta m-auto">Learn More</button>
+            <button className="spon-button text-white rounded m-auto">Learn More</button>
           </div>
         </div>
       );
