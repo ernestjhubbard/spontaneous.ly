@@ -20,7 +20,7 @@ export default function ProfilePage(props) {
           <button className="spon-button rounded text-white col-12">Upcoming Adventures</button>
           <button className="spon-button rounded text-white col-12">Past Adventures</button>
           <div className="calc-button-50">
-            <button className="spon-button rounded text-white">Friends</button>
+            <button className="spon-button rounded text-white" onClick={() => props.setView('friendList')}>Friends</button>
             <button className="spon-button rounded text-white">Messages</button>
           </div>
         </div>

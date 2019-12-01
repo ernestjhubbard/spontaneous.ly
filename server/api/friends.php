@@ -1,11 +1,15 @@
 <?php
 $link = get_db_link();
 if ($request['method'] === 'GET') {
-    $user_id = $request['body']['userId'];
-    $sql_get_friends = "SELECT * FROM friendRequests AS f JOIN users AS u 
-                                   ON f.`senderId` = u.`userId`
+    $sql_current_user = "SELECT userId FROM `logins` 
+                       ORDER BY `logins`.`loginId` DESC";
+    $user_query = mysqli_query($link, $sql_current_user);
+    $user_fetch = mysqli_fetch_assoc($user_query);
+    $user_id = $user_fetch['userId'];
+    $sql_get_friends = "SELECT * FROM users AS u JOIN friendRequests AS f
+                                   ON f.`recipientId` = u.`userId`
                                 WHERE f.`isAccepted` = 1 
-                                  AND u.`userId` = $user_id";
+                                  AND f.`senderId` = $user_id";
     $friends_query = mysqli_query($link, $sql_get_friends);
     $output = [];
     while($row = mysqli_fetch_assoc($friends_query)){
