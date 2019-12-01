@@ -6,12 +6,13 @@ import DefaultPage from './default-page';
 import ActivityList from './activity-list';
 import ProfilePage from './profile-page';
 import FriendList from './friend-list';
+import MessageFriend from './message-friend';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'signIn',
+      view: 'home',
       user: {
         firstName: '',
         lastName: '',
@@ -105,7 +106,9 @@ class App extends React.Component {
     } else if (stateName === 'createAccount') {
       differentPage = <CreateAccount createUser={this.createUser} />;
     } else if (stateName === 'friendList') {
-      differentPage = <FriendList />;
+      differentPage = <FriendList setView={this.setView} view={this.state.view} />;
+    } else if (stateName === 'messageFriend') {
+      differentPage = <MessageFriend />;
     }
     return (
       <div>
