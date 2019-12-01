@@ -80,7 +80,7 @@ CREATE TABLE `logins` (
   `loginId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   PRIMARY KEY (`loginId`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `logins` (
 
 LOCK TABLES `logins` WRITE;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
-INSERT INTO `logins` VALUES (1,4),(2,4),(3,1),(4,4),(5,4),(6,4),(7,4),(8,1),(9,2),(10,2),(11,3),(12,3),(13,4),(14,4),(15,3),(16,1),(17,4),(18,3),(19,4),(20,4),(21,4),(22,4),(23,12),(24,4),(25,4),(26,4),(27,4),(28,4),(29,1),(30,1),(31,4),(32,4),(33,4),(34,4),(35,4),(36,2),(37,1),(38,4),(39,5),(40,5),(41,4),(42,4),(43,4),(44,4),(45,4),(46,1),(47,1),(48,13);
+INSERT INTO `logins` VALUES (1,4),(2,4),(3,1),(4,4),(5,4),(6,4),(7,4),(8,1),(9,2),(10,2),(11,3),(12,3),(13,4),(14,4),(15,3),(16,1),(17,4),(18,3),(19,4),(20,4),(21,4),(22,4),(23,12),(24,4),(25,4),(26,4),(27,4),(28,4),(29,1),(30,1),(31,4),(32,4),(33,4),(34,4),(35,4),(36,2),(37,1),(38,4),(39,5),(40,5),(41,4),(42,4),(43,4),(44,4),(45,4),(46,1),(47,1),(48,13),(49,3),(50,2),(51,2);
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `messages` (
   `recipientId` int(11) NOT NULL,
   `sentAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`messageId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,6 +116,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+INSERT INTO `messages` VALUES (1,'Yo yo yo',2,4,'2019-12-01 07:22:21'),(2,'What\'s up my girlfriend',4,2,'2019-12-01 07:22:21');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-30 21:22:00
+-- Dump completed on 2019-11-30 23:33:04
