@@ -6,6 +6,7 @@ switch ($request['path']) {
   case '/':
     readfile('index.html');
     exit;
+  case '/api/messages':
   case '/api/friends':
   case '/api/points':
   case '/api/users':

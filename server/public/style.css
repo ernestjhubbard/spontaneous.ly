@@ -252,8 +252,6 @@ ul {
   margin: auto 8px auto auto;
 }
 
-/* PROFILE PAGE BELOW - CHANGE AS NEEDED */
-
 .profile-user-image {
   background-position: center;
   background-repeat: no-repeat;
@@ -276,18 +274,36 @@ ul {
   width: calc(50% - 8px);
 }
 
-/* PROFILE PAGE ABOVE - CHANGE AS NEEDED */
-
 input::placeholder {
   color: #ccc;
 }
 
-.email-input,
-.password-input,
-.zip-input {
+.email-input, .password-input, .zip-input {
   font-size: 1rem;
 }
 
 ::-webkit-scrollbar {
   display: none;
 }
+
+/* FRIEND PAGE BELOW - CHANGE AS NEEDED */
+
+.friend-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.friend-button {
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: white;
+}
+
+.send-message {
+  color: #f07070
+}
+
+/* FRIEND PAGE ABOVE - CHANGE AS NEEDED */
