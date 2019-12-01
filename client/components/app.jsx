@@ -66,8 +66,14 @@ class App extends React.Component {
     };
     fetch('/api/users', config)
       .then(results => results.json())
-      .then(data => this.setView('home'));
-    this.fetchUser();
+      .then(data => {
+        if (data.error) {
+          return null;
+        } else {
+          this.fetchUser();
+          this.setView('home');
+        }
+      });
   }
 
   createUser({ firstName, lastName, email, image, password }) {

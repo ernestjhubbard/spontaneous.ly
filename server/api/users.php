@@ -15,14 +15,14 @@ if ($request['method'] === 'GET') {
   }
 if ($request['method'] === 'POST') {
     $user_email = $request['body']['email'];
-    $user_first_name = $request['body']['firstName'];
-    $user_last_name = $request['body']['lastName'];
     $user_password = $request['body']['password'];
-    $user_image = $request['body']['image'];
     if(!isset($user_email)){
       throw new ApiError('User email is required', 400);
     }
-    if(isset($user_first_name)){
+    if(isset($request['body']['firstName'])){
+      $user_first_name = $request['body']['firstName'];
+      $user_last_name = $request['body']['lastName'];
+      $user_image = $request['body']['image'];
       $create_user = "INSERT INTO users (`email`, `firstName`, `lastName`, `image`, `password`) 
                            VALUES (?,?,?,?,?)";
       $sql_prepare_user = mysqli_prepare($link, $create_user);
@@ -31,12 +31,17 @@ if ($request['method'] === 'POST') {
       $insert = mysqli_insert_id($link);
     }
     else{
-    $user_query = "SELECT userId 
+    $login_password = $request['body']['password'];
+    $user_query = "SELECT `userId`
                      FROM users 
-                    WHERE '$user_email' = email";
+                    WHERE '$user_email' = email
+                      AND '$login_password' = `password`";
     $user_id = mysqli_query($link, $user_query);
     $id = mysqli_fetch_assoc($user_id);
     $login_id = $id['userId'];
+    if(!isset($id)){
+      throw new ApiError('Invalid Login Credentials', 400);
+    }
     $sql_login = "INSERT INTO logins (userId) 
                        VALUES ($login_id)";
     mysqli_query($link, $sql_login);
