@@ -5,6 +5,7 @@ import SignIn from './sign-in';
 import DefaultPage from './default-page';
 import ActivityList from './activity-list';
 import ProfilePage from './profile-page';
+import FriendList from './friend-list';
 
 class App extends React.Component {
   constructor(props) {
@@ -16,8 +17,7 @@ class App extends React.Component {
         lastName: '',
         image: '',
         email: '',
-        points: 0,
-        friends: []
+        points: 0
       }
     };
     this.setView = this.setView.bind(this);
@@ -99,11 +99,13 @@ class App extends React.Component {
     } else if (stateName === 'activityList') {
       differentPage = <ActivityList setView={this.setView} />;
     } else if (stateName === 'profilePage') {
-      differentPage = <ProfilePage user={this.state.user} />;
+      differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
     } else if (stateName === 'signIn') {
       differentPage = <SignIn signIn={this.signIn} />;
     } else if (stateName === 'createAccount') {
       differentPage = <CreateAccount createUser={this.createUser} />;
+    } else if (stateName === 'friendList') {
+      differentPage = <FriendList />;
     }
     return (
       <div>
