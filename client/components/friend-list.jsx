@@ -13,11 +13,11 @@ class FriendList extends React.Component {
       <Friend key={friend.userId} image={friend.image} firstName={friend.firstName} lastName={friend.lastName} />
     );
     return (
-      <div className="container align-center">
+      <div className="container align-center my-5">
         <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
-        <div className="container d-flex justify-content-between">
-          <h6>All Friends</h6>
-          <h6>Pending Requests</h6>
+        <div className="d-flex justify-content-between">
+          <h4 className=""><span className="badge viewing">All Friends</span></h4>
+          <h4 className=""><span className="badge">Pending Requests</span></h4>
         </div>
         <div className="container">
           {friendsArray}

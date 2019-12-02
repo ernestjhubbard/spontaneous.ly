@@ -6,6 +6,7 @@ import DefaultPage from './default-page';
 import ActivityList from './activity-list';
 import ProfilePage from './profile-page';
 import FriendList from './friend-list';
+import StaticActivity from './static-activity';
 
 class App extends React.Component {
   constructor(props) {
@@ -18,9 +19,11 @@ class App extends React.Component {
         image: '',
         email: '',
         points: 0
-      }
+      },
+      static: null
     };
     this.setView = this.setView.bind(this);
+    this.setStatic = this.setStatic.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
@@ -29,6 +32,12 @@ class App extends React.Component {
   setView(name) {
     this.setState({
       view: name
+    });
+  }
+
+  setStatic(activity) {
+    this.setState({
+      static: activity
     });
   }
 
@@ -52,7 +61,8 @@ class App extends React.Component {
             userId: null
           }
         })
-      );
+      )
+      .catch(error => console.error('There was an error:', error.message));
   }
 
   signIn({ email, password }) {
@@ -73,7 +83,8 @@ class App extends React.Component {
           this.fetchUser();
           this.setView('home');
         }
-      });
+      })
+      .catch(error => console.error('There was an error:', error.message));
   }
 
   createUser({ firstName, lastName, email, image, password }) {
@@ -87,7 +98,8 @@ class App extends React.Component {
     };
     fetch('/api/users', config)
       .then(results => results.json())
-      .then(data => data);
+      .then(data => data)
+      .catch(error => console.error('There was an error:', error.message));
     this.setView('signIn');
   }
 
@@ -95,7 +107,7 @@ class App extends React.Component {
     let differentPage;
     const stateName = this.state.view;
     if (stateName === 'home') {
-      differentPage = <DefaultPage setView={this.setView} />;
+      differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic}/>;
     } else if (stateName === 'activityList') {
       differentPage = <ActivityList setView={this.setView} />;
     } else if (stateName === 'profilePage') {
@@ -106,10 +118,12 @@ class App extends React.Component {
       differentPage = <CreateAccount createUser={this.createUser} />;
     } else if (stateName === 'friendList') {
       differentPage = <FriendList />;
+    } else if (stateName === 'staticActivity') {
+      differentPage = <StaticActivity activity={this.state.static} />;
     }
     return (
       <div>
-        <Header setView={this.setView} currentView={this.state.view} />
+        <Header setView={this.setView} currentView={this.state.view} user={this.state.user}/>
         {differentPage}
       </div>
     );
