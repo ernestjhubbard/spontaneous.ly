@@ -7,7 +7,7 @@ function Header(props) {
       <img className="logo-alone"
         src="assets/images/logo-alone.png"
         onClick={() => props.setView('home')} />
-      <MenuNav setView={props.setView} currentView={props.currentView} />
+      <MenuNav setView={props.setView} currentView={props.currentView} user={props.user}/>
     </div>
   );
 }

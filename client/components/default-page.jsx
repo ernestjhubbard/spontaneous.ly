@@ -21,39 +21,51 @@ function DefaultPage(props) {
         <div className="d-flex flex-row horizontal-scroll mb-4">
           <div className="col-sm-3">
             <div className="card card-size adventure-card">
-              <img src="assets/images/selective-focus-photography-of-paintbrush-near-paint-pallet-1047540.jpg" className="img-info card-img-top" alt="Wine and Paint" />
+              <img src="assets/images/wine-and-paint.jpg" className="img-info card-img-top" alt="Wine and Paint" />
               <div className="card-body">
                 <p className="text-muted"><small>Wine and Paint</small></p>
-                <p className="text-muted mb-0"><a href="#"><small>Learn More</small></a></p>
+                <p className="text-muted mb-0"><a onClick={() => {
+                  props.setView('staticActivity');
+                  props.setStatic('Wine and Paint');
+                }}><small>Learn More</small></a></p>
               </div>
             </div>
           </div>
           <div className="col-sm-3">
             <div className="card card-size adventure-card">
-              <img src="assets/images/action-backlit-ball-basketball-1152853.jpg"
+              <img src="assets/images/pickup-basketball.jpg"
                 className="img-info card-img-top" alt="Backetball Leagues" />
               <div className="card-body">
-                <p className="text-muted"><small>Basketball Leagues</small></p>
-                <p className="text-muted mb-0"><a href="#"><small>Learn More</small></a></p>
+                <p className="text-muted"><small>Pickup Basketball</small></p>
+                <p className="text-muted mb-0"><a onClick={() => {
+                  props.setView('staticActivity');
+                  props.setStatic('Pickup Basketball');
+                }}><small>Learn More</small></a></p>
               </div>
             </div>
           </div>
           <div className="col-sm-3">
             <div className="card card-size adventure-card">
-              <img src="assets/images/backlit-beach-dawn-dusk-588561.jpg" className="img-info card-img-top" alt="Yoga" />
+              <img src="assets/images/yoga.jpg" className="img-info card-img-top" alt="Yoga" />
               <div className="card-body">
                 <p className="text-muted"><small>Yoga</small></p>
-                <p className="text-muted mb-0"><a href="#"><small>Learn More</small></a></p>
+                <p className="text-muted mb-0"><a onClick={() => {
+                  props.setView('staticActivity');
+                  props.setStatic('Yoga');
+                }}><small>Learn More</small></a></p>
               </div>
             </div>
           </div>
           <div className="col-sm-3">
             <div className="card card-size adventure-card">
-              <img src="assets/images/sunset-beach-summer-hd-wallpaper-33443.jpg" className="img-info card-img-top"
+              <img src="assets/images/parasailing.jpg" className="img-info card-img-top"
                 alt="Parasailing" />
               <div className="card-body">
                 <p className="text-muted"><small>Parasailing</small></p>
-                <p className="text-muted mb-0"><a href="#"><small>Learn More</small></a></p>
+                <p className="text-muted mb-0"><a onClick={() => {
+                  props.setView('staticActivity');
+                  props.setStatic('Parasailing');
+                }}><small>Learn More</small></a></p>
               </div>
             </div>
           </div>
