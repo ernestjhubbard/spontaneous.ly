@@ -28,7 +28,7 @@ class ConfirmActivity extends React.Component {
         </div>
 
         <div className="button-container mx-auto">
-          <button className="back-home-button">Back to Home</button>
+          <button className="back-home-button" onClick={() => this.props.setView('home')}>Back to Home</button>
           <button className="cancel-button text-muted">
             Cancel Reservation
           </button>
