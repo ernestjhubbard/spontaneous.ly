@@ -3,6 +3,11 @@
   src: url(assets/font/RobotoMono-Regular.ttf);
 }
 
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(assets/font/RobotoMono-Bold.ttf);
+}
+
 body {
   font-family: 'Roboto Mono';
 }
@@ -401,4 +406,8 @@ input::placeholder {
   background-color: white;
   width: 90%;
   border-radius: 5px;
+}
+
+.bold-text{
+  font-family: 'Roboto-Bold';
 }

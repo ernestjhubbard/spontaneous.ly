@@ -12,22 +12,26 @@ class ConfirmActivity extends React.Component {
 
         <div className="confirm-info mx-auto">
           <div className="activity-text">
-            <span className="font-weight-bold">Location: </span>Laguna Beach
+            <p className="font-weight-bold">
+              <span className="bold-text">Location: </span>Laguna Beach
+            </p>
           </div>
           <div className="activity-text">
-            <span className="font-weight-bold">Time: </span>MM/DD/YY @ HH:MM
+            <span className="bold-text">Time: </span>MM/DD/YY @ HH:MM
           </div>
           <div className="activity-text">
-            <span className="font-weight-bold">Cost: $</span>XX
+            <span className="bold-text">Cost: </span>$XX
           </div>
           <div className="activity-text">
-            <span className="font-weight-bold">Spontaneity Points: </span>XX
+            <span className="bold-text">Spontaneity Points: </span>XX
           </div>
         </div>
 
         <div className="button-container mx-auto">
           <button className="back-home-button">Back to Home</button>
-          <button className="cancel-button text-muted">Cancel Reservation</button>
+          <button className="cancel-button text-muted">
+            Cancel Reservation
+          </button>
         </div>
       </>
     );
