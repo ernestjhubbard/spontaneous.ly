@@ -28,7 +28,7 @@ class ActivityDetail extends React.Component {
               {activity.dateTime}
             </div>
             <div className="activity-text">
-              <strong>Cost: </strong>
+              <strong>Cost: $</strong>
               {activity.cost}
             </div>
             <div className="activity-text">5 Users are joining in</div>
