@@ -323,9 +323,9 @@ input::placeholder {
 }
 
 .activity-thumbnail {
-  height: 100px;
   width: 100px;
-  background-size: contain;
+  height: 100px;
+  background-size: cover;
   background-repeat: no-repeat;
 }
 
