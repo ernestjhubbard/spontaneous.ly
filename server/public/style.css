@@ -255,6 +255,39 @@ ul {
   margin: auto 8px auto auto;
 }
 
+.activity-top-banner {
+  height: 35vh;
+  background-image: linear-gradient(#801d8080, #ffc0cb80);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.activity-detail-container{
+width: 90%;
+}
+
+.activity-detail{
+  border: 1px solid gray;
+  border-radius: 5px;
+  height: 20vh;
+}
+
+.confirm-button{
+  background-color: #F07070;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  width: 45%;
+}
+
+.back-button{
+  border: 1px solid #F07070;
+  color: #F07070;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  width: 45%;
+}
 .profile-user-image {
   background-position: center;
   background-repeat: no-repeat;
