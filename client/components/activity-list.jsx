@@ -22,7 +22,6 @@ class ActivityList extends React.Component {
         this.setState({ activities: listedActivities });
       })
       .catch(error => console.error('Fetch error: ', error));
-
   }
 
   render() {

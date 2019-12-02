@@ -111,42 +111,6 @@ body{
   background: #e76c6c;
 }
 
-#number-one {
-  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/2062637/pexels-photo-2062637.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position: center;
-}
-
-#number-two {
-  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position: center;
-}
-
-#number-three {
-  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/1762851/pexels-photo-1762851.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position: center;
-}
-
-#number-four {
-  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/1037993/pexels-photo-1037993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position: center;
-}
-
-#number-five {
-  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/673857/pexels-photo-673857.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position: center;
-}
-
-#number-six {
-  background-image: linear-gradient(#00000030, #00000030), url(https://images.pexels.com/photos/1407305/pexels-photo-1407305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
-  background-size: cover;
-  background-position: center;
-}
-
 .arrow {
   height: 40px;
   width: 40px;
@@ -279,4 +243,38 @@ ul {
 
 .menu-nav-bar{
   margin: auto 8px auto auto;
+}
+
+.activity-top-banner {
+  height: 35vh;
+  background-image: linear-gradient(#801d8080, #ffc0cb80);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.activity-detail-container{
+width: 90%;
+}
+
+.activity-detail{
+  border: 1px solid gray;
+  border-radius: 5px;
+  height: 20vh;
+}
+
+.confirm-button{
+  background-color: #F07070;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  width: 45%;
+}
+
+.back-button{
+  border: 1px solid #F07070;
+  color: #F07070;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  width: 45%;
 }
