@@ -17,7 +17,7 @@ export default function ProfilePage(props) {
           <h1 className="profile-point-value text-center m-auto">{props.user.points}</h1>
         </div>
         <div className="profile-footer">
-          <button className="spon-button rounded text-white col-12">Upcoming Adventures</button>
+          <button className="spon-button rounded text-white col-12" onClick={() => props.setView('upcomingActivities')}>Upcoming Adventures</button>
           <button className="spon-button rounded text-white col-12">Past Adventures</button>
           <div className="calc-button-50">
             <button className="spon-button rounded text-white" onClick={() => props.setView('friendList')}>Friends</button>

@@ -322,6 +322,13 @@ input::placeholder {
   display: none;
 }
 
+.activity-thumbnail {
+  height: 100px;
+  width: 100px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 /* FRIEND PAGE BELOW - CHANGE AS NEEDED */
 
 .viewing {

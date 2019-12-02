@@ -7,6 +7,7 @@ import ActivityList from './activity-list';
 import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
+import UpcomingActivities from './upcoming-activities';
 
 class App extends React.Component {
   constructor(props) {
@@ -134,6 +135,9 @@ class App extends React.Component {
             retrieve={this.retrieveMessages}
             fetchUser={this.fetchUser}
             user={this.state.user} />;
+        break;
+      case 'upcomingActivities':
+        differentPage = <UpcomingActivities />;
         break;
     }
     return (
