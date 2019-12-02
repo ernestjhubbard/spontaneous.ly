@@ -1,5 +1,8 @@
 <?php
-$link = get_db_link();
+$link = get_db_link()
+
+/* RETRIEVES LIST OF FRIENDS OF THE CURRENT LOGGED IN USER */
+
 if ($request['method'] === 'GET') {
     $sql_current_user = "SELECT userId FROM `logins` 
                        ORDER BY `logins`.`loginId` DESC";
@@ -18,6 +21,9 @@ if ($request['method'] === 'GET') {
     $response['body'] = $output;
     send($response);
   }
+  
+/* USER CAN ADD A FRIEND -- NOT YET IMPLEMENTED FRONT END */
+
 if ($request['method'] === 'POST') {
     $sender_id = $request['body']['senderId'];
     $recipient_id = $request['body']['recipientId'];

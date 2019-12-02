@@ -5,14 +5,14 @@ import SignIn from './sign-in';
 import DefaultPage from './default-page';
 import ActivityList from './activity-list';
 import ProfilePage from './profile-page';
-import FriendList from './friend-list';
-import MessageFriend from './message-friend';
+import FriendPage from './friend-page';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'home',
+      view: 'friendPage',
+      messages: [],
       user: {
         firstName: '',
         lastName: '',
@@ -33,6 +33,8 @@ class App extends React.Component {
     });
   }
 
+  /* FETCHES USER FROM DB WHEN THEY SIGN IN */
+
   fetchUser() {
     const userConfig = {
       method: 'GET',
@@ -50,7 +52,7 @@ class App extends React.Component {
             image: data.image,
             email: data.email,
             points: 5,
-            userId: null
+            userId: data.userId
           }
         })
       );
@@ -95,20 +97,31 @@ class App extends React.Component {
   render() {
     let differentPage;
     const stateName = this.state.view;
-    if (stateName === 'home') {
-      differentPage = <DefaultPage setView={this.setView} />;
-    } else if (stateName === 'activityList') {
-      differentPage = <ActivityList setView={this.setView} />;
-    } else if (stateName === 'profilePage') {
-      differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
-    } else if (stateName === 'signIn') {
-      differentPage = <SignIn signIn={this.signIn} />;
-    } else if (stateName === 'createAccount') {
-      differentPage = <CreateAccount createUser={this.createUser} />;
-    } else if (stateName === 'friendList') {
-      differentPage = <FriendList setView={this.setView} view={this.state.view} />;
-    } else if (stateName === 'messageFriend') {
-      differentPage = <MessageFriend />;
+    switch (stateName) {
+      case 'home':
+        differentPage = <DefaultPage setView={this.setView} />;
+        break;
+      case 'activityList':
+        differentPage = <ActivityList setView={this.setView} />;
+        break;
+      case 'profilePage':
+        differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
+        break;
+      case 'signIn':
+        differentPage = <SignIn signIn={this.signIn} />;
+        break;
+      case 'createAccount':
+        differentPage = <CreateAccount createUser={this.createUser} />;
+        break;
+      case 'friendPage':
+        differentPage =
+          <FriendPage
+            setView={this.setView}
+            view={this.state.view}
+            retrieve={this.retrieveMessages}
+            fetchUser={this.fetchUser}
+            user={this.state.user} />;
+        break;
     }
     return (
       <div>

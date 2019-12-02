@@ -1,5 +1,8 @@
 <?php
 $link = get_db_link();
+
+/* GET REQUEST GRABS THE LAST USER LOGGED IN */
+
 if ($request['method'] === 'GET') {
     $sql_login = "SELECT userId FROM `logins`
                             ORDER BY `logins`.`loginId` DESC";
@@ -19,6 +22,9 @@ if ($request['method'] === 'POST') {
     if(!isset($user_email)){
       throw new ApiError('User email is required', 400);
     }
+
+    /* FOR WHEN THE USER IS CREATING AN ACCOUNT */
+    
     if(isset($request['body']['firstName'])){
       $user_first_name = $request['body']['firstName'];
       $user_last_name = $request['body']['lastName'];
@@ -30,6 +36,8 @@ if ($request['method'] === 'POST') {
       mysqli_stmt_execute($sql_prepare_user);
       $insert = mysqli_insert_id($link);
     }
+
+    /* FOR WHEN THE USER IS LOGGING IN - NEED TO MAKE IT A PREPARED STATEMENT */
     else{
     $login_password = $request['body']['password'];
     $user_query = "SELECT `userId`
@@ -39,9 +47,9 @@ if ($request['method'] === 'POST') {
     $user_id = mysqli_query($link, $user_query);
     $id = mysqli_fetch_assoc($user_id);
     $login_id = $id['userId'];
-    if(!isset($id)){
-      throw new ApiError('Invalid Login Credentials', 400);
-    }
+      if(!isset($id)){
+        throw new ApiError('Invalid Login Credentials', 400);
+      }
     $sql_login = "INSERT INTO logins (userId)
                        VALUES ($login_id)";
     mysqli_query($link, $sql_login);

@@ -6,26 +6,106 @@ class MessageFriend extends React.Component {
     super(props);
     this.state = {
       messages: [],
-      message: ''
+      message: '',
+      friend: {}
     };
+    this.retrieveMessages = this.retrieveMessages.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
   }
 
   render() {
-    const messages = this.state.messages.map(m =>
-      <Message key={m.messageId} message={m.message} />
+    const userId = this.props.user.userId;
+    const recipientId = this.state.friend.userId;
+    const message = this.state.message;
+
+    /* CREATES AN ARRAY OF SINGLE MESSAGES RETRIEVED */
+
+    const messages = this.state.messages.map((m, index) =>
+      <Message
+        key={index}
+        friend={this.state.friend}
+        message={m.message}
+        image={m.image}
+        userId={userId}
+        recipientId={m.recipientId} />
     );
     return (
-      <div>
+      <div className="container fixed-bottom">
         {messages}
-        <input className="password-input form-control form-control-lg text-center"
-          name="message"
-          onChange={this.handleChange}
-          value={this.state.message}
-          type="text"
-        ></input>
-        <button type="submit" className="spon-button rounded text-white w-100" value="Submit">Submit</button>
+        <form onSubmit={() => this.sendMessage({ recipientId, message })}>
+          <div className="input-group mb-3">
+            <input className="form-control text-center"
+              name="message"
+              onChange={this.handleChange}
+              value={this.state.message}
+              type="text"
+            ></input>
+            <button
+              type="submit"
+              className="input-group-append send-button rounded text-white"
+              value="Submit">
+              Send</button>
+          </div>
+        </form>
       </div>
     );
+  }
+
+  sendMessage({ recipientId, message }) {
+    event.preventDefault();
+    const userConfig = {
+      method: 'POST',
+      body: JSON.stringify({ recipientId, message }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/messages', userConfig)
+      .then(results => results.json())
+      .then(data => data);
+    this.retrieveMessages({ recipientId });
+  }
+
+  /* RETRIEVES MESSAGES AND RETRIEVES SINGLE FRIEND INFORMATION FROM DB */
+
+  componentDidMount() {
+    const recipientId = this.props.friendId;
+    const friendId = this.props.friendId;
+    this.retrieveMessages({ recipientId });
+    this.getFriend({ friendId });
+  }
+
+  /* RETRIEVES MESSAGES THAT USER HAS STORED IN DB */
+
+  retrieveMessages({ recipientId }) {
+    event.preventDefault();
+    this.setState({ messages: [] });
+    const userConfig = {
+      method: 'POST',
+      body: JSON.stringify({ recipientId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/messages', userConfig)
+      .then(results => results.json())
+      .then(data => this.setState({ messages: this.state.messages.concat(data) }));
+  }
+
+  /* GETS SINGLE FRIEND THAT USER WANTS TO TALK TO */
+
+  getFriend({ friendId }) {
+    const userConfig = {
+      method: 'POST',
+      body: JSON.stringify({ friendId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/messages', userConfig)
+      .then(results => results.json())
+      .then(friend => this.setState({ friend }));
   }
 
   handleChange(event) {

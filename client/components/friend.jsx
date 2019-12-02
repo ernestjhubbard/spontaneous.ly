@@ -4,8 +4,7 @@ export default function Friend(props) {
   const friendImage = {
     backgroundImage: `url("assets/images/users/${props.image}")`
   };
-  const recipientId = props.userId;
-
+  const recipientId = props.recipientId;
   return (
     <div className="row my-3 w-100 d-flex justify-content-evenly">
       <div className="col-2 friend-image rounded-circle p-0 mr-4" style={friendImage}></div>
@@ -14,9 +13,11 @@ export default function Friend(props) {
         <i
           className="fas fa-paper-plane fa-2x adventure-card mt-2"
           onClick={() => {
-            props.retrieve({ recipientId });
-            props.setView('messageFriend');
-          }}></i></div>
+            props.clickFriend(recipientId);
+            props.changeView('messageFriend');
+          }}>
+        </i>
+      </div>
     </div>
   );
 }

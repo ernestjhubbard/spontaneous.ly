@@ -288,6 +288,10 @@ input::placeholder {
 
 /* FRIEND PAGE BELOW - CHANGE AS NEEDED */
 
+.friend-page {
+  height: 70vh
+}
+
 .friend-image {
   background-position: center;
   background-repeat: no-repeat;
@@ -304,6 +308,11 @@ input::placeholder {
 
 .send-message {
   color: #f07070
+}
+
+.send-button {
+  background-color: #f07070;
+  border: none;
 }
 
 /* FRIEND PAGE ABOVE - CHANGE AS NEEDED */
