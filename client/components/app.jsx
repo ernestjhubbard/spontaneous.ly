@@ -7,12 +7,13 @@ import ActivityList from './activity-list';
 import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
+import ConfirmActivity from './confirm-page';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'signIn',
+      view: 'confirm',
       messages: [],
       user: {
         firstName: '',
@@ -134,6 +135,10 @@ class App extends React.Component {
             retrieve={this.retrieveMessages}
             fetchUser={this.fetchUser}
             user={this.state.user} />;
+        break;
+      case 'confirm':
+        differentPage =
+          <ConfirmActivity setView={this.setView}/>;
         break;
     }
     return (
