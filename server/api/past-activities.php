@@ -9,7 +9,7 @@ if ($request['method'] === 'GET') {
                                 JOIN activities
                                   ON activities.activityId = reservations.activityId
                                WHERE userId = $user_id
-                                 AND activities.dateTime > NOW()
+                                 AND activities.dateTime < NOW()
                                  AND isCancelled = 0
                             ORDER BY activities.dateTime ASC";
   $reserved_activities_query = mysqli_query($link, $sql_reserved_activities);
