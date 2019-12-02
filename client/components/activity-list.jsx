@@ -1,15 +1,25 @@
 import React from 'react';
 import Carousel from './carousel';
+import ActivityDetail from './activity-detail';
 
 class ActivityList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      view: 'default',
+      activityClicked: {}
     };
+    this.setView = this.setView.bind(this);
+    this.fetchDetail = this.fetchDetail.bind(this);
+  }
+
+  setView(view) {
+    this.setState({ view });
   }
 
   render() {
-    return (
+    const currentView = this.state.view;
+    const carousel =
       <div>
         <div className="activity-list-hero top-banner d-flex">
           <div className="m-auto p-3">
@@ -18,13 +28,29 @@ class ActivityList extends React.Component {
           </div>
         </div>
         <div className="container-fluid my-5">
-          <Carousel />
+          <Carousel setView={this.setView} fetch={this.fetchDetail}/>
+          <p className="text-center">Not happy with these choices?</p>
+          <p className="text-center"><a href="#" className="reroll">Re-roll for 25 points.</a></p>
         </div>
-        <p className="text-center">Not happy with these choices?</p>
-        <p className="text-center"><a href="#" className="reroll">Re-roll for 25 points.</a></p>
-      </div>
-    );
+      </div>;
+    const view = currentView === 'default' ? carousel : <ActivityDetail setView={this.setView} activity={this.state.activityClicked}/>;
+    return view;
   }
+
+  fetchDetail({ activityId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ activityId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/activity-details', config)
+      .then(results => results.json())
+      .then(data => this.setState({ activityClicked: data }));
+
+  }
+
 }
 
 export default ActivityList;
