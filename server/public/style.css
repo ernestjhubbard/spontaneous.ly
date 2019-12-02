@@ -273,6 +273,11 @@ width: 90%;
   height: 20vh;
 }
 
+.activity-description{
+  height: 25vh;
+  overflow: scroll;
+}
+
 .confirm-button{
   background-color: #F07070;
   border-radius: 5px;
