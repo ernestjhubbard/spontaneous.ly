@@ -25,6 +25,19 @@ class MenuNav extends React.Component {
   }
 
   render() {
+    const view = this.props.currentView;
+    const viewBoolean = view === 'signIn' || view === 'createAccount';
+    const signIn = <button
+      className="spon-button rounded text-white w-100"
+      onClick={() => this.props.setView('signIn')}>Sign In</button>;
+    const createAccount = <button
+      className="spon-button rounded text-white w-100"
+      onClick={() => this.props.setView('createAccount')}>Create Account</button>;
+    const pageOrSignIn = viewBoolean ? 'signIn' : 'profilePage';
+    const firstName = this.props.user.firstName;
+    const profileImage = {
+      backgroundImage: `url("assets/images/users/${this.props.user.image}")`
+    };
     return (
       <div className="menu-nav-bar">
         <i className="fas fa-bars hamburger" onClick={this.changeDrawer}></i>
@@ -33,25 +46,33 @@ class MenuNav extends React.Component {
             <div className="shut mb-3">
               <i className="fas fa-times close-icon" onClick={this.changeDrawer}></i>
             </div>
-            <h6 className="text-center">Welcome Back</h6>
-            <ul>
-              <li>
-                <a href="#">View Profile</a>
+            {viewBoolean ? null : <div className="my-5">
+              <div className="profile-user-image rounded-circle mx-auto my-3" style={profileImage}></div>
+              <h6 className="text-center">Welcome Back, {`${firstName}`}</h6>
+            </div>
+            }
+            <ul onClick={this.changeDrawer}>
+              <li onClick={() => {
+                this.props.setView(pageOrSignIn);
+              }}>
+                {viewBoolean ? signIn : <a>View Profile</a>}
               </li>
               <li>
-                <a href="#">Account Settings</a>
+                {viewBoolean ? createAccount : <a>Account Settings</a>}
               </li>
               <li>
-                <a href="#">Upcoming Adventures</a>
+                {viewBoolean ? null : <a>Upcoming Adventures</a>}
               </li>
               <li>
-                <a href="#">Past Adventures</a>
+                {viewBoolean ? null : <a>Past Adventures</a>}
               </li>
               <li>
-                <a href="#">View Friends</a>
+                {viewBoolean ? null : <a onClick={() => {
+                  this.props.setView('friendPage');
+                }}>View Friends</a>}
               </li>
               <li>
-                <a href="#">Read Messages</a>
+                {viewBoolean ? null : <a>Read Messages</a>}
               </li>
             </ul>
           </div>

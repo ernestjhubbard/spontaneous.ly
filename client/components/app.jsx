@@ -1,15 +1,33 @@
 import React from 'react';
 import Header from './header';
+import CreateAccount from './create-account';
+import SignIn from './sign-in';
 import DefaultPage from './default-page';
 import ActivityList from './activity-list';
+import ProfilePage from './profile-page';
+import FriendPage from './friend-page';
+import StaticActivity from './static-activity';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'home'
+      view: 'friendPage',
+      messages: [],
+      user: {
+        firstName: '',
+        lastName: '',
+        image: '',
+        email: '',
+        points: 0
+      },
+      static: null
     };
     this.setView = this.setView.bind(this);
+    this.setStatic = this.setStatic.bind(this);
+    this.fetchUser = this.fetchUser.bind(this);
+    this.signIn = this.signIn.bind(this);
+    this.createUser = this.createUser.bind(this);
   }
 
   setView(name) {
@@ -18,17 +36,109 @@ class App extends React.Component {
     });
   }
 
+  setStatic(activity) {
+    this.setState({
+      static: activity
+    });
+  }
+
+  fetchUser() {
+    const userConfig = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/users', userConfig)
+      .then(results => results.json())
+      .then(data =>
+        this.setState({
+          user: {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            image: data.image,
+            email: data.email,
+            points: 5,
+            userId: data.userId
+          }
+        })
+      )
+      .catch(error => console.error('There was an error:', error.message));
+  }
+
+  signIn({ email, password }) {
+    event.preventDefault();
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/users', config)
+      .then(results => results.json())
+      .then(data => {
+        if (data.error) {
+          return null;
+        } else {
+          this.fetchUser();
+          this.setView('home');
+        }
+      })
+      .catch(error => console.error('There was an error:', error.message));
+  }
+
+  createUser({ firstName, lastName, email, image, password }) {
+    event.preventDefault();
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ firstName, lastName, email, image, password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/users', config)
+      .then(results => results.json())
+      .then(data => data)
+      .catch(error => console.error('There was an error:', error.message));
+    this.setView('signIn');
+  }
+
   render() {
     let differentPage;
     const stateName = this.state.view;
-    if (stateName === 'home') {
-      differentPage = <DefaultPage setView={this.setView}/>;
-    } else if (stateName === 'activityList') {
-      differentPage = <ActivityList setView={this.setView}/>;
+    switch (stateName) {
+      case 'home':
+        differentPage = <DefaultPage setView={this.setView} />;
+        break;
+      case 'activityList':
+        differentPage = <ActivityList setView={this.setView} />;
+        break;
+      case 'profilePage':
+        differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
+        break;
+      case 'signIn':
+        differentPage = <SignIn signIn={this.signIn} />;
+        break;
+      case 'createAccount':
+        differentPage = <CreateAccount createUser={this.createUser} />;
+        break;
+      case 'staticActivity':
+        differentPage = <StaticActivity activity={this.state.static} />;
+        break;
+      case 'friendPage':
+        differentPage =
+          <FriendPage
+            setView={this.setView}
+            view={this.state.view}
+            retrieve={this.retrieveMessages}
+            fetchUser={this.fetchUser}
+            user={this.state.user} />;
+        break;
     }
     return (
       <div>
-        <Header setView={this.setView}/>
+        <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
         {differentPage}
       </div>
     );

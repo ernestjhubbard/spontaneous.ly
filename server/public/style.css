@@ -1,29 +1,39 @@
-@font-face{
+@font-face {
   font-family: Roboto Mono;
   src: url(assets/font/RobotoMono-Regular.ttf);
 }
 
-body{
+body {
   font-family: 'Roboto Mono';
 }
 
-.header-bar{
+.spon-button {
+  background-color: #F07070;
+  border: none;
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.header-bar {
   background-color: #F07070;
   justify-content: space-between;
   padding: 15px;
 }
 
-.logo-alone{
+.logo-alone {
   height: 2.8rem;
+  cursor: pointer;
 }
 
-.top-banner{
+.top-banner {
   height: 30vh;
-  background-image: linear-gradient(#801d8080, #ffc0cb80),
-  url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.activity-list-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
 }
 
 .center-nav {
@@ -35,12 +45,12 @@ body{
   color: #fff;
 }
 
-.location-text{
+.location-text {
   top: 28%;
-  left:37%;
+  left: 37%;
 }
 
-.card-size{
+.card-size {
   width: 100%;
   min-width: 200px;
   align-items: stretch;
@@ -55,7 +65,7 @@ body{
   object-fit: cover;
 }
 
-.horizontal-scroll{
+.horizontal-scroll {
   overflow-x: scroll;
 }
 
@@ -169,7 +179,7 @@ button:focus {
   position: absolute;
   top: 0;
   left: 0;
-  transition: .25s all;
+  transition: .3s all;
   overflow: hidden;
   display: block;
 }
@@ -192,7 +202,7 @@ button:focus {
   top: 0px;
   right: 0px;
   width: 80%;
-  transition: .25s all;
+  transition: .3s all;
 }
 
 .hamburger {
@@ -220,7 +230,7 @@ button:focus {
   margin: 1rem 0em;
   display: block;
   color: #f07070;
-  transition: .25s all;
+  transition: .3s all;
   text-decoration: none;
 }
 
@@ -241,7 +251,7 @@ ul {
   cursor: pointer;
 }
 
-.menu-nav-bar{
+.menu-nav-bar {
   margin: auto 8px auto auto;
 }
 
@@ -277,4 +287,80 @@ width: 90%;
   border-radius: 5px;
   font-size: 1.5rem;
   width: 45%;
+}
+.profile-user-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 200px;
+  width: 200px;
+}
+
+.profile-point-value {
+  font-size: 4rem;
+  color: #F07070;
+}
+
+.calc-button-50 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calc-button-50 button {
+  width: calc(50% - 8px);
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+.input-font {
+  font-size: 1rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* FRIEND PAGE BELOW - CHANGE AS NEEDED */
+
+.viewing {
+  background: #f07070;
+  color: #fff;
+}
+
+.friend-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.friend-button {
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: white;
+}
+
+.send-message {
+  color: #f07070
+}
+
+/* FRIEND PAGE ABOVE - CHANGE AS NEEDED */
+
+.wine-and-paint-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/wine-and-paint.jpg);
+}
+
+.pickup-basketball-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/pickup-basketball.jpg);
+}
+
+.yoga-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/yoga.jpg);
+}
+
+.parasailing-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/parasailing.jpg);
 }
