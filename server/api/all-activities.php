@@ -2,6 +2,7 @@
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
+  // If the user somehow bypasses the filter, they will see all activities, rather than throw an error
   if (!isset($request['body']['points'])) {
     $sql_query = "SELECT *
                     FROM `activities`";
