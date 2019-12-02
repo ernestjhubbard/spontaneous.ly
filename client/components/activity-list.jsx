@@ -21,7 +21,7 @@ class ActivityList extends React.Component {
     const currentView = this.state.view;
     const carousel =
       <div>
-        <div className="top-banner activity-list-hero d-flex">
+        <div className="activity-list-hero top-banner d-flex">
           <div className="m-auto p-3">
             <h2 className="text-center text-white">Adventures in Your Area</h2>
             <p className="text-center text-white">Irvine, CA</p>
@@ -29,6 +29,8 @@ class ActivityList extends React.Component {
         </div>
         <div className="container-fluid my-5">
           <Carousel setView={this.setView} fetch={this.fetchDetail}/>
+          <p className="text-center">Not happy with these choices?</p>
+          <p className="text-center"><a href="#" className="reroll">Re-roll for 25 points.</a></p>
         </div>
       </div>;
     const view = currentView === 'default' ? carousel : <ActivityDetail setView={this.setView} activity={this.state.activityClicked}/>;

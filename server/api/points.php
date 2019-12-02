@@ -1,9 +1,15 @@
 <?php
 
 $link = get_db_link();
+$user_id = 1;
 
-if ($request['method'] === 'POST') {
-  $user_id = 4;
+if ($request['method'] === 'GET') {
+  $sql_user_points = "SELECT value FROM points WHERE userId = $user_id";
+  $user_points_query = mysqli_query($link, $sql_user_points);
+  $user_points = mysqli_fetch_all($user_points_query, MYSQLI_ASSOC);
+  $response['body'] = $user_points;
+  send($response);
+} else if ($request['method'] === 'POST') {
   $transaction_type = $request['body']['transactionType'];
   if ($transaction_type === "reservation" && isset($request['body']['activityId'])){
       $activity_id = $request['body']['activityId'];
