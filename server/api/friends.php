@@ -1,7 +1,5 @@
 <?php
-$link = get_db_link()
-
-/* RETRIEVES LIST OF FRIENDS OF THE CURRENT LOGGED IN USER */
+$link = get_db_link();
 
 if ($request['method'] === 'GET') {
     $sql_current_user = "SELECT userId FROM `logins` 
@@ -22,8 +20,6 @@ if ($request['method'] === 'GET') {
     send($response);
   }
   
-/* USER CAN ADD A FRIEND -- NOT YET IMPLEMENTED FRONT END */
-
 if ($request['method'] === 'POST') {
     $sender_id = $request['body']['senderId'];
     $recipient_id = $request['body']['recipientId'];

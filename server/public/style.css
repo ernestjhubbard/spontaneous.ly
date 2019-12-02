@@ -27,10 +27,13 @@ body {
 
 .top-banner {
   height: 30vh;
-  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.activity-list-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
 }
 
 .center-nav {
@@ -176,7 +179,7 @@ button:focus {
   position: absolute;
   top: 0;
   left: 0;
-  transition: .25s all;
+  transition: .3s all;
   overflow: hidden;
   display: block;
 }
@@ -199,7 +202,7 @@ button:focus {
   top: 0px;
   right: 0px;
   width: 80%;
-  transition: .25s all;
+  transition: .3s all;
 }
 
 .hamburger {
@@ -227,7 +230,7 @@ button:focus {
   margin: 1rem 0em;
   display: block;
   color: #f07070;
-  transition: .25s all;
+  transition: .3s all;
   text-decoration: none;
 }
 
@@ -278,7 +281,7 @@ input::placeholder {
   color: #ccc;
 }
 
-.email-input, .password-input, .zip-input {
+.input-font {
   font-size: 1rem;
 }
 
@@ -288,8 +291,9 @@ input::placeholder {
 
 /* FRIEND PAGE BELOW - CHANGE AS NEEDED */
 
-.friend-page {
-  height: 70vh
+.viewing {
+  background: #f07070;
+  color: #fff;
 }
 
 .friend-image {
@@ -310,9 +314,20 @@ input::placeholder {
   color: #f07070
 }
 
-.send-button {
-  background-color: #f07070;
-  border: none;
+/* FRIEND PAGE ABOVE - CHANGE AS NEEDED */
+
+.wine-and-paint-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/wine-and-paint.jpg);
 }
 
-/* FRIEND PAGE ABOVE - CHANGE AS NEEDED */
+.pickup-basketball-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/pickup-basketball.jpg);
+}
+
+.yoga-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/yoga.jpg);
+}
+
+.parasailing-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/parasailing.jpg);
+}

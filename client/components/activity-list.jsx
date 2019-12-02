@@ -10,7 +10,7 @@ class ActivityList extends React.Component {
 
   render() {
     return (
-      <div className="">
+      <div>
         <div className="top-banner d-flex">
           <div className="m-auto p-3">
             <h2 className="text-center text-white">Adventures in Your Area</h2>

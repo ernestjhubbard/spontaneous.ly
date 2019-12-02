@@ -18,9 +18,6 @@ class MessageFriend extends React.Component {
     const userId = this.props.user.userId;
     const recipientId = this.state.friend.userId;
     const message = this.state.message;
-
-    /* CREATES AN ARRAY OF SINGLE MESSAGES RETRIEVED */
-
     const messages = this.state.messages.map((m, index) =>
       <Message
         key={index}
@@ -67,16 +64,12 @@ class MessageFriend extends React.Component {
     this.retrieveMessages({ recipientId });
   }
 
-  /* RETRIEVES MESSAGES AND RETRIEVES SINGLE FRIEND INFORMATION FROM DB */
-
   componentDidMount() {
     const recipientId = this.props.friendId;
     const friendId = this.props.friendId;
     this.retrieveMessages({ recipientId });
     this.getFriend({ friendId });
   }
-
-  /* RETRIEVES MESSAGES THAT USER HAS STORED IN DB */
 
   retrieveMessages({ recipientId }) {
     event.preventDefault();
@@ -92,8 +85,6 @@ class MessageFriend extends React.Component {
       .then(results => results.json())
       .then(data => this.setState({ messages: this.state.messages.concat(data) }));
   }
-
-  /* GETS SINGLE FRIEND THAT USER WANTS TO TALK TO */
 
   getFriend({ friendId }) {
     const userConfig = {

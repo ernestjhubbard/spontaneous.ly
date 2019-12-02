@@ -1,8 +1,6 @@
 <?php
 $link = get_db_link();
 
-/* GET REQUEST GRABS THE LAST USER LOGGED IN */
-
 if ($request['method'] === 'GET') {
     $sql_login = "SELECT userId FROM `logins`
                             ORDER BY `logins`.`loginId` DESC";
@@ -23,8 +21,6 @@ if ($request['method'] === 'POST') {
       throw new ApiError('User email is required', 400);
     }
 
-    /* FOR WHEN THE USER IS CREATING AN ACCOUNT */
-    
     if(isset($request['body']['firstName'])){
       $user_first_name = $request['body']['firstName'];
       $user_last_name = $request['body']['lastName'];
@@ -37,7 +33,6 @@ if ($request['method'] === 'POST') {
       $insert = mysqli_insert_id($link);
     }
 
-    /* FOR WHEN THE USER IS LOGGING IN - NEED TO MAKE IT A PREPARED STATEMENT */
     else{
     $login_password = $request['body']['password'];
     $user_query = "SELECT `userId`

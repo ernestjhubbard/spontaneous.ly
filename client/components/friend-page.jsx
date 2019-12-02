@@ -2,8 +2,6 @@ import React from 'react';
 import MessageFriend from './message-friend';
 import FriendList from './friend-list';
 
-/* THIS IS THE PARENT CLASS OF MESSAGEFRIEND AND FRIENDLIST */
-
 class FriendPage extends React.Component {
   constructor(props) {
     super(props);
@@ -38,20 +36,14 @@ class FriendPage extends React.Component {
     );
   }
 
-  /* RETRIEVES LIST OF FRIENDS OF THE USER */
-
   componentDidMount() {
     this.getFriends();
     this.props.fetchUser();
   }
 
-  /* VIEWS ARE MESSAGEFRIEND AND FRIENDLIST */
-
   changeView(view) {
     this.setState({ view });
   }
-
-  /* RETRIEVES LIST OF FRIENDS TO PASS TO FRIENDLIST */
 
   getFriends() {
     const config = {
@@ -65,13 +57,9 @@ class FriendPage extends React.Component {
       .then(data => this.setState({ friends: this.state.friends.concat(data) }));
   }
 
-  /* WHEN YOU CLICK ON A USER TO MESSAGE THEM IT STORES THEIR ID IN STATE */
-
   clickFriend(friendId) {
     this.setState({ friendClicked: friendId });
   }
-
-  /* GETS THE FRIEND INFORMATION FROM DB WHEN THEY CLICK ON THEM TO MESSAGE THEM */
 
   getFriend({ friendId }) {
     const userConfig = {
