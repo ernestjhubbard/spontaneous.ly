@@ -8,7 +8,7 @@ function DefaultPage(props) {
           <h1 className="text-center h2">Spontaneous.ly</h1>
           <p className="text-center">Get connected. Be spontaneous</p>
           <form onSubmit={() => props.setView('activityList')}>
-            <input className="zip-input w-100 form-control-lg border text-center"
+            <input className="input-font w-100 form-control-lg border text-center"
               type="text"
               placeholder="Enter your zip"></input>
           </form>

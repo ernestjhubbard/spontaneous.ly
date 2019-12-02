@@ -11,7 +11,7 @@ class ActivityList extends React.Component {
   render() {
     return (
       <div>
-        <div className="top-banner d-flex">
+        <div className="activity-list-hero top-banner d-flex">
           <div className="m-auto p-3">
             <h2 className="text-center text-white">Adventures in Your Area</h2>
             <p className="text-center text-white">Irvine, CA</p>
@@ -20,6 +20,8 @@ class ActivityList extends React.Component {
         <div className="container-fluid my-5">
           <Carousel />
         </div>
+        <p className="text-center">Not happy with these choices?</p>
+        <p className="text-center"><a href="#" className="reroll">Re-roll for 25 points.</a></p>
       </div>
     );
   }

@@ -30,7 +30,10 @@ class MessageFriend extends React.Component {
     return (
       <div className="container fixed-bottom">
         {messages}
-        <form onSubmit={() => this.sendMessage({ recipientId, message })}>
+        <form onSubmit={() => {
+          this.sendMessage({ recipientId, message });
+          this.setState({ message: '' });
+        }}>
           <div className="input-group mb-3">
             <input className="form-control text-center"
               name="message"

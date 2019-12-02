@@ -217,7 +217,7 @@ button:focus {
 }
 
 .nav-open {
-  transform: translateX(0px);
+  transform: translateX(0%);
 }
 
 .nav-drawer h3 {
@@ -363,4 +363,8 @@ input::placeholder {
 
 .parasailing-hero {
   background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/parasailing.jpg);
+}
+
+.reroll {
+  color: #f07070;
 }
