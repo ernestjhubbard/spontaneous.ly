@@ -12,7 +12,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'friendPage',
+      view: 'signIn',
       messages: [],
       user: {
         firstName: '',
@@ -109,7 +109,7 @@ class App extends React.Component {
     const stateName = this.state.view;
     switch (stateName) {
       case 'home':
-        differentPage = <DefaultPage setView={this.setView} />;
+        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} />;
         break;
       case 'activityList':
         differentPage = <ActivityList setView={this.setView} />;
