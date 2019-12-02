@@ -33,7 +33,7 @@ body {
 }
 
 .activity-list-hero {
-    background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/low-angle-photography-of-coconut-trees-804410.jpg);
 }
 
 .center-nav {
@@ -315,6 +315,7 @@ input::placeholder {
 }
 
 /* FRIEND PAGE ABOVE - CHANGE AS NEEDED */
+
 .wine-and-paint-hero {
   background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/wine-and-paint.jpg);
 }

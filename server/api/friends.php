@@ -1,5 +1,6 @@
 <?php
 $link = get_db_link();
+
 if ($request['method'] === 'GET') {
     $sql_current_user = "SELECT userId FROM `logins` 
                        ORDER BY `logins`.`loginId` DESC";
@@ -18,6 +19,7 @@ if ($request['method'] === 'GET') {
     $response['body'] = $output;
     send($response);
   }
+  
 if ($request['method'] === 'POST') {
     $sender_id = $request['body']['senderId'];
     $recipient_id = $request['body']['recipientId'];

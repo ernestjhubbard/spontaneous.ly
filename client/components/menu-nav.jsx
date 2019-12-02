@@ -68,7 +68,7 @@ class MenuNav extends React.Component {
               </li>
               <li>
                 {viewBoolean ? null : <a onClick={() => {
-                  this.props.setView('friendList');
+                  this.props.setView('friendPage');
                 }}>View Friends</a>}
               </li>
               <li>

@@ -1,16 +1,29 @@
 import React from 'react';
 import Friend from './friend';
+
 class FriendList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      friends: []
+      friends: [],
+      messages: []
     };
   }
 
   render() {
-    const friendsArray = this.state.friends.map(friend =>
-      <Friend key={friend.userId} image={friend.image} firstName={friend.firstName} lastName={friend.lastName} />
+    const friendsArray = this.props.friends.map((friend, index) =>
+      <Friend
+        clickFriend={this.props.clickFriend}
+        messages={this.state.messages}
+        changeView={this.props.changeView}
+        setView={this.props.setView}
+        key={index}
+        retrieve={this.props.retrieve}
+        recipientId={friend.recipientId}
+        getFriend={this.getFriend}
+        image={friend.image}
+        firstName={friend.firstName}
+        lastName={friend.lastName} />
     );
     return (
       <div className="container align-center my-5">
@@ -24,22 +37,6 @@ class FriendList extends React.Component {
         </div>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.getFriends();
-  }
-
-  getFriends() {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/friends', config)
-      .then(results => results.json())
-      .then(data => this.setState({ friends: this.state.friends.concat(data) }));
   }
 }
 
