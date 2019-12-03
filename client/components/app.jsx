@@ -16,7 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'activityFilter',
+      view: 'activityDetail',
       messages: [],
       activityClicked: {},
       user: {
@@ -56,7 +56,7 @@ class App extends React.Component {
       filter: filterObject
     });
   }
-  
+
   fetchDetail({ activityId }) {
     const config = {
       method: 'POST',
