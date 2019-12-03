@@ -52,7 +52,7 @@ class App extends React.Component {
       static: activity
     });
   }
-00
+
   setFilter(filterObject) {
     this.setState({
       filter: filterObject
