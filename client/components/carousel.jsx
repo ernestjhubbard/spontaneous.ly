@@ -120,7 +120,7 @@ class Carousel extends React.Component {
       );
     });
     return (
-      <div className="outer">
+      <div className="outer mb-3">
         <div className="inner">
           <div className="slides d-flex" style={{ transform: `translateX(${currentPosition.position}%)` }}>
             {activityCard}
