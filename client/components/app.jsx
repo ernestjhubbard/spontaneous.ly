@@ -1,23 +1,22 @@
 import React from 'react';
 import Header from './header';
-import CreateAccount from './create-account';
-import SignIn from './sign-in';
+// import CreateAccount from './create-account';
+// import SignIn from './sign-in';
 import DefaultPage from './default-page';
 import ActivityFilter from './activity-filter';
-import ActivityList from './activity-list';
-import ActivityDetail from './activity-detail';
-import ProfilePage from './profile-page';
-import FriendPage from './friend-page';
+// import ActivityList from './activity-list';
+// import ActivityDetail from './activity-detail';
+// import ProfilePage from './profile-page';
+// import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
-import UpcomingActivities from './upcoming-activities';
-import PastActivities from './past-activities';
-import ConfirmActivity from './confirm-page';
-// import {
-//   BrowserRouter as Router,
-//   Switch,
-//   Route,
-//   Link
-// } from 'react-router-dom';
+// import UpcomingActivities from './upcoming-activities';
+// import PastActivities from './past-activities';
+// import ConfirmActivity from './confirm-page';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -140,71 +139,77 @@ class App extends React.Component {
   }
 
   render() {
-    let differentPage;
-    const stateName = this.state.view;
-    switch (stateName) {
-      case 'home':
-        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip}/>;
-        break;
-      case 'activityFilter':
-        differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
-        break;
-      case 'activityList':
-        differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.state.filter} />;
-        break;
-      case 'profilePage':
-        differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
-        break;
-      case 'signIn':
-        differentPage = <SignIn signIn={this.signIn} />;
-        break;
-      case 'createAccount':
-        differentPage = <CreateAccount createUser={this.createUser} />;
-        break;
-      case 'staticActivity':
-        differentPage = <StaticActivity activity={this.state.static} />;
-        break;
-      case 'friendPage':
-        differentPage =
-          <FriendPage
-            setView={this.setView}
-            view={this.state.view}
-            retrieve={this.retrieveMessages}
-            fetchUser={this.fetchUser}
-            user={this.state.user} />;
-        break;
-      case 'upcomingActivities':
-        differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
-        break;
-      case 'pastActivities':
-        differentPage = <PastActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
-        break;
-      case 'confirm':
-        differentPage = <ConfirmActivity setView={this.setView} />;
-        break;
-      case 'activityDetail':
-        differentPage = <ActivityDetail setView={this.setView} activity={this.state.activityClicked} />;
-        break;
-    }
-    return (
-      <div>
-        <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
-        {differentPage}
-      </div>
-    );
+    // let differentPage;
+    // const stateName = this.state.view;
+    // switch (stateName) {
+    //   case 'home':
+    //     differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip}/>;
+    //     break;
+    //   case 'activityFilter':
+    //     differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
+    //     break;
+    //   case 'activityList':
+    //     differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.state.filter} />;
+    //     break;
+    //   case 'profilePage':
+    //     differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
+    //     break;
+    //   case 'signIn':
+    //     differentPage = <SignIn signIn={this.signIn} />;
+    //     break;
+    //   case 'createAccount':
+    //     differentPage = <CreateAccount createUser={this.createUser} />;
+    //     break;
+    //   case 'staticActivity':
+    //     differentPage = <StaticActivity activity={this.state.static} />;
+    //     break;
+    //   case 'friendPage':
+    //     differentPage =
+    //       <FriendPage
+    //         setView={this.setView}
+    //         view={this.state.view}
+    //         retrieve={this.retrieveMessages}
+    //         fetchUser={this.fetchUser}
+    //         user={this.state.user} />;
+    //     break;
+    //   case 'upcomingActivities':
+    //     differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
+    //     break;
+    //   case 'pastActivities':
+    //     differentPage = <PastActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
+    //     break;
+    //   case 'confirm':
+    //     differentPage = <ConfirmActivity setView={this.setView} />;
+    //     break;
+    //   case 'activityDetail':
+    //     differentPage = <ActivityDetail setView={this.setView} activity={this.state.activityClicked} />;
+    //     break;
+    // }
 
     // return (
     //   <div>
     //     <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
-    //     <Router></Router>
-    //     <Link></Link>
-    //     <Switch>
-    //       <Route path="/">
-    //         <DefaultPage />
-    //       </Route>
-    //     </Switch>
+    //     {differentPage}
     //   </div>
     // );
+
+    return (
+      <div>
+        <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <DefaultPage />
+            </Route>
+            <Route path="/activity-filter">
+              <ActivityFilter />
+            </Route>
+            <Route path="/adventures/:activity" component={StaticActivity}>
+            </Route>
+          </Switch>
+        </Router>
+      </div>
+    );
   }
 }
 

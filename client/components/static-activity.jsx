@@ -4,8 +4,9 @@ class StaticActivity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentActivity: this.props.activity
+      currentActivity: props.match.params.activity
     };
+    this.activity = props.match.params.activity;
     this.getContent = this.getContent.bind(this);
   }
 

@@ -1,4 +1,7 @@
 import React from 'react';
+import {
+  Link
+} from 'react-router-dom';
 
 function DefaultPage(props) {
   return (
@@ -25,10 +28,9 @@ function DefaultPage(props) {
               <img src="assets/images/wine-and-paint.jpg" className="img-info card-img-top" alt="Wine and Paint" />
               <div className="card-body">
                 <p className="text-muted"><small>Wine and Paint</small></p>
-                <p className="text-muted mb-0"><a onClick={() => {
-                  props.setView('staticActivity');
-                  props.setStatic('Wine and Paint');
-                }}><small>Learn More</small></a></p>
+                <p className="text-muted mb-0">
+                  <Link to="/adventures/Wine and Paint"><small>Learn More</small></Link>
+                </p>
               </div>
             </div>
           </div>
@@ -38,10 +40,9 @@ function DefaultPage(props) {
                 className="img-info card-img-top" alt="Backetball Leagues" />
               <div className="card-body">
                 <p className="text-muted"><small>Pickup Basketball</small></p>
-                <p className="text-muted mb-0"><a onClick={() => {
-                  props.setView('staticActivity');
-                  props.setStatic('Pickup Basketball');
-                }}><small>Learn More</small></a></p>
+                <p className="text-muted mb-0">
+                  <Link to="/adventures/Pickup Basketball"><small>Learn More</small></Link>
+                </p>
               </div>
             </div>
           </div>
@@ -50,10 +51,9 @@ function DefaultPage(props) {
               <img src="assets/images/yoga.jpg" className="img-info card-img-top" alt="Yoga" />
               <div className="card-body">
                 <p className="text-muted"><small>Yoga</small></p>
-                <p className="text-muted mb-0"><a onClick={() => {
-                  props.setView('staticActivity');
-                  props.setStatic('Yoga');
-                }}><small>Learn More</small></a></p>
+                <p className="text-muted mb-0">
+                  <Link to="/adventures/Yoga"><small>Learn More</small></Link>
+                </p>
               </div>
             </div>
           </div>
@@ -63,10 +63,9 @@ function DefaultPage(props) {
                 alt="Parasailing" />
               <div className="card-body">
                 <p className="text-muted"><small>Parasailing</small></p>
-                <p className="text-muted mb-0"><a onClick={() => {
-                  props.setView('staticActivity');
-                  props.setStatic('Parasailing');
-                }}><small>Learn More</small></a></p>
+                <p className="text-muted mb-0">
+                  <Link to="/adventures/Parasailing"><small>Learn More</small></Link>
+                </p>
               </div>
             </div>
           </div>
