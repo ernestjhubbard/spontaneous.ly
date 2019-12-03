@@ -13,45 +13,38 @@ class ActivityDetail extends React.Component {
     };
     return (
       <>
-        <div className="activity-top-banner" style={background}>
-          <h2 className="text-center text-white">{activity.activity}</h2>
+        <div className="activity-list-hero top-banner d-flex" style={background}>
+          <div className="m-auto p-3">
+            <h2 className="text-center text-white">{activity.activity}</h2>
+          </div>
         </div>
-
-        <div className="activity-detail-container mx-auto">
-          <div className="activity-detail mt-4">
-            <div className="activity-text">
-              <span className="bold-text">Location: </span>
-              {activity.location}
-            </div>
-            <div className="activity-text">
-              <span className="bold-text">Time: </span>
-              {activity.dateTime}
-            </div>
-            <div className="activity-text">
-              <span className="bold-text">Cost: $</span>
-              {activity.cost}
-            </div>
-            <div className="activity-text">5 Users are joining in</div>
+        <div className="container my-5 mx-auto">
+          <div className="p-2 border rounded mb-3">
+            <p className="mb-2"><span className="bold-text">Location: </span>{activity.location}</p>
+            <p className="mb-2"><span className="bold-text">Time: </span>{activity.dateTime}</p>
+            <p className="mb-2"><span className="bold-text">Cost: </span>${activity.cost}</p>
+            <p className="mb-0"><span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">5</span> Users are joining in</p>
           </div>
           <div className="activity-description">
-            <span className="bold-text">Description: </span>
-            {activity.description}
+           <p>
+             <small>
+                <span className="bold-text">Description: </span>{activity.description}
+             </small>
+           </p>
           </div>
-          <div className="button-container">
-            <button
-              className="confirm-button text-white"
-              onClick={() => {
+        </div>
+        <div className="container button-container calc-button-50 p-3 fixed-bottom">
+          <button className="spon-button rounded text-white mt-0"
+            onClick={() => {
                 const activityId = activity.activityId;
                 this.props.reserve({ activityId });
                 this.props.setView('confirm');
               }}>Confirm</button>
-            <button
-              className="back-button ml-4"
-              onClick={() => this.props.setView('activityList')}
-            >
-              Back
-            </button>
-          </div>
+          <button
+            className="spon-button-alt rounded mt-0"
+            onClick={() => this.props.setView('activityList')}>
+            Back
+          </button>
         </div>
       </>
     );
