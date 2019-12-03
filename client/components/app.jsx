@@ -8,6 +8,7 @@ import ActivityDetail from './activity-detail';
 import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
+import UpcomingActivities from './upcoming-activities';
 import ConfirmActivity from './confirm-page';
 
 class App extends React.Component {
@@ -151,6 +152,9 @@ class App extends React.Component {
             retrieve={this.retrieveMessages}
             fetchUser={this.fetchUser}
             user={this.state.user} />;
+        break;
+      case 'upcomingActivities':
+        differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
         break;
       case 'confirm':
         differentPage = <ConfirmActivity setView={this.setView} activity={this.state.activityClicked}/>;

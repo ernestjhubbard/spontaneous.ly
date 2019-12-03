@@ -61,7 +61,9 @@ class MenuNav extends React.Component {
                 {viewBoolean ? createAccount : <a>Account Settings</a>}
               </li>
               <li>
-                {viewBoolean ? null : <a>Upcoming Adventures</a>}
+                {viewBoolean ? null : <a onClick={() => {
+                  this.props.setView('upcomingActivities');
+                }}>Upcoming Adventures</a>}
               </li>
               <li>
                 {viewBoolean ? null : <a>Past Adventures</a>}

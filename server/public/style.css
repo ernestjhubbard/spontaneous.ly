@@ -332,6 +332,20 @@ input::placeholder {
   display: none;
 }
 
+.activity-thumbnail {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.points {
+  width: 14%;
+  color: #f07070;
+  border: 1px solid;
+  border-radius: 3.5px;
+}
+
 /* FRIEND PAGE BELOW - CHANGE AS NEEDED */
 
 .viewing {
