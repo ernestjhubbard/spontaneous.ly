@@ -1,6 +1,20 @@
 import React from 'react';
+import CancelModal from './cancel-modal';
 
 class ConfirmActivity extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    };
+    this.openModal = this.openModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+  }
 
   render() {
     return (
@@ -13,37 +27,43 @@ class ConfirmActivity extends React.Component {
         <div className="confirm-info mx-auto">
           <div className="activity-text ml-2 mt-2">
             <p>
-              <span className="bold-text">Location: </span>Laguna Beach
+              <span className="bold-text">Location: </span>{' '}
+              {this.props.activity.location}
             </p>
           </div>
           <div className="activity-text ml-2">
             <p>
-              <span className="bold-text">Time: </span>MM/DD/YY @ HH:MM
+              <span className="bold-text">Time: </span>
+              {this.props.activity.dateTime}
             </p>
           </div>
           <div className="activity-text ml-2">
             <p>
-              <span className="bold-text">Cost: </span>$XX
+              <span className="bold-text">Cost: </span>${this.props.activity.cost}
             </p>
           </div>
           <div className="activity-text ml-2">
             <p>
               <span className="bold-text">Spontaneity Points: </span>
-              <span className="point p-1">XX</span>
+              <span className="point p-1">{this.props.activity.points}</span>
             </p>
           </div>
         </div>
 
         <div className="container mx-auto text-center">
-          <div
+          <button
             className="back-home-button w-100"
             onClick={() => this.props.setView('home')}
           >
             Back to Home
-          </div>
-          <div className="cancel-button w-100 mt-2">
-            Cancel Reservation
-          </div>
+          </button>
+          <button className="cancel-button w-100 mt-2" onClick={this.openModal}>Cancel Reservation</button>
+          {this.state.showModal
+            ? <CancelModal
+              closeModal={this.openModal}
+              cancel={this.props.reserve}
+              activityId={this.props.activity.activityId}/>
+            : null}
         </div>
       </>
     );

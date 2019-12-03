@@ -17,7 +17,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'activityDetail',
+      view: 'signIn',
       messages: [],
       activityClicked: {},
       user: {
@@ -38,6 +38,7 @@ class App extends React.Component {
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
     this.fetchDetail = this.fetchDetail.bind(this);
+    this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
   }
 
   setView(name) {
@@ -51,7 +52,7 @@ class App extends React.Component {
       static: activity
     });
   }
-
+00
   setFilter(filterObject) {
     this.setState({
       filter: filterObject
@@ -133,21 +134,53 @@ class App extends React.Component {
     this.setView('signIn');
   }
 
+  reserveConfirmAndCancel({ activityId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ activityId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/reservations', config)
+      .then(response => response.json());
+  }
+
   render() {
     let differentPage;
     const stateName = this.state.view;
     switch (stateName) {
       case 'home':
-        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip}/>;
+        differentPage = (
+          <DefaultPage
+            setView={this.setView}
+            setStatic={this.setStatic}
+            setZip={this.setZip}
+          />
+        );
         break;
       case 'activityFilter':
-        differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
+        differentPage = (
+          <ActivityFilter
+            setView={this.setView}
+            setFilter={this.setFilter}
+            zip={this.state.zip}
+          />
+        );
         break;
       case 'activityList':
-        differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.state.filter} />;
+        differentPage = (
+          <ActivityList
+            setView={this.setView}
+            fetch={this.fetchDetail}
+            filterCriteria={this.state.filter}
+          />
+        );
         break;
       case 'profilePage':
-        differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
+        differentPage = (
+          <ProfilePage user={this.state.user} setView={this.setView} />
+        );
         break;
       case 'signIn':
         differentPage = <SignIn signIn={this.signIn} />;
@@ -159,30 +192,58 @@ class App extends React.Component {
         differentPage = <StaticActivity activity={this.state.static} />;
         break;
       case 'friendPage':
-        differentPage =
+        differentPage = (
           <FriendPage
             setView={this.setView}
             view={this.state.view}
             retrieve={this.retrieveMessages}
             fetchUser={this.fetchUser}
-            user={this.state.user} />;
+            user={this.state.user}
+          />
+        );
         break;
       case 'upcomingActivities':
-        differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
+        differentPage = (
+          <UpcomingActivities
+            setView={this.setView}
+            fetchActivity={this.fetchDetail}
+          />
+        );
         break;
       case 'pastActivities':
-        differentPage = <PastActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
+        differentPage = (
+          <PastActivities
+            setView={this.setView}
+            fetchActivity={this.fetchDetail}
+          />
+        );
         break;
       case 'confirm':
-        differentPage = <ConfirmActivity setView={this.setView} />;
+        differentPage = (
+          <ConfirmActivity
+            setView={this.setView}
+            activity={this.state.activityClicked}
+            reserve={this.reserveConfirmAndCancel}
+          />
+        );
         break;
       case 'activityDetail':
-        differentPage = <ActivityDetail setView={this.setView} activity={this.state.activityClicked} />;
+        differentPage = (
+          <ActivityDetail
+            setView={this.setView}
+            activity={this.state.activityClicked}
+            reserve={this.reserveConfirmAndCancel}
+          />
+        );
         break;
     }
     return (
       <div>
-        <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
+        <Header
+          setView={this.setView}
+          currentView={this.state.view}
+          user={this.state.user}
+        />
         {differentPage}
       </div>
     );

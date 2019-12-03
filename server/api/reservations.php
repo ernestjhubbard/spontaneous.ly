@@ -12,7 +12,11 @@ if ($request['method'] === 'POST') {
                       WHERE activityId = $activity_id";
     $activity_query = mysqli_query($link, $sql_activity);
     $activity = mysqli_fetch_assoc($activity_query);
-    $user_id = 1;
+    $sql_user = "SELECT userId FROM `logins`
+                            ORDER BY `logins`.`loginId` DESC";
+    $login_query = mysqli_query($link, $sql_user);
+    $user_fetch = mysqli_fetch_assoc($login_query);
+    $user_id = $user_fetch['userId'];
     $sql_is_cancelled = "SELECT isCancelled
                            FROM reservations
                           WHERE userId = $user_id
