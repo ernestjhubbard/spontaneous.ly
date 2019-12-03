@@ -8,16 +8,27 @@ class CreateAccount extends React.Component {
       lastName: '',
       email: '',
       image: '',
-      password: ''
+      password: '',
+      userUpload: {}
     };
     this.handleChange = this.handleChange.bind(this);
+    this.imageInput = React.createRef();
+    this.fileUpload = this.fileUpload.bind(this);
+    this.uploadHandler = this.uploadHandler.bind(this);
   }
 
   render() {
     return (
       <div className="container align-center my-5">
         <h4 className="text-center font-weight-bold mb-3">Create An Account</h4>
-        <form onSubmit={() => this.props.createUser(this.state)}>
+        <form
+          method="post"
+          encType="multipart/form-data"
+          onSubmit={() => {
+            this.uploadHandler();
+            this.props.createUser(this.state);
+          }
+          }>
           <div className="form-group" >
             <label htmlFor="email">First Name</label>
             <input className="input-font form-control form-control-lg text-center"
@@ -61,6 +72,8 @@ class CreateAccount extends React.Component {
           <label htmlFor="">Upload a Profile Picture</label>
           <div className="custom-file">
             <input type="file"
+              name="userUpload"
+              onChange={this.fileUpload}
               className="custom-file-input"
               id="validatedCustomFile"
               accept="image/png, image/jpeg, image/jpg"
@@ -77,6 +90,29 @@ class CreateAccount extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  fileUpload(event) {
+    const imageName = event.target.files[0].name;
+    const image = event.target.files[0];
+    this.setState({ userUpload: image });
+    this.setState({ image: imageName });
+  }
+
+  uploadHandler() {
+    const formData = new FormData();
+    formData.append(
+      'myFile',
+      this.state.userUpload,
+      this.state.userUpload.name
+    );
+    const config = {
+      method: 'POST',
+      body: formData
+    };
+    fetch('/api/image-upload', config)
+      .then(results => results.json())
+      .then(data => data);
   }
 }
 

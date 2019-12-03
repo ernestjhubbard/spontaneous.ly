@@ -16,7 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'activityFilter',
+      view: 'signIn',
       messages: [],
       activityClicked: {},
       user: {
@@ -56,7 +56,7 @@ class App extends React.Component {
       filter: filterObject
     });
   }
-  
+
   fetchDetail({ activityId }) {
     const config = {
       method: 'POST',
@@ -116,11 +116,33 @@ class App extends React.Component {
       .catch(error => console.error('There was an error:', error.message));
   }
 
-  createUser({ firstName, lastName, email, image, password }) {
+  fileUpload(event) {
+    this.setState({ isLoading: true });
+    const files = Array.from(event.target.files);
+    const formData = new FormData();
+
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
+
+    fetch('api/image-upload', {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(images => {
+        this.setState({
+          isLoading: false,
+          images
+        });
+      });
+  }
+
+  createUser({ firstName, lastName, email, image, password, userUpload }) {
     event.preventDefault();
     const config = {
       method: 'POST',
-      body: JSON.stringify({ firstName, lastName, email, image, password }),
+      body: JSON.stringify({ firstName, lastName, email, image, password, userUpload }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -137,10 +159,10 @@ class App extends React.Component {
     const stateName = this.state.view;
     switch (stateName) {
       case 'home':
-        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip}/>;
+        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip} />;
         break;
       case 'activityFilter':
-        differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
+        differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip} />;
         break;
       case 'activityList':
         differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.state.filter} />;
