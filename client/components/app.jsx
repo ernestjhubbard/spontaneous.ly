@@ -5,9 +5,12 @@ import SignIn from './sign-in';
 import DefaultPage from './default-page';
 import ActivityFilter from './activity-filter';
 import ActivityList from './activity-list';
+import ActivityDetail from './activity-detail';
 import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
+import UpcomingActivities from './upcoming-activities';
+import ConfirmActivity from './confirm-page';
 
 class App extends React.Component {
   constructor(props) {
@@ -15,6 +18,7 @@ class App extends React.Component {
     this.state = {
       view: 'activityFilter',
       messages: [],
+      activityClicked: {},
       user: {
         firstName: '',
         lastName: '',
@@ -32,6 +36,7 @@ class App extends React.Component {
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
+    this.fetchDetail = this.fetchDetail.bind(this);
   }
 
   setView(name) {
@@ -50,6 +55,19 @@ class App extends React.Component {
     this.setState({
       filter: filterObject
     });
+  }
+  
+  fetchDetail({ activityId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ activityId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/activity-details', config)
+      .then(results => results.json())
+      .then(data => this.setState({ activityClicked: data }));
   }
 
   fetchUser() {
@@ -125,7 +143,7 @@ class App extends React.Component {
         differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
         break;
       case 'activityList':
-        differentPage = <ActivityList setView={this.setView} filterCriteria={this.state.filter}/>;
+        differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.state.filter} />;
         break;
       case 'profilePage':
         differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
@@ -147,6 +165,15 @@ class App extends React.Component {
             retrieve={this.retrieveMessages}
             fetchUser={this.fetchUser}
             user={this.state.user} />;
+        break;
+      case 'upcomingActivities':
+        differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
+        break;
+      case 'confirm':
+        differentPage = <ConfirmActivity setView={this.setView} />;
+        break;
+      case 'activityDetail':
+        differentPage = <ActivityDetail setView={this.setView} activity={this.state.activityClicked} />;
         break;
     }
     return (

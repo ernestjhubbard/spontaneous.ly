@@ -3,6 +3,11 @@
   src: url(assets/font/RobotoMono-Regular.ttf);
 }
 
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(assets/font/RobotoMono-Bold.ttf);
+}
+
 body {
   font-family: 'Roboto Mono';
 }
@@ -327,6 +332,20 @@ input::placeholder {
   display: none;
 }
 
+.activity-thumbnail {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.points {
+  width: 14%;
+  color: #f07070;
+  border: 1px solid;
+  border-radius: 3.5px;
+}
+
 /* FRIEND PAGE BELOW - CHANGE AS NEEDED */
 
 .viewing {
@@ -378,4 +397,42 @@ input::placeholder {
 .filter-range::-moz-range-thumb,
 .filter-range::-ms-thumb {
   background: #fff!important;
+}  
+  
+.confirmation-container{
+  width: 90%;
+}
+
+.confirm-info{
+  width: 90%;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.back-home-button{
+  background-color: #f07070;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.cancel-button{
+  font-size: 1.25rem;
+  background-color: white;
+  border-radius: 5px;
+  color: lightgray;
+}
+
+.bold-text{
+  font-family: 'Roboto-Bold';
+}
+
+.point{
+  background-color: #f07070;
+  border-radius: 2px;
+  color: white;
 }

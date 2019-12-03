@@ -20,26 +20,31 @@ class ActivityDetail extends React.Component {
         <div className="activity-detail-container mx-auto">
           <div className="activity-detail mt-4">
             <div className="activity-text">
-              <strong>Location: </strong>
+              <span className="bold-text">Location: </span>
               {activity.location}
             </div>
             <div className="activity-text">
-              <strong>Time: </strong>
+              <span className="bold-text">Time: </span>
               {activity.dateTime}
             </div>
             <div className="activity-text">
-              <strong>Cost: </strong>
+              <span className="bold-text">Cost: $</span>
               {activity.cost}
             </div>
             <div className="activity-text">5 Users are joining in</div>
           </div>
           <div className="activity-description">
-            <strong>Description: </strong>
+            <span className="bold-text">Description: </span>
             {activity.description}
           </div>
           <div className="button-container">
             <button className="confirm-button text-white">Confirm</button>
-            <button className="back-button ml-4" onClick={() => this.props.setView('default')}>Back</button>
+            <button
+              className="back-button ml-4"
+              onClick={() => this.props.setView('default')}
+            >
+              Back
+            </button>
           </div>
         </div>
       </>
