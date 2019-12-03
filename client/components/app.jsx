@@ -25,7 +25,8 @@ class App extends React.Component {
         email: '',
         points: 0
       },
-      static: null
+      static: null,
+      showModal: false
     };
     this.setView = this.setView.bind(this);
     this.setStatic = this.setStatic.bind(this);

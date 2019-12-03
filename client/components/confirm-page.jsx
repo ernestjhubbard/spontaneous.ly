@@ -1,9 +1,19 @@
 import React from 'react';
+import CancelModal from './cancel-modal';
 
 class ConfirmActivity extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      showModal: false
+    };
+    this.openModal = this.openModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({
+      showModal: !this.state.showModal
+    });
   }
 
   render() {
@@ -47,7 +57,8 @@ class ConfirmActivity extends React.Component {
           >
             Back to Home
           </button>
-          <button className="cancel-button w-100 mt-2">Cancel Reservation</button>
+          <button className="cancel-button w-100 mt-2" onClick={this.openModal}>Cancel Reservation</button>
+          {this.state.showModal ? <CancelModal closeModal={this.openModal}/> : null}
         </div>
       </>
     );
