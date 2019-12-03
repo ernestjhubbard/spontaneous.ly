@@ -232,6 +232,7 @@ class App extends React.Component {
           <ActivityDetail
             setView={this.setView}
             activity={this.state.activityClicked}
+            reserve={this.reserveConfirmAndCancel}
           />
         );
         break;

@@ -15,7 +15,7 @@ class CancelModal extends React.Component {
             className="cancel-confirm-button"
             onClick={() => {
               const activityId = this.props.activityId;
-              this.cancelActivity({ activityId });
+              this.props.cancel({ activityId });
               this.props.closeModal();
             }}>Confirm</button>
           <button className="cancel-back-button ml-2" onClick={this.props.closeModal}>Back</button>
