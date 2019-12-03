@@ -3,6 +3,7 @@ import Header from './header';
 import CreateAccount from './create-account';
 import SignIn from './sign-in';
 import DefaultPage from './default-page';
+import ActivityFilter from './activity-filter';
 import ActivityList from './activity-list';
 import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
@@ -12,7 +13,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'signIn',
+      view: 'activityFilter',
       messages: [],
       user: {
         firstName: '',
@@ -21,10 +22,13 @@ class App extends React.Component {
         email: '',
         points: 0
       },
-      static: null
+      static: null,
+      zip: 92618,
+      filter: {}
     };
     this.setView = this.setView.bind(this);
     this.setStatic = this.setStatic.bind(this);
+    this.setFilter = this.setFilter.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
@@ -39,6 +43,12 @@ class App extends React.Component {
   setStatic(activity) {
     this.setState({
       static: activity
+    });
+  }
+
+  setFilter(filterObject) {
+    this.setState({
+      filter: filterObject
     });
   }
 
@@ -109,10 +119,13 @@ class App extends React.Component {
     const stateName = this.state.view;
     switch (stateName) {
       case 'home':
-        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} />;
+        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip}/>;
+        break;
+      case 'activityFilter':
+        differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
         break;
       case 'activityList':
-        differentPage = <ActivityList setView={this.setView} />;
+        differentPage = <ActivityList setView={this.setView} filterCriteria={this.state.filter}/>;
         break;
       case 'profilePage':
         differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;

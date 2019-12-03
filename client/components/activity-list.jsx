@@ -28,7 +28,7 @@ class ActivityList extends React.Component {
           </div>
         </div>
         <div className="container-fluid my-5">
-          <Carousel setView={this.setView} fetch={this.fetchDetail}/>
+          <Carousel setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.props.filterCriteria}/>
           <p className="text-center">Not happy with these choices?</p>
           <p className="text-center"><a href="#" className="reroll">Re-roll for 25 points.</a></p>
         </div>
