@@ -11,27 +11,39 @@ class ConfirmActivity extends React.Component {
         </div>
 
         <div className="confirm-info mx-auto">
-          <div className="activity-text">
-            <p className="font-weight-bold">
+          <div className="activity-text ml-2 mt-2">
+            <p>
               <span className="bold-text">Location: </span>Laguna Beach
             </p>
           </div>
-          <div className="activity-text">
-            <span className="bold-text">Time: </span>MM/DD/YY @ HH:MM
+          <div className="activity-text ml-2">
+            <p>
+              <span className="bold-text">Time: </span>MM/DD/YY @ HH:MM
+            </p>
           </div>
-          <div className="activity-text">
-            <span className="bold-text">Cost: </span>$XX
+          <div className="activity-text ml-2">
+            <p>
+              <span className="bold-text">Cost: </span>$XX
+            </p>
           </div>
-          <div className="activity-text">
-            <span className="bold-text">Spontaneity Points: </span>XX
+          <div className="activity-text ml-2">
+            <p>
+              <span className="bold-text">Spontaneity Points: </span>
+              <span className="point p-1">XX</span>
+            </p>
           </div>
         </div>
 
-        <div className="button-container mx-auto">
-          <button className="back-home-button" onClick={() => this.props.setView('home')}>Back to Home</button>
-          <button className="cancel-button text-muted">
+        <div className="container mx-auto text-center">
+          <div
+            className="back-home-button w-100"
+            onClick={() => this.props.setView('home')}
+          >
+            Back to Home
+          </div>
+          <div className="cancel-button w-100 mt-2">
             Cancel Reservation
-          </button>
+          </div>
         </div>
       </>
     );

@@ -397,17 +397,22 @@ input::placeholder {
   background-color: #f07070;
   color: white;
   border-radius: 5px;
-  width: 90%;
   font-size: 1.25rem;
 }
 
 .cancel-button{
   font-size: 1.25rem;
   background-color: white;
-  width: 90%;
   border-radius: 5px;
+  color: lightgray;
 }
 
 .bold-text{
   font-family: 'Roboto-Bold';
+}
+
+.point{
+  background-color: #f07070;
+  border-radius: 2px;
+  color: white;
 }
