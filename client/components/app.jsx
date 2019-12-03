@@ -10,6 +10,7 @@ import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
 import UpcomingActivities from './upcoming-activities';
+import PastActivities from './past-activities';
 import ConfirmActivity from './confirm-page';
 
 class App extends React.Component {
@@ -56,7 +57,7 @@ class App extends React.Component {
       filter: filterObject
     });
   }
-  
+
   fetchDetail({ activityId }) {
     const config = {
       method: 'POST',
@@ -168,6 +169,9 @@ class App extends React.Component {
         break;
       case 'upcomingActivities':
         differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
+        break;
+      case 'pastActivities':
+        differentPage = <PastActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
         break;
       case 'confirm':
         differentPage = <ConfirmActivity setView={this.setView} />;
