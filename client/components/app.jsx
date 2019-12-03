@@ -12,6 +12,12 @@ import StaticActivity from './static-activity';
 import UpcomingActivities from './upcoming-activities';
 import PastActivities from './past-activities';
 import ConfirmActivity from './confirm-page';
+// import {
+//   BrowserRouter as Router,
+//   Switch,
+//   Route,
+//   Link
+// } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -186,6 +192,19 @@ class App extends React.Component {
         {differentPage}
       </div>
     );
+
+    // return (
+    //   <div>
+    //     <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
+    //     <Router></Router>
+    //     <Link></Link>
+    //     <Switch>
+    //       <Route path="/">
+    //         <DefaultPage />
+    //       </Route>
+    //     </Switch>
+    //   </div>
+    // );
   }
 }
 
