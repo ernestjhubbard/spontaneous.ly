@@ -34,10 +34,15 @@ class ActivityDetail extends React.Component {
           </div>
         </div>
         <div className="container button-container calc-button-50 p-3 fixed-bottom">
-          <button className="spon-button rounded text-white mt-0">Confirm</button>
+          <button className="spon-button rounded text-white mt-0"
+            onClick={() => {
+              const activityId = activity.activityId;
+              this.props.reserve({ activityId });
+              this.props.setView('confirm');
+            }}>Confirm</button>
           <button
             className="spon-button-alt rounded mt-0"
-            onClick={() => this.props.setView('default')}>
+            onClick={() => this.props.setView('activityList')}>
             Back
           </button>
         </div>
