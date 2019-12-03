@@ -11,7 +11,7 @@ switch ($request['path']) {
   case '/api/points':
   case '/api/users':
   case '/api/reservations':
-  case '/api/upcoming-activities':
+  case '/api/upcoming-past-activities':
   case '/api/past-activities':
   case '/api/all-activities':
   case '/api/activity-details':
