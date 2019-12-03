@@ -137,7 +137,7 @@ class App extends React.Component {
             user={this.state.user} />;
         break;
       case 'upcomingActivities':
-        differentPage = <UpcomingActivities />;
+        differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
         break;
     }
     return (

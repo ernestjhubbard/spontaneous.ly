@@ -1,6 +1,9 @@
 import React from 'react';
 
 function Activity(props) {
+  const fetchActivity = props.fetchActivity;
+  const changeView = props.setView;
+  const activityId = props.activityId;
   const activityInfo = props.activityData;
   const dateTime = activityInfo.dateTime;
   const separationIndex = dateTime.indexOf(' ');
@@ -11,15 +14,18 @@ function Activity(props) {
   time = formatTime(time);
 
   return (
-    <div className="row border rounded m-3">
+    <div className="row border rounded m-3" onClick={() => {
+      fetchActivity({ activityId });
+      changeView('activityDetails');
+    }}>
       <div className="activity-thumbnail border rounded m-1" style={{ backgroundImage: `url(assets/images/activity/${activityInfo.image}` }}></div>
       <div className="m-3">
         <div className="bold-text">{activityInfo.activity}</div>
-        <div className="text-muted">{date + ' ' + time}</div>
+        <div className="text-muted">{date + ', ' + time}</div>
         <p className="mb-0">
           <small className="bold-text">
             <span className="points d-inline-flex justify-content-center align-items-center mr-2">{activityInfo.points}</span>
-            Spontaneity Points
+            Points
           </small>
         </p>
       </div>
