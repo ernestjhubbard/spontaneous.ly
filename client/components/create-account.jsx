@@ -16,7 +16,7 @@ class CreateAccount extends React.Component {
   render() {
     return (
       <div className="container align-center my-5">
-        <h4 className="text-center font-weight-bold">Create An Account</h4>
+        <h4 className="text-center font-weight-bold mb-3">Create An Account</h4>
         <form onSubmit={() => this.props.createUser(this.state)}>
           <div className="form-group" >
             <label htmlFor="email">First Name</label>

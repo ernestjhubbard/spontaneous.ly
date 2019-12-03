@@ -13,7 +13,7 @@ class SignIn extends React.Component {
   render() {
     return (
       <div className="container align-center my-5">
-        <h4 className="text-center font-weight-bold">Sign In</h4>
+        <h4 className="text-center font-weight-bold mb-3">Sign In</h4>
         <form onSubmit={() => this.props.signIn(this.state)}>
           <label htmlFor="email">Email</label>
           <input className="input-font form-control form-control-lg text-center mb-3"

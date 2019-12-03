@@ -81,7 +81,13 @@ class Carousel extends React.Component {
   }
 
   getAllActivities() {
-    fetch('api/all-activities')
+    const cost = this.props.filterCriteria.cost;
+    const distance = this.props.filterCriteria.distance;
+    const points = this.props.filterCriteria.points;
+    const config = {
+      method: 'GET'
+    };
+    fetch(`api/all-activities?cost=${cost}&distance=${distance}&points=${points}`, config)
       .then(response => response.json())
       .then(activityList => {
         const listedActivities = this.state.activities.concat(activityList);
@@ -114,7 +120,7 @@ class Carousel extends React.Component {
       );
     });
     return (
-      <div className="outer">
+      <div className="outer mb-3">
         <div className="inner">
           <div className="slides d-flex" style={{ transform: `translateX(${currentPosition.position}%)` }}>
             {activityCard}

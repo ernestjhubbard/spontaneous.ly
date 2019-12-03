@@ -3,19 +3,21 @@ import Header from './header';
 import CreateAccount from './create-account';
 import SignIn from './sign-in';
 import DefaultPage from './default-page';
+import ActivityFilter from './activity-filter';
 import ActivityList from './activity-list';
 import ActivityDetail from './activity-detail';
 import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
 import UpcomingActivities from './upcoming-activities';
+import PastActivities from './past-activities';
 import ConfirmActivity from './confirm-page';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'confirm',
+      view: 'activityFilter',
       messages: [],
       activityClicked: {},
       user: {
@@ -26,10 +28,12 @@ class App extends React.Component {
         points: 0
       },
       static: null,
-      showModal: false
+      zip: 92618,
+      filter: {}
     };
     this.setView = this.setView.bind(this);
     this.setStatic = this.setStatic.bind(this);
+    this.setFilter = this.setFilter.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
@@ -45,6 +49,12 @@ class App extends React.Component {
   setStatic(activity) {
     this.setState({
       static: activity
+    });
+  }
+
+  setFilter(filterObject) {
+    this.setState({
+      filter: filterObject
     });
   }
 
@@ -128,10 +138,13 @@ class App extends React.Component {
     const stateName = this.state.view;
     switch (stateName) {
       case 'home':
-        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} />;
+        differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip}/>;
+        break;
+      case 'activityFilter':
+        differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
         break;
       case 'activityList':
-        differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} />;
+        differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.state.filter} />;
         break;
       case 'profilePage':
         differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
@@ -156,6 +169,9 @@ class App extends React.Component {
         break;
       case 'upcomingActivities':
         differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
+        break;
+      case 'pastActivities':
+        differentPage = <PastActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
         break;
       case 'confirm':
         differentPage = <ConfirmActivity setView={this.setView} activity={this.state.activityClicked}/>;

@@ -394,6 +394,12 @@ input::placeholder {
   color: #f07070;
 }
 
+.filter-range::-webkit-slider-thumb,
+.filter-range::-moz-range-thumb,
+.filter-range::-ms-thumb {
+  background: #fff!important;
+}  
+  
 .confirmation-container{
   width: 90%;
 }
