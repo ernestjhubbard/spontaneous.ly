@@ -1,32 +1,40 @@
 import React from 'react';
 import Activity from './activity';
 
-class UpcomingActivities extends React.Component {
+class UpcomingOrPastActivities extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { upcomingActivities: [] };
+    this.state = { activities: [] };
   }
 
-  componentDidMount() {
+  fetchActivities() {
     const conf = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/upcoming-activities', conf)
+    fetch(`/api/upcoming-past-activities?activityType=${this.props.activityType}`, conf)
       .then(results => results.json())
-      .then(upcomingActivities => this.setState({ upcomingActivities }))
+      .then(activities => this.setState({ activities }))
       .catch(error => console.error('There was an error:', error.message));
   }
 
+  componentDidMount() {
+    this.fetchActivities();
+  }
+
+  componentDidUpdate() {
+    this.fetchActivities();
+  }
+
   render() {
-    const upcomingActivity = this.state.upcomingActivities;
+    const activities = this.state.activities;
     return (
       <div className="container">
-        <h4 className="bold-text d-flex justify-content-center m-3 overflow-auto">Upcoming Adventures</h4>
+        <h4 className="bold-text d-flex justify-content-center m-3 overflow-auto">{`${this.props.activityType}`} Adventures</h4>
         <div>
-          {upcomingActivity.map(activityInfo =>
+          {activities.map(activityInfo =>
             <Activity
               key={activityInfo.activityId}
               activityId={activityInfo.activityId}
@@ -39,4 +47,4 @@ class UpcomingActivities extends React.Component {
   }
 }
 
-export default UpcomingActivities;
+export default UpcomingOrPastActivities;
