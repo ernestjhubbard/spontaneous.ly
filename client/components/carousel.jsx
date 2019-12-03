@@ -117,7 +117,7 @@ class Carousel extends React.Component {
       <div className="outer">
         <div className="inner">
           <div className="slides d-flex" style={{ transform: `translateX(${currentPosition.position}%)` }}>
-            {activityCard}
+            {activityCard}0
           </div>
         </div>
         <div className="indicator">{currentPosition.currentImageArray}</div>
