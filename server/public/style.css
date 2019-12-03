@@ -416,3 +416,13 @@ input::placeholder {
   border-radius: 2px;
   color: white;
 }
+
+.font-color{
+  color: #f07070;
+}
+
+.confirm-cancel-modal{
+  z-index: 1;
+  width: 90%;
+  height: 50%;
+}

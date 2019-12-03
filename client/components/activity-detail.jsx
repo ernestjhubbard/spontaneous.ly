@@ -38,10 +38,12 @@ class ActivityDetail extends React.Component {
             {activity.description}
           </div>
           <div className="button-container">
-            <button className="confirm-button text-white">Confirm</button>
+            <button
+              className="confirm-button text-white"
+              onClick={() => this.props.setView('confirm')}>Confirm</button>
             <button
               className="back-button ml-4"
-              onClick={() => this.props.setView('default')}
+              onClick={() => this.props.setView('activityList')}
             >
               Back
             </button>

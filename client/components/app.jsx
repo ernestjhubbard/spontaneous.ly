@@ -153,7 +153,7 @@ class App extends React.Component {
             user={this.state.user} />;
         break;
       case 'confirm':
-        differentPage = <ConfirmActivity setView={this.setView} />;
+        differentPage = <ConfirmActivity setView={this.setView} activity={this.state.activityClicked}/>;
         break;
       case 'activityDetail':
         differentPage = <ActivityDetail setView={this.setView} activity={this.state.activityClicked} />;
