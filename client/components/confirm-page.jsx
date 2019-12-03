@@ -62,7 +62,7 @@ class ConfirmActivity extends React.Component {
             ? <CancelModal
               closeModal={this.openModal}
               cancel={this.props.reserve}
-              activityId={this.props.activity.activityId}/>
+              activityId={this.props.activity.activityId} />
             : null}
         </div>
       </>
