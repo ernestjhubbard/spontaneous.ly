@@ -329,6 +329,13 @@ input::placeholder {
   background-repeat: no-repeat;
 }
 
+.points {
+  width: 15%;
+  color: #f07070;
+  border: 1px solid;
+  border-radius: 3.5px;
+}
+
 /* FRIEND PAGE BELOW - CHANGE AS NEEDED */
 
 .viewing {
