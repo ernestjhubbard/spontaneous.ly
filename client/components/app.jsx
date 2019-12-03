@@ -178,7 +178,9 @@ class App extends React.Component {
         break;
       case 'profilePage':
         differentPage = (
-          <ProfilePage user={this.state.user} setView={this.setView} />
+          <ProfilePage
+            user={this.state.user}
+            setView={this.setView} />
         );
         break;
       case 'signIn':
@@ -202,10 +204,18 @@ class App extends React.Component {
         );
         break;
       case 'upcomingActivities':
-        differentPage = <UpcomingOrPastActivities setView={this.setView} fetchActivity={this.fetchDetail} activityType={'Upcoming'} />;
+        differentPage =
+          <UpcomingOrPastActivities
+            setView={this.setView}
+            fetchActivity={this.fetchDetail}
+            activityType={'Upcoming'} />;
         break;
       case 'pastActivities':
-        differentPage = <UpcomingOrPastActivities setView={this.setView} fetchActivity={this.fetchDetail} activityType={'Past'} />;
+        differentPage =
+          <UpcomingOrPastActivities
+            setView={this.setView}
+            fetchActivity={this.fetchDetail}
+            activityType={'Past'} />;
         break;
       case 'confirm':
         differentPage = (
