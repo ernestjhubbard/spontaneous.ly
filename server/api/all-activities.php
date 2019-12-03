@@ -2,37 +2,45 @@
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
+  $max_cost = $request['query']['cost'] * 70;
+  $distance = $request['query']['distance'];
+  $max_points = $request['query']['points'] * 15;
   // If the user somehow bypasses the filter, they will see all activities, rather than throw an error
-  if (!isset($request['body']['points'])) {
+  if (!isset($request['query']['points'])) {
     $sql_query = "SELECT *
                     FROM `activities`";
   }
-  if ($request['body']['points'] > 4 && $request['body']['points'] < 16) {
+  if ($max_points === 15) {
     $sql_query = "SELECT *
                     FROM `activities`
-                   WHERE points < 16";
-  } else if ($request['body']['points'] > 15 && $request['body']['points'] < 31) {
+                   WHERE points < 16
+                     AND cost < $max_cost";
+  } else if ($max_points === 30) {
     $sql_query = "SELECT *
                     FROM `activities`
                    WHERE points
                  BETWEEN 16
-                     AND 30";
-  } else if ($request['body']['points'] > 30 && $request['body']['points'] < 46) {
+                     AND 30
+                     AND cost < $max_cost";
+  } else if ($max_points === 45) {
     $sql_query = "SELECT *
                     FROM `activities`
                    WHERE points
                  BETWEEN 31
-                     AND 45";
-  } else if ($request['body']['points'] > 45 && $request['body']['points'] < 61) {
+                     AND 45
+                     AND cost < $max_cost";
+  } else if ($max_points < 60) {
     $sql_query = "SELECT *
                     FROM `activities`
                    WHERE points
                  BETWEEN 46
-                     AND 60";
-  } else if ($request['body']['points'] >= 61) {
+                     AND 60
+                     AND cost < $max_cost";
+  } else if ($max_points === 75) {
     $sql_query = "SELECT *
                     FROM `activities`
-                   WHERE points > 60";
+                   WHERE points > 60
+                     AND cost < $max_cost";
   }
   $result = mysqli_query($link, $sql_query);
   $output = [];
