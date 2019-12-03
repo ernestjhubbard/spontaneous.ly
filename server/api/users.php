@@ -22,10 +22,6 @@ if ($request['method'] === 'POST') {
       throw new ApiError('User email is required', 400);
     }
     if(isset($request['body']['firstName'])){
-      $current_dir = getcwd();
-      $upload_directory = "../public/assets/images/users/";
-      $image_name = $_FILES['body']['userUpload'];
-      $upload_path = $current_dir . $upload_directory . basename($image_name);
       $user_first_name = $request['body']['firstName'];
       $user_last_name = $request['body']['lastName'];
       $user_image = $request['body']['image'];

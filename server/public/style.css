@@ -19,6 +19,20 @@ body {
   margin-top: 1rem;
 }
 
+.spon-button-alt {
+  background-color: #fff;
+  border: 1px solid #f07070;
+  color: #f07070;
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.user-count {
+  background: #f07070;
+  width: 30px;
+  height: 30px;
+}
+
 .header-bar {
   background-color: #F07070;
   justify-content: space-between;
@@ -268,19 +282,8 @@ ul {
   background-position: center;
 }
 
-.activity-detail-container{
-width: 90%;
-}
-
-.activity-detail{
-  border: 1px solid gray;
-  border-radius: 5px;
-  height: 20vh;
-}
-
-.activity-description{
-  height: 25vh;
-  overflow: scroll;
+.activity-description {
+  margin-bottom: 7rem;
 }
 
 .confirm-button{
@@ -318,6 +321,11 @@ width: 90%;
 
 .calc-button-50 button {
   width: calc(50% - 8px);
+}
+
+.button-container {
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, .2);
+  background: #fff;
 }
 
 input::placeholder {
@@ -389,7 +397,8 @@ input::placeholder {
   background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/parasailing.jpg);
 }
 
-.reroll {
+.reroll,
+.font-color {
   color: #f07070;
 }
 
@@ -397,8 +406,8 @@ input::placeholder {
 .filter-range::-moz-range-thumb,
 .filter-range::-ms-thumb {
   background: #fff!important;
-}  
-  
+}
+
 .confirmation-container{
   width: 90%;
 }
@@ -435,4 +444,46 @@ input::placeholder {
   background-color: #f07070;
   border-radius: 2px;
   color: white;
+}
+
+.confirm-cancel-modal{
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(0,0,0, 0.5);
+  backdrop-filter: blur(3px);
+}
+
+.inner-modal{
+  position: absolute;
+  height: 40%;
+  width: 90%;
+  left: 5%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.cancel-confirm-button{
+  background-color: #f07070;
+  color: white;
+  width: 40%;
+  height: 15%;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.cancel-back-button{
+  color: #f07070;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 40%;
+  height: 15%;
+  font-size: 1.25rem;
 }

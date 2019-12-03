@@ -36,6 +36,10 @@ function Activity(props) {
 function formatDate(string) {
   let newDate = string.split('-').reverse().join('').split(' ').reverse().join(' ');
   newDate = [newDate.slice(0, 2), '/', newDate.slice(2, 4), '/', newDate.slice(4, 6)].join('');
+  const monthDateIndex = newDate.lastIndexOf('/');
+  let monthDate = newDate.slice(0, monthDateIndex);
+  monthDate = monthDate.split('/').reverse().join('').split(' ').reverse().join(' ');
+  newDate = [monthDate.slice(0, 2), '/', monthDate.slice(2, 4), '/', newDate.slice(6, 8)].join('');
   return newDate;
 }
 
