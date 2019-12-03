@@ -26,20 +26,20 @@ class ActivityDetail extends React.Component {
             <p className="mb-0"><span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">5</span> Users are joining in</p>
           </div>
           <div className="activity-description">
-           <p>
-             <small>
+            <p>
+              <small>
                 <span className="bold-text">Description: </span>{activity.description}
-             </small>
-           </p>
+              </small>
+            </p>
           </div>
         </div>
         <div className="container button-container calc-button-50 p-3 fixed-bottom">
           <button className="spon-button rounded text-white mt-0"
             onClick={() => {
-                const activityId = activity.activityId;
-                this.props.reserve({ activityId });
-                this.props.setView('confirm');
-              }}>Confirm</button>
+              const activityId = activity.activityId;
+              this.props.reserve({ activityId });
+              this.props.setView('confirm');
+            }}>Confirm</button>
           <button
             className="spon-button-alt rounded mt-0"
             onClick={() => this.props.setView('activityList')}>
