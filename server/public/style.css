@@ -3,6 +3,11 @@
   src: url(assets/font/RobotoMono-Regular.ttf);
 }
 
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(assets/font/RobotoMono-Bold.ttf);
+}
+
 body {
   font-family: 'Roboto Mono';
 }
@@ -372,4 +377,42 @@ input::placeholder {
 
 .reroll {
   color: #f07070;
+}
+
+.confirmation-container{
+  width: 90%;
+}
+
+.confirm-info{
+  width: 90%;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.back-home-button{
+  background-color: #f07070;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.cancel-button{
+  font-size: 1.25rem;
+  background-color: white;
+  border-radius: 5px;
+  color: lightgray;
+}
+
+.bold-text{
+  font-family: 'Roboto-Bold';
+}
+
+.point{
+  background-color: #f07070;
+  border-radius: 2px;
+  color: white;
 }
