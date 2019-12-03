@@ -101,7 +101,14 @@ class Carousel extends React.Component {
           key={activity.activityId}>
           <div className="inner-card text-center">
             <h3 className="text-white text-center mb-3">{activity.activity}</h3>
-            <button className="spon-button text-white rounded m-auto">Learn More</button>
+            <button
+              className="spon-button text-white rounded m-auto"
+              onClick={() => {
+                const activityId = activity.activityId;
+                this.props.setView('activityDetail');
+                this.props.fetch({ activityId });
+              }
+              }>Learn More</button>
           </div>
         </div>
       );
