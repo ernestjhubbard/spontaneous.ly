@@ -2,11 +2,17 @@
 
 $link = get_db_link();
 if ($request['method'] === 'GET'){
+  $sql_login = "SELECT userId FROM `logins`
+                            ORDER BY `logins`.`loginId` DESC";
+  $login_query = mysqli_query($link, $sql_login);
+  $user_fetch = mysqli_fetch_assoc($login_query);
+  $user_id = $user_fetch['userId'];
   $activity = $request['query']['activity'];
   $sql_activity = "SELECT * FROM users AS u JOIN reservations AS r
                               ON u.`userID` = r.`userId`
                            WHERE r.`isCancelled` = 0
-                             AND r.`activityId` = $activity";
+                             AND r.`activityId` = $activity
+                             AND r.`userId` != $user_id";
   $activity_query = mysqli_query($link, $sql_activity);
   $attendees = [];
     while($row = mysqli_fetch_assoc($activity_query)){
