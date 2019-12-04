@@ -18,6 +18,7 @@ class ActivityDetail extends React.Component {
           onClick={() => {
             const activityId = activity.activityId;
             this.props.reserve({ activityId });
+            this.props.getAttendees(activityId);
             this.props.setView('confirm');
           }}>
         Confirm

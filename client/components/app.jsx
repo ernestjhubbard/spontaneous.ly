@@ -292,7 +292,6 @@ class App extends React.Component {
         differentPage = (
           <ConfirmActivity
             attendees={this.state.usersAttending}
-            getAttendees={this.getAttendees}
             setView={this.setView}
             activity={this.state.activityClicked}
             reserve={this.reserveConfirmAndCancel}
