@@ -42,6 +42,12 @@ class ConfirmActivity extends React.Component {
               <span className="bold-text">Cost: </span>${this.props.activity.cost}
             </p>
           </div>
+          <div className="activity-text ml-2 mt-2">
+            <p>
+              <span className="bold-text">Total Guests: </span>{' '}
+              <span className="point p-1">{this.props.attendees}</span>
+            </p>
+          </div>
           <div className="activity-text ml-2">
             <p>
               <span className="bold-text">Spontaneity Points: </span>
@@ -62,7 +68,7 @@ class ConfirmActivity extends React.Component {
             ? <CancelModal
               closeModal={this.openModal}
               cancel={this.props.reserve}
-              activityId={this.props.activity.activityId}/>
+              activityId={this.props.activity.activityId} />
             : null}
         </div>
       </>

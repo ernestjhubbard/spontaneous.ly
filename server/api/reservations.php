@@ -1,7 +1,16 @@
 <?php
 
 $link = get_db_link();
-
+if ($request['method'] === 'GET'){
+  $activity = $request['query']['activity'];
+  $sql_activity = "SELECT * FROM users AS u JOIN reservations AS r
+                              ON r.`userId` = u.`userId` 
+                           WHERE r.`isCancelled` = 0"
+  $activity_query = mysqli_query($link, $sql_activity);
+  $attendees = mysqli_num_rows($activity_query);
+  $response['body'] = $attendees;
+  send($response);
+}
 if ($request['method'] === 'POST') {
   $activity_id = $request['body']['activityId'];
   if (!isset($activity_id) || !is_numeric($activity_id) || intval($activity_id) === 0) {
