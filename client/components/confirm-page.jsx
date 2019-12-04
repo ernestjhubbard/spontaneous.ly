@@ -43,7 +43,10 @@ class ConfirmActivity extends React.Component {
             </p>
           </div>
           <div className="activity-text ml-2 mt-2">
-            <p onClick={() => this.props.setView('attendeesList')}>
+            <p onClick={() => {
+              this.props.setView('attendeesList');
+              this.props.getAttendees(this.props.activity.activityId);
+            }}>
               <span className="bold-text">Total Guests: </span>{' '}
               <span className="point p-1">{this.props.attendees.length}</span>
             </p>
