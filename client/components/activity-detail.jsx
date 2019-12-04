@@ -48,20 +48,19 @@ class ActivityDetail extends React.Component {
       </>
     );
 
-    // const backToPastActivitiesButton = (
-    //   <button
-    //     className="spon-button-alt rounded mt-0"
-    //     onClick={() => this.props.setView('pastActivities')}>
-    //         Back
-    //   </button>
-    // );
+    const backToPastActivitiesButton = (
+      <button
+        className="spon-button-alt rounded mt-0 mx-auto"
+        onClick={() => this.props.setView('pastActivities')}>
+            Back
+      </button>
+    );
 
     let whichButton = this.props.view === 'activityDetail' ? confirmButton : cancelButton;
-    if (this.props.view === 'pastActivities') {
-      return (
-        whichButton = null
-      );
+    if (this.props.view === 'activityDetailPast') {
+      whichButton = backToPastActivitiesButton;
     }
+
     return (
       <>
         <div className="activity-list-hero top-banner d-flex" style={background}>

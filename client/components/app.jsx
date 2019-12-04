@@ -68,7 +68,9 @@ class App extends React.Component {
     };
     fetch('/api/activity-details', config)
       .then(results => results.json())
-      .then(data => this.setState({ activityClicked: data }));
+      .then(data => {
+        this.setState({ activityClicked: data });
+      });
   }
 
   fetchUser() {
