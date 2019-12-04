@@ -12,8 +12,10 @@ if ($request['method'] === 'GET') {
   if (isset($request['query']['userId'])) {
     $user_id = $request['query']['userId'];
   }
-    $user_query =  "SELECT * FROM users AS u
-                            WHERE $user_id = u.`userId`";
+    $user_query =  "SELECT *
+                      FROM users
+                        AS u
+                     WHERE $user_id = u.`userId`";
     $user_result = mysqli_query($link, $user_query);
     $output = mysqli_fetch_assoc($user_result);
     $response['body'] = $output;
@@ -23,10 +25,10 @@ if ($request['method'] === 'POST') {
 
     $user_email = $request['body']['email'];
     $user_password = $request['body']['password'];
-    if(!isset($user_email)){
+    if (!isset($user_email)) {
       throw new ApiError('User email is required', 400);
     }
-    if(isset($request['body']['firstName'])){
+    if (isset($request['body']['firstName'])) {
       $user_first_name = $request['body']['firstName'];
       $user_last_name = $request['body']['lastName'];
       $user_image = $request['body']['image'];
@@ -39,16 +41,16 @@ if ($request['method'] === 'POST') {
       $response['body'] = $request['body'];
       send($response);
     }
-    else{
+    else {
     $login_password = $request['body']['password'];
-    $user_query = "SELECT `userId`
+    $user_query = "SELECT userId
                      FROM users
                     WHERE '$user_email' = email
                       AND '$login_password' = `password`";
     $user_id = mysqli_query($link, $user_query);
     $id = mysqli_fetch_assoc($user_id);
     $login_id = $id['userId'];
-      if(!isset($id)){
+      if (!isset($id)) {
         throw new ApiError('Invalid Login Credentials', 400);
       }
     $sql_login = "INSERT INTO logins (userId)
