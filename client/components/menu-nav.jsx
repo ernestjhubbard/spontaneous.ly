@@ -70,7 +70,7 @@ class MenuNav extends React.Component {
                 {viewBoolean ? null : <NavLink to="/past-activities">Past Adventures</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <NavLink to="/">View Friends</NavLink>}
+                {viewBoolean ? null : <NavLink to="/friends">View Friends</NavLink>}
               </li>
               <li>
                 {viewBoolean ? null : <a>Read Messages</a>}
