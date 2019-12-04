@@ -106,7 +106,7 @@ class ActivityDetail extends React.Component {
             </p>
             <p className="mb-0">
               <span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">
-                5
+                {this.props.attendees.length}
               </span>{' '}
               Users are joining in
             </p>
