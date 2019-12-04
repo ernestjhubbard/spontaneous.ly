@@ -66,7 +66,7 @@ class ConfirmActivity extends React.Component {
           <button className="cancel-button w-100 mt-2" onClick={this.openModal}>Cancel Reservation</button>
           {this.state.showModal
             ? <CancelModal
-              closeModal={this.openModal}
+              closeModal={this.props.setView('home')}
               cancel={this.props.reserve}
               activityId={this.props.activity.activityId} />
             : null}
