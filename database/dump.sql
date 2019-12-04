@@ -80,7 +80,7 @@ CREATE TABLE `logins` (
   `loginId` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
   PRIMARY KEY (`loginId`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +89,7 @@ CREATE TABLE `logins` (
 
 LOCK TABLES `logins` WRITE;
 /*!40000 ALTER TABLE `logins` DISABLE KEYS */;
-INSERT INTO `logins` VALUES (1,4),(2,4),(3,1),(4,4),(5,4),(6,4),(7,4),(8,1),(9,2),(10,2),(11,3),(12,3),(13,4),(14,4),(15,3),(16,1),(17,4),(18,3),(19,4),(20,4),(21,4),(22,4),(23,12),(24,4),(25,4),(26,4),(27,4),(28,4),(29,1),(30,1),(31,4),(32,4),(33,4),(34,4),(35,4),(36,2),(37,1),(38,4),(39,5),(40,5),(41,4),(42,4),(43,4),(44,4),(45,4),(46,1),(47,1),(48,13),(49,3),(50,2),(51,2),(52,4),(53,2),(54,2),(55,2),(56,2),(57,2),(58,2),(59,2),(60,2),(61,1);
+INSERT INTO `logins` VALUES (1,4),(2,4),(3,1),(4,4),(5,4),(6,4),(7,4),(8,1),(9,2),(10,2),(11,3),(12,3),(13,4),(14,4),(15,3),(16,1),(17,4),(18,3),(19,4),(20,4),(21,4),(22,4),(23,12),(24,4),(25,4),(26,4),(27,4),(28,4),(29,1),(30,1),(31,4),(32,4),(33,4),(34,4),(35,4),(36,2),(37,1),(38,4),(39,5),(40,5),(41,4),(42,4),(43,4),(44,4),(45,4),(46,1),(47,1),(48,13),(49,3),(50,2),(51,2),(52,4),(53,2),(54,2),(55,2),(56,2),(57,2),(58,2),(59,2),(60,2),(61,1),(62,2),(63,2),(64,2),(65,5),(66,5),(67,3),(68,63),(69,67),(70,68),(71,68),(72,68),(73,68),(74,68),(75,68),(76,68),(77,68),(78,68),(79,68),(80,68),(81,68),(82,68),(83,68),(84,68),(85,68),(86,1),(87,2),(88,3),(89,1),(90,69),(91,1),(92,4),(93,1),(94,2);
 /*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,7 +107,7 @@ CREATE TABLE `messages` (
   `recipientId` int(11) NOT NULL,
   `sentAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`messageId`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -116,7 +116,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (18,'Hey gurl',2,4,'2019-12-02 01:52:10'),(19,'Sup',2,4,'2019-12-02 01:52:20'),(20,'Yo yo',4,2,'2019-12-02 02:02:08'),(21,'How\'s it popping',4,2,'2019-12-02 02:02:08'),(22,'Poppin like a race horse',2,4,'2019-12-02 04:50:40'),(23,'Hey dog',1,3,'2019-12-02 05:18:54'),(24,'What\'s the cookie bro',3,1,'2019-12-02 05:18:54'),(25,'The cookie is the lunch',1,3,'2019-12-02 05:20:08');
+INSERT INTO `messages` VALUES (18,'Hey gurl',2,4,'2019-12-02 01:52:10'),(19,'Sup',2,4,'2019-12-02 01:52:20'),(20,'Yo yo',4,2,'2019-12-02 02:02:08'),(21,'How\'s it popping',4,2,'2019-12-02 02:02:08'),(22,'Poppin like a race horse',2,4,'2019-12-02 04:50:40'),(23,'Hey dog',1,3,'2019-12-02 05:18:54'),(24,'What\'s the cookie bro',3,1,'2019-12-02 05:18:54'),(25,'The cookie is the lunch',1,3,'2019-12-02 05:20:08'),(26,'Eyyy',2,4,'2019-12-02 17:42:58'),(27,'What up',2,4,'2019-12-02 17:43:12'),(28,'Hey',2,4,'2019-12-02 17:46:09'),(29,'HeyAnswer me',2,4,'2019-12-02 17:46:13'),(30,'HeyAnswer me now',2,4,'2019-12-02 17:46:16'),(31,'HeyAnswer me nownow',2,4,'2019-12-02 17:46:18'),(32,'What up',1,3,'2019-12-04 03:00:32');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +140,7 @@ CREATE TABLE `points` (
 
 LOCK TABLES `points` WRITE;
 /*!40000 ALTER TABLE `points` DISABLE KEYS */;
-INSERT INTO `points` VALUES (1,15,'reservation'),(1,15,'reservation'),(1,15,'reservation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-25,'re-roll'),(1,-25,'re-roll'),(1,-25,'re-roll');
+INSERT INTO `points` VALUES (1,15,'reservation'),(1,15,'reservation'),(1,15,'reservation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-25,'re-roll'),(1,-25,'re-roll'),(1,-25,'re-roll'),(68,44,'reservation'),(68,40,'reservation'),(68,39,'reservation'),(68,42,'reservation'),(68,39,'reservation'),(68,45,'reservation'),(68,43,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(2,40,'reservation'),(3,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(69,44,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(1,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation');
 /*!40000 ALTER TABLE `points` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (1,44,1),(1,33,1);
+INSERT INTO `reservations` VALUES (4,59,0),(1,59,0),(2,59,1);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +183,7 @@ CREATE TABLE `users` (
   `password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Laurence','Baldwin','lbaldwin@learningfuze.com','laurence','laurence.png'),(2,'Bernadette','Garza','bgarza@learningfuze.com','bernadette','bernadette.png'),(3,'Enrique','Ramos','eramos@learningfuze.com','enrique','enrique.png'),(4,'Laverne','Pratt','lpratt@learningfuze.com','laverne','laverne.png'),(5,'','','','',''),(6,'','','','',''),(7,'john','g','jschmidt@learningfuze.com','jj',''),(8,'john','jacob','jschmidt@learningfuze.com','john','john.png'),(9,'','','','',''),(10,'','','','',''),(11,'ern','skern','ernskern@learningfuze.com','',''),(12,'ram','bo','rambo@learningfuze.com','',''),(13,'blarg','snag','bsnag@learningfuze.com','blarg','');
+INSERT INTO `users` VALUES (1,'Laurence','Baldwin','lbaldwin@learningfuze.com','laurence','laurence.png'),(2,'Bernadette','Garza','bgarza@learningfuze.com','bernadette','bernadette.png'),(3,'Enrique','Ramos','eramos@learningfuze.com','enrique','enrique.png'),(4,'Laverne','Pratt','lpratt@learningfuze.com','laverne','laverne.png'),(68,'Ace','Ventura','aventura@learningfuze.com','ace','aceventura.jpg'),(69,'john','jacob','jschmidt@learningfuze.com','jj','aceventura.jpg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -205,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-01 21:22:59
+-- Dump completed on 2019-12-04  9:15:52
