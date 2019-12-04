@@ -3,7 +3,7 @@
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-  $user_id = 68;
+  $user_id = 1;
   $operator = $request['query']['activityType'] === 'Upcoming' ? '>' : '<';
   $sql_activities = "SELECT reservations.activityId, activities.activity, activities.dateTime, activities.points, activities.image
                        FROM reservations
