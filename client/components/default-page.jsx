@@ -7,19 +7,23 @@ class DefaultPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirectToResults: false
+      zipcode: null
     };
+    this.setZip = this.props.setZip;
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleChange() {
+    this.setState({ zipcode: event.target.value });
+  }
+
   handleSubmit() {
-    this.setState({ redirectToResults: true });
+    this.setZip(this.state.zipcode);
+    this.props.history.push('/activity-filter');
   }
 
   render() {
-    if (this.state.redirectToResults) {
-      return (null);
-    }
     return (
       <div className="">
         <div className="center-nav d-flex">
@@ -30,7 +34,8 @@ class DefaultPage extends React.Component {
               <input className="input-font w-100 form-control-lg border text-center"
                 type="text"
                 placeholder="Enter your zip"
-                maxLength="5"></input>
+                maxLength="5"
+                onChange={this.handleChange}></input>
             </form>
           </div>
         </div>
@@ -99,7 +104,7 @@ class DefaultPage extends React.Component {
 //         <div className="m-auto">
 //           <h1 className="text-center h2">Spontaneous.ly</h1>
 //           <p className="text-center">Get connected. Be spontaneous</p>
-//           <form onSubmit={() => props.setView('activityFilter')}>
+//           <form onSubmit={() => props.history.push('/activity-filter')}>
 //             <input className="input-font w-100 form-control-lg border text-center"
 //               type="text"
 //               placeholder="Enter your zip"

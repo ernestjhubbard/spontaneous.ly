@@ -4,9 +4,9 @@ import Header from './header';
 // import SignIn from './sign-in';
 import DefaultPage from './default-page';
 import ActivityFilter from './activity-filter';
-// import ActivityList from './activity-list';
+import ActivityList from './activity-list';
 // import ActivityDetail from './activity-detail';
-// import ProfilePage from './profile-page';
+import ProfilePage from './profile-page';
 // import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
 // import UpcomingActivities from './upcoming-activities';
@@ -33,10 +33,11 @@ class App extends React.Component {
         points: 0
       },
       static: null,
-      zip: 92618,
+      zip: null,
       filter: {}
     };
     this.setView = this.setView.bind(this);
+    this.setZip = this.setZip.bind(this);
     this.setStatic = this.setStatic.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
@@ -60,6 +61,12 @@ class App extends React.Component {
   setFilter(filterObject) {
     this.setState({
       filter: filterObject
+    });
+  }
+
+  setZip(zipcode) {
+    this.setState({
+      zip: zipcode
     });
   }
 
@@ -142,15 +149,6 @@ class App extends React.Component {
     // let differentPage;
     // const stateName = this.state.view;
     // switch (stateName) {
-    //   case 'home':
-    //     differentPage = <DefaultPage setView={this.setView} setStatic={this.setStatic} setZip={this.setZip}/>;
-    //     break;
-    //   case 'activityFilter':
-    //     differentPage = <ActivityFilter setView={this.setView} setFilter={this.setFilter} zip={this.state.zip}/>;
-    //     break;
-    //   case 'activityList':
-    //     differentPage = <ActivityList setView={this.setView} fetch={this.fetchDetail} filterCriteria={this.state.filter} />;
-    //     break;
     //   case 'profilePage':
     //     differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
     //     break;
@@ -192,20 +190,16 @@ class App extends React.Component {
     //     {differentPage}
     //   </div>
     // );
-
     return (
       <div>
-        <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
         <Router>
+          <Header currentView={this.state.view} user={this.state.user} />
           <Switch>
-            <Route exact path="/">
-              <DefaultPage />
-            </Route>
-            <Route path="/activity-filter">
-              <ActivityFilter />
-            </Route>
-            <Route path="/adventures/:activity" component={StaticActivity}>
-            </Route>
+            <Route exact path="/" render={props => <DefaultPage {...props} setZip={this.setZip} />}/>
+            <Route path="/activity-filter" render={props => <ActivityFilter {...props} zip={this.state.zip} setFilter={this.setFilter} />} />
+            <Route path="/activity-list" render={props => <ActivityList {...props} filterCriteria={this.state.filter} fetch={this.fetchDetail}/>} />
+            <Route path="/adventures/:activity" component={StaticActivity} />
+            <Route path="/profile" render={props => <ProfilePage user={this.state.user} />} />
           </Switch>
         </Router>
       </div>

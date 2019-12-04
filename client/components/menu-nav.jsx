@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class MenuNav extends React.Component {
   constructor(props) {
@@ -55,7 +56,7 @@ class MenuNav extends React.Component {
               <li onClick={() => {
                 this.props.setView(pageOrSignIn);
               }}>
-                {viewBoolean ? signIn : <a>View Profile</a>}
+                {viewBoolean ? signIn : <Link to="/profile">View Profile</Link>}
               </li>
               <li>
                 {viewBoolean ? createAccount : <a>Account Settings</a>}
