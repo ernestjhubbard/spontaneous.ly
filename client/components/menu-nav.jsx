@@ -1,5 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {
+  NavLink
+} from 'react-router-dom';
 
 class MenuNav extends React.Component {
   constructor(props) {
@@ -56,25 +58,19 @@ class MenuNav extends React.Component {
               <li onClick={() => {
                 this.props.setView(pageOrSignIn);
               }}>
-                {viewBoolean ? signIn : <Link to="/profile">View Profile</Link>}
+                {viewBoolean ? signIn : <NavLink to="/profile">View Profile</NavLink>}
               </li>
               <li>
-                {viewBoolean ? createAccount : <a>Account Settings</a>}
+                {viewBoolean ? createAccount : <NavLink to="/">Account Settings</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <a onClick={() => {
-                  this.props.setView('upcomingActivities');
-                }}>Upcoming Adventures</a>}
+                {viewBoolean ? null : <NavLink to="/upcoming-activities">Upcoming Adventures</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <a onClick={() => {
-                  this.props.setView('pastActivities');
-                }}>Past Adventures</a>}
+                {viewBoolean ? null : <NavLink to="/past-activities">Past Adventures</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <a onClick={() => {
-                  this.props.setView('friendPage');
-                }}>View Friends</a>}
+                {viewBoolean ? null : <NavLink to="/">View Friends</NavLink>}
               </li>
               <li>
                 {viewBoolean ? null : <a>Read Messages</a>}

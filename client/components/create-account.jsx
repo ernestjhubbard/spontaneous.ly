@@ -10,14 +10,27 @@ class CreateAccount extends React.Component {
       image: '',
       password: ''
     };
+    this.navigateHome = this.navigateHome.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  navigateHome() {
+    const { history } = this.props;
+    history.push('/');
   }
 
   render() {
     return (
       <div className="container align-center my-5">
         <h4 className="text-center font-weight-bold mb-3">Create An Account</h4>
-        <form onSubmit={() => this.props.createUser(this.state)}>
+        <form onSubmit={() => {
+          this.props.createUser(this.state);
+          this.navigateHome();
+        }}>
           <div className="form-group" >
             <label htmlFor="email">First Name</label>
             <input className="input-font form-control form-control-lg text-center"
@@ -73,10 +86,6 @@ class CreateAccount extends React.Component {
         </form>
       </div>
     );
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
   }
 }
 

@@ -1,17 +1,17 @@
 import React from 'react';
 import Header from './header';
-// import CreateAccount from './create-account';
-// import SignIn from './sign-in';
+import CreateAccount from './create-account';
+import SignIn from './sign-in';
 import DefaultPage from './default-page';
 import ActivityFilter from './activity-filter';
 import ActivityList from './activity-list';
-// import ActivityDetail from './activity-detail';
+import ActivityDetail from './activity-detail';
 import ProfilePage from './profile-page';
-// import FriendPage from './friend-page';
+import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
-// import UpcomingActivities from './upcoming-activities';
-// import PastActivities from './past-activities';
-// import ConfirmActivity from './confirm-page';
+import UpcomingActivities from './upcoming-activities';
+import PastActivities from './past-activities';
+import ConfirmActivity from './confirm-page';
 import {
   BrowserRouter as Router,
   Switch,
@@ -149,18 +149,6 @@ class App extends React.Component {
     // let differentPage;
     // const stateName = this.state.view;
     // switch (stateName) {
-    //   case 'profilePage':
-    //     differentPage = <ProfilePage user={this.state.user} setView={this.setView} />;
-    //     break;
-    //   case 'signIn':
-    //     differentPage = <SignIn signIn={this.signIn} />;
-    //     break;
-    //   case 'createAccount':
-    //     differentPage = <CreateAccount createUser={this.createUser} />;
-    //     break;
-    //   case 'staticActivity':
-    //     differentPage = <StaticActivity activity={this.state.static} />;
-    //     break;
     //   case 'friendPage':
     //     differentPage =
     //       <FriendPage
@@ -170,36 +158,25 @@ class App extends React.Component {
     //         fetchUser={this.fetchUser}
     //         user={this.state.user} />;
     //     break;
-    //   case 'upcomingActivities':
-    //     differentPage = <UpcomingActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
-    //     break;
-    //   case 'pastActivities':
-    //     differentPage = <PastActivities setView={this.setView} fetchActivity={this.fetchDetail} />;
-    //     break;
-    //   case 'confirm':
-    //     differentPage = <ConfirmActivity setView={this.setView} />;
-    //     break;
-    //   case 'activityDetail':
-    //     differentPage = <ActivityDetail setView={this.setView} activity={this.state.activityClicked} />;
-    //     break;
     // }
 
-    // return (
-    //   <div>
-    //     <Header setView={this.setView} currentView={this.state.view} user={this.state.user} />
-    //     {differentPage}
-    //   </div>
-    // );
     return (
       <div>
         <Router>
-          <Header currentView={this.state.view} user={this.state.user} />
+          <Header user={this.state.user} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props} setZip={this.setZip} />}/>
-            <Route path="/activity-filter" render={props => <ActivityFilter {...props} zip={this.state.zip} setFilter={this.setFilter} />} />
-            <Route path="/activity-list" render={props => <ActivityList {...props} filterCriteria={this.state.filter} fetch={this.fetchDetail}/>} />
-            <Route path="/adventures/:activity" component={StaticActivity} />
-            <Route path="/profile" render={props => <ProfilePage user={this.state.user} />} />
+            <Route exact path="/activity-filter" render={props => <ActivityFilter {...props} zip={this.state.zip} setFilter={this.setFilter} />} />
+            <Route exact path="/activity-list" render={props => <ActivityList {...props} filterCriteria={this.state.filter} fetch={this.fetchDetail}/>} />
+            <Route exact path="/adventures/:activity" component={StaticActivity} />
+            <Route exact path="/profile" render={props => <ProfilePage {...props} user={this.state.user} />} />
+            <Route exact path="/sign-in" render={props => <SignIn {...props} signIn={this.signIn} />} />
+            <Route exact path="/create-an-account" render={props => <CreateAccount {...props} createUser={this.createUser} />} />
+            <Route exact path="/friends" render={props => <FriendPage {...props} retrieve={this.retrieveMessages} fetchUser={this.fetchUser} user={this.state.user} />} />
+            <Route exact path="/upcoming-activities" render={props => <UpcomingActivities {...props} fetchActivity={this.fetchDetail} />} />
+            <Route exact path="/past-activities" render={props => <PastActivities {...props} fetchActivity={this.fetchDetail} />} />
+            <Route exact path="/confirmed" render={props => <ConfirmActivity {...props} />} />
+            <Route exact path="/activity-details" render={props => <ActivityDetail {...props} activity={this.state.activityClicked}/>} />
           </Switch>
         </Router>
       </div>

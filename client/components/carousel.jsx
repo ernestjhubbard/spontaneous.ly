@@ -64,7 +64,7 @@ class Carousel extends React.Component {
     for (let index = 0; index < this.state.activities.length; index++) {
       const id = index + 1;
       if (index + 1 === position.currentCard) {
-        position.currentImageArray.push(<div className="current-image active" id={this.props.id} key={id} onClick={() => {
+        position.currentImageArray.push(<div className="current-image activeSlide" id={this.props.id} key={id} onClick={() => {
           this.setPosition(id);
         }}></div>);
       } else {

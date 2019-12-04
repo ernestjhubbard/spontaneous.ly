@@ -23,8 +23,8 @@ class PastActivities extends React.Component {
   render() {
     const pastActivity = this.state.pastActivities;
     return (
-      <div className="container">
-        <h4 className="bold-text d-flex justify-content-center m-3 overflow-auto">Past Adventures</h4>
+      <div className="container my-5">
+        <h4 className="bold-text d-flex justify-content-center">Past Adventures</h4>
         <div>
           {pastActivity.map(activityInfo =>
             <Activity

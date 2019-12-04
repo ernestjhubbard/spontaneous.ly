@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class ConfirmActivity extends React.Component {
-
   render() {
     return (
       <>
@@ -35,12 +35,10 @@ class ConfirmActivity extends React.Component {
         </div>
 
         <div className="container mx-auto text-center">
-          <div
-            className="back-home-button w-100"
-            onClick={() => this.props.setView('home')}
-          >
-            Back to Home
-          </div>
+
+          <Link to="/">
+            <button className="spon-button text-white rounded w-100">Back to Home</button>
+          </Link>
           <div className="cancel-button w-100 mt-2">
             Cancel Reservation
           </div>

@@ -14,7 +14,7 @@ function Activity(props) {
   time = formatTime(time);
 
   return (
-    <div className="row border rounded m-3" onClick={() => {
+    <div className="d-flex border rounded my-3" onClick={() => {
       fetchActivity({ activityId });
       changeView('activityDetail');
     }}>
