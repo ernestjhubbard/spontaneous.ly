@@ -85,7 +85,6 @@ class ActivityDetail extends React.Component {
         </div>
         <div className="container button-container calc-button-50 p-3 fixed-bottom">
           {whichButton}
-
         </div>
       </>
     );
