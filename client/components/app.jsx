@@ -73,7 +73,9 @@ class App extends React.Component {
     };
     fetch('/api/activity-details', config)
       .then(results => results.json())
-      .then(data => this.setState({ activityClicked: data }));
+      .then(data => {
+        this.setState({ activityClicked: data });
+      });
   }
 
   fetchUser() {
@@ -272,10 +274,18 @@ class App extends React.Component {
         );
         break;
       case 'upcomingActivities':
-        differentPage = <UpcomingOrPastActivities setView={this.setView} fetchActivity={this.fetchDetail} activityType={'Upcoming'} />;
+        differentPage =
+          <UpcomingOrPastActivities
+            setView={this.setView}
+            fetchActivity={this.fetchDetail}
+            activityType={'Upcoming'} />;
         break;
       case 'pastActivities':
-        differentPage = <UpcomingOrPastActivities setView={this.setView} fetchActivity={this.fetchDetail} activityType={'Past'} />;
+        differentPage =
+          <UpcomingOrPastActivities
+            setView={this.setView}
+            fetchActivity={this.fetchDetail}
+            activityType={'Past'} />;
         break;
       case 'confirm':
         differentPage = (
@@ -292,11 +302,35 @@ class App extends React.Component {
         differentPage = (
           <ActivityDetail
             attendees={this.state.usersAttending}
+            view={this.state.view}
             getAttendees={this.getAttendees}
             transaction={this.pointsTransaction}
             setView={this.setView}
             activity={this.state.activityClicked}
             reserve={this.reserveConfirmAndCancel}
+          />
+        );
+        break;
+      case 'activityDetailCancel':
+        differentPage = (
+          <ActivityDetail
+            getAttendees={this.getAttendees}
+            transaction={this.pointsTransaction}
+            view={this.state.view}
+            setView={this.setView}
+            activity={this.state.activityClicked}
+            cancel={this.reserveConfirmAndCancel}
+          />
+        );
+        break;
+      case 'activityDetailPast':
+        differentPage = (
+          <ActivityDetail
+            getAttendees={this.getAttendees}
+            transaction={this.pointsTransaction}
+            view={this.state.view}
+            setView={this.setView}
+            activity={this.state.activityClicked}
           />
         );
         break;
