@@ -2,6 +2,8 @@ import React from 'react';
 import Carousel from './carousel';
 
 export default function ActivityList(props) {
+  const rerollPoints = props.reroll;
+  const transactionType = { transactionType: 'reroll' };
   return (
     <div>
       <div className="activity-list-hero top-banner d-flex">
@@ -13,7 +15,15 @@ export default function ActivityList(props) {
       <div className="container-fluid my-5">
         <Carousel setView={props.setView} fetch={props.fetch} filterCriteria={props.filterCriteria} />
         <p className="text-center">Not happy with these choices?</p>
-        <p className="text-center"><a href="#" className="reroll">Re-roll for 25 points.</a></p>
+        <p className="text-center"
+          onClick={() => {
+            rerollPoints(transactionType);
+            props.setView('activityFilter');
+          }}>
+          <a href="#" className="reroll">
+              Re-roll for 25 points.
+          </a>
+        </p>
       </div>
     </div>
   );

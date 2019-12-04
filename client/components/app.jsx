@@ -241,6 +241,7 @@ class App extends React.Component {
             setView={this.setView}
             fetch={this.fetchDetail}
             filterCriteria={this.state.filter}
+            reroll={this.pointsTransaction}
           />
         );
         break;
