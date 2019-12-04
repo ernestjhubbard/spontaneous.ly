@@ -280,14 +280,18 @@ class App extends React.Component {
           <UpcomingOrPastActivities
             setView={this.setView}
             fetchActivity={this.fetchDetail}
-            activityType={'Upcoming'} />;
+            activityType={'Upcoming'}
+            getAttendees={this.getAttendees}
+          />;
         break;
       case 'pastActivities':
         differentPage =
           <UpcomingOrPastActivities
             setView={this.setView}
             fetchActivity={this.fetchDetail}
-            activityType={'Past'} />;
+            activityType={'Past'}
+            getAttendees={this.getAttendees}
+          />;
         break;
       case 'confirm':
         differentPage = (
