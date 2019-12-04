@@ -17,6 +17,7 @@ class SignIn extends React.Component {
 
   handleSubmit() {
     this.props.signIn(this.state);
+    this.props.history.push('/');
   }
 
   render() {

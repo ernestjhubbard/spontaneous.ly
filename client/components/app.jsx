@@ -229,36 +229,50 @@ class App extends React.Component {
     return (
       <div>
         <Router>
-          <Header user={this.state.user} />
+          <Header user={this.state.user} setView={this.setView} currentView={this.state.view} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
-              setZip={this.setZip} />}/>
+              setZip={this.setZip}
+              setView={this.setView} />}/>
             <Route exact path="/activity-filter" render={props => <ActivityFilter {...props}
               zip={this.state.zip}
-              setFilter={this.setFilter} />} />
+              setFilter={this.setFilter}
+              setView={this.setView}/>} />
             <Route exact path="/activity-list" render={props => <ActivityList {...props}
               filterCriteria={this.state.filter}
+              setView={this.setView}
               fetch={this.fetchDetail}/>} />
-            <Route exact path="/adventures/:activity" component={StaticActivity} />
             <Route exact path="/profile" render={props => <ProfilePage {...props}
               user={this.state.user}
+              setView={this.setView}
               points={this.state.points}
               getPoints={this.getPoints}/>} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}
-              signIn={this.signIn} />} />
+              signIn={this.signIn}
+              setView={this.setView}/>} />
             <Route exact path="/create-an-account"
-              render={props => <CreateAccount {...props} createUser={this.createUser} />} />
-            <Route exact path="/friends" render={props => <FriendPage {...props}
+              render={props => <CreateAccount {...props}
+                createUser={this.createUser}
+                setView={this.setView}/>} />
+            <Route exact path="/profile/friends" render={props => <FriendPage {...props}
               retrieve={this.retrieveMessages}
               fetchUser={this.fetchUser}
               user={this.state.user}
-              view={this.state.view} />} />
-            <Route exact path="/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
+              view={this.state.view}
+              setView={this.setView}/>} />
+            <Route exact path="/profile/messages" render={props => <FriendPage {...props}
+              retrieve={this.retrieveMessages}
+              fetchUser={this.fetchUser}
+              user={this.state.user}
+              view={this.state.view}
+              setView={this.setView} />} />
+            <Route exact path="/profile/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
               activityType={'Upcoming'}/>} />
-            <Route exact path="/past-activities" render={props => <UpcomingOrPastActivities {...props}
+            <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Past'} />} />
+              activityType={'Past'}
+              setView={this.setView}/>} />
             <Route exact path="/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
               getAttendees={this.getAttendees}
@@ -276,14 +290,18 @@ class App extends React.Component {
               transaction={this.pointsTransaction}
               view={this.state.view}
               activity={this.state.activityClicked}
-              cancel={this.reserveConfirmAndCancel} />} />
+              cancel={this.reserveConfirmAndCancel}
+              setView={this.setView}/>} />
             <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
               getAttendees={this.getAttendees}
               transaction={this.pointsTransaction}
               view={this.state.view}
-              activity={this.state.activityClicked} />} />
+              activity={this.state.activityClicked}
+              setView={this.setView}/>} />
             <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
-              attendees={this.state.usersAttending} />} />
+              attendees={this.state.usersAttending}
+              setView={this.setView}/>} />
+            <Route exact path="/adventures/:activity" component={StaticActivity} />
           </Switch>
         </Router>
       </div>

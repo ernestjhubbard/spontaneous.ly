@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Link,
   NavLink
 } from 'react-router-dom';
 
@@ -30,12 +31,18 @@ class MenuNav extends React.Component {
   render() {
     const view = this.props.currentView;
     const viewBoolean = view === 'signIn' || view === 'createAccount';
-    const signIn = <button
-      className="spon-button rounded text-white w-100"
-      onClick={() => this.props.setView('signIn')}>Sign In</button>;
-    const createAccount = <button
-      className="spon-button rounded text-white w-100"
-      onClick={() => this.props.setView('createAccount')}>Create Account</button>;
+    const signIn =
+      <Link to="/sign-in">
+        <button
+          className="spon-button rounded text-white w-100"
+          onClick={() => this.props.setView('signIn')}>Sign In</button>
+      </Link>;
+    const createAccount =
+      <Link to="/create-an-account">
+        <button
+          className="spon-button rounded text-white w-100"
+          onClick={() => this.props.setView('createAccount')}>Create Account</button>
+      </Link>;
     const pageOrSignIn = viewBoolean ? 'signIn' : 'profilePage';
     const firstName = this.props.user.firstName;
     const profileImage = {
@@ -61,19 +68,19 @@ class MenuNav extends React.Component {
                 {viewBoolean ? signIn : <NavLink to="/profile">View Profile</NavLink>}
               </li>
               <li>
-                {viewBoolean ? createAccount : <NavLink to="/">Account Settings</NavLink>}
+                {viewBoolean ? createAccount : <NavLink to="/profile">Account Settings</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <NavLink to="/upcoming-activities">Upcoming Adventures</NavLink>}
+                {viewBoolean ? null : <NavLink to="/profile/upcoming-activities">Upcoming Adventures</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <NavLink to="/past-activities">Past Adventures</NavLink>}
+                {viewBoolean ? null : <NavLink to="/profile/past-activities">Past Adventures</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <NavLink to="/friends">View Friends</NavLink>}
+                {viewBoolean ? null : <NavLink to="/profile/friends">View Friends</NavLink>}
               </li>
               <li>
-                {viewBoolean ? null : <a>Read Messages</a>}
+                {viewBoolean ? null : <NavLink to="/profile/messages">Read Messages</NavLink>}
               </li>
             </ul>
           </div>

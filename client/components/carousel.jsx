@@ -98,7 +98,7 @@ class Carousel extends React.Component {
 
   render() {
     const currentPosition = this.getPosition();
-    var activityCard = this.state.activities.map(activity => {
+    const activityCard = this.state.activities.map(activity => {
       return (
         <div
           className="carousel-container w-100 col-12"
@@ -123,7 +123,7 @@ class Carousel extends React.Component {
       <div className="outer mb-3">
         <div className="inner">
           <div className="slides d-flex" style={{ transform: `translateX(${currentPosition.position}%)` }}>
-            {activityCard}0
+            {activityCard}
           </div>
         </div>
         <div className="indicator">{currentPosition.currentImageArray}</div>

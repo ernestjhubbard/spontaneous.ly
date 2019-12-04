@@ -11,7 +11,6 @@ class CreateAccount extends React.Component {
       password: '',
       userUpload: {}
     };
-    this.navigateHome = this.navigateHome.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.imageInput = React.createRef();
     this.fileUpload = this.fileUpload.bind(this);
@@ -20,11 +19,6 @@ class CreateAccount extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-  }
-
-  navigateHome() {
-    const { history } = this.props;
-    history.push('/');
   }
 
   render() {
@@ -38,7 +32,7 @@ class CreateAccount extends React.Component {
           onSubmit={() => {
             this.uploadHandler();
             this.props.createUser(this.state);
-            this.navigateHome();
+            this.props.history.push('/');
           }}>
           <div className="form-group" >
             <label htmlFor="email">First Name</label>

@@ -11,7 +11,7 @@ export default function ActivityList(props) {
         </div>
       </div>
       <div className="container-fluid my-5">
-        <Carousel fetch={props.fetch} filterCriteria={props.filterCriteria}/>
+        <Carousel fetch={props.fetch} filterCriteria={props.filterCriteria} setView={props.setView} />
         <p className="text-center">Not happy with these choices?</p>
         <p className="text-center"><a href="#" className="reroll">Re-roll for 25 points.</a></p>
       </div>
