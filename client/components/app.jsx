@@ -26,7 +26,7 @@ class App extends React.Component {
         image: '',
         email: ''
       },
-      usersAttending: 0,
+      usersAttending: [],
       points: 0,
       static: null,
       zip: 92618,
@@ -208,7 +208,7 @@ class App extends React.Component {
     };
     fetch(`/api/reservations?activity=${activityId}`, config)
       .then(response => response.json())
-      .then(usersAttending => this.setState({ usersAttending }));
+      .then(data => data.map(users => this.setState({ usersAttending: this.state.usersAttending.concat(users) })));
   }
 
   render() {
@@ -281,6 +281,7 @@ class App extends React.Component {
         differentPage = (
           <ConfirmActivity
             attendees={this.state.usersAttending}
+            getAttendees={this.getAttendees}
             setView={this.setView}
             activity={this.state.activityClicked}
             reserve={this.reserveConfirmAndCancel}
@@ -290,6 +291,7 @@ class App extends React.Component {
       case 'activityDetail':
         differentPage = (
           <ActivityDetail
+            attendees={this.state.usersAttending}
             getAttendees={this.getAttendees}
             transaction={this.pointsTransaction}
             setView={this.setView}
@@ -300,7 +302,7 @@ class App extends React.Component {
         break;
       case 'attendeesList':
         differentPage = (
-          <AttendeesList />
+          <AttendeesList attendees={this.state.usersAttending} />
         );
     }
     return (
