@@ -11,6 +11,56 @@ class ActivityDetail extends React.Component {
     const background = {
       backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(assets/images/activity/${activity.image})`
     };
+    const confirmButton = (
+      <>
+        <button
+          className="spon-button rounded text-white mt-0"
+          onClick={() => {
+            const activityId = activity.activityId;
+            this.props.reserve({ activityId });
+            this.props.setView('confirm');
+          }}>
+        Confirm
+        </button>
+        <button
+          className="spon-button-alt rounded mt-0"
+          onClick={() => this.props.setView('activityList')}>
+            Back
+        </button>
+      </>
+    );
+
+    const cancelButton = (
+      <>
+        <button
+          className="spon-button rounded text-white mt-0"
+          onClick={() => {
+            const activityId = activity.activityId;
+            this.props.cancel({ activityId });
+          }}>
+        Cancel
+        </button>
+        <button
+          className="spon-button-alt rounded mt-0"
+          onClick={() => this.props.setView('upcomingActivities')}>
+            Back
+        </button>
+      </>
+    );
+
+    const backToPastActivitiesButton = (
+      <button
+        className="spon-button-alt rounded mt-0 mx-auto"
+        onClick={() => this.props.setView('pastActivities')}>
+            Back
+      </button>
+    );
+
+    let whichButton = this.props.view === 'activityDetail' ? confirmButton : cancelButton;
+    if (this.props.view === 'activityDetailPast') {
+      whichButton = backToPastActivitiesButton;
+    }
+
     return (
       <>
         <div className="activity-list-hero top-banner d-flex" style={background}>
@@ -34,20 +84,7 @@ class ActivityDetail extends React.Component {
           </div>
         </div>
         <div className="container button-container calc-button-50 p-3 fixed-bottom">
-          <button className="spon-button rounded text-white mt-0"
-            onClick={() => {
-              const activityId = activity.activityId;
-              const transactionType = 'reservation';
-              this.props.getAttendees(activityId);
-              this.props.transaction({ transactionType, activityId });
-              this.props.reserve({ activityId });
-              this.props.setView('confirm');
-            }}>Confirm</button>
-          <button
-            className="spon-button-alt rounded mt-0"
-            onClick={() => this.props.setView('activityList')}>
-            Back
-          </button>
+          {whichButton}
         </div>
       </>
     );
