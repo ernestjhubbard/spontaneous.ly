@@ -24,8 +24,10 @@ class UpcomingOrPastActivities extends React.Component {
     this.fetchActivities();
   }
 
-  componentDidUpdate() {
-    this.fetchActivities();
+  componentDidUpdate(prevType) {
+    if (this.props.activityType !== prevType.activityType) {
+      this.fetchActivities();
+    }
   }
 
   render() {
