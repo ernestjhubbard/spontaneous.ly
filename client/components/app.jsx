@@ -210,7 +210,7 @@ class App extends React.Component {
     };
     fetch(`/api/reservations?activity=${activityId}`, config)
       .then(response => response.json())
-      .then(data => data.map(users => this.setState({ usersAttending: this.state.usersAttending.concat(users) })));
+      .then(usersAttending => this.setState({ usersAttending }));
   }
 
   render() {
@@ -238,6 +238,7 @@ class App extends React.Component {
       case 'activityList':
         differentPage = (
           <ActivityList
+            getAttendees={this.getAttendees}
             setView={this.setView}
             fetch={this.fetchDetail}
             filterCriteria={this.state.filter}
@@ -303,7 +304,6 @@ class App extends React.Component {
           <ActivityDetail
             attendees={this.state.usersAttending}
             view={this.state.view}
-            getAttendees={this.getAttendees}
             transaction={this.pointsTransaction}
             setView={this.setView}
             activity={this.state.activityClicked}
@@ -314,7 +314,7 @@ class App extends React.Component {
       case 'activityDetailCancel':
         differentPage = (
           <ActivityDetail
-            getAttendees={this.getAttendees}
+            attendees={this.state.usersAttending}
             transaction={this.pointsTransaction}
             view={this.state.view}
             setView={this.setView}
@@ -326,7 +326,7 @@ class App extends React.Component {
       case 'activityDetailPast':
         differentPage = (
           <ActivityDetail
-            getAttendees={this.getAttendees}
+            attendees={this.state.usersAttending}
             transaction={this.pointsTransaction}
             view={this.state.view}
             setView={this.setView}
