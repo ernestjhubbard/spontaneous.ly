@@ -15,12 +15,12 @@ if ($request['method'] === 'GET') {
     send($response);
   }
 if ($request['method'] === 'POST') {
+
     $user_email = $request['body']['email'];
     $user_password = $request['body']['password'];
     if(!isset($user_email)){
       throw new ApiError('User email is required', 400);
     }
-
     if(isset($request['body']['firstName'])){
       $user_first_name = $request['body']['firstName'];
       $user_last_name = $request['body']['lastName'];
@@ -31,8 +31,9 @@ if ($request['method'] === 'POST') {
       mysqli_stmt_bind_param($sql_prepare_user, 'sssss', $user_email, $user_first_name, $user_last_name, $user_image, $user_password);
       mysqli_stmt_execute($sql_prepare_user);
       $insert = mysqli_insert_id($link);
+      $response['body'] = $request['body'];
+      send($response);
     }
-
     else{
     $login_password = $request['body']['password'];
     $user_query = "SELECT `userId`

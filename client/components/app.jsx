@@ -9,9 +9,9 @@ import ActivityDetail from './activity-detail';
 import ProfilePage from './profile-page';
 import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
-import UpcomingActivities from './upcoming-activities';
-import PastActivities from './past-activities';
+import UpcomingOrPastActivities from './upcoming-past-activities';
 import ConfirmActivity from './confirm-page';
+import AttendeesList from './attendees-list';
 import {
   BrowserRouter as Router,
   Switch,
@@ -22,16 +22,17 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'activityDetail',
+      view: 'signIn',
       messages: [],
       activityClicked: {},
       user: {
         firstName: '',
         lastName: '',
         image: '',
-        email: '',
-        points: 0
+        email: ''
       },
+      usersAttending: [],
+      points: 0,
       static: null,
       zip: null,
       filter: {}
@@ -44,6 +45,10 @@ class App extends React.Component {
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
     this.fetchDetail = this.fetchDetail.bind(this);
+    this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
+    this.pointsTransaction = this.pointsTransaction.bind(this);
+    this.getPoints = this.getPoints.bind(this);
+    this.getAttendees = this.getAttendees.bind(this);
   }
 
   setView(name) {
@@ -80,7 +85,9 @@ class App extends React.Component {
     };
     fetch('/api/activity-details', config)
       .then(results => results.json())
-      .then(data => this.setState({ activityClicked: data }));
+      .then(data => {
+        this.setState({ activityClicked: data });
+      });
   }
 
   fetchUser() {
@@ -99,7 +106,6 @@ class App extends React.Component {
             lastName: data.lastName,
             image: data.image,
             email: data.email,
-            points: 5,
             userId: data.userId
           }
         })
@@ -123,17 +129,40 @@ class App extends React.Component {
           return null;
         } else {
           this.fetchUser();
+          this.getPoints();
           this.setView('home');
         }
       })
       .catch(error => console.error('There was an error:', error.message));
   }
 
-  createUser({ firstName, lastName, email, image, password }) {
+  fileUpload(event) {
+    this.setState({ isLoading: true });
+    const files = Array.from(event.target.files);
+    const formData = new FormData();
+
+    files.forEach((file, i) => {
+      formData.append(i, file);
+    });
+
+    fetch('api/image-upload', {
+      method: 'POST',
+      body: formData
+    })
+      .then(res => res.json())
+      .then(images => {
+        this.setState({
+          isLoading: false,
+          images
+        });
+      });
+  }
+
+  createUser({ firstName, lastName, email, image, password, userUpload }) {
     event.preventDefault();
     const config = {
       method: 'POST',
-      body: JSON.stringify({ firstName, lastName, email, image, password }),
+      body: JSON.stringify({ firstName, lastName, email, image, password, userUpload }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -145,38 +174,116 @@ class App extends React.Component {
     this.setView('signIn');
   }
 
-  render() {
-    // let differentPage;
-    // const stateName = this.state.view;
-    // switch (stateName) {
-    //   case 'friendPage':
-    //     differentPage =
-    //       <FriendPage
-    //         setView={this.setView}
-    //         view={this.state.view}
-    //         retrieve={this.retrieveMessages}
-    //         fetchUser={this.fetchUser}
-    //         user={this.state.user} />;
-    //     break;
-    // }
+  reserveConfirmAndCancel({ activityId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ activityId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/reservations', config)
+      .then(response => response.json());
+  }
 
+  getPoints() {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/points', config)
+      .then(response => response.json())
+      .then(data => {
+        const points = data.reduce((total, value) => total + value.value, 0);
+        this.setState({ points });
+      });
+  }
+
+  pointsTransaction({ transactionType, activityId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ transactionType, activityId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/points', config)
+      .then(response => response.json());
+  }
+
+  getAttendees(activityId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/reservations?activity=${activityId}`, config)
+      .then(response => response.json())
+      .then(data => data.map(users => this.setState({ usersAttending: this.state.usersAttending.concat(users) })));
+  }
+
+  render() {
     return (
       <div>
         <Router>
           <Header user={this.state.user} />
           <Switch>
-            <Route exact path="/" render={props => <DefaultPage {...props} setZip={this.setZip} />}/>
-            <Route exact path="/activity-filter" render={props => <ActivityFilter {...props} zip={this.state.zip} setFilter={this.setFilter} />} />
-            <Route exact path="/activity-list" render={props => <ActivityList {...props} filterCriteria={this.state.filter} fetch={this.fetchDetail}/>} />
+            <Route exact path="/" render={props => <DefaultPage {...props}
+              setZip={this.setZip} />}/>
+            <Route exact path="/activity-filter" render={props => <ActivityFilter {...props}
+              zip={this.state.zip}
+              setFilter={this.setFilter} />} />
+            <Route exact path="/activity-list" render={props => <ActivityList {...props}
+              filterCriteria={this.state.filter}
+              fetch={this.fetchDetail}/>} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
-            <Route exact path="/profile" render={props => <ProfilePage {...props} user={this.state.user} />} />
-            <Route exact path="/sign-in" render={props => <SignIn {...props} signIn={this.signIn} />} />
-            <Route exact path="/create-an-account" render={props => <CreateAccount {...props} createUser={this.createUser} />} />
-            <Route exact path="/friends" render={props => <FriendPage {...props} retrieve={this.retrieveMessages} fetchUser={this.fetchUser} user={this.state.user} />} />
-            <Route exact path="/upcoming-activities" render={props => <UpcomingActivities {...props} fetchActivity={this.fetchDetail} />} />
-            <Route exact path="/past-activities" render={props => <PastActivities {...props} fetchActivity={this.fetchDetail} />} />
-            <Route exact path="/confirmed" render={props => <ConfirmActivity {...props} />} />
-            <Route exact path="/activity-details" render={props => <ActivityDetail {...props} activity={this.state.activityClicked}/>} />
+            <Route exact path="/profile" render={props => <ProfilePage {...props}
+              user={this.state.user}
+              points={this.state.points}
+              getPoints={this.getPoints}/>} />
+            <Route exact path="/sign-in" render={props => <SignIn {...props}
+              signIn={this.signIn} />} />
+            <Route exact path="/create-an-account"
+              render={props => <CreateAccount {...props} createUser={this.createUser} />} />
+            <Route exact path="/friends" render={props => <FriendPage {...props}
+              retrieve={this.retrieveMessages}
+              fetchUser={this.fetchUser}
+              user={this.state.user}
+              view={this.state.view} />} />
+            <Route exact path="/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
+              fetchActivity={this.fetchDetail}
+              activityType={'Upcoming'}/>} />
+            <Route exact path="/past-activities" render={props => <UpcomingOrPastActivities {...props}
+              fetchActivity={this.fetchDetail}
+              activityType={'Past'} />} />
+            <Route exact path="/confirmed" render={props => <ConfirmActivity {...props}
+              attendees={this.state.usersAttending}
+              getAttendees={this.getAttendees}
+              activity={this.state.activityClicked} r
+              eserve={this.reserveConfirmAndCancel}/>} />
+            <Route exact path="/activity-details" render={props => <ActivityDetail {...props}
+              attendees={this.state.usersAttending}
+              view={this.state.view}
+              getAttendees={this.getAttendees}
+              transaction={this.pointsTransaction}
+              activity={this.state.activityClicked}
+              reserve={this.reserveConfirmAndCancel}/>} />
+            <Route exact path="/activity-details/cancel" render={props => <ActivityDetail {...props}
+              getAttendees={this.getAttendees}
+              transaction={this.pointsTransaction}
+              view={this.state.view}
+              activity={this.state.activityClicked}
+              cancel={this.reserveConfirmAndCancel} />} />
+            <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
+              getAttendees={this.getAttendees}
+              transaction={this.pointsTransaction}
+              view={this.state.view}
+              activity={this.state.activityClicked} />} />
+            <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
+              attendees={this.state.usersAttending} />} />
           </Switch>
         </Router>
       </div>
