@@ -11,6 +11,7 @@ import FriendPage from './friend-page';
 import StaticActivity from './static-activity';
 import UpcomingOrPastActivities from './upcoming-past-activities';
 import ConfirmActivity from './confirm-page';
+import AttendeesList from './attendees-list';
 
 class App extends React.Component {
   constructor(props) {
@@ -23,9 +24,10 @@ class App extends React.Component {
         firstName: '',
         lastName: '',
         image: '',
-        email: '',
-        points: 0
+        email: ''
       },
+      usersAttending: 0,
+      points: 0,
       static: null,
       zip: 92618,
       filter: {}
@@ -38,6 +40,9 @@ class App extends React.Component {
     this.createUser = this.createUser.bind(this);
     this.fetchDetail = this.fetchDetail.bind(this);
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
+    this.pointsTransaction = this.pointsTransaction.bind(this);
+    this.getPoints = this.getPoints.bind(this);
+    this.getAttendees = this.getAttendees.bind(this);
   }
 
   setView(name) {
@@ -87,7 +92,6 @@ class App extends React.Component {
             lastName: data.lastName,
             image: data.image,
             email: data.email,
-            points: 5,
             userId: data.userId
           }
         })
@@ -111,6 +115,7 @@ class App extends React.Component {
           return null;
         } else {
           this.fetchUser();
+          this.getPoints();
           this.setView('home');
         }
       })
@@ -167,6 +172,45 @@ class App extends React.Component {
       .then(response => response.json());
   }
 
+  getPoints() {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/points', config)
+      .then(response => response.json())
+      .then(data => {
+        const points = data.reduce((total, value) => total + value.value, 0);
+        this.setState({ points });
+      });
+  }
+
+  pointsTransaction({ transactionType, activityId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ transactionType, activityId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/points', config)
+      .then(response => response.json());
+  }
+
+  getAttendees(activityId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/reservations?activity=${activityId}`, config)
+      .then(response => response.json())
+      .then(usersAttending => this.setState({ usersAttending }));
+  }
+
   render() {
     let differentPage;
     const stateName = this.state.view;
@@ -200,7 +244,11 @@ class App extends React.Component {
         break;
       case 'profilePage':
         differentPage = (
-          <ProfilePage user={this.state.user} setView={this.setView} />
+          <ProfilePage
+            user={this.state.user}
+            points={this.state.points}
+            getPoints={this.getPoints}
+            setView={this.setView} />
         );
         break;
       case 'signIn':
@@ -232,6 +280,7 @@ class App extends React.Component {
       case 'confirm':
         differentPage = (
           <ConfirmActivity
+            attendees={this.state.usersAttending}
             setView={this.setView}
             activity={this.state.activityClicked}
             reserve={this.reserveConfirmAndCancel}
@@ -241,12 +290,18 @@ class App extends React.Component {
       case 'activityDetail':
         differentPage = (
           <ActivityDetail
+            getAttendees={this.getAttendees}
+            transaction={this.pointsTransaction}
             setView={this.setView}
             activity={this.state.activityClicked}
             reserve={this.reserveConfirmAndCancel}
           />
         );
         break;
+      case 'attendeesList':
+        differentPage = (
+          <AttendeesList />
+        );
     }
     return (
       <div>

@@ -4,6 +4,7 @@ export default function ProfilePage(props) {
   const profileImage = {
     backgroundImage: `url("assets/images/users/${props.user.image}")`
   };
+  props.getPoints();
   return (
     <div className="container align-center d-flex">
       <div className="profile-center m-auto">
@@ -14,7 +15,7 @@ export default function ProfilePage(props) {
         </div>
         <div className="border rounded p-3">
           <h4 className="align-center text-center">Spontaneity Points</h4>
-          <h1 className="profile-point-value text-center m-auto">{props.user.points}</h1>
+          <h1 className="profile-point-value text-center m-auto">{props.points}</h1>
         </div>
         <div className="profile-footer">
           <button className="spon-button rounded text-white col-12" onClick={() => props.setView('upcomingActivities')}>Upcoming Adventures</button>

@@ -37,6 +37,9 @@ class ActivityDetail extends React.Component {
           <button className="spon-button rounded text-white mt-0"
             onClick={() => {
               const activityId = activity.activityId;
+              const transactionType = 'reservation';
+              this.props.getAttendees(activityId);
+              this.props.transaction({ transactionType, activityId });
               this.props.reserve({ activityId });
               this.props.setView('confirm');
             }}>Confirm</button>
