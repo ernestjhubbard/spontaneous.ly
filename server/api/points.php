@@ -7,6 +7,9 @@ $login_query = mysqli_query($link, $sql_login);
 $user_fetch = mysqli_fetch_assoc($login_query);
 $user_id = $user_fetch['userId'];
 if ($request['method'] === 'GET') {
+  if (isset($request['query']['userId'])) {
+    $user_id = $request['query']['userId'];
+  }
   $sql_user_points = "SELECT value FROM points WHERE userId = $user_id";
   $user_points_query = mysqli_query($link, $sql_user_points);
   $user_points = mysqli_fetch_all($user_points_query, MYSQLI_ASSOC);

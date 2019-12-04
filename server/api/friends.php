@@ -2,14 +2,17 @@
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-    $sql_current_user = "SELECT userId FROM `logins` 
+    $sql_current_user = "SELECT userId FROM `logins`
                        ORDER BY `logins`.`loginId` DESC";
     $user_query = mysqli_query($link, $sql_current_user);
     $user_fetch = mysqli_fetch_assoc($user_query);
     $user_id = $user_fetch['userId'];
+  if (isset($request['query']['userId'])) {
+    $user_id = $request['query']['userId'];
+  }
     $sql_get_friends = "SELECT * FROM users AS u JOIN friendRequests AS f
                                    ON f.`recipientId` = u.`userId`
-                                WHERE f.`isAccepted` = 1 
+                                WHERE f.`isAccepted` = 1
                                   AND f.`senderId` = $user_id";
     $friends_query = mysqli_query($link, $sql_get_friends);
     $output = [];
@@ -19,12 +22,12 @@ if ($request['method'] === 'GET') {
     $response['body'] = $output;
     send($response);
   }
-  
+
 if ($request['method'] === 'POST') {
     $sender_id = $request['body']['senderId'];
     $recipient_id = $request['body']['recipientId'];
     $add_friend_query = "INSERT INTO friendRequests (senderId, recipientId, isAccepted)
-                              VALUES ($sender_id, $recipient_id, 1)";
+                              VALUES ($sender_id, $recipient_id, 1), ($recipient_id, $sender_id, 1)";
     mysqli_query($link, $add_friend_query);
     $response['body'] = "SUCCESS";
     send($response);

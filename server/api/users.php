@@ -1,12 +1,17 @@
 <?php
+
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-    $sql_login = "SELECT userId FROM `logins`
-                            ORDER BY `logins`.`loginId` DESC";
+    $sql_login = "SELECT userId
+                    FROM `logins`
+                ORDER BY `logins`.`loginId` DESC";
     $login_query = mysqli_query($link, $sql_login);
     $user_fetch = mysqli_fetch_assoc($login_query);
     $user_id = $user_fetch['userId'];
+  if (isset($request['query']['userId'])) {
+    $user_id = $request['query']['userId'];
+  }
     $user_query =  "SELECT * FROM users AS u
                             WHERE $user_id = u.`userId`";
     $user_result = mysqli_query($link, $user_query);
