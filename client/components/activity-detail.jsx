@@ -73,7 +73,7 @@ class ActivityDetail extends React.Component {
             <p className="mb-2"><span className="bold-text">Location: </span>{activity.location}</p>
             <p className="mb-2"><span className="bold-text">Time: </span>{activity.dateTime}</p>
             <p className="mb-2"><span className="bold-text">Cost: </span>${activity.cost}</p>
-            <p className="mb-0"><span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">5</span> Users are joining in</p>
+            <p className="mb-0"><span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">{this.props.attendees.length}</span> Users are joining in</p>
           </div>
           <div className="activity-description">
             <p>

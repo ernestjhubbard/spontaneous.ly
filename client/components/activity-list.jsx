@@ -13,7 +13,7 @@ export default function ActivityList(props) {
         </div>
       </div>
       <div className="container-fluid my-5">
-        <Carousel setView={props.setView} fetch={props.fetch} filterCriteria={props.filterCriteria} />
+        <Carousel setView={props.setView} getAttendees={props.getAttendees} fetch={props.fetch} filterCriteria={props.filterCriteria} />
         <p className="text-center">Not happy with these choices?</p>
         <p className="text-center"
           onClick={() => {
