@@ -229,9 +229,29 @@ class App extends React.Component {
       case 'activityDetail':
         differentPage = (
           <ActivityDetail
+            view={this.state.view}
             setView={this.setView}
             activity={this.state.activityClicked}
             reserve={this.reserveConfirmAndCancel}
+          />
+        );
+        break;
+      case 'activityDetailCancel':
+        differentPage = (
+          <ActivityDetail
+            view={this.state.view}
+            setView={this.setView}
+            activity={this.state.activityClicked}
+            cancel={this.reserveConfirmAndCancel}
+          />
+        );
+        break;
+      case 'activityDetailPast':
+        differentPage = (
+          <ActivityDetail
+            view={this.state.view}
+            setView={this.setView}
+            activity={this.state.activityClicked}
           />
         );
         break;
