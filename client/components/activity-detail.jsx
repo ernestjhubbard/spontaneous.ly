@@ -8,10 +8,12 @@ class ActivityDetail extends React.Component {
     this.state = {
       showModal: false,
       activityData: '',
-      usersAttending: 0
+      usersAttending: '',
+      isConfirmed: false
     };
     this.openModal = this.openModal.bind(this);
     this.checkUTC = this.checkUTC.bind(this);
+    this.checkIfConfirmed = this.checkIfConfirmed.bind(this);
   }
 
   componentDidMount() {
@@ -25,7 +27,10 @@ class ActivityDetail extends React.Component {
 
     fetch(`/api/reservations?activity=${this.props.match.params.id}`, config)
       .then(response => response.json())
-      .then(attendees => this.setState({ usersAttending: attendees.length }))
+      .then(attendees => {
+        this.setState({ usersAttending: attendees });
+        this.checkIfConfirmed(this.props.user.userId);
+      })
       .catch(error => console.error('Error', error.message));
   }
 
@@ -38,29 +43,20 @@ class ActivityDetail extends React.Component {
   checkUTC(datetimeString) {
     let dateArray = [];
     if (datetimeString !== undefined) {
-      const splitBySpace = datetimeString.split(' ');
-      const joinedByColon = splitBySpace.join(':');
-      const splitByColon = joinedByColon.split(':');
-      const joinedByDash = splitByColon.join('-');
-      const splitByDash = joinedByDash.split('-');
-      dateArray = splitByDash.map(dateItem => parseInt(dateItem));
+      const splitDate = datetimeString.split(' ').join(':').split(':').join('-').split('-');
+      dateArray = splitDate.map(dateItem => parseInt(dateItem));
     }
     const utcTime = Date.UTC(dateArray[0], dateArray[1], dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
-    return (Date.now() < utcTime);
+    return (Date.now() <= utcTime);
   }
 
-  // getAttendees(activityId) {
-  //   const config = {
-  //     method: 'GET',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   };
-  //   fetch(`/api/reservations?activity=${activityId}`, config)
-  //     .then(response => response.json())
-  //     .then(attendees => console.log(attendees))
-  //     .catch(error => console.error('Error', error.message));
-  // }
+  checkIfConfirmed(loggedInUserId) {
+    for (let loopIndex = 0; loopIndex < this.state.usersAttending.length; loopIndex++) {
+      if (this.state.usersAttending[loopIndex].userId === loggedInUserId) {
+        this.setState({ isConfirmed: true });
+      }
+    }
+  }
 
   render() {
     const activity = this.state.activityData;
@@ -68,6 +64,7 @@ class ActivityDetail extends React.Component {
       backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(/assets/images/activity/${activity.image})`
     };
     const isUpcoming = this.checkUTC(this.state.activityData.dateTime);
+
     return (
       <>
         <div className="top-banner d-flex" style={background}>
@@ -90,7 +87,7 @@ class ActivityDetail extends React.Component {
             </p>
             <p className="mb-0">
               <span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">
-                {this.state.usersAttending}
+                {this.state.usersAttending.length}
               </span> Users are joining in
             </p>
           </div>
@@ -103,7 +100,7 @@ class ActivityDetail extends React.Component {
             </p>
           </div>
         </div>
-        {isUpcoming ? <ConfirmOrCancel {...this.props} /> : <BackToPastActivitiesButton />}
+        {isUpcoming ? <DynamicReserveOrCancel {...this.props} isConfirmed={this.state.isConfirmed} openModal={this.openModal} /> : <BackToPastActivitiesButton />}
       </>
     );
   }
@@ -111,53 +108,47 @@ class ActivityDetail extends React.Component {
 
 export default ActivityDetail;
 
-function ConfirmOrCancel() {
-
+function DynamicReserveOrCancel(props) {
   return (
     <div className="container button-container calc-button-50 p-3 fixed-bottom">
-      <button
-        className="spon-button rounded text-white mt-0"
-        onClick={() => {
-          const activityId = this.state.activityData.activityId;
-          this.props.reserve({ activityId });
-          this.props.history.push('/activity-details/confirmed');
-        }}>
-      Confirm
-      </button>
+      <ConfirmOrCancelButton isConfirmed={props.isConfirmed} {...props} />
       <button
         className="spon-button-alt rounded mt-0"
         onClick={() => {
-          this.props.history.push('/activity-list');
+          props.history.push('/activity-list');
         }}>
-      Back
+            Back
       </button>
     </div>
-
   );
 }
 
-// function CancelButtons() {
-//   return (
-//     <>
-//       <button
-//         className="spon-button rounded text-white mt-0"
-//         onClick={this.openModal}>
-//       Cancel
-//       </button>
-//       {this.state.showModal ? (
-//         <CancelModal
-//           cancel={this.props.cancel}
-//           activityId={this.props.activity.activityId}
-//         />
-//       ) : null}
-//       <button
-//         className="spon-button-alt rounded mt-0">
-//       Back
-//       </button>
-
-//     </>
-//   );
-// }
+function ConfirmOrCancelButton(props) {
+  if (props.isConfirmed) {
+    return (
+      <button
+        className="spon-link-cancel rounded mt-0"
+        onClick={() => {
+          const activityId = this.state.activityData.activityId;
+          props.reserve({ activityId });
+          props.history.push('/activity-details/confirmed');
+        }}>
+        Cancel
+      </button>
+    );
+  }
+  return (
+    <button
+      className="spon-button rounded text-white mt-0"
+      onClick={() => {
+        const activityId = this.state.activityData.activityId;
+        props.reserve({ activityId });
+        props.history.push('/activity-details/confirmed');
+      }}>
+      Confirm
+    </button>
+  );
+}
 
 function BackToPastActivitiesButton() {
   return (
@@ -172,10 +163,3 @@ function BackToPastActivitiesButton() {
     </div>
   );
 }
-
-// function whichButton() {
-//   this.props.view === 'activityDetail' ? confirmButton : cancelButton;
-//   if (this.props.view === 'activityDetailPast') {
-//     whichButton = backToPastActivitiesButton;
-//   }
-// }

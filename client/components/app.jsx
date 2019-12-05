@@ -225,9 +225,8 @@ class App extends React.Component {
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/activity=:id" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
+              user={this.state.user}
               transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
               attendees={this.state.usersAttending}/>} />
