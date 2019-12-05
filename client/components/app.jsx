@@ -145,7 +145,14 @@ class App extends React.Component {
     event.preventDefault();
     const config = {
       method: 'POST',
-      body: JSON.stringify({ firstName, lastName, email, image, password, userUpload }),
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        image,
+        password,
+        userUpload
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -164,8 +171,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/reservations', config)
-      .then(response => response.json());
+    fetch('/api/reservations', config).then(response => response.json());
   }
 
   getPoints() {
@@ -191,8 +197,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/points', config)
-      .then(response => response.json());
+    fetch('/api/points', config).then(response => response.json());
   }
 
   getAttendees(activityId) {
@@ -211,7 +216,7 @@ class App extends React.Component {
     return (
       <div>
         <>
-          <Header user={this.state.user} currentView={this.state.view} />
+          <Header user={this.state.user} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
               setZip={this.setZip} />} />
