@@ -1,4 +1,8 @@
 import React from 'react';
+import {
+  Link,
+  NavLink
+} from 'react-router-dom';
 
 class MenuNav extends React.Component {
   constructor(props) {
@@ -25,60 +29,20 @@ class MenuNav extends React.Component {
   }
 
   render() {
-    const view = this.props.currentView;
-    const viewBoolean = view === 'signIn' || view === 'createAccount';
-    const signIn = <button
-      className="spon-button rounded text-white w-100"
-      onClick={() => this.props.setView('signIn')}>Sign In</button>;
-    const createAccount = <button
-      className="spon-button rounded text-white w-100"
-      onClick={() => this.props.setView('createAccount')}>Create Account</button>;
-    const pageOrSignIn = viewBoolean ? 'signIn' : 'profilePage';
-    const firstName = this.props.user.firstName;
-    const profileImage = {
-      backgroundImage: `url("assets/images/users/${this.props.user.image}")`
-    };
+    const isSignedIn = this.props.user !== null;
+    const checkOpenState = this.checkIfOpen();
     return (
       <div className="menu-nav-bar">
-        <i className="fas fa-bars hamburger" onClick={this.changeDrawer}></i>
-        <div className={`menu menu-${this.checkIfOpen()}`}>
-          <div className={`nav-drawer nav-${this.checkIfOpen()}`}>
-            <div className="shut mb-3">
-              <i className="fas fa-times close-icon" onClick={this.changeDrawer}></i>
+        <i className="fas fa-bars hamburger" onClick={this.changeDrawer} />
+        <div className={`menu menu-${checkOpenState}`}>
+          <div className={`darkness darkness-${checkOpenState}`} onClick={this.changeDrawer} />
+          <div className={`nav-drawer nav-${checkOpenState}`}>
+            <div className="shut py-3">
+              <i className="fas fa-times close-icon" onClick={this.changeDrawer} />
             </div>
-            {viewBoolean ? null : <div className="my-5">
-              <div className="profile-user-image rounded-circle mx-auto my-3" style={profileImage}></div>
-              <h6 className="text-center">Welcome Back, {`${firstName}`}</h6>
-            </div>
-            }
-            <ul onClick={this.changeDrawer}>
-              <li onClick={() => {
-                this.props.setView(pageOrSignIn);
-              }}>
-                {viewBoolean ? signIn : <a>View Profile</a>}
-              </li>
-              <li>
-                {viewBoolean ? createAccount : <a>Account Settings</a>}
-              </li>
-              <li>
-                {viewBoolean ? null : <a onClick={() => {
-                  this.props.setView('upcomingActivities');
-                }}>Upcoming Adventures</a>}
-              </li>
-              <li>
-                {viewBoolean ? null : <a onClick={() => {
-                  this.props.setView('pastActivities');
-                }}>Past Adventures</a>}
-              </li>
-              <li>
-                {viewBoolean ? null : <a onClick={() => {
-                  this.props.setView('friendPage');
-                }}>View Friends</a>}
-              </li>
-              <li>
-                {viewBoolean ? null : <a>Read Messages</a>}
-              </li>
-            </ul>
+            {isSignedIn
+              ? <SignedInLinkList user={this.props.user} changeDrawer={this.changeDrawer} />
+              : <SignedOutButtons changeDrawer={this.changeDrawer}/>}
           </div>
         </div>
       </div>
@@ -87,3 +51,65 @@ class MenuNav extends React.Component {
 }
 
 export default MenuNav;
+
+function SignedInLinkList(props) {
+  const profileImage = {
+    backgroundImage: `url("assets/images/users/${props.user.image}")`
+  };
+
+  return (
+    <>
+      <div className="my-5">
+        <div className="profile-user-image rounded-circle mx-auto my-3" style={profileImage} />
+        <h6 className="text-center">Welcome Back, {`${props.user.firstName}`}</h6>
+      </div>
+      <ul onClick = { props.changeDrawer } >
+        <li>
+          <NavLink to="/profile">View Profile</NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile">Account Settings</NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile/upcoming-activities">Upcoming Adventures</NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile/past-activities">Past Adventures</NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile/friends">View Friends</NavLink>
+        </li>
+        <li>
+          <NavLink to="/profile/messages">Read Messages</NavLink>
+        </li>
+      </ul >
+    </>
+  );
+}
+
+function SignedOutButtons(props) {
+  return (
+    <>
+      <ul>
+        <li>
+          <Link to="/sign-in">
+            <button
+              onClick={props.changeDrawer}
+              className="spon-button rounded text-white w-100 mt-0">
+                Sign In
+            </button>
+          </Link>
+        </li>
+        <li>
+          <Link to="/create-an-account">
+            <button
+              onClick={props.changeDrawer}
+              className="spon-button rounded text-white w-100 mt-0">
+                Create Account
+            </button>
+          </Link>
+        </li>
+      </ul>
+    </>
+  );
+}
