@@ -40,7 +40,6 @@ class App extends React.Component {
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
-    this.getAttendees = this.getAttendees.bind(this);
   }
 
   setFilter(filterObject) {
@@ -179,18 +178,6 @@ class App extends React.Component {
     };
     fetch('/api/points', config)
       .then(response => response.json());
-  }
-
-  getAttendees(activityId) {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/reservations?activity=${activityId}`, config)
-      .then(response => response.json())
-      .then(usersAttending => this.setState({ usersAttending }));
   }
 
   render() {

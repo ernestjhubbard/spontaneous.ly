@@ -111,8 +111,7 @@ class Carousel extends React.Component {
               className="spon-button text-white rounded m-auto"
               onClick={() => {
                 const activityId = activity.activityId;
-                this.props.getAttendees(activityId);
-                this.props.history.push(`/activity-details/activity=${activity.activityId}`);
+                this.props.history.push(`/activity-details/activity=${activityId}`);
               }
               }>Learn More</button>
           </div>
