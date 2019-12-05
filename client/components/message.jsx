@@ -2,10 +2,10 @@ import React from 'react';
 //
 export default function Message(props) {
   const friendImage = {
-    backgroundImage: `url("assets/images/users/${props.friend.image}")`
+    backgroundImage: `url("/assets/images/users/${props.friend.image}")`
   };
   const userImage = {
-    backgroundImage: `url("assets/images/users/${props.image}")`
+    backgroundImage: `url("/assets/images/users/${props.image}")`
   };
   const currentUser = props.userId;
   const friend =

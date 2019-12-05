@@ -9,43 +9,40 @@ $user_fetch = mysqli_fetch_assoc($user_query);
 $sender_id = $user_fetch['userId'];
 
 if ($request['method'] === 'GET') {
-    $sql_messages = "SELECT *
-                       FROM messages
-                         AS m
-                       JOIN users
-                         AS u
-                      WHERE u.userId = m.senderId";
-    $messages_query = mysqli_query($link, $sql_messages);
-    $messages = [];
-    while($row = mysqli_fetch_assoc($messages_query)){
-      $messages[] = $row;
+    if(isset($request['query']['recipientId'])){
+      $recipient_id = $request['query']['recipientId'];
+      $sql_messages = "SELECT *
+                         FROM messages
+                           AS m
+                         JOIN users
+                           AS u
+                           ON $sender_id = u.userId
+                        WHERE $sender_id = m.senderId
+                           OR $sender_id = m.recipientId
+                          AND $recipient_id = m.senderId
+                           OR $recipient_id = m.recipientId";
+      $messages_query = mysqli_query($link, $sql_messages);
+      $messages = [];
+      while($row = mysqli_fetch_assoc($messages_query)){
+        $messages[] = $row;
+      }
+      $response['body'] = $messages;
+      send($response);
     }
-    $response['body'] = $request['body'];
-    send($response);
+    else if (isset($request['query']['userId'])){
+      $friend_id = $request['query']['userId'];
+      $sql_friend = "SELECT * 
+                       FROM users 
+                      WHERE $friend_id = userId";
+      $friend_query = mysqli_query($link, $sql_friend);
+      $friend = mysqli_fetch_assoc($friend_query);
+      $response['body'] = $friend;
+      send($response);
+    }
 }
 if ($request['method'] === 'POST'){
-  if(isset($request['body']['recipientId']) && !isset($request['body']['message'])){
-    $recipient_id = $request['body']['recipientId'];
-    $sql_messages = "SELECT *
-                       FROM messages
-                         AS m
-                       JOIN users
-                         AS u
-                         ON $sender_id = u.userId
-                      WHERE $sender_id = m.senderId
-                         OR $sender_id = m.recipientId
-                        AND $recipient_id = m.senderId
-                         OR $recipient_id = m.recipientId";
-    $messages_query = mysqli_query($link, $sql_messages);
-    $messages = [];
-    while($row = mysqli_fetch_assoc($messages_query)){
-      $messages[] = $row;
-    }
-    $response['body'] = $messages;
-    send($response);
-  }
 
-  else if(isset($request['body']['friendId']) && !isset($request['body']['message'])){
+  if(isset($request['body']['friendId']) && !isset($request['body']['message'])){
     $friend_id = $request['body']['friendId'];
     $sql_friend = "SELECT * FROM users WHERE userId = $friend_id";
     $friend_query = mysqli_query($link, $sql_friend);
