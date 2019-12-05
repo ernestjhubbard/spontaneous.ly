@@ -21,10 +21,10 @@ class MessageFriend extends React.Component {
     const messages = this.state.messages.map((m, index) =>
       <Message
         key={index}
+        userId={userId}
         friend={this.state.friend}
         message={m.message}
         image={m.image}
-        userId={userId}
         recipientId={m.recipientId} />
     );
     return (
@@ -68,36 +68,33 @@ class MessageFriend extends React.Component {
   }
 
   componentDidMount() {
-    const recipientId = this.props.friendId;
-    const friendId = this.props.friendId;
-    this.retrieveMessages({ recipientId });
-    this.getFriend({ friendId });
+    const recipientId = this.props.match.params.friendId;
+    this.retrieveMessages(recipientId);
+    this.getFriend(recipientId);
   }
 
-  retrieveMessages({ recipientId }) {
+  retrieveMessages(recipientId) {
     event.preventDefault();
     this.setState({ messages: [] });
     const userConfig = {
-      method: 'POST',
-      body: JSON.stringify({ recipientId }),
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/messages', userConfig)
+    fetch(`/api/messages?recipientId=${recipientId}`, userConfig)
       .then(results => results.json())
       .then(data => this.setState({ messages: this.state.messages.concat(data) }));
   }
 
-  getFriend({ friendId }) {
+  getFriend(friendId) {
     const userConfig = {
-      method: 'POST',
-      body: JSON.stringify({ friendId }),
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/messages', userConfig)
+    fetch(`/api/messages?userId=${friendId}`, userConfig)
       .then(results => results.json())
       .then(friend => this.setState({ friend }));
   }

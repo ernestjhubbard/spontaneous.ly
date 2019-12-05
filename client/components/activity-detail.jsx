@@ -30,14 +30,14 @@ class ActivityDetail extends React.Component {
             this.props.reserve({ activityId });
             this.props.history.push('/activity-details/confirmed');
           }}>
-        Confirm
+          Confirm
         </button>
         <button
           className="spon-button-alt rounded mt-0"
           onClick={() => {
             this.props.history.push('/activity-list');
           }}>
-            Back
+          Back
         </button>
       </>
     );

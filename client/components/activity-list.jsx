@@ -20,7 +20,7 @@ export default function ActivityList(props) {
             rerollPoints(transactionType);
           }}>
           <a href="#" className="reroll">
-              Re-roll for 25 points.
+            Re-roll for 25 points.
           </a>
         </p>
       </div>
