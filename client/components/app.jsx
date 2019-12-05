@@ -32,7 +32,6 @@ class App extends React.Component {
       filter: {}
     };
     this.setZip = this.setZip.bind(this);
-    this.setStatic = this.setStatic.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
@@ -42,12 +41,6 @@ class App extends React.Component {
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
-  }
-
-  setStatic(activity) {
-    this.setState({
-      static: activity
-    });
   }
 
   setFilter(filterObject) {
@@ -204,7 +197,7 @@ class App extends React.Component {
     return (
       <div>
         <>
-          <Header user={this.state.user} currentView={this.state.view} />
+          <Header user={this.state.user} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
               setZip={this.setZip}/>}/>
@@ -244,20 +237,11 @@ class App extends React.Component {
               attendees={this.state.usersAttending}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
-            <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
+            <Route exact path="/activity-details/activity=:id" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
               transaction={this.pointsTransaction}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
-            <Route exact path="/activity-details/cancel" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
-              transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}
-              cancel={this.reserveConfirmAndCancel}/>} />
-            <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
-              transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}/>} />
             <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
               attendees={this.state.usersAttending}/>} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />

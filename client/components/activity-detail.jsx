@@ -1,13 +1,24 @@
 import React from 'react';
-import CancelModal from './cancel-modal';
+// import CancelModal from './cancel-modal';
 
 class ActivityDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      activityData: ''
     };
     this.openModal = this.openModal.bind(this);
+  }
+
+  componentDidMount() {
+    const config = {
+      method: 'GET'
+    };
+    fetch(`/api/activity-details?activityId=${this.props.match.params.id}`, config)
+      .then(response => response.json())
+      .then(activityDetails => this.setState({ activityData: activityDetails }))
+      .catch(error => console.error('Fetch error: ', error));
   }
 
   openModal() {
@@ -17,66 +28,66 @@ class ActivityDetail extends React.Component {
   }
 
   render() {
-    const activity = this.props.activity;
+    const activity = this.state.activityData;
     const background = {
       backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(/assets/images/activity/${activity.image})`
     };
-    const confirmButton = (
-      <>
-        <button
-          className="spon-button rounded text-white mt-0"
-          onClick={() => {
-            const activityId = activity.activityId;
-            this.props.reserve({ activityId });
-            this.props.history.push('/activity-details/confirmed');
-          }}>
-        Confirm
-        </button>
-        <button
-          className="spon-button-alt rounded mt-0"
-          onClick={() => {
-            this.props.history.push('/activity-list');
-          }}>
-            Back
-        </button>
-      </>
-    );
+    // const confirmButton = (
+    //   <>
+    //     <button
+    //       className="spon-button rounded text-white mt-0"
+    //       onClick={() => {
+    //         const activityId = activity.activityId;
+    //         this.props.reserve({ activityId });
+    //         this.props.history.push('/activity-details/confirmed');
+    //       }}>
+    //     Confirm
+    //     </button>
+    //     <button
+    //       className="spon-button-alt rounded mt-0"
+    //       onClick={() => {
+    //         this.props.history.push('/activity-list');
+    //       }}>
+    //         Back
+    //     </button>
+    //   </>
+    // );
 
-    const cancelButton = (
-      <>
-        <button
-          className="spon-button rounded text-white mt-0"
-          onClick={this.openModal}
-        >
-          Cancel
-        </button>
-        {this.state.showModal ? (
-          <CancelModal
-            cancel={this.props.cancel}
-            activityId={this.props.activity.activityId}
-          />
-        ) : null}
-        <button
-          className="spon-button-alt rounded mt-0"
-        >
-          Back
-        </button>
-      </>
-    );
+    // const cancelButton = (
+    //   <>
+    //     <button
+    //       className="spon-button rounded text-white mt-0"
+    //       onClick={this.openModal}
+    //     >
+    //       Cancel
+    //     </button>
+    //     {this.state.showModal ? (
+    //       <CancelModal
+    //         cancel={this.props.cancel}
+    //         activityId={this.props.activity.activityId}
+    //       />
+    //     ) : null}
+    //     <button
+    //       className="spon-button-alt rounded mt-0"
+    //     >
+    //       Back
+    //     </button>
+    //   </>
+    // );
 
-    const backToPastActivitiesButton = (
-      <button
-        className="spon-button-alt rounded mt-0 mx-auto"
-      >
-        Back
-      </button>
-    );
+    // const backToPastActivitiesButton = (
+    //   <button
+    //     className="spon-button-alt rounded mt-0 mx-auto"
+    //   >
+    //     Back
+    //   </button>
+    // );
 
-    let whichButton =
-      this.props.view === 'activityDetail' ? confirmButton : cancelButton;
-    if (this.props.view === 'activityDetailPast') {
-      whichButton = backToPastActivitiesButton;
-    }
+    // let whichButton =
+    //   this.props.view === 'activityDetail' ? confirmButton : cancelButton;
+    // if (this.props.view === 'activityDetailPast') {
+    //   whichButton = backToPastActivitiesButton;
+    // }
 
     return (
       <>
@@ -115,7 +126,7 @@ class ActivityDetail extends React.Component {
           </div>
         </div>
         <div className="container button-container calc-button-50 p-3 fixed-bottom">
-          {whichButton}
+          {/* {whichButton} */}
         </div>
       </>
     );
@@ -123,3 +134,66 @@ class ActivityDetail extends React.Component {
 }
 
 export default ActivityDetail;
+
+// function ConfirmButton() {
+//   return (
+//     <>
+//       <button
+//         className="spon-button rounded text-white mt-0"
+//         onClick={() => {
+//           const activityId = this.state.activityData.activityId;
+//           this.props.reserve({ activityId });
+//           this.props.history.push('/activity-details/confirmed');
+//         }}>
+//       Confirm
+//       </button>
+//       <button
+//         className="spon-button-alt rounded mt-0"
+//         onClick={() => {
+//           this.props.history.push('/activity-list');
+//         }}>
+//       Back
+//       </button>
+//     </>
+//   );
+// }
+
+// function CancelButtons() {
+//   return (
+//     <>
+//       <button
+//         className="spon-button rounded text-white mt-0"
+//         onClick={this.openModal}>
+//       Cancel
+//       </button>
+//       {this.state.showModal ? (
+//         <CancelModal
+//           cancel={this.props.cancel}
+//           activityId={this.props.activity.activityId}
+//         />
+//       ) : null}
+//       <button
+//         className="spon-button-alt rounded mt-0">
+//       Back
+//       </button>
+
+//     </>
+//   );
+// }
+
+// function BackToPastActivitiesButton() {
+//   return (
+//     <button
+//       className="spon-button-alt rounded mt-0 mx-auto"
+//     >
+//     Back
+//     </button>
+//   );
+// }
+
+// function whichButton() {
+//   this.props.view === 'activityDetail' ? confirmButton : cancelButton;
+//   if (this.props.view === 'activityDetailPast') {
+//     whichButton = backToPastActivitiesButton;
+//   }
+// }

@@ -112,8 +112,7 @@ class Carousel extends React.Component {
               onClick={() => {
                 const activityId = activity.activityId;
                 this.props.getAttendees(activityId);
-                this.props.fetch({ activityId });
-                this.props.history.push(`/activity-details/${activity.activityId}`);
+                this.props.history.push(`/activity-details/activity=${activity.activityId}`);
               }
               }>Learn More</button>
           </div>
