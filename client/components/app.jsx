@@ -233,14 +233,13 @@ class App extends React.Component {
               createUser={this.createUser} />} />
             <Route exact path="/profile/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Upcoming'}
-              getAttendees={this.getAttendees} />} />
+              activityType={'Upcoming'}/>} />
             <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Past'}
-              getAttendees={this.getAttendees} />} />
+              activityType={'Past'}/>} />
             <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
+              getAttendees={this.getAttendees}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel} />} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
@@ -256,9 +255,9 @@ class App extends React.Component {
             <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
               transaction={this.pointsTransaction}
-              activity={this.state.activityClicked} />} />
-            <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
-              attendees={this.state.usersAttending} />} />
+              activity={this.state.activityClicked}/>} />
+            <Route exact path="/activity-details/attendees/:activity" render={props => <AttendeesList {...props}
+              attendees={this.state.usersAttending}/>} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
             <Route exact path="/profile/friends" render={props => <FriendList {...props} />} />
             <Route exact path="/profile/friends/:friendId" render={props => <MessageFriend {...props}

@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Attendee(props) {
   const attendeeImage = {
-    backgroundImage: `url("assets/images/users/${props.image}")`
+    backgroundImage: `url("/assets/images/users/${props.image}")`
   };
   return (
     <div className="row my-3 w-100 d-flex justify-content-evenly">
