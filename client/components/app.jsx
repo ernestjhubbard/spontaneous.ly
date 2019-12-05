@@ -22,7 +22,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'signIn',
       messages: [],
       activityClicked: {},
       user: null,
@@ -32,7 +31,6 @@ class App extends React.Component {
       zip: null,
       filter: {}
     };
-    this.setView = this.setView.bind(this);
     this.setZip = this.setZip.bind(this);
     this.setStatic = this.setStatic.bind(this);
     this.setFilter = this.setFilter.bind(this);
@@ -44,12 +42,6 @@ class App extends React.Component {
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
-  }
-
-  setView(name) {
-    this.setState({
-      view: name
-    });
   }
 
   setStatic(activity) {
@@ -115,7 +107,6 @@ class App extends React.Component {
         } else {
           this.fetchUser();
           this.getPoints();
-          this.setView('home');
         }
       })
       .catch(error => console.error('There was an error:', error.message));
@@ -156,7 +147,6 @@ class App extends React.Component {
       .then(results => results.json())
       .then(data => data)
       .catch(error => console.error('There was an error:', error.message));
-    this.setView('signIn');
   }
 
   reserveConfirmAndCancel({ activityId }) {
@@ -207,86 +197,69 @@ class App extends React.Component {
     };
     fetch(`/api/reservations?activity=${activityId}`, config)
       .then(response => response.json())
-      .then(data => data.map(users => this.setState({ usersAttending: this.state.usersAttending.concat(users) })));
+      .then(usersAttending => this.setState({ usersAttending }));
   }
 
   render() {
     return (
       <div>
         <>
-          <Header user={this.state.user} setView={this.setView} currentView={this.state.view} />
+          <Header user={this.state.user} currentView={this.state.view} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
-              setZip={this.setZip}
-              setView={this.setView} />}/>
+              setZip={this.setZip}/>}/>
             <Route exact path="/activity-filter" render={props => <ActivityFilter {...props}
               zip={this.state.zip}
-              setFilter={this.setFilter}
-              setView={this.setView}/>} />
+              setFilter={this.setFilter}/>} />
             <Route exact path="/activity-list" render={props => <ActivityList {...props}
+              getAttendees={this.getAttendees}
               filterCriteria={this.state.filter}
-              setView={this.setView}
+              reroll={this.pointsTransaction}
               fetch={this.fetchDetail}/>} />
             <Route exact path="/profile" render={props => <ProfilePage {...props}
               user={this.state.user}
-              setView={this.setView}
               points={this.state.points}
               getPoints={this.getPoints}/>} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}
-              signIn={this.signIn}
-              setView={this.setView}/>} />
-            <Route exact path="/create-an-account"
-              render={props => <CreateAccount {...props}
-                createUser={this.createUser}
-                setView={this.setView}/>} />
+              signIn={this.signIn}/>} />
+            <Route exact path="/create-an-account" render={props => <CreateAccount {...props}
+              createUser={this.createUser}/>} />
             <Route exact path="/profile/friends" render={props => <FriendPage {...props}
               retrieve={this.retrieveMessages}
               fetchUser={this.fetchUser}
-              user={this.state.user}
-              view={this.state.view}
-              setView={this.setView}/>} />
+              user={this.state.user}/>} />
             <Route exact path="/profile/messages" render={props => <FriendPage {...props}
               retrieve={this.retrieveMessages}
               fetchUser={this.fetchUser}
-              user={this.state.user}
-              view={this.state.view}
-              setView={this.setView} />} />
+              user={this.state.user} />} />
             <Route exact path="/profile/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Upcoming'}/>} />
+              activityType={'Upcoming'}
+              getAttendees={this.getAttendees}/>} />
             <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
               activityType={'Past'}
-              setView={this.setView}/>} />
+              getAttendees={this.getAttendees}/>} />
             <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
-              getAttendees={this.getAttendees}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
-              setView={this.setView}
-              view={this.state.view}
-              getAttendees={this.getAttendees}
               transaction={this.pointsTransaction}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/cancel" render={props => <ActivityDetail {...props}
-              getAttendees={this.getAttendees}
-              transaction={this.pointsTransaction}
-              view={this.state.view}
-              activity={this.state.activityClicked}
-              cancel={this.reserveConfirmAndCancel}
-              setView={this.setView}/>} />
-            <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
-              getAttendees={this.getAttendees}
-              transaction={this.pointsTransaction}
-              view={this.state.view}
-              activity={this.state.activityClicked}
-              setView={this.setView}/>} />
-            <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
               attendees={this.state.usersAttending}
-              setView={this.setView}/>} />
+              transaction={this.pointsTransaction}
+              activity={this.state.activityClicked}
+              cancel={this.reserveConfirmAndCancel}/>} />
+            <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
+              attendees={this.state.usersAttending}
+              transaction={this.pointsTransaction}
+              activity={this.state.activityClicked}/>} />
+            <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
+              attendees={this.state.usersAttending}/>} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
           </Switch>
         </>

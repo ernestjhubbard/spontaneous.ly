@@ -21,6 +21,7 @@ function Activity(props) {
   return (
     <div className="d-flex border rounded my-3" onClick={() => {
       fetchActivity({ activityId });
+      props.getAttendees(activityId);
       changeView(view);
     }}>
       <div className="activity-thumbnail border rounded m-1" style={{ backgroundImage: `url(assets/images/activity/${activityInfo.image}` }}></div>

@@ -36,8 +36,8 @@ class ConfirmActivity extends React.Component {
             <span className="bold-text">Cost: </span>${this.props.activity.cost}
           </p>
           <p onClick={() => this.props.setView('attendeesList')}>
-            <span className="bold-text">Total Guests: </span>
-            <span className="badge confirmed-badge text-white">{this.props.attendees.length}</span>
+            <span className="bold-text">Total Guests: </span>{' '}
+            <span className="point p-1">{this.props.attendees.length}</span>
           </p>
           <p className="mb-0">
             <span className="bold-text">Spontaneity Points: </span>
@@ -45,7 +45,7 @@ class ConfirmActivity extends React.Component {
           </p>
         </div>
         <div className="container mx-auto text-center fixed-bottom p-3">
-          <button className="spon-button text-white rounded w-100" onClick={alert('This was pressed')}>Back to Home</button>
+          <button className="spon-button text-white rounded w-100" onClick={() => alert('This was pressed')}>Back to Home</button>
           <button className="spon-link-cancel rounded w-100" onClick={this.openModal}>Cancel Reservation</button>
         </div>
         {this.state.showModal
