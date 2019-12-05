@@ -38,7 +38,6 @@ class App extends React.Component {
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
     this.fetchDetail = this.fetchDetail.bind(this);
-    this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
@@ -149,18 +148,6 @@ class App extends React.Component {
       .catch(error => console.error('There was an error:', error.message));
   }
 
-  reserveConfirmAndCancel({ activityId }) {
-    const config = {
-      method: 'POST',
-      body: JSON.stringify({ activityId }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/reservations', config)
-      .then(response => response.json());
-  }
-
   getPoints() {
     const config = {
       method: 'GET',
@@ -204,7 +191,7 @@ class App extends React.Component {
     return (
       <div>
         <>
-          <Header user={this.state.user} currentView={this.state.view} />
+          <Header user={this.state.user} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
               setZip={this.setZip}/>}/>
@@ -242,18 +229,15 @@ class App extends React.Component {
               getAttendees={this.getAttendees}/>} />
             <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
-              activity={this.state.activityClicked}
-              reserve={this.reserveConfirmAndCancel}/>} />
+              activity={this.state.activityClicked}/>} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
               transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}
-              reserve={this.reserveConfirmAndCancel}/>} />
+              activity={this.state.activityClicked}/>} />
             <Route exact path="/activity-details/cancel" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
               transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}
-              cancel={this.reserveConfirmAndCancel}/>} />
+              activity={this.state.activityClicked}/>} />
             <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
               transaction={this.pointsTransaction}
