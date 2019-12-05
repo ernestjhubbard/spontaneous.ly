@@ -22,7 +22,6 @@ class CancelModal extends React.Component {
                   const activityId = this.props.activityId;
                   this.props.cancel({ activityId });
                   this.props.closeModal();
-                  this.props.history.push('/');
                 }}
               >
                 Confirm
