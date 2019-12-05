@@ -53,7 +53,7 @@ class ActivityDetail extends React.Component {
         {this.state.showModal ? (
           <CancelModal
             cancel={this.props.cancel}
-            activityId={this.props.activity.activityId}
+            activityId={activity.activityId}
           />
         ) : null}
         <button
