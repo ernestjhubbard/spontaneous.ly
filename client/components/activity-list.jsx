@@ -18,6 +18,7 @@ export default function ActivityList(props) {
         <p className="text-center"
           onClick={() => {
             rerollPoints(transactionType);
+            props.history.push('/activity-filter');
           }}>
           <a href="#" className="reroll">
             Re-roll for 25 points.
