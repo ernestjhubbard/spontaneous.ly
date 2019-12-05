@@ -1,5 +1,8 @@
 import React from 'react';
 import CancelModal from './cancel-modal';
+import {
+  Link
+} from 'react-router-dom';
 
 class ConfirmActivity extends React.Component {
   constructor(props) {
@@ -37,7 +40,9 @@ class ConfirmActivity extends React.Component {
           </p>
           <p>
             <span className="bold-text">Total Guests: </span>{' '}
-            <span className="point p-1">{this.props.attendees.length}</span>
+            <Link to={`/activity-details/attendees/${this.props.activity.activityId}`}>
+              <span className="point p-1">{this.props.attendees.length}</span>
+            </Link>
           </p>
           <p className="mb-0">
             <span className="bold-text">Spontaneity Points: </span>
