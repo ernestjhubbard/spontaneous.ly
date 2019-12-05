@@ -64,7 +64,7 @@ class Carousel extends React.Component {
     for (let index = 0; index < this.state.activities.length; index++) {
       const id = index + 1;
       if (index + 1 === position.currentCard) {
-        position.currentImageArray.push(<div className="current-image active" id={this.props.id} key={id} onClick={() => {
+        position.currentImageArray.push(<div className="current-image activeSlide" id={this.props.id} key={id} onClick={() => {
           this.setPosition(id);
         }}></div>);
       } else {
@@ -98,7 +98,7 @@ class Carousel extends React.Component {
 
   render() {
     const currentPosition = this.getPosition();
-    var activityCard = this.state.activities.map(activity => {
+    const activityCard = this.state.activities.map(activity => {
       return (
         <div
           className="carousel-container w-100 col-12"
@@ -111,8 +111,9 @@ class Carousel extends React.Component {
               className="spon-button text-white rounded m-auto"
               onClick={() => {
                 const activityId = activity.activityId;
-                this.props.setView('activityDetail');
+                this.props.getAttendees(activityId);
                 this.props.fetch({ activityId });
+                this.props.history.push(`/activity-details/${activity.activityId}`);
               }
               }>Learn More</button>
           </div>
@@ -123,7 +124,7 @@ class Carousel extends React.Component {
       <div className="outer mb-3">
         <div className="inner">
           <div className="slides d-flex" style={{ transform: `translateX(${currentPosition.position}%)` }}>
-            {activityCard}0
+            {activityCard}
           </div>
         </div>
         <div className="indicator">{currentPosition.currentImageArray}</div>

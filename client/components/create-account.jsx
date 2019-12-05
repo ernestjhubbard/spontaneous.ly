@@ -17,18 +17,23 @@ class CreateAccount extends React.Component {
     this.uploadHandler = this.uploadHandler.bind(this);
   }
 
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
   render() {
     return (
       <div className="container align-center my-5">
         <h4 className="text-center font-weight-bold mb-3">Create An Account</h4>
+
         <form
           method="post"
           encType="multipart/form-data"
           onSubmit={() => {
             this.uploadHandler();
             this.props.createUser(this.state);
-          }
-          }>
+            this.props.history.push('/');
+          }}>
           <div className="form-group" >
             <label htmlFor="email">First Name</label>
             <input className="input-font form-control form-control-lg text-center"
@@ -86,10 +91,6 @@ class CreateAccount extends React.Component {
         </form>
       </div>
     );
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
   }
 
   fileUpload(event) {
