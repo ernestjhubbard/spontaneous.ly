@@ -18,10 +18,9 @@ export default function ActivityList(props) {
         <p className="text-center"
           onClick={() => {
             rerollPoints(transactionType);
-            props.setView('activityFilter');
           }}>
           <a href="#" className="reroll">
-              Re-roll for 25 points.
+            Re-roll for 25 points.
           </a>
         </p>
       </div>
