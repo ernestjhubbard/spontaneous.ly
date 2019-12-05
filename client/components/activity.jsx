@@ -2,11 +2,9 @@ import React from 'react';
 
 function Activity(props) {
   const fetchActivity = props.fetchActivity;
-  const changeView = props.setView;
   const activityId = props.activityId;
   const activityInfo = props.activityData;
   const dateTime = activityInfo.dateTime;
-  const activityType = props.activityType;
   const separationIndex = dateTime.indexOf(' ');
   const timeIndex = dateTime.lastIndexOf(':');
   let date = dateTime.slice(2, separationIndex);
@@ -14,15 +12,10 @@ function Activity(props) {
   let time = dateTime.slice(separationIndex + 1, timeIndex);
   time = formatTime(time);
 
-  const fromPast = 'activityDetailPast';
-  const fromUpcoming = 'activityDetailCancel';
-  const view = activityType === 'Upcoming' ? fromUpcoming : fromPast;
-
   return (
     <div className="d-flex border rounded my-3" onClick={() => {
       fetchActivity({ activityId });
       props.getAttendees(activityId);
-      changeView(view);
     }}>
       <div className="activity-thumbnail border rounded m-1" style={{ backgroundImage: `url(assets/images/activity/${activityInfo.image}` }}></div>
       <div className="m-3">

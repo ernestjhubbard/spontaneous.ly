@@ -42,7 +42,6 @@ class UpcomingOrPastActivities extends React.Component {
               activityId={activityInfo.activityId}
               activityData={activityInfo}
               fetchActivity={this.props.fetchActivity}
-              setView={this.props.setView}
               activityType={this.props.activityType}
               getAttendees={this.props.getAttendees}
             />) }
