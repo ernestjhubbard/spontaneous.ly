@@ -19,7 +19,7 @@ class ActivityDetail extends React.Component {
   render() {
     const activity = this.props.activity;
     const background = {
-      backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(assets/images/activity/${activity.image})`
+      backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(/assets/images/activity/${activity.image})`
     };
     const confirmButton = (
       <>
@@ -29,15 +29,17 @@ class ActivityDetail extends React.Component {
             const activityId = activity.activityId;
             this.props.reserve({ activityId });
             this.props.setView('confirm');
-          }}
-        >
-          Confirm
+            this.props.history.push('/activity-details/confirmed');
+          }}>
+        Confirm
         </button>
         <button
           className="spon-button-alt rounded mt-0"
-          onClick={() => this.props.setView('activityList')}
-        >
-          Back
+          onClick={() => {
+            this.props.setView('activityList');
+            this.props.history.push('/activity-list');
+          }}>
+            Back
         </button>
       </>
     );
@@ -83,10 +85,7 @@ class ActivityDetail extends React.Component {
 
     return (
       <>
-        <div
-          className="activity-list-hero top-banner d-flex"
-          style={background}
-        >
+        <div className="top-banner d-flex" style={background}>
           <div className="m-auto p-3">
             <h2 className="text-center text-white">{activity.activity}</h2>
           </div>

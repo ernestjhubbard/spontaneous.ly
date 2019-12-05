@@ -33,8 +33,8 @@ class UpcomingOrPastActivities extends React.Component {
   render() {
     const activities = this.state.activities;
     return (
-      <div className="container">
-        <h4 className="bold-text d-flex justify-content-center m-3 overflow-auto">{`${this.props.activityType}`} Adventures</h4>
+      <div className="container my-5">
+        <h4 className="bold-text d-flex justify-content-center">{`${this.props.activityType}`} Adventures</h4>
         <div>
           {activities.map(activityInfo =>
             <Activity

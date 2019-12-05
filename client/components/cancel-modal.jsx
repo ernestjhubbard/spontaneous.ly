@@ -4,21 +4,21 @@ class CancelModal extends React.Component {
 
   render() {
     return (
-      <div className="confirm-cancel-modal">
-        <div className="inner-modal text-center">
-          <h1 className="mt-2">Are you sure you want to cancel your reservation?</h1>
-          <h5>
-            Cancelling costs you <span className="font-color">50</span>{' '}
-            Spontaneity Points
-          </h5>
-          <button
-            className="cancel-confirm-button"
-            onClick={() => {
-              const activityId = this.props.activityId;
-              this.props.cancel({ activityId });
-              this.props.closeModal();
-            }}>Confirm</button>
-          <button className="cancel-back-button ml-2" onClick={this.props.closeModal}>Back</button>
+      <div className="confirm-cancel-modal container">
+        <div className="inner-modal text-center p-3 rounded">
+          <h3 className="mb-3">Are you sure you want to cancel your reservation?</h3>
+          <h5>Cancelling costs you <span className="font-color">50</span> Spontaneity Points</h5>
+          <div className="calc-button-50">
+            <button
+              className="spon-button-cancel rounded"
+              onClick={() => {
+                const activityId = this.props.activityId;
+                this.props.cancel({ activityId });
+                this.props.closeModal();
+                this.props.history.push('/');
+              }}>Confirm</button>
+            <button className="spon-button text-white rounded" onClick={this.props.closeModal}>Back</button>
+          </div>
         </div>
       </div>
     );

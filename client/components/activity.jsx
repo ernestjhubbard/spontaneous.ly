@@ -19,7 +19,7 @@ function Activity(props) {
   const view = activityType === 'Upcoming' ? fromUpcoming : fromPast;
 
   return (
-    <div className="row border rounded m-3" onClick={() => {
+    <div className="d-flex border rounded my-3" onClick={() => {
       fetchActivity({ activityId });
       props.getAttendees(activityId);
       changeView(view);

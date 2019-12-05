@@ -8,13 +8,23 @@ class SignIn extends React.Component {
       password: ''
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleSubmit() {
+    this.props.signIn(this.state);
+    this.props.history.push('/');
   }
 
   render() {
     return (
       <div className="container align-center my-5">
         <h4 className="text-center font-weight-bold mb-3">Sign In</h4>
-        <form onSubmit={() => this.props.signIn(this.state)}>
+        <form onSubmit={this.handleSubmit}>
           <label htmlFor="email">Email</label>
           <input className="input-font form-control form-control-lg text-center mb-3"
             name="email"
@@ -35,10 +45,6 @@ class SignIn extends React.Component {
         </form>
       </div>
     );
-  }
-
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
   }
 }
 
