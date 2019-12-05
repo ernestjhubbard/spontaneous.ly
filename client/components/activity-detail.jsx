@@ -100,7 +100,7 @@ class ActivityDetail extends React.Component {
             </p>
           </div>
         </div>
-        {isUpcoming ? <DynamicReserveOrCancel {...this.props} isConfirmed={this.state.isConfirmed} openModal={this.openModal} /> : <BackToPastActivitiesButton />}
+        {isUpcoming ? <DynamicReserveOrCancel {...this.props} isConfirmed={this.state.isConfirmed} openModal={this.openModal} activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton />}
       </>
     );
   }
@@ -129,8 +129,7 @@ function ConfirmOrCancelButton(props) {
       <button
         className="spon-link-cancel rounded mt-0"
         onClick={() => {
-          const activityId = this.state.activityData.activityId;
-          props.reserve({ activityId });
+          props.reserve({ });
           props.history.push('/activity-details/confirmed');
         }}>
         Cancel
@@ -141,9 +140,8 @@ function ConfirmOrCancelButton(props) {
     <button
       className="spon-button rounded text-white mt-0"
       onClick={() => {
-        const activityId = this.state.activityData.activityId;
-        props.reserve({ activityId });
-        props.history.push('/activity-details/confirmed');
+        props.reserve({ activityId: props.activityId });
+        props.history.push(`/activity-details/${props.activityId}/confirmed`);
       }}>
       Confirm
     </button>

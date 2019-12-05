@@ -36,7 +36,7 @@ class App extends React.Component {
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
-    this.fetchDetail = this.fetchDetail.bind(this);
+    // this.fetchDetail = this.fetchDetail.bind(this);
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
@@ -54,20 +54,15 @@ class App extends React.Component {
     });
   }
 
-  fetchDetail({ activityId }) {
-    const config = {
-      method: 'POST',
-      body: JSON.stringify({ activityId }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/activity-details', config)
-      .then(results => results.json())
-      .then(data => {
-        this.setState({ activityClicked: data });
-      });
-  }
+  // fetchDetail(activityId) {
+  //   const config = {
+  //     method: 'GET'
+  //   };
+  //   fetch(`/api/activity-details?activityId=${activityId}`, config)
+  //     .then(response => response.json())
+  //     .then(activityDetails => this.setState({ activityData: activityDetails }))
+  //     .catch(error => console.error('Fetch error: ', error));
+  // }
 
   fetchUser() {
     const userConfig = {
@@ -220,7 +215,7 @@ class App extends React.Component {
               fetchActivity={this.fetchDetail}
               activityType={'Past'}
               getAttendees={this.getAttendees}/>} />
-            <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
+            <Route exact path="/activity-details/:id/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
