@@ -15,9 +15,9 @@ function Activity(props) {
   return (
     <div className="d-flex border rounded my-3" onClick={() => {
       fetchActivity({ activityId });
-      props.getAttendees(activityId);
+      props.history.push(`/activity-details/${activityId}`);
     }}>
-      <div className="activity-thumbnail border rounded m-1" style={{ backgroundImage: `url(assets/images/activity/${activityInfo.image}` }}></div>
+      <div className="activity-thumbnail border rounded m-1" style={{ backgroundImage: `url(/assets/images/activity/${activityInfo.image}` }}></div>
       <div className="m-3">
         <div className="bold-text">{activityInfo.activity}</div>
         <div className="text-muted">{date + ', ' + time}</div>

@@ -38,6 +38,7 @@ class UpcomingOrPastActivities extends React.Component {
         <div>
           {activities.map(activityInfo =>
             <Activity
+              {...this.props}
               key={activityInfo.activityId}
               activityId={activityInfo.activityId}
               activityData={activityInfo}
