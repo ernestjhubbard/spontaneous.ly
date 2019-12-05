@@ -25,13 +25,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       activityClicked: {},
-      user: {
-        email: 'bgarza@learningfuze.com',
-        firstName: 'Bernadette',
-        lastName: 'Garza',
-        image: 'bernadette.png',
-        userId: 2
-      },
+      user: null,
       usersAttending: [],
       points: 0,
       static: null,

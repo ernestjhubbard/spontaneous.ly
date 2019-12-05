@@ -1,5 +1,6 @@
 import React from 'react';
 import CancelModal from './cancel-modal';
+import { Link } from 'react-router-dom';
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -52,15 +53,13 @@ class ActivityDetail extends React.Component {
         </button>
         {this.state.showModal ? (
           <CancelModal
-            cancel={this.props.cancel}
+            cancel={this.props.reserve}
             activityId={activity.activityId}
           />
         ) : null}
-        <button
-          className="spon-button-alt rounded mt-0"
-        >
-          Back
-        </button>
+        <Link to="/profile/upcoming-activities">
+          <button className="spon-button-alt rounded mt-0">Back</button>
+        </Link>
       </>
     );
 

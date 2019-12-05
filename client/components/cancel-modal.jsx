@@ -21,8 +21,6 @@ class CancelModal extends React.Component {
                 onClick={() => {
                   const activityId = this.props.activityId;
                   this.props.cancel({ activityId });
-                  this.props.closeModal();
-                  this.props.history.push('/');
                 }}
               >
                 Confirm
@@ -30,8 +28,7 @@ class CancelModal extends React.Component {
             </Link>
             <Link to="/">
               <button
-                className="spon-button text-white rounded"
-              >
+                className="spon-button text-white rounded">
                 Back
               </button>
             </Link>
