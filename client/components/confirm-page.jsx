@@ -19,6 +19,10 @@ class ConfirmActivity extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.props.getAttendees(this.props.activity.activityId);
+  }
+
   render() {
     return (
       <div className="container my-5">

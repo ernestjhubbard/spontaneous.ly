@@ -240,6 +240,7 @@ class App extends React.Component {
               activityType={'Past'}/>} />
             <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
+              getAttendees={this.getAttendees}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
@@ -256,7 +257,7 @@ class App extends React.Component {
               attendees={this.state.usersAttending}
               transaction={this.pointsTransaction}
               activity={this.state.activityClicked}/>} />
-            <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
+            <Route exact path="/activity-details/attendees/:activity" render={props => <AttendeesList {...props}
               attendees={this.state.usersAttending}/>} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
           </Switch>
