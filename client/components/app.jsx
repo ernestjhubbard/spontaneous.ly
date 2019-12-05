@@ -234,8 +234,7 @@ class App extends React.Component {
               user={this.state.user} />} />
             <Route exact path="/profile/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Upcoming'}
-              getAttendees={this.getAttendees}/>} />
+              activityType={'Upcoming'}/>} />
             <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
               activityType={'Past'}/>} />
