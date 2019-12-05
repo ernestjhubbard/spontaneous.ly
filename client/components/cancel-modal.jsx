@@ -12,15 +12,16 @@ class CancelModal extends React.Component {
     this.reserveConfirmAndCancel();
   }
 
-  reserveConfirmAndCancel({ activityId }) {
+  reserveConfirmAndCancel(activityId) {
     const config = {
       method: 'POST',
-      body: JSON.stringify({ activityId }),
+      body: JSON.stringify(activityId),
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/reservations', config).then(response => response.json());
+    fetch('/api/reservations', config)
+      .then(response => response.json());
   }
 
   render() {
