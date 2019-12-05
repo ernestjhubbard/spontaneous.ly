@@ -16,7 +16,6 @@ class FriendList extends React.Component {
         clickFriend={this.props.clickFriend}
         messages={this.state.messages}
         changeView={this.props.changeView}
-        setView={this.props.setView}
         key={index}
         retrieve={this.props.retrieve}
         recipientId={friend.recipientId}

@@ -23,20 +23,16 @@ class ProfilePage extends React.Component {
           </div>
           <div className="profile-footer">
             <button className="spon-button rounded text-white col-12" onClick={() => {
-              this.props.setView('upcomingActivities');
               this.props.history.push('/profile/upcoming-activities');
             }}>Upcoming Adventures</button>
             <button className="spon-button rounded text-white col-12" onClick={() => {
-              this.props.setView('pastActivities');
               this.props.history.push('/profile/past-activities');
             }}>Past Adventures</button>
             <div className="calc-button-50">
               <button className="spon-button rounded text-white" onClick={() => {
-                this.props.setView('friendList');
                 this.props.history.push('/profile/friends');
               }}>Friends</button>
               <button className="spon-button rounded text-white" onClick={() => {
-                this.props.setView('messageFriend');
                 this.props.history.push('/profile/messages');
               }}>Messages</button>
             </div>

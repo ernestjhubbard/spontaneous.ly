@@ -28,7 +28,6 @@ class ActivityDetail extends React.Component {
           onClick={() => {
             const activityId = activity.activityId;
             this.props.reserve({ activityId });
-            this.props.setView('confirm');
             this.props.history.push('/activity-details/confirmed');
           }}>
         Confirm
@@ -36,7 +35,6 @@ class ActivityDetail extends React.Component {
         <button
           className="spon-button-alt rounded mt-0"
           onClick={() => {
-            this.props.setView('activityList');
             this.props.history.push('/activity-list');
           }}>
             Back
@@ -54,14 +52,12 @@ class ActivityDetail extends React.Component {
         </button>
         {this.state.showModal ? (
           <CancelModal
-            closeModal={this.props.setView('upcomingActivities')}
             cancel={this.props.cancel}
             activityId={this.props.activity.activityId}
           />
         ) : null}
         <button
           className="spon-button-alt rounded mt-0"
-          onClick={() => this.props.setView('upcomingActivities')}
         >
           Back
         </button>
@@ -71,7 +67,6 @@ class ActivityDetail extends React.Component {
     const backToPastActivitiesButton = (
       <button
         className="spon-button-alt rounded mt-0 mx-auto"
-        onClick={() => this.props.setView('pastActivities')}
       >
         Back
       </button>

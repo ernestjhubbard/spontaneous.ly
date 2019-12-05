@@ -25,7 +25,6 @@ class FriendPage extends React.Component {
         <FriendList
           changeView={this.changeView}
           friends={this.state.friends}
-          setView={this.props.setView}
           retrieve={this.retrieveMessages}
           clickFriend={this.clickFriend} />;
     }
