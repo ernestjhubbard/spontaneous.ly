@@ -13,7 +13,7 @@ import UpcomingOrPastActivities from './upcoming-past-activities';
 import ConfirmActivity from './confirm-page';
 import AttendeesList from './attendees-list';
 import {
-  BrowserRouter as Router,
+  withRouter,
   Switch,
   Route
 } from 'react-router-dom';
@@ -25,12 +25,7 @@ class App extends React.Component {
       view: 'signIn',
       messages: [],
       activityClicked: {},
-      user: {
-        firstName: '',
-        lastName: '',
-        image: '',
-        email: ''
-      },
+      user: null,
       usersAttending: [],
       points: 0,
       static: null,
@@ -99,17 +94,7 @@ class App extends React.Component {
     };
     fetch('/api/users', userConfig)
       .then(results => results.json())
-      .then(data =>
-        this.setState({
-          user: {
-            firstName: data.firstName,
-            lastName: data.lastName,
-            image: data.image,
-            email: data.email,
-            userId: data.userId
-          }
-        })
-      )
+      .then(data => this.setState({ user: data }))
       .catch(error => console.error('There was an error:', error.message));
   }
 
@@ -228,7 +213,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Router>
+        <>
           <Header user={this.state.user} setView={this.setView} currentView={this.state.view} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
@@ -278,7 +263,7 @@ class App extends React.Component {
               getAttendees={this.getAttendees}
               activity={this.state.activityClicked}
               reserve={this.reserveConfirmAndCancel}/>} />
-            <Route exact path="/activity-details/" render={props => <ActivityDetail {...props}
+            <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
               setView={this.setView}
               view={this.state.view}
@@ -304,10 +289,10 @@ class App extends React.Component {
               setView={this.setView}/>} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
           </Switch>
-        </Router>
+        </>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

@@ -241,7 +241,7 @@ button:focus {
 }
 
 .nav-drawer {
-  padding: 3.8rem 2rem;
+  padding: 0rem 2rem;
   position: absolute;
   height: 100%;
   background: #fff;

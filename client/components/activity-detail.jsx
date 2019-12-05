@@ -9,7 +9,7 @@ class ActivityDetail extends React.Component {
   render() {
     const activity = this.props.activity;
     const background = {
-      backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(assets/images/activity/${activity.image})`
+      backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(/assets/images/activity/${activity.image})`
     };
     const confirmButton = (
       <>
