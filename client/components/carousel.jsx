@@ -113,6 +113,7 @@ class Carousel extends React.Component {
                 const activityId = activity.activityId;
                 this.props.setView('activityDetail');
                 this.props.fetch({ activityId });
+                this.props.history.push('/activity-details');
               }
               }>Learn More</button>
           </div>

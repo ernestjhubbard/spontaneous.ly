@@ -48,11 +48,13 @@ class MenuNav extends React.Component {
     const profileImage = {
       backgroundImage: `url("assets/images/users/${this.props.user.image}")`
     };
+    const checkOpenState = this.checkIfOpen();
     return (
       <div className="menu-nav-bar">
         <i className="fas fa-bars hamburger" onClick={this.changeDrawer}></i>
-        <div className={`menu menu-${this.checkIfOpen()}`}>
-          <div className={`nav-drawer nav-${this.checkIfOpen()}`}>
+        <div className={`menu menu-${checkOpenState}`}>
+          <div className={`darkness darkness-${checkOpenState}`} onClick={this.changeDrawer}></div>
+          <div className={`nav-drawer nav-${checkOpenState}`}>
             <div className="shut mb-3">
               <i className="fas fa-times close-icon" onClick={this.changeDrawer}></i>
             </div>

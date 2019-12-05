@@ -273,13 +273,14 @@ class App extends React.Component {
               fetchActivity={this.fetchDetail}
               activityType={'Past'}
               setView={this.setView}/>} />
-            <Route exact path="/confirmed" render={props => <ConfirmActivity {...props}
+            <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
               getAttendees={this.getAttendees}
-              activity={this.state.activityClicked} r
-              eserve={this.reserveConfirmAndCancel}/>} />
-            <Route exact path="/activity-details" render={props => <ActivityDetail {...props}
+              activity={this.state.activityClicked}
+              reserve={this.reserveConfirmAndCancel}/>} />
+            <Route exact path="/activity-details/" render={props => <ActivityDetail {...props}
               attendees={this.state.usersAttending}
+              setView={this.setView}
               view={this.state.view}
               getAttendees={this.getAttendees}
               transaction={this.pointsTransaction}
