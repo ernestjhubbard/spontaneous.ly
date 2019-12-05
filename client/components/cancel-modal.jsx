@@ -2,27 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class CancelModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
-  }
-
-  componentDidMount() {
-    this.reserveConfirmAndCancel();
-  }
-
-  reserveConfirmAndCancel(activityId) {
-    const config = {
-      method: 'POST',
-      body: JSON.stringify(activityId),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/reservations', config)
-      .then(response => response.json());
-  }
 
   render() {
     return (
@@ -41,7 +20,9 @@ class CancelModal extends React.Component {
                 className="spon-button-cancel rounded"
                 onClick={() => {
                   const activityId = this.props.activityId;
-                  this.reserveConfirmAndCancel({ activityId });
+                  this.props.cancel({ activityId });
+                  this.props.closeModal();
+                  this.props.history.push('/');
                 }}
               >
                 Confirm

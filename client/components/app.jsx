@@ -38,6 +38,7 @@ class App extends React.Component {
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
     this.fetchDetail = this.fetchDetail.bind(this);
+    this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
@@ -137,7 +138,14 @@ class App extends React.Component {
     event.preventDefault();
     const config = {
       method: 'POST',
-      body: JSON.stringify({ firstName, lastName, email, image, password, userUpload }),
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        image,
+        password,
+        userUpload
+      }),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -146,6 +154,17 @@ class App extends React.Component {
       .then(results => results.json())
       .then(data => data)
       .catch(error => console.error('There was an error:', error.message));
+  }
+
+  reserveConfirmAndCancel({ activityId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ activityId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/reservations', config).then(response => response.json());
   }
 
   getPoints() {
@@ -171,8 +190,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/points', config)
-      .then(response => response.json());
+    fetch('/api/points', config).then(response => response.json());
   }
 
   getAttendees(activityId) {
@@ -193,58 +211,172 @@ class App extends React.Component {
         <>
           <Header user={this.state.user} />
           <Switch>
-            <Route exact path="/" render={props => <DefaultPage {...props}
-              setZip={this.setZip}/>}/>
-            <Route exact path="/activity-filter" render={props => <ActivityFilter {...props}
-              zip={this.state.zip}
-              setFilter={this.setFilter}/>} />
-            <Route exact path="/activity-list" render={props => <ActivityList {...props}
-              getAttendees={this.getAttendees}
-              filterCriteria={this.state.filter}
-              reroll={this.pointsTransaction}
-              fetch={this.fetchDetail}/>} />
-            <Route exact path="/profile" render={props => <ProfilePage {...props}
-              user={this.state.user}
-              points={this.state.points}
-              getPoints={this.getPoints}/>} />
-            <Route exact path="/sign-in" render={props => <SignIn {...props}
-              signIn={this.signIn}/>} />
-            <Route exact path="/create-an-account" render={props => <CreateAccount {...props}
-              createUser={this.createUser}/>} />
-            <Route exact path="/profile/friends" render={props => <FriendPage {...props}
-              retrieve={this.retrieveMessages}
-              fetchUser={this.fetchUser}
-              user={this.state.user}/>} />
-            <Route exact path="/profile/messages" render={props => <FriendPage {...props}
-              retrieve={this.retrieveMessages}
-              fetchUser={this.fetchUser}
-              user={this.state.user} />} />
-            <Route exact path="/profile/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
-              fetchActivity={this.fetchDetail}
-              activityType={'Upcoming'}
-              getAttendees={this.getAttendees}/>} />
-            <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
-              fetchActivity={this.fetchDetail}
-              activityType={'Past'}
-              getAttendees={this.getAttendees}/>} />
-            <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
-              attendees={this.state.usersAttending}
-              activity={this.state.activityClicked}/>} />
-            <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
-              transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}/>} />
-            <Route exact path="/activity-details/cancel" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
-              transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}/>} />
-            <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
-              transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}/>} />
-            <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
-              attendees={this.state.usersAttending}/>} />
-            <Route exact path="/adventures/:activity" component={StaticActivity} />
+            <Route
+              exact
+              path="/"
+              render={props => <DefaultPage {...props} setZip={this.setZip} />}
+            />
+            <Route
+              exact
+              path="/activity-filter"
+              render={props => (
+                <ActivityFilter
+                  {...props}
+                  zip={this.state.zip}
+                  setFilter={this.setFilter}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/activity-list"
+              render={props => (
+                <ActivityList
+                  {...props}
+                  getAttendees={this.getAttendees}
+                  filterCriteria={this.state.filter}
+                  reroll={this.pointsTransaction}
+                  fetch={this.fetchDetail}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/profile"
+              render={props => (
+                <ProfilePage
+                  {...props}
+                  user={this.state.user}
+                  points={this.state.points}
+                  getPoints={this.getPoints}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/sign-in"
+              render={props => <SignIn {...props} signIn={this.signIn} />}
+            />
+            <Route
+              exact
+              path="/create-an-account"
+              render={props => (
+                <CreateAccount {...props} createUser={this.createUser} />
+              )}
+            />
+            <Route
+              exact
+              path="/profile/friends"
+              render={props => (
+                <FriendPage
+                  {...props}
+                  retrieve={this.retrieveMessages}
+                  fetchUser={this.fetchUser}
+                  user={this.state.user}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/profile/messages"
+              render={props => (
+                <FriendPage
+                  {...props}
+                  retrieve={this.retrieveMessages}
+                  fetchUser={this.fetchUser}
+                  user={this.state.user}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/profile/upcoming-activities"
+              render={props => (
+                <UpcomingOrPastActivities
+                  {...props}
+                  fetchActivity={this.fetchDetail}
+                  activityType={'Upcoming'}
+                  getAttendees={this.getAttendees}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/profile/past-activities"
+              render={props => (
+                <UpcomingOrPastActivities
+                  {...props}
+                  fetchActivity={this.fetchDetail}
+                  activityType={'Past'}
+                  getAttendees={this.getAttendees}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/activity-details/confirmed"
+              render={props => (
+                <ConfirmActivity
+                  {...props}
+                  attendees={this.state.usersAttending}
+                  activity={this.state.activityClicked}
+                  reserve={this.reserveConfirmAndCancel}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/activity-details/:id"
+              render={props => (
+                <ActivityDetail
+                  {...props}
+                  attendees={this.state.usersAttending}
+                  transaction={this.pointsTransaction}
+                  activity={this.state.activityClicked}
+                  reserve={this.reserveConfirmAndCancel}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/activity-details/cancel"
+              render={props => (
+                <ActivityDetail
+                  {...props}
+                  attendees={this.state.usersAttending}
+                  transaction={this.pointsTransaction}
+                  activity={this.state.activityClicked}
+                  cancel={this.reserveConfirmAndCancel}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/activity-details/past"
+              render={props => (
+                <ActivityDetail
+                  {...props}
+                  attendees={this.state.usersAttending}
+                  transaction={this.pointsTransaction}
+                  activity={this.state.activityClicked}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/activity-details/attendees"
+              render={props => (
+                <AttendeesList
+                  {...props}
+                  attendees={this.state.usersAttending}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/adventures/:activity"
+              component={StaticActivity}
+            />
           </Switch>
         </>
       </div>

@@ -26,6 +26,8 @@ class ActivityDetail extends React.Component {
         <button
           className="spon-button rounded text-white mt-0"
           onClick={() => {
+            const activityId = activity.activityId;
+            this.props.reserve({ activityId });
             this.props.history.push('/activity-details/confirmed');
           }}>
         Confirm
