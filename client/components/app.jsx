@@ -24,7 +24,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activityClicked: {},
+      activityData: {},
       user: null,
       usersAttending: [],
       points: 0,
@@ -37,10 +37,11 @@ class App extends React.Component {
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
     this.createUser = this.createUser.bind(this);
-    // this.fetchDetail = this.fetchDetail.bind(this);
+    this.fetchDetail = this.fetchDetail.bind(this);
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
+    this.getAttendees = this.getAttendees.bind(this);
   }
 
   setFilter(filterObject) {
@@ -55,15 +56,15 @@ class App extends React.Component {
     });
   }
 
-  // fetchDetail(activityId) {
-  //   const config = {
-  //     method: 'GET'
-  //   };
-  //   fetch(`/api/activity-details?activityId=${activityId}`, config)
-  //     .then(response => response.json())
-  //     .then(activityDetails => this.setState({ activityData: activityDetails }))
-  //     .catch(error => console.error('Fetch error: ', error));
-  // }
+  fetchDetail(activityId) {
+    const config = {
+      method: 'GET'
+    };
+    fetch(`/api/activity-details?activityId=${activityId}`, config)
+      .then(response => response.json())
+      .then(activityDetails => this.setState({ activityData: activityDetails }))
+      .catch(error => console.error('Fetch error: ', error));
+  }
 
   fetchUser() {
     const userConfig = {
@@ -76,6 +77,19 @@ class App extends React.Component {
       .then(results => results.json())
       .then(data => this.setState({ user: data }))
       .catch(error => console.error('There was an error:', error.message));
+  }
+
+  getAttendees(activityId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/reservations?activity=${activityId}`, config)
+      .then(response => response.json())
+      .then(usersAttending => this.setState({ usersAttending }))
+      .catch(error => console.error('Error:', error));
   }
 
   signIn({ email, password }) {
@@ -214,8 +228,9 @@ class App extends React.Component {
               getAttendees={this.getAttendees}/>} />
             <Route exact path="/activity-details/:id/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
+              activity={this.state.activityData}
               getAttendees={this.getAttendees}
-              activity={this.state.activityClicked}
+              fetchDetail={this.fetchDetail}
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
               user={this.state.user}
