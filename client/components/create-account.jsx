@@ -32,7 +32,7 @@ class CreateAccount extends React.Component {
           onSubmit={() => {
             this.uploadHandler();
             this.props.createUser(this.state);
-            this.props.history.push('/');
+            this.props.history.push('/sign-in');
           }}>
           <div className="form-group" >
             <label htmlFor="email">First Name</label>
