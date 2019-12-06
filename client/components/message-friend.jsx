@@ -29,12 +29,12 @@ class MessageFriend extends React.Component {
     );
     return (
       <div className="container position-relative">
-        <img
-          src="/assets/images/back-arrow.png"
-          onClick={() => this.props.history.goBack()}
-        />
-        <div className="text-center mt-4 mb-3">
-          <h4>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
+        <div className="text-center d-flex mt-4 mb-3">
+          <img
+            src="/assets/images/back-arrow.png"
+            className="back-arrow mr-5"
+            onClick={() => this.props.history.goBack()}
+          /><h4>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
         <div className="message-container position-absolute col-12">
           {messages}

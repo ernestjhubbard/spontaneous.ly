@@ -526,3 +526,7 @@ input::placeholder {
 .friend-name {
   width: calc(100% - 114px);
 }
+
+.back-arrow{
+  width: 10%;
+}
