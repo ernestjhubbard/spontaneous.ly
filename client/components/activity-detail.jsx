@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CancelModal from './cancel-modal';
+import { Link } from 'react-router-dom';
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -63,8 +64,10 @@ class ActivityDetail extends React.Component {
     const background = {
       backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(/assets/images/activity/${activity.image})`
     };
+
     const isUpcoming = this.checkUTC(this.state.activityData.dateTime);
     const showModal = this.state.showModal;
+
     return (
       <>
         <div className="top-banner d-flex" style={background}>

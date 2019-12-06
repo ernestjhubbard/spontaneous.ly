@@ -6,23 +6,22 @@ class FriendList extends React.Component {
     super(props);
     this.state = {
       friends: [],
-      messages: []
+      friendClicked: null
     };
   }
 
   render() {
-    const friendsArray = this.props.friends.map((friend, index) =>
+    const friends = this.state.friends;
+    const friendsArray = friends.map((friend, index) =>
       <Friend
-        clickFriend={this.props.clickFriend}
-        messages={this.state.messages}
-        changeView={this.props.changeView}
         key={index}
-        retrieve={this.props.retrieve}
+        pushMessage={this.props.history.push}
+        clickFriend={this.clickFriend}
         recipientId={friend.recipientId}
-        getFriend={this.getFriend}
         image={friend.image}
         firstName={friend.firstName}
-        lastName={friend.lastName} />
+        lastName={friend.lastName}
+      />
     );
     return (
       <div className="container align-center my-5">
@@ -36,6 +35,38 @@ class FriendList extends React.Component {
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.getFriends();
+  }
+
+  getFriends() {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/friends', config)
+      .then(results => results.json())
+      .then(data => data.map(friend => this.setState({ friends: this.state.friends.concat(friend) })));
+  }
+
+  getFriendMessages(friendId) {
+    const userConfig = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/messages?friendId=${friendId}`, userConfig)
+      .then(results => results.json())
+      .then(data => data);
+  }
+
+  clickFriend(friendId) {
+    this.setState({ friendClicked: friendId });
   }
 }
 
