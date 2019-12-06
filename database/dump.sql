@@ -65,7 +65,7 @@ CREATE TABLE `friendRequests` (
 
 LOCK TABLES `friendRequests` WRITE;
 /*!40000 ALTER TABLE `friendRequests` DISABLE KEYS */;
-INSERT INTO `friendRequests` VALUES (2,4,1),(2,3,1),(1,3,1),(3,1,1);
+INSERT INTO `friendRequests` VALUES (4,1,1),(1,4,1),(4,2,1),(2,4,1),(4,3,1),(3,4,1);
 /*!40000 ALTER TABLE `friendRequests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 20:42:01
+-- Dump completed on 2019-12-06 20:51:41
