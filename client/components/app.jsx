@@ -30,7 +30,8 @@ class App extends React.Component {
       points: 0,
       static: null,
       zip: null,
-      filter: {}
+      filter: {},
+      fetchingUser: true
     };
     this.setZip = this.setZip.bind(this);
     this.setFilter = this.setFilter.bind(this);
@@ -75,8 +76,9 @@ class App extends React.Component {
     };
     fetch('/api/users', userConfig)
       .then(results => results.json())
-      .then(data => this.setState({ user: data }))
+      .then(user => this.setState({ user, fetchingUser: false }))
       .catch(error => console.error('There was an error:', error.message));
+
   }
 
   getAttendees(activityId) {
@@ -103,8 +105,8 @@ class App extends React.Component {
     };
     fetch('/api/users', config)
       .then(results => results.json())
-      .then(data => {
-        if (data.error) {
+      .then(user => {
+        if (user.error) {
           return null;
         } else {
           this.fetchUser();
@@ -134,6 +136,10 @@ class App extends React.Component {
           images
         });
       });
+  }
+
+  componentDidMount() {
+    this.fetchUser();
   }
 
   createUser({ firstName, lastName, email, image, password, userUpload }) {
@@ -195,14 +201,30 @@ class App extends React.Component {
     fetch('/api/points', config).then(response => response.json());
   }
 
+  getAttendees(activityId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/ api / reservations ? activity = ${activityId}`, config)
+      .then(response => response.json())
+      .then(usersAttending => this.setState({ usersAttending }));
+  }
+        
   render() {
+    if (this.state.fetchingUser === true) {
+      return null;
+    }
     return (
       <div>
         <>
           <Header user={this.state.user} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
-              setZip={this.setZip} />} />
+              setZip={this.setZip}
+              fetchUser={this.fetchUser} />} />
             <Route exact path="/activity-filter" render={props => <ActivityFilter {...props}
               zip={this.state.zip}
               setFilter={this.setFilter} />} />
@@ -221,7 +243,7 @@ class App extends React.Component {
               createUser={this.createUser} />} />
             <Route exact path="/profile/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Upcoming'}/>} />
+              activityType={'Upcoming'} />} />
             <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
               activityType={'Past'}
@@ -237,9 +259,9 @@ class App extends React.Component {
               activity={this.state.activityData}
               fetchDetail={this.fetchDetail}
               transaction={this.pointsTransaction}
-              reserve={this.reserveConfirmAndCancel}/>} />
-            <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
-              attendees={this.state.usersAttending}/>} />
+              activity={this.state.activityClicked} />} />
+            <Route exact path="/activity-details/attendees/:activity" render={props => <AttendeesList {...props}
+              attendees={this.state.usersAttending} />} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
             <Route exact path="/profile/friends" render={props => <FriendList {...props} />} />
             <Route exact path="/profile/friends/:friendId" render={props => <MessageFriend {...props}

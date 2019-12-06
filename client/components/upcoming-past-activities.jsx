@@ -44,7 +44,7 @@ class UpcomingOrPastActivities extends React.Component {
               activityData={activityInfo}
               fetchActivity={this.props.fetchActivity}
               activityType={this.props.activityType}
-            />) }
+            />)}
         </div>
       </div>
     );
