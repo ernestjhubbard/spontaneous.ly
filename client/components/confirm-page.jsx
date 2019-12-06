@@ -8,7 +8,8 @@ class ConfirmActivity extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      attendees: []
     };
     this.changeModal = this.changeModal.bind(this);
   }
@@ -20,7 +21,17 @@ class ConfirmActivity extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAttendees(this.props.match.params.id);
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/reservations?activity=${this.props.match.params.id}`, config)
+      .then(response => response.json())
+      .then(attendees => this.setState({ attendees }))
+      .catch(error => console.error('Error:', error));
+
     this.props.fetchDetail(this.props.match.params.id);
   }
 
@@ -46,7 +57,7 @@ class ConfirmActivity extends React.Component {
           <p>
             <span className="bold-text">Total Guests: </span>{' '}
             <Link to={`/activity-details/attendees/${this.props.match.params.id}`}>
-              <span className="badge confirmed-badge text-white">{this.props.attendees.length}</span>
+              <span className="badge confirmed-badge text-white">{this.state.attendees.length}</span>
             </Link>
           </p>
           <p className="mb-0">
