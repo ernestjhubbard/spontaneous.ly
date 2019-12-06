@@ -10,17 +10,18 @@ class ConfirmActivity extends React.Component {
     this.state = {
       showModal: false
     };
-    this.openModal = this.openModal.bind(this);
+    this.changeModal = this.changeModal.bind(this);
   }
 
-  openModal() {
+  changeModal() {
     this.setState({
       showModal: !this.state.showModal
     });
   }
 
   componentDidMount() {
-    this.props.getAttendees(this.props.activity.activityId);
+    this.props.getAttendees(this.props.match.params.id);
+    this.props.fetchDetail(this.props.match.params.id);
   }
 
   render() {
@@ -44,8 +45,8 @@ class ConfirmActivity extends React.Component {
           </p>
           <p>
             <span className="bold-text">Total Guests: </span>{' '}
-            <Link to={`/activity-details/attendees/${this.props.activity.activityId}`}>
-              <span className="point p-1">{this.props.attendees.length}</span>
+            <Link to={`/activity-details/attendees/${this.props.match.params.id}`}>
+              <span className="badge confirmed-badge text-white">{this.props.attendees.length}</span>
             </Link>
           </p>
           <p className="mb-0">
@@ -58,13 +59,12 @@ class ConfirmActivity extends React.Component {
         <div className="container mx-auto text-center fixed-bottom p-3">
           <button
             className="spon-button text-white rounded w-100"
-            onClick={() => alert('This was pressed')}
-          >
+            onClick={() => this.props.history.push('/')}>
             Back to Home
           </button>
           <button
             className="spon-link-cancel rounded w-100"
-            onClick={this.openModal}
+            onClick={this.changeModal}
           >
             Cancel Reservation
           </button>
@@ -72,9 +72,9 @@ class ConfirmActivity extends React.Component {
         {this.state.showModal ? (
           <CancelModal
             {...this.props}
-            closeModal={this.openModal}
+            changeModal={this.changeModal}
             cancel={this.props.reserve}
-            activityId={this.props.activity.activityId}
+            activityId={this.props.match.params.id}
           />
         ) : null}
       </div>

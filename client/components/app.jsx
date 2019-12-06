@@ -24,7 +24,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activityClicked: {},
+      activityData: {},
       user: null,
       usersAttending: [],
       points: 0,
@@ -34,7 +34,6 @@ class App extends React.Component {
       fetchingUser: true
     };
     this.setZip = this.setZip.bind(this);
-    this.setStatic = this.setStatic.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
     this.signIn = this.signIn.bind(this);
@@ -44,12 +43,6 @@ class App extends React.Component {
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getPoints = this.getPoints.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
-  }
-
-  setStatic(activity) {
-    this.setState({
-      static: activity
-    });
   }
 
   setFilter(filterObject) {
@@ -64,19 +57,14 @@ class App extends React.Component {
     });
   }
 
-  fetchDetail({ activityId }) {
+  fetchDetail(activityId) {
     const config = {
-      method: 'POST',
-      body: JSON.stringify({ activityId }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      method: 'GET'
     };
-    fetch('/api/activity-details', config)
-      .then(results => results.json())
-      .then(data => {
-        this.setState({ activityClicked: data });
-      });
+    fetch(`/api/activity-details?activityId=${activityId}`, config)
+      .then(response => response.json())
+      .then(activityDetails => this.setState({ activityData: activityDetails }))
+      .catch(error => console.error('Fetch error: ', error));
   }
 
   fetchUser() {
@@ -91,6 +79,19 @@ class App extends React.Component {
       .then(user => this.setState({ user, fetchingUser: false }))
       .catch(error => console.error('There was an error:', error.message));
 
+  }
+
+  getAttendees(activityId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/reservations?activity=${activityId}`, config)
+      .then(response => response.json())
+      .then(usersAttending => this.setState({ usersAttending }))
+      .catch(error => console.error('Error:', error));
   }
 
   signIn({ email, password }) {
@@ -211,7 +212,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(usersAttending => this.setState({ usersAttending }));
   }
-
+        
   render() {
     if (this.state.fetchingUser === true) {
       return null;
@@ -245,24 +246,18 @@ class App extends React.Component {
               activityType={'Upcoming'} />} />
             <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Past'} />} />
-            <Route exact path="/activity-details/confirmed" render={props => <ConfirmActivity {...props}
+              activityType={'Past'}
+              getAttendees={this.getAttendees}/>} />
+            <Route exact path="/activity-details/:id/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
+              activity={this.state.activityData}
               getAttendees={this.getAttendees}
-              activity={this.state.activityClicked}
-              reserve={this.reserveConfirmAndCancel} />} />
+              fetchDetail={this.fetchDetail}
+              reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
-              transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}
-              reserve={this.reserveConfirmAndCancel} />} />
-            <Route exact path="/activity-details/cancel" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
-              transaction={this.pointsTransaction}
-              activity={this.state.activityClicked}
-              cancel={this.reserveConfirmAndCancel} />} />
-            <Route exact path="/activity-details/past" render={props => <ActivityDetail {...props}
-              attendees={this.state.usersAttending}
+              user={this.state.user}
+              activity={this.state.activityData}
+              fetchDetail={this.fetchDetail}
               transaction={this.pointsTransaction}
               activity={this.state.activityClicked} />} />
             <Route exact path="/activity-details/attendees/:activity" render={props => <AttendeesList {...props}
