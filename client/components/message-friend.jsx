@@ -28,8 +28,8 @@ class MessageFriend extends React.Component {
         recipientId={m.recipientId} />
     );
     return (
-      <div className="container position-relative">
-        <div className="text-center d-flex mt-4 mb-3">
+      <div className="container position-relative fade-in">
+        <div className="text-center mt-5 mb-3">
           <img
             src="/assets/images/back-arrow.png"
             className="back-arrow mr-5"

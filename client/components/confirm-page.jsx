@@ -56,7 +56,7 @@ class ConfirmActivity extends React.Component {
           </p>
           <p>
             <span className="bold-text">Total Guests: </span>{' '}
-            <Link to={`/activity-details/attendees/${this.props.match.params.id}`}>
+            <Link to={`/activity-details/${this.props.match.params.id}/attendees/`}>
               <span className="badge confirmed-badge text-white">{this.state.attendees.length}</span>
             </Link>
           </p>
