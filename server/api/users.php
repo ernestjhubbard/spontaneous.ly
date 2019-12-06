@@ -15,9 +15,9 @@ if ($request['method'] === 'GET') {
 if ($request['method'] === 'POST') {
   $email = $request['body']['email'];
   $password = $request['body']['password'];
-  $sql_login = "SELECT userId, email, password
-                      FROM users
-                     WHERE email = ?";
+  $sql_login = "SELECT *
+                  FROM users
+                 WHERE email = ?";
   $login_prepare = mysqli_prepare($link, $sql_login);
   mysqli_stmt_bind_param($login_prepare, 's', $email);
   mysqli_stmt_execute($login_prepare);
@@ -29,7 +29,10 @@ if ($request['method'] === 'POST') {
     $_SESSION['user_id'] = $user_id;
     $response['body'] = [
       'userId' => $login['userId'],
-      'email' => $login['email']
+      'email' => $login['email'],
+      'firstName' =>$login['firstName'],
+      'lastName' => $login['lastName'],
+      'image' => $login['image']
     ];
     send($response);
   } else {
