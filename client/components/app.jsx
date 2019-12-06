@@ -172,7 +172,9 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/reservations', config).then(response => response.json());
+    fetch('/api/reservations', config)
+      .then(response => response.json())
+      .then(message => console.error(message));
   }
 
   getPoints() {
@@ -249,6 +251,7 @@ class App extends React.Component {
               transaction={this.pointsTransaction}
               reserve={this.reserveConfirmAndCancel} />} />
             <Route exact path="/activity-details/attendees/:activity" render={props => <AttendeesList {...props}
+              getAttendees={this.getAttendees}
               attendees={this.state.usersAttending} />} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
             <Route exact path="/profile/friends" render={props => <FriendList {...props} />} />

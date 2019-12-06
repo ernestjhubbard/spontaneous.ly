@@ -3,12 +3,7 @@
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
-  $sql_login = "SELECT userId
-                  FROM logins
-              ORDER BY logins.loginId DESC";
-  $login_query = mysqli_query($link, $sql_login);
-  $user_fetch = mysqli_fetch_assoc($login_query);
-  $user_id = $user_fetch['userId'];
+  $user_id = $_SESSION['user_id'];
   $activity = $request['query']['activity'];
   $sql_activity = "SELECT * FROM users AS u JOIN reservations AS r
                               ON u.userID = r.userId
@@ -34,12 +29,7 @@ if ($request['method'] === 'POST') {
                       WHERE activityId = $activity_id";
     $activity_query = mysqli_query($link, $sql_activity);
     $activity = mysqli_fetch_assoc($activity_query);
-    $sql_user = "SELECT userId
-                   FROM logins
-               ORDER BY logins.loginId DESC";
-    $login_query = mysqli_query($link, $sql_user);
-    $user_fetch = mysqli_fetch_assoc($login_query);
-    $user_id = $user_fetch['userId'];
+    $user_id = $_SESSION['user_id'];
     $sql_is_cancelled = "SELECT isCancelled
                            FROM reservations
                           WHERE userId = $user_id
