@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CancelModal from './cancel-modal';
-import { Link } from 'react-router-dom';
 
 class ActivityDetail extends React.Component {
   constructor(props) {
