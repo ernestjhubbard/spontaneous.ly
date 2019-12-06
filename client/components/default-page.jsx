@@ -40,7 +40,7 @@ class DefaultPage extends React.Component {
           </div>
         </div>
         <div className="bottom-nav my-5">
-          <div className="bottom-text col-sm-12">
+          <div className="bottom-text col-sm-12 mb-3">
             <h4>Spontaneous Adventures for Any Interest</h4>
           </div>
           <div className="d-flex flex-row horizontal-scroll mb-4">

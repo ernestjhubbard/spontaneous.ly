@@ -46,13 +46,14 @@ class MessageFriend extends React.Component {
                 onChange={this.handleChange}
                 value={this.state.message}
                 type="text"
-              ></input>
+              />
               <div className="input-group-append">
                 <button
                   type="submit"
                   className="input-group-append send-button spon-button rounded text-white mt-0"
                   value="Submit">
-              Send</button>
+                    Send
+                </button>
               </div>
             </div>
           </form>
@@ -111,7 +112,6 @@ class MessageFriend extends React.Component {
   handleChange(event) {
     this.setState({ message: event.target.value });
   }
-
 }
 
 export default MessageFriend;
