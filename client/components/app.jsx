@@ -157,7 +157,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/users', config)
+    fetch('/api/signup', config)
       .then(results => results.json())
       .then(data => data)
       .catch(error => console.error('There was an error:', error.message));

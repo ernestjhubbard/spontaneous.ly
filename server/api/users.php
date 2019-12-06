@@ -13,76 +13,27 @@ if ($request['method'] === 'GET') {
 }
 
 if ($request['method'] === 'POST') {
-  if (!isset($_SESSION['user_id'])) {
-    $password = $request['body']['password'];
-    $email = $request['body']['email'];
-    if (isset($email) && isset($password)) {
-      $sql_login = "SELECT userId
-                     FROM users
-                    WHERE email = '$email'
-                      AND password = '$password'";
-      $login_query = mysqli_query($link, $sql_login);
-      $login = mysqli_fetch_assoc($login_query);
-      $user_id = $login['userId'];
-      $_SESSION['user_id'] = $user_id;
-      $response['body'] = $login;
-      send($response);
-    }
+  $email = $request['body']['email'];
+  $password = $request['body']['password'];
+  $sql_login = "SELECT userId, email, password
+                      FROM users
+                     WHERE email = ?";
+  $login_prepare = mysqli_prepare($link, $sql_login);
+  mysqli_stmt_bind_param($login_prepare, 's', $email);
+  mysqli_stmt_execute($login_prepare);
+  $result = mysqli_stmt_get_result($login_prepare);
+  $login = mysqli_fetch_assoc($result);
+  $fetch_password = $login['password'];
+  if (password_verify($password, $fetch_password)) {
+    $user_id = $login['userId'];
+    $_SESSION['user_id'] = $user_id;
+    $response['body'] = [
+      'userId' => $login['userId'],
+      'email' => $login['email']
+    ];
+    send($response);
+  } else {
+    terminal_log('invalid');
+    throw new ApiError('Invalid login', 401);
   }
 }
-  //   $sql_login = "SELECT userId
-  //                   FROM logins
-  //               ORDER BY logins.loginId DESC";
-  //   $login_query = mysqli_query($link, $sql_login);
-  //   $user_fetch = mysqli_fetch_assoc($login_query);
-  //   $user_id = $user_fetch['userId'];
-  // if (isset($request['query']['userId'])) {
-  //   $user_id = $request['query']['userId'];
-  // }
-  //   $user_query =  "SELECT *
-  //                     FROM users
-  //                       AS u
-  //                    WHERE $user_id = u.userId";
-  //   $user_result = mysqli_query($link, $user_query);
-  //   $output = mysqli_fetch_assoc($user_result);
-  // }
-// if ($request['method'] === 'POST') {
-
-//     $user_email = $request['body']['email'];
-//     $user_password = $request['body']['password'];
-//     if (!isset($user_email)) {
-//       throw new ApiError('User email is required', 400);
-//     }
-//     if (isset($request['body']['firstName'])) {
-//       $user_first_name = $request['body']['firstName'];
-//       $user_last_name = $request['body']['lastName'];
-//       $user_image = $request['body']['image'];
-//       $create_user = "INSERT INTO users (`email`, `firstName`, `lastName`, `image`, `password`)
-//                            VALUES (?,?,?,?,?)";
-//       $sql_prepare_user = mysqli_prepare($link, $create_user);
-//       mysqli_stmt_bind_param($sql_prepare_user, 'sssss', $user_email, $user_first_name, $user_last_name, $user_image, $user_password);
-//       mysqli_stmt_execute($sql_prepare_user);
-//       $insert = mysqli_insert_id($link);
-//       $response['body'] = $request['body'];
-//       send($response);
-//     }
-//     else {
-//     $login_password = $request['body']['password'];
-//     $user_query = "SELECT userId
-//                      FROM users
-//                     WHERE '$user_email' = email
-//                       AND '$login_password' = `password`";
-//     $user_id = mysqli_query($link, $user_query);
-//     $id = mysqli_fetch_assoc($user_id);
-//     $login_id = $id['userId'];
-//       if (!isset($id)) {
-//         throw new ApiError('Invalid Login Credentials', 400);
-//       }
-//     $sql_login = "INSERT INTO logins (userId)
-//                        VALUES ($login_id)";
-//     mysqli_query($link, $sql_login);
-//     $_SESSION['user_id'] = $id['userId'];
-//     $response['body']= $_SESSION['user_id'];
-//     send($response);
-//     }
-//   }
