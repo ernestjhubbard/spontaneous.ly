@@ -30,18 +30,25 @@ class MessageFriend extends React.Component {
     return (
       <div className="container position-relative fade-in">
         <div className="text-center mt-5 mb-3">
-          <h4>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
+          <img
+            src="/assets/images/back-arrow.png"
+            className="back-arrow mr-5"
+            onClick={() => this.props.history.goBack()}
+          /><h4>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
         <div className="message-container position-absolute col-12">
           {messages}
         </div>
         <div className="fixed-bottom p-3 bg-white">
-          <form onSubmit={() => {
-            this.sendMessage({ recipientId, message });
-            this.setState({ message: '' });
-          }}>
+          <form
+            onSubmit={() => {
+              this.sendMessage({ recipientId, message });
+              this.setState({ message: '' });
+            }}
+          >
             <div className="input-group">
-              <input className="form-control form-control-lg"
+              <input
+                className="form-control form-control-lg"
                 name="message"
                 onChange={this.handleChange}
                 value={this.state.message}
@@ -51,8 +58,9 @@ class MessageFriend extends React.Component {
                 <button
                   type="submit"
                   className="input-group-append send-button spon-button rounded text-white mt-0"
-                  value="Submit">
-                    Send
+                  value="Submit"
+                >
+                  Send
                 </button>
               </div>
             </div>

@@ -61,14 +61,26 @@ class StaticActivity extends React.Component {
       <div>
         <div className={`${allContent.heroClass} top-banner d-flex`}>
           <div className="m-auto p-3">
-            <h2 className="text-center text-white">{this.state.currentActivity}</h2>
+            <h2 className="text-center text-white">
+              {this.state.currentActivity}
+            </h2>
           </div>
         </div>
         <div className="container-fluid my-5">
           <p>{allContent.content.text1}</p>
-          <img src={allContent.content.img1} alt={allContent.content.imgAlt} className="img-fluid my-5" />
+          <img
+            src={allContent.content.img1}
+            alt={allContent.content.imgAlt}
+            className="img-fluid my-5"
+          />
           <p>{allContent.content.text2}</p>
         </div>
+        <button
+          className="spon-button-alt rounded w-100 mt-0 mx-auto"
+          onClick={() => this.props.history.goBack()}
+        >
+          Back
+        </button>
       </div>
     );
   }

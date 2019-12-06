@@ -20,9 +20,13 @@ class AttendeesList extends React.Component {
     return (
       <div className="container my-5">
         <h4 className="d-flex justify-content-center">Attendees</h4>
-        <div className="">
-          {attendees}
-        </div>
+        <div>{attendees}</div>
+        <button
+          className="spon-button-alt fixed-bottom rounded w-100 mt-0 mx-auto"
+          onClick={() => this.props.history.goBack()}
+        >
+          Back
+        </button>
       </div>
     );
   }

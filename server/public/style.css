@@ -561,4 +561,7 @@ a:hover {
 @keyframes fadein {
   from { opacity: 0; }
   to { opacity: 1; }
+  
+.back-arrow{
+  width: 10%;
 }

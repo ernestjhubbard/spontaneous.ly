@@ -56,7 +56,15 @@ function SignedInLinkList(props) {
   const profileImage = {
     backgroundImage: `url("assets/images/users/${props.user.image}")`
   };
-
+  function signOut() {
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/users', config);
+  }
   return (
     <>
       <div className="my-5">
@@ -81,6 +89,9 @@ function SignedInLinkList(props) {
         </li>
         <li>
           <NavLink to="/profile/messages">Read Messages</NavLink>
+        </li>
+        <li>
+          <NavLink onClick={signOut} to="/sign-in">Sign Out</NavLink>
         </li>
       </ul >
     </>

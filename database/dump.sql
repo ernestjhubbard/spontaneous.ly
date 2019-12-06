@@ -65,7 +65,7 @@ CREATE TABLE `friendRequests` (
 
 LOCK TABLES `friendRequests` WRITE;
 /*!40000 ALTER TABLE `friendRequests` DISABLE KEYS */;
-INSERT INTO `friendRequests` VALUES (2,4,1),(2,3,1),(1,3,1),(3,1,1);
+INSERT INTO `friendRequests` VALUES (4,1,1),(1,4,1),(4,2,1),(2,4,1),(4,3,1),(3,4,1);
 /*!40000 ALTER TABLE `friendRequests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (1,88,0),(1,45,0),(1,47,1),(1,84,0),(1,56,1),(1,65,0),(1,21,0),(1,42,0),(1,33,1),(1,77,0),(1,58,0),(2,25,0);
+INSERT INTO `reservations` VALUES (4,89,0),(4,53,0),(4,39,0),(4,43,0),(4,11,0),(4,88,0),(4,87,0),(4,45,0),(4,47,0);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +183,7 @@ CREATE TABLE `users` (
   `password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +192,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Laurence','Baldwin','lbaldwin@learningfuze.com','laurence','laurence.png'),(2,'Bernadette','Garza','bgarza@learningfuze.com','bernadette','bernadette.png'),(3,'Enrique','Ramos','eramos@learningfuze.com','enrique','enrique.png'),(4,'Laverne','Pratt','lpratt@learningfuze.com','laverne','laverne.png'),(68,'Ace','Ventura','aventura@learningfuze.com','ace','aceventura.jpg'),(69,'john','jacob','jschmidt@learningfuze.com','jj','aceventura.jpg');
+INSERT INTO `users` VALUES (1,'Laurence','Baldwin','lbaldwin@learningfuze.com','$2y$10$7.g.wDpXNeHP9uC5bMt.Ku.gAPgnhMJeSQXJIyf0lAfltZwHxlkTK','laurence.png'),(2,'Bernadette','Garza','bgarza@learningfuze.com','$2y$10$sTKIAf7JwVOpNlFfOY8EqOu7Ly5NEfRk4iOM6oPQ1Vpir6n6xPtLa','bernadette.png'),(3,'Enrique','Ramos','eramos@learningfuze.com','$2y$10$N/IfXKrBYylBIohhJpRAV.DEllWHV7cksrzDbO.YLdyh2S2YxJ2ka','enrique.png'),(4,'Laverne','Pratt','lpratt@learningfuze.com','$2y$10$EnQbA6cL9PUX0oFmFjRMveVLlYZtdnDdPDWd3NwpDb3z58QNG.iQ.','laverne.png'),(70,'joe','joe','joe@joe.com','$2y$10$d5JCBWoW0RtaO6t9B68Lh.KbHEu9XRA3mAEt13aIcaMYm8XncDnTW','joe.jpg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -205,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 19:50:58
+-- Dump completed on 2019-12-06 20:51:41

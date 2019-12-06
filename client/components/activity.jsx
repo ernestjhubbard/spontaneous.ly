@@ -46,8 +46,10 @@ function formatTime(string) {
   let timeString;
   if (hour < 12) {
     timeString = string + 'AM';
-  } else if (hour === 12 || hour > 12) {
-    hour = hour - 12;
+  } else if (hour >= 12) {
+    if (hour > 12) {
+      hour = hour - 12;
+    }
     timeString = hour + string.slice(minuteIndex, string.length) + 'PM';
   }
   return timeString;
