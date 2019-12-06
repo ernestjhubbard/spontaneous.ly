@@ -9,6 +9,10 @@ class AttendeesList extends React.Component {
     };
   }
 
+  componentDidMount() {
+    this.props.getAttendees(this.props.match.params.activity);
+  }
+
   render() {
     const attendees = this.props.attendees.map(attendee =>
       <Attendee key={attendee.userId} firstName={attendee.firstName} lastName={attendee.lastName} image={attendee.image} />
@@ -16,7 +20,7 @@ class AttendeesList extends React.Component {
     return (
       <div className="container my-5">
         <h4 className="d-flex justify-content-center">Attendees</h4>
-        <div>
+        <div className="">
           {attendees}
         </div>
       </div>

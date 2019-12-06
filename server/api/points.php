@@ -1,12 +1,7 @@
 <?php
 
 $link = get_db_link();
-$sql_login = "SELECT userId
-                FROM logins
-            ORDER BY logins.loginId DESC";
-$login_query = mysqli_query($link, $sql_login);
-$user_fetch = mysqli_fetch_assoc($login_query);
-$user_id = $user_fetch['userId'];
+$user_id = $_SESSION['user_id'];
 if ($request['method'] === 'GET') {
   if (isset($request['query']['userId'])) {
     $user_id = $request['query']['userId'];
