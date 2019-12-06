@@ -1,12 +1,7 @@
 <?php
 $link = get_db_link();
 
-$sql_sender = "SELECT userId
-                 FROM logins
-             ORDER BY logins.loginId DESC";
-$user_query = mysqli_query($link, $sql_sender);
-$user_fetch = mysqli_fetch_assoc($user_query);
-$sender_id = $user_fetch['userId'];
+$user_id = $_SESSION['user_id'];
 
 if ($request['method'] === 'GET') {
     if(isset($request['query']['recipientId'])){
@@ -16,9 +11,9 @@ if ($request['method'] === 'GET') {
                            AS m
                          JOIN users
                            AS u
-                           ON $sender_id = u.userId
-                        WHERE $sender_id = m.senderId
-                           OR $sender_id = m.recipientId
+                           ON $user_id = u.userId
+                        WHERE $user_id = m.senderId
+                           OR $user_id = m.recipientId
                           AND $recipient_id = m.senderId
                            OR $recipient_id = m.recipientId";
       $messages_query = mysqli_query($link, $sql_messages);
@@ -31,8 +26,8 @@ if ($request['method'] === 'GET') {
     }
     else if (isset($request['query']['userId'])){
       $friend_id = $request['query']['userId'];
-      $sql_friend = "SELECT * 
-                       FROM users 
+      $sql_friend = "SELECT *
+                       FROM users
                       WHERE $friend_id = userId";
       $friend_query = mysqli_query($link, $sql_friend);
       $friend = mysqli_fetch_assoc($friend_query);
@@ -56,7 +51,7 @@ if ($request['method'] === 'POST'){
     $sender_message = $request['body']['message'];
     $sql_send_message = "INSERT INTO messages (message, senderId, recipientId) VALUES (?,?,?)";
     $prepared_message = mysqli_prepare($link, $sql_send_message);
-    mysqli_stmt_bind_param($prepared_message, 'sii', $sender_message, $sender_id, $recipient_id);
+    mysqli_stmt_bind_param($prepared_message, 'sii', $sender_message, $user_id, $recipient_id);
     mysqli_stmt_execute($prepared_message);
     $response['body'] = $sender_message;
     send($response);
