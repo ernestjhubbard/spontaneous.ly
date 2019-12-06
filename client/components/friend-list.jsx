@@ -30,7 +30,7 @@ class FriendList extends React.Component {
           <h4 className=""><span className="badge viewing">All Friends</span></h4>
           <h4 className=""><span className="badge">Pending Requests</span></h4>
         </div>
-        <div className="container">
+        <div>
           {friendsArray}
         </div>
       </div>

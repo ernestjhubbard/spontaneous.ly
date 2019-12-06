@@ -230,7 +230,10 @@ button:focus {
 .darkness {
   background-image: linear-gradient(#00000050, #00000050);
   height: 100%;
-  transition: .25s all;
+  transition: .15s all;
+  height: 100%;
+  width: 100%;
+  position: fixed;
 }
 
 .darkness-closed {
@@ -243,7 +246,7 @@ button:focus {
 
 .nav-drawer {
   padding: 0rem 2rem;
-  position: absolute;
+  position: fixed;
   height: 100%;
   background: #fff;
   top: 0px;
@@ -512,4 +515,14 @@ input::placeholder {
 
 .confirmed-badge {
   background: #f07070;
+}
+
+.message-container {
+  left: 0;
+  height: 70vh;
+  overflow: scroll;
+}
+
+.friend-name {
+  width: calc(100% - 114px);
 }
