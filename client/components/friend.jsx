@@ -5,12 +5,12 @@ export default function Friend(props) {
     backgroundImage: `url("/assets/images/users/${props.image}")`
   };
   return (
-    <div className="row my-3 w-100 d-flex justify-content-evenly">
-      <div className="col-2 friend-image rounded-circle p-0 mr-4" style={friendImage}></div>
-      <button className="friend-button border rounded my-0 mx-1">{props.firstName} {props.lastName}</button>
-      <div className="col-2 send-message">
+    <div className="d-flex justify-content-between my-3">
+      <div className="friend-image rounded-circle p-0 mr-3" style={friendImage}></div>
+      <button className="friend-button friend-name border rounded my-0">{props.firstName} {props.lastName}</button>
+      <div className="send-message d-flex ml-3">
         <i
-          className="fas fa-paper-plane fa-2x adventure-card mt-2"
+          className="fas fa-paper-plane fa-2x adventure-card m-auto"
           onClick={() => props.pushMessage(`/profile/friends/${props.recipientId}`)} />
       </div>
     </div>

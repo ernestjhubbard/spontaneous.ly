@@ -29,8 +29,8 @@ class MessageFriend extends React.Component {
     );
     return (
       <div className="container position-relative">
-        <div className="friend-name text-center my-5">
-          <h3>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h3>
+        <div className="text-center mt-5 mb-3">
+          <h4>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
         <div className="message-container position-absolute col-12">
           {messages}
