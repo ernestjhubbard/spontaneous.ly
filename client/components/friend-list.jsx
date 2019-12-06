@@ -27,12 +27,20 @@ class FriendList extends React.Component {
       <div className="container align-center my-5">
         <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
         <div className="d-flex justify-content-between">
-          <h4 className=""><span className="badge viewing">All Friends</span></h4>
-          <h4 className=""><span className="badge">Pending Requests</span></h4>
+          <h4 className="">
+            <span className="badge viewing">All Friends</span>
+          </h4>
+          <h4 className="">
+            <span className="badge">Pending Requests</span>
+          </h4>
         </div>
-        <div>
-          {friendsArray}
-        </div>
+        <div>{friendsArray}</div>
+        <button
+          className="spon-button-alt fixed-bottom rounded w-100 mt-0 mx-auto"
+          onClick={() => this.props.history.goBack()}
+        >
+          Back
+        </button>
       </div>
     );
   }

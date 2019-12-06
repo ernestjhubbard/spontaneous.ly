@@ -34,9 +34,11 @@ class UpcomingOrPastActivities extends React.Component {
     const activities = this.state.activities;
     return (
       <div className="container my-5">
-        <h4 className="d-flex justify-content-center">{`${this.props.activityType}`} Adventures</h4>
+        <h4 className="d-flex justify-content-center">
+          {`${this.props.activityType}`} Adventures
+        </h4>
         <div>
-          {activities.map(activityInfo =>
+          {activities.map(activityInfo => (
             <Activity
               {...this.props}
               key={activityInfo.activityId}
@@ -44,8 +46,15 @@ class UpcomingOrPastActivities extends React.Component {
               activityData={activityInfo}
               fetchActivity={this.props.fetchActivity}
               activityType={this.props.activityType}
-            />)}
+            />
+          ))}
         </div>
+        <button
+          className="spon-button-alt fixed-bottom rounded w-100 mt-0 mx-auto"
+          onClick={() => this.props.history.goBack()}
+        >
+          Back
+        </button>
       </div>
     );
   }
