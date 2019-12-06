@@ -50,7 +50,7 @@ class UpcomingOrPastActivities extends React.Component {
           ))}
         </div>
         <button
-          className="spon-button-alt fixed-bottom rounded w-100 mt-0 mx-auto"
+          className="spon-button-alt fixed-bottom rounded w-100"
           onClick={() => this.props.history.goBack()}
         >
           Back
