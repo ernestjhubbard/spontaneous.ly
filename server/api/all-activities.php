@@ -15,33 +15,38 @@ if ($request['method'] === 'GET') {
     $sql_query = "SELECT *
                     FROM activities
                    WHERE points < 16
-                     AND cost < $max_cost";
+                     AND cost < $max_cost
+                     AND dateTime > NOW()";
   } else if ($max_points === 30) {
     $sql_query = "SELECT *
                     FROM activities
                    WHERE points
                  BETWEEN 16
                      AND 30
-                     AND cost < $max_cost";
+                     AND cost < $max_cost
+                     AND dateTime > NOW()";
   } else if ($max_points === 45) {
     $sql_query = "SELECT *
                     FROM activities
                    WHERE points
                  BETWEEN 31
                      AND 45
-                     AND cost < $max_cost";
-  } else if ($max_points < 60) {
+                     AND cost < $max_cost
+                     AND dateTime > NOW()";
+  } else if ($max_points === 60) {
     $sql_query = "SELECT *
                     FROM activities
                    WHERE points
                  BETWEEN 46
                      AND 60
-                     AND cost < $max_cost";
+                     AND cost < $max_cost
+                     AND dateTime > NOW()";
   } else if ($max_points === 75) {
     $sql_query = "SELECT *
                     FROM activities
                    WHERE points > 60
-                     AND cost < $max_cost";
+                     AND cost < $max_cost
+                     AND dateTime > NOW()";
   }
   $result = mysqli_query($link, $sql_query);
   $output = [];

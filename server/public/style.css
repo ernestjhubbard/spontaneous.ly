@@ -230,6 +230,7 @@ button:focus {
 .darkness {
   background-image: linear-gradient(#00000050, #00000050);
   height: 100%;
+  transition: .25s all;
 }
 
 .darkness-closed {

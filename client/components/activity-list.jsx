@@ -5,7 +5,7 @@ export default function ActivityList(props) {
   const rerollPoints = props.reroll;
   const transactionType = { transactionType: 'reroll' };
   return (
-    <div>
+    <div className="fade-content-in">
       <div className="activity-list-hero top-banner d-flex">
         <div className="m-auto p-3">
           <h2 className="text-center text-white">Adventures in Your Area</h2>
@@ -18,6 +18,7 @@ export default function ActivityList(props) {
         <p className="text-center"
           onClick={() => {
             rerollPoints(transactionType);
+            props.history.push('/activity-filter');
           }}>
           <a href="#" className="reroll">
             Re-roll for 25 points.

@@ -10,7 +10,6 @@ class Carousel extends React.Component {
       activities: []
     };
     this.startTimer = this.startTimer.bind(this);
-    this.stopTimer = this.stopTimer.bind(this);
     this.moveBackward = this.moveBackward.bind(this);
     this.moveForward = this.moveForward.bind(this);
     this.getPosition = this.getPosition.bind(this);
@@ -20,9 +19,6 @@ class Carousel extends React.Component {
 
   startTimer() {
     setInterval(this.moveForward, 5000);
-  }
-
-  stopTimer() {
   }
 
   moveBackward() {
@@ -111,8 +107,7 @@ class Carousel extends React.Component {
               className="spon-button text-white rounded m-auto"
               onClick={() => {
                 const activityId = activity.activityId;
-                this.props.fetch({ activityId });
-                this.props.history.push(`/activity-details/${activity.activityId}`);
+                this.props.history.push(`/activity-details/${activityId}`);
               }
               }>Learn More</button>
           </div>

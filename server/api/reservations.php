@@ -14,7 +14,7 @@ if ($request['method'] === 'GET') {
                               ON u.userID = r.userId
                            WHERE r.isCancelled = 0
                              AND r.activityId = $activity
-                             AND r.userId != $user_id";
+                             AND r.userId = $user_id";
   $activity_query = mysqli_query($link, $sql_activity);
   $attendees = [];
     while ($row = mysqli_fetch_assoc($activity_query)) {
