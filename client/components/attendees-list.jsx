@@ -14,8 +14,8 @@ class AttendeesList extends React.Component {
       <Attendee key={attendee.userId} firstName={attendee.firstName} lastName={attendee.lastName} image={attendee.image} />
     );
     return (
-      <div className="container">
-        <h4 className="bold-text d-flex justify-content-center m-3 overflow-auto">Attendees</h4>
+      <div className="container my-5">
+        <h4 className="d-flex justify-content-center">Attendees</h4>
         <div>
           {attendees}
         </div>

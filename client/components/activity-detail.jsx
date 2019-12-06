@@ -72,7 +72,7 @@ class ActivityDetail extends React.Component {
     const showModal = this.state.showModal;
 
     return (
-      <>
+      <div>
         <div className="top-banner d-flex" style={background}>
           <div className="m-auto p-3">
             <h2 className="text-center text-white">{activity.activity}</h2>
@@ -106,15 +106,17 @@ class ActivityDetail extends React.Component {
             </p>
           </div>
         </div>
-        {isUpcoming ? <DynamicReserveOrCancel {...this.props}
-          isConfirmed={this.state.isConfirmed}
-          changeModal={this.changeModal}
-          activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton {...this.props} />}
-        {showModal ? <CancelModal {...this.props}
-          activityId={this.props.match.params.id}
-          changeModal={this.changeModal}
-          cancel={this.props.reserve}/> : null}
-      </>
+        <div className="fade-in">
+          {isUpcoming ? <DynamicReserveOrCancel {...this.props}
+            isConfirmed={this.state.isConfirmed}
+            changeModal={this.changeModal}
+            activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton {...this.props} />}
+          {showModal ? <CancelModal {...this.props}
+            activityId={this.props.match.params.id}
+            changeModal={this.changeModal}
+            cancel={this.props.reserve}/> : null}
+        </div>
+      </div>
     );
   }
 }

@@ -28,7 +28,7 @@ class MessageFriend extends React.Component {
         recipientId={m.recipientId} />
     );
     return (
-      <div className="container position-relative">
+      <div className="container position-relative fade-in">
         <div className="text-center mt-5 mb-3">
           <h4>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>

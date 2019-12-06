@@ -12,6 +12,10 @@ body {
   font-family: 'Roboto Mono';
 }
 
+* {
+  animation: fadein .75s;
+}
+
 .spon-button {
   background-color: #F07070;
   border: none;
@@ -525,4 +529,15 @@ input::placeholder {
 
 .friend-name {
   width: calc(100% - 114px);
+}
+
+.fade-in {
+  animation: fadein 1.5s;
+}
+
+
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
