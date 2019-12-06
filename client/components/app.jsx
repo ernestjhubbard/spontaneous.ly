@@ -201,18 +201,6 @@ class App extends React.Component {
     fetch('/api/points', config).then(response => response.json());
   }
 
-  getAttendees(activityId) {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/ api / reservations ? activity = ${activityId}`, config)
-      .then(response => response.json())
-      .then(usersAttending => this.setState({ usersAttending }));
-  }
-        
   render() {
     if (this.state.fetchingUser === true) {
       return null;
@@ -259,7 +247,7 @@ class App extends React.Component {
               activity={this.state.activityData}
               fetchDetail={this.fetchDetail}
               transaction={this.pointsTransaction}
-              activity={this.state.activityClicked} />} />
+              reserve={this.reserveConfirmAndCancel} />} />
             <Route exact path="/activity-details/attendees/:activity" render={props => <AttendeesList {...props}
               attendees={this.state.usersAttending} />} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
