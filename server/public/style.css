@@ -513,3 +513,9 @@ input::placeholder {
 .confirmed-badge {
   background: #f07070;
 }
+
+.message-container {
+  left: 0;
+  height: 69vh;
+  overflow: scroll;
+}

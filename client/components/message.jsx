@@ -9,14 +9,14 @@ export default function Message(props) {
   };
   const currentUser = props.userId;
   const friend =
-    <div className="row my-3 w-100 mx-auto">
-      <button className="col-9 friend-button border rounded my-0 mx-1">{props.message}</button>
-      <div className="col-2 friend-image rounded-circle p-0 float-right" style={userImage}></div>
+    <div className="row my-3 w-100 mx-auto justify-content-end">
+      <div className="d-flex p-2 border rounded"><p className="m-auto">{props.message}</p></div>
+      <div className="friend-image rounded-circle p-0 float-right ml-3" style={userImage}></div>
     </div>;
   const user =
     <div className="row my-3 w-100 mx-auto">
-      <div className="col-2 friend-image rounded-circle p-0" style={friendImage}></div>
-      <button className="col-9 friend-button border rounded my-0 mx-1">{props.message}</button>
+      <div className="friend-image rounded-circle p-0 mr-3" style={friendImage}></div>
+      <div className="d-flex p-2 border rounded"><p className="m-auto">{props.message}</p></div>
     </div>;
   const messageView = props.recipientId === currentUser ? user : friend;
 

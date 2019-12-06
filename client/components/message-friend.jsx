@@ -28,26 +28,35 @@ class MessageFriend extends React.Component {
         recipientId={m.recipientId} />
     );
     return (
-      <div className="container fixed-bottom">
-        {messages}
-        <form onSubmit={() => {
-          this.sendMessage({ recipientId, message });
-          this.setState({ message: '' });
-        }}>
-          <div className="input-group mb-3">
-            <input className="form-control text-center"
-              name="message"
-              onChange={this.handleChange}
-              value={this.state.message}
-              type="text"
-            ></input>
-            <button
-              type="submit"
-              className="input-group-append send-button rounded text-white"
-              value="Submit">
+      <div className="container position-relative">
+        <div className="friend-name text-center my-5">
+          <h3>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h3>
+        </div>
+        <div className="message-container position-absolute col-12">
+          {messages}
+        </div>
+        <div className="fixed-bottom p-3 bg-white">
+          <form onSubmit={() => {
+            this.sendMessage({ recipientId, message });
+            this.setState({ message: '' });
+          }}>
+            <div className="input-group">
+              <input className="form-control form-control-lg"
+                name="message"
+                onChange={this.handleChange}
+                value={this.state.message}
+                type="text"
+              ></input>
+              <div className="input-group-append">
+                <button
+                  type="submit"
+                  className="input-group-append send-button spon-button rounded text-white mt-0"
+                  value="Submit">
               Send</button>
-          </div>
-        </form>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
