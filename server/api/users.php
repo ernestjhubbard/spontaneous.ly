@@ -13,30 +13,34 @@ if ($request['method'] === 'GET') {
 }
 
 if ($request['method'] === 'POST') {
-  $email = $request['body']['email'];
-  $password = $request['body']['password'];
-  $sql_login = "SELECT *
+  if (isset($_SESSION['user_id'])) {
+    unset($_SESSION['user_id']);
+  } else {
+    $email = $request['body']['email'];
+    $password = $request['body']['password'];
+    $sql_login = "SELECT *
                   FROM users
                  WHERE email = ?";
-  $login_prepare = mysqli_prepare($link, $sql_login);
-  mysqli_stmt_bind_param($login_prepare, 's', $email);
-  mysqli_stmt_execute($login_prepare);
-  $result = mysqli_stmt_get_result($login_prepare);
-  $login = mysqli_fetch_assoc($result);
-  $fetch_password = $login['password'];
-  if (password_verify($password, $fetch_password)) {
-    $user_id = $login['userId'];
-    $_SESSION['user_id'] = $user_id;
-    $response['body'] = [
-      'userId' => $login['userId'],
-      'email' => $login['email'],
-      'firstName' =>$login['firstName'],
-      'lastName' => $login['lastName'],
-      'image' => $login['image']
-    ];
-    send($response);
-  } else {
-    terminal_log('invalid');
-    throw new ApiError('Invalid login', 401);
+    $login_prepare = mysqli_prepare($link, $sql_login);
+    mysqli_stmt_bind_param($login_prepare, 's', $email);
+    mysqli_stmt_execute($login_prepare);
+    $result = mysqli_stmt_get_result($login_prepare);
+    $login = mysqli_fetch_assoc($result);
+    $fetch_password = $login['password'];
+    if (password_verify($password, $fetch_password)) {
+      $user_id = $login['userId'];
+      $_SESSION['user_id'] = $user_id;
+      $response['body'] = [
+        'userId' => $login['userId'],
+        'email' => $login['email'],
+        'firstName' => $login['firstName'],
+        'lastName' => $login['lastName'],
+        'image' => $login['image']
+      ];
+      send($response);
+    } else {
+      terminal_log('invalid');
+      throw new ApiError('Invalid login', 401);
+    }
   }
 }
