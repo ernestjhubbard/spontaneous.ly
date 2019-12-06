@@ -65,7 +65,7 @@ CREATE TABLE `friendRequests` (
 
 LOCK TABLES `friendRequests` WRITE;
 /*!40000 ALTER TABLE `friendRequests` DISABLE KEYS */;
-INSERT INTO `friendRequests` VALUES (2,4,1),(2,3,1),(1,3,1),(3,1,1);
+INSERT INTO `friendRequests` VALUES (4,1,1),(1,4,1),(4,2,1),(2,4,1),(4,3,1),(3,4,1);
 /*!40000 ALTER TABLE `friendRequests` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +164,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (1,88,0),(1,45,0),(1,47,1),(1,84,0),(1,56,1),(1,65,0),(1,21,0),(1,42,0),(1,33,1),(1,77,0),(1,58,0),(2,25,0);
+INSERT INTO `reservations` VALUES (4,89,0),(4,53,0),(4,39,0),(4,43,0),(4,11,0),(4,88,0),(4,87,0),(4,45,0),(4,47,0);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 15:13:56
+-- Dump completed on 2019-12-06 20:51:41
