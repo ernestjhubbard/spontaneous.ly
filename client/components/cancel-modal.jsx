@@ -1,7 +1,6 @@
 import React from 'react';
 
 class CancelModal extends React.Component {
-
   render() {
     return (
       <div className="confirm-cancel-modal container">
@@ -12,12 +11,12 @@ class CancelModal extends React.Component {
             <button
               className="spon-button-cancel rounded"
               onClick={() => {
-                const activityId = this.props.activityId;
-                this.props.cancel({ activityId });
-                this.props.closeModal();
+                this.props.cancel({ activityId: this.props.activityId });
                 this.props.history.push('/');
               }}>Confirm</button>
-            <button className="spon-button text-white rounded" onClick={this.props.closeModal}>Back</button>
+            <button className="spon-button text-white rounded" onClick={() => {
+              this.props.changeModal();
+            }}>Back</button>
           </div>
         </div>
       </div>

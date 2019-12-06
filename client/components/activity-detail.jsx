@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import CancelModal from './cancel-modal';
+import CancelModal from './cancel-modal';
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class ActivityDetail extends React.Component {
       usersAttending: '',
       isConfirmed: false
     };
-    this.openModal = this.openModal.bind(this);
+    this.changeModal = this.changeModal.bind(this);
     this.checkUTC = this.checkUTC.bind(this);
     this.checkIfConfirmed = this.checkIfConfirmed.bind(this);
   }
@@ -34,7 +34,7 @@ class ActivityDetail extends React.Component {
       .catch(error => console.error('Error', error.message));
   }
 
-  openModal() {
+  changeModal() {
     this.setState({
       showModal: !this.state.showModal
     });
@@ -64,7 +64,7 @@ class ActivityDetail extends React.Component {
       backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(/assets/images/activity/${activity.image})`
     };
     const isUpcoming = this.checkUTC(this.state.activityData.dateTime);
-
+    const showModal = this.state.showModal;
     return (
       <>
         <div className="top-banner d-flex" style={background}>
@@ -100,7 +100,14 @@ class ActivityDetail extends React.Component {
             </p>
           </div>
         </div>
-        {isUpcoming ? <DynamicReserveOrCancel {...this.props} isConfirmed={this.state.isConfirmed} openModal={this.openModal} activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton />}
+        {isUpcoming ? <DynamicReserveOrCancel {...this.props}
+          isConfirmed={this.state.isConfirmed}
+          changeModal={this.changeModal}
+          activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton />}
+        {showModal ? <CancelModal {...this.props}
+          activityId={this.props.match.params.id}
+          changeModal={this.changeModal}
+          cancel={this.props.reserve}/> : null}
       </>
     );
   }
@@ -115,7 +122,7 @@ function DynamicReserveOrCancel(props) {
       <button
         className="spon-button-alt rounded mt-0"
         onClick={() => {
-          props.history.push('/activity-list');
+          props.history.goBack();
         }}>
             Back
       </button>
@@ -129,8 +136,7 @@ function ConfirmOrCancelButton(props) {
       <button
         className="spon-link-cancel rounded mt-0"
         onClick={() => {
-          props.reserve({ });
-          props.history.push('/activity-details/confirmed');
+          props.changeModal();
         }}>
         Cancel
       </button>
@@ -153,9 +159,8 @@ function BackToPastActivitiesButton() {
     <div className="container button-container p-3 fixed-bottom">
       <Link to="/profile/past-activities">
         <button
-          className="spon-button-alt rounded w-100 mt-0 mx-auto"
-        >
-    Back
+          className="spon-button-alt rounded w-100 mt-0 mx-auto">
+        Back
         </button>
       </Link>
     </div>
