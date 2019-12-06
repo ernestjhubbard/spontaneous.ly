@@ -234,6 +234,8 @@ class App extends React.Component {
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
               user={this.state.user}
+              activity={this.state.activityData}
+              fetchDetail={this.fetchDetail}
               transaction={this.pointsTransaction}
               reserve={this.reserveConfirmAndCancel}/>} />
             <Route exact path="/activity-details/attendees" render={props => <AttendeesList {...props}
