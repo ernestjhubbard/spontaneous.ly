@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import CancelModal from './cancel-modal';
 
 class ActivityDetail extends React.Component {
@@ -42,12 +41,17 @@ class ActivityDetail extends React.Component {
 
   checkUTC(datetimeString) {
     let dateArray = [];
+    let eventUtc = 0;
+    const date = new Date();
+    const currentDate = [date.getFullYear(), (date.getMonth() + 1), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()];
+    let currentUtc = 0;
     if (datetimeString !== undefined) {
       const splitDate = datetimeString.split(' ').join(':').split(':').join('-').split('-');
       dateArray = splitDate.map(dateItem => parseInt(dateItem));
+      eventUtc = Date.UTC(dateArray[0], dateArray[1], dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
+      currentUtc = Date.UTC(currentDate[0], currentDate[1], currentDate[2], currentDate[3], currentDate[4], currentDate[5]);
     }
-    const utcTime = Date.UTC(dateArray[0], dateArray[1], dateArray[2], dateArray[3], dateArray[4], dateArray[5]);
-    return (Date.now() <= utcTime);
+    return (currentUtc <= eventUtc);
   }
 
   checkIfConfirmed(loggedInUserId) {
@@ -105,7 +109,7 @@ class ActivityDetail extends React.Component {
         {isUpcoming ? <DynamicReserveOrCancel {...this.props}
           isConfirmed={this.state.isConfirmed}
           changeModal={this.changeModal}
-          activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton />}
+          activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton {...this.props} />}
         {showModal ? <CancelModal {...this.props}
           activityId={this.props.match.params.id}
           changeModal={this.changeModal}
@@ -156,15 +160,14 @@ function ConfirmOrCancelButton(props) {
   );
 }
 
-function BackToPastActivitiesButton() {
+function BackToPastActivitiesButton(props) {
   return (
     <div className="container button-container p-3 fixed-bottom">
-      <Link to="/profile/past-activities">
-        <button
-          className="spon-button-alt rounded w-100 mt-0 mx-auto">
+      <button
+        className="spon-button-alt rounded w-100 mt-0 mx-auto"
+        onClick={() => props.history.goBack()}>
         Back
-        </button>
-      </Link>
+      </button>
     </div>
   );
 }
