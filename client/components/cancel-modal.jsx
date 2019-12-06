@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class CancelModal extends React.Component {
-
   render() {
     return (
       <div className="confirm-cancel-modal container">
@@ -15,23 +14,15 @@ class CancelModal extends React.Component {
             Spontaneity Points
           </h5>
           <div className="calc-button-50">
-            <Link to="/">
-              <button
-                className="spon-button-cancel rounded"
-                onClick={() => {
-                  const activityId = this.props.activityId;
-                  this.props.cancel({ activityId });
-                }}
-              >
-                Confirm
-              </button>
-            </Link>
-            <Link to="/">
-              <button
-                className="spon-button text-white rounded">
-                Back
-              </button>
-            </Link>
+            <button
+              className="spon-button-cancel rounded"
+              onClick={() => {
+                this.props.cancel({ activityId: this.props.activityId });
+                this.props.history.push('/');
+              }}>Confirm</button>
+            <button className="spon-button text-white rounded" onClick={() => {
+              this.props.changeModal();
+            }}>Back</button>
           </div>
         </div>
       </div>
