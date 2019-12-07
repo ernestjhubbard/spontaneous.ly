@@ -17,15 +17,13 @@ class ActivityDetail extends React.Component {
   }
 
   componentDidMount() {
-    const config = {
-      method: 'GET'
-    };
-    fetch(`/api/activity-details?activityId=${this.props.match.params.id}`, config)
+    const activityParams = new URLSearchParams(window.location.search);
+    fetch(`/api/activity-details?${activityParams.toString()}`)
       .then(response => response.json())
       .then(activityDetails => this.setState({ activityData: activityDetails }))
       .catch(error => console.error('Fetch error: ', error));
 
-    fetch(`/api/reservations?activity=${this.props.match.params.id}`, config)
+    fetch(`/api/reservations?${activityParams.toString()}`)
       .then(response => response.json())
       .then(attendees => {
         this.setState({ usersAttending: attendees });
@@ -72,9 +70,8 @@ class ActivityDetail extends React.Component {
     };
     const isUpcoming = this.checkUTC(this.state.activityData.dateTime);
     const showModal = this.state.showModal;
-
     if (isConfirmed) {
-      routePath = `/activity-details/${activity.activityId}/attendees/`;
+      routePath = `/attendees?activityId=${activity.activityId}`;
     }
 
     return (
@@ -118,9 +115,9 @@ class ActivityDetail extends React.Component {
           {isUpcoming ? <DynamicReserveOrCancel {...this.props}
             isConfirmed={this.state.isConfirmed}
             changeModal={this.changeModal}
-            activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton {...this.props} />}
+            activityId={this.state.activityData.activityId} /> : <BackToPastActivitiesButton {...this.props} />}
           {showModal ? <CancelModal {...this.props}
-            activityId={this.props.match.params.id}
+            activityId={this.state.activityData.activityId}
             changeModal={this.changeModal}
             cancel={this.props.reserve}/> : null}
         </div>
@@ -163,7 +160,7 @@ function ConfirmOrCancelButton(props) {
       className="spon-button rounded text-white mt-0"
       onClick={() => {
         props.reserve({ activityId: props.activityId });
-        props.history.push(`/activity-details/${props.activityId}/confirmed`);
+        props.history.push(`/confirmed?activityId=${props.activityId}`);
       }}>
       Confirm
     </button>

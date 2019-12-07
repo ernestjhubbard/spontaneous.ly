@@ -35,12 +35,14 @@ class FriendList extends React.Component {
           </h4>
         </div>
         <div>{friendsArray}</div>
-        <button
-          className="spon-button-alt fixed-bottom rounded w-100 mt-0 mx-auto"
-          onClick={() => this.props.history.goBack()}
-        >
-          Back
-        </button>
+        <div className="button-container fixed-bottom p-3">
+          <button
+            className="spon-button-alt rounded mt-0 w-100"
+            onClick={() => this.props.history.goBack()}
+          >
+            Back
+          </button>
+        </div>
       </div>
     );
   }

@@ -13,7 +13,6 @@ class Carousel extends React.Component {
     this.moveBackward = this.moveBackward.bind(this);
     this.moveForward = this.moveForward.bind(this);
     this.getPosition = this.getPosition.bind(this);
-    this.getAllActivities = this.getAllActivities.bind(this);
     this.startTimer();
   }
 
@@ -26,8 +25,8 @@ class Carousel extends React.Component {
     newState.currentCard--;
     newState.position = newState.position + 100;
     if (newState.currentCard === 0) {
-      newState.currentCard = this.state.activities.length;
-      newState.position = -((this.state.activities.length - 1) * 100);
+      newState.currentCard = this.props.activities.length;
+      newState.position = -((this.props.activities.length - 1) * 100);
     }
     this.setState(newState);
   }
@@ -36,7 +35,7 @@ class Carousel extends React.Component {
     const newState = this.state;
     newState.currentCard++;
     newState.position = newState.position - 100;
-    if (newState.currentCard === this.state.activities.length + 1) {
+    if (newState.currentCard === this.props.activities.length + 1) {
       newState.currentCard = 1;
       newState.position = 0;
     }
@@ -57,7 +56,7 @@ class Carousel extends React.Component {
       position: this.state.position,
       currentImageArray: []
     };
-    for (let index = 0; index < this.state.activities.length; index++) {
+    for (let index = 0; index < this.props.activities.length; index++) {
       const id = index + 1;
       if (index + 1 === position.currentCard) {
         position.currentImageArray.push(<div className="current-image activeSlide" id={this.props.id} key={id} onClick={() => {
@@ -72,29 +71,9 @@ class Carousel extends React.Component {
     return position;
   }
 
-  componentDidMount() {
-    this.getAllActivities();
-  }
-
-  getAllActivities() {
-    const cost = this.props.filterCriteria.cost;
-    const distance = this.props.filterCriteria.distance;
-    const points = this.props.filterCriteria.points;
-    const config = {
-      method: 'GET'
-    };
-    fetch(`api/all-activities?cost=${cost}&distance=${distance}&points=${points}`, config)
-      .then(response => response.json())
-      .then(activityList => {
-        const listedActivities = this.state.activities.concat(activityList);
-        this.setState({ activities: listedActivities });
-      })
-      .catch(error => console.error('Fetch error: ', error));
-  }
-
   render() {
     const currentPosition = this.getPosition();
-    const activityCard = this.state.activities.map(activity => {
+    const activityCard = this.props.activities.map(activity => {
       return (
         <div
           className="carousel-container w-100 col-12"
@@ -107,7 +86,7 @@ class Carousel extends React.Component {
               className="spon-button text-white rounded m-auto"
               onClick={() => {
                 const activityId = activity.activityId;
-                this.props.history.push(`/activity-details/${activityId}`);
+                this.props.history.push(`/activity-details?activityId=${activityId}`);
               }
               }>Learn More</button>
           </div>

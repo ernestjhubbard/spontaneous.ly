@@ -58,10 +58,7 @@ class App extends React.Component {
   }
 
   fetchDetail(activityId) {
-    const config = {
-      method: 'GET'
-    };
-    fetch(`/api/activity-details?activityId=${activityId}`, config)
+    fetch(`/api/activity-details?${activityId}`)
       .then(response => response.json())
       .then(activityDetails => this.setState({ activityData: activityDetails }))
       .catch(error => console.error('Fetch error: ', error));
@@ -82,13 +79,7 @@ class App extends React.Component {
   }
 
   getAttendees(activityId) {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/reservations?activity=${activityId}`, config)
+    fetch(`/api/reservations?${activityId}`)
       .then(response => response.json())
       .then(usersAttending => this.setState({ usersAttending }))
       .catch(error => console.error('Error:', error));
@@ -238,19 +229,19 @@ class App extends React.Component {
               fetchActivity={this.fetchDetail}
               activityType={'Past'}
               getAttendees={this.getAttendees}/>} />
-            <Route exact path="/activity-details/:id/confirmed" render={props => <ConfirmActivity {...props}
+            <Route exact path="/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
               activity={this.state.activityData}
               getAttendees={this.getAttendees}
               fetchDetail={this.fetchDetail}
               reserve={this.reserveConfirmAndCancel}/>} />
-            <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
+            <Route exact path="/activity-details" render={props => <ActivityDetail {...props}
               user={this.state.user}
               activity={this.state.activityData}
               fetchDetail={this.fetchDetail}
               transaction={this.pointsTransaction}
               reserve={this.reserveConfirmAndCancel} />} />
-            <Route exact path="/activity-details/:activity/attendees/" render={props => <AttendeesList {...props}
+            <Route exact path="/attendees" render={props => <AttendeesList {...props}
               getAttendees={this.getAttendees}
               attendees={this.state.usersAttending} />} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />

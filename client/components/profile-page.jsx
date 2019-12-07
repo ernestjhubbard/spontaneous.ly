@@ -12,7 +12,7 @@ class ProfilePage extends React.Component {
     return (
       <div className="container align-center d-flex">
         <div className="profile-center m-auto">
-          <div className="profile-user-info my-5">
+          <div className="profile-user-info mt-5">
             <div
               className="profile-user-image rounded-circle m-auto"
               style={profileImage}
@@ -62,13 +62,13 @@ class ProfilePage extends React.Component {
                 Messages
               </button>
             </div>
+            <button
+              className="spon-button-alt rounded w-100 mx-auto"
+              onClick={() => this.props.history.goBack()}
+            >
+              Back
+            </button>
           </div>
-          <button
-            className="spon-button-alt rounded w-100 mt-1 mx-auto"
-            onClick={() => this.props.history.goBack()}
-          >
-            Back
-          </button>
         </div>
       </div>
     );
