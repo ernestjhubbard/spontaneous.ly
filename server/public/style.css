@@ -570,3 +570,7 @@ a:hover {
 .edit-button{
   width: 10%;
 }
+
+.account-setting-input {
+  border-radius: 5px;
+}
