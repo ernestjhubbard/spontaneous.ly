@@ -6,7 +6,7 @@ if ($request['method'] === 'GET') {
   if (isset($request['query']['userId'])) {
     $user_id = $request['query']['userId'];
   }
-    $sql_get_friends = "SELECT *
+    $sql_get_friends = "SELECT firstName, lastName, image, userId
                           FROM users
                             AS u
                           JOIN friendRequests

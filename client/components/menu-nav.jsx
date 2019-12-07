@@ -42,7 +42,7 @@ class MenuNav extends React.Component {
             </div>
             {isSignedIn
               ? <SignedInLinkList user={this.props.user} changeDrawer={this.changeDrawer} />
-              : <SignedOutButtons changeDrawer={this.changeDrawer}/>}
+              : <SignedOutButtons changeDrawer={this.changeDrawer} />}
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default MenuNav;
 
 function SignedInLinkList(props) {
   const profileImage = {
-    backgroundImage: `url("assets/images/users/${props.user.image}")`
+    backgroundImage: `url("/assets/images/users/${props.user.image}")`
   };
   function signOut() {
     const config = {
@@ -71,9 +71,9 @@ function SignedInLinkList(props) {
         <div className="profile-user-image rounded-circle mx-auto my-3" style={profileImage} />
         <h6 className="text-center">Welcome Back, {`${props.user.firstName}`}</h6>
       </div>
-      <ul onClick = { props.changeDrawer } >
+      <ul onClick={props.changeDrawer} >
         <li>
-          <NavLink to="/profile">View Profile</NavLink>
+          <NavLink to={`/profile/${props.user.userId}`}>View Profile</NavLink>
         </li>
         <li>
           <NavLink to="/profile">Account Settings</NavLink>
@@ -93,7 +93,7 @@ function SignedInLinkList(props) {
         <li>
           <NavLink onClick={signOut} to="/sign-in">Sign Out</NavLink>
         </li>
-      </ul >
+      </ul>
     </>
   );
 }
@@ -107,7 +107,7 @@ function SignedOutButtons(props) {
             <button
               onClick={props.changeDrawer}
               className="spon-button rounded text-white w-100 mt-0">
-                Sign In
+              Sign In
             </button>
           </Link>
         </li>
@@ -116,7 +116,7 @@ function SignedOutButtons(props) {
             <button
               onClick={props.changeDrawer}
               className="spon-button rounded text-white w-100 mt-0">
-                Create Account
+              Create Account
             </button>
           </Link>
         </li>

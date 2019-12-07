@@ -12,10 +12,10 @@ if ($request['method'] === 'GET') {
                          JOIN users
                            AS u
                            ON $user_id = u.userId
-                        WHERE $user_id = m.senderId
-                           OR $user_id = m.recipientId
-                          AND $recipient_id = m.senderId
-                           OR $recipient_id = m.recipientId";
+                        WHERE ($user_id = m.senderId
+                           OR $user_id = m.recipientId)
+                          AND ($recipient_id = m.senderId
+                           OR $recipient_id = m.recipientId)";
       $messages_query = mysqli_query($link, $sql_messages);
       $messages = [];
       while($row = mysqli_fetch_assoc($messages_query)){
@@ -26,7 +26,7 @@ if ($request['method'] === 'GET') {
     }
     else if (isset($request['query']['userId'])){
       $friend_id = $request['query']['userId'];
-      $sql_friend = "SELECT *
+      $sql_friend = "SELECT firstName, lastName, image, userId
                        FROM users
                       WHERE $friend_id = userId";
       $friend_query = mysqli_query($link, $sql_friend);

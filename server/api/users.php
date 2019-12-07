@@ -3,7 +3,7 @@
 $link = get_db_link();
 if ($request['method'] === 'GET') {
   $user_id = $_SESSION['user_id'];
-  $sql_login = "SELECT * 
+  $sql_login = "SELECT userId, firstName, lastName, image
                   FROM users
                  WHERE userId = '$user_id'";
   $login_query = mysqli_query($link, $sql_login);

@@ -223,7 +223,7 @@ class App extends React.Component {
               filterCriteria={this.state.filter}
               reroll={this.pointsTransaction}
               fetch={this.fetchDetail} />} />
-            <Route exact path="/profile" render={props => <ProfilePage {...props}
+            <Route exact path="/profile/:userId" render={props => <ProfilePage {...props}
               user={this.state.user}
               points={this.state.points}
               getPoints={this.getPoints} />} />
