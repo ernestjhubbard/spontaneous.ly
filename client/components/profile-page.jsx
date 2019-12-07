@@ -1,13 +1,27 @@
 import React from 'react';
 
 class ProfilePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null,
+      fetchingUser: true,
+      points: 0
+    };
+  }
+
   componentDidMount() {
-    this.props.getPoints();
+    const userId = this.props.match.params.userId;
+    this.userInfo(userId);
+    this.getPoints(userId);
   }
 
   render() {
+    if (this.state.fetchingUser === true) {
+      return null;
+    }
     const profileImage = {
-      backgroundImage: `url("assets/images/users/${this.props.user.image}")`
+      backgroundImage: `url("/assets/images/users/${this.state.user.image}")`
     };
     return (
       <div className="container align-center d-flex">
@@ -18,13 +32,13 @@ class ProfilePage extends React.Component {
               style={profileImage}
             ></div>
             <h4 className="font-weight-bold text-center my-3">
-              {this.props.user.firstName} {this.props.user.lastName}
+              {this.state.user.firstName} {this.state.user.lastName}
             </h4>
           </div>
           <div className="border rounded p-3">
             <h4 className="align-center text-center">Spontaneity Points</h4>
             <h1 className="profile-point-value text-center m-auto">
-              {this.props.points}
+              {this.state.points}
             </h1>
           </div>
           <div className="profile-footer">
@@ -73,6 +87,37 @@ class ProfilePage extends React.Component {
       </div>
     );
   }
+
+  userInfo(userId) {
+    const userConfig = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/users?userId=${userId}`, userConfig)
+      .then(results => results.json())
+      .then(user => {
+        this.setState({ user, fetchingUser: false });
+      })
+      .catch(error => console.error('There was an error:', error.message));
+  }
+
+  getPoints(userId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/points?userId=${userId}`, config)
+      .then(response => response.json())
+      .then(data => {
+        const points = data.reduce((total, value) => total + value.value, 0);
+        this.setState({ points });
+      });
+  }
+
 }
 
 export default ProfilePage;

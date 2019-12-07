@@ -10,12 +10,18 @@ class AttendeesList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAttendees(this.props.match.params.activity);
+    this.getAttendees(this.props.match.params.activity);
   }
 
   render() {
-    const attendees = this.props.attendees.map(attendee =>
-      <Attendee key={attendee.userId} firstName={attendee.firstName} lastName={attendee.lastName} image={attendee.image} />
+    const attendees = this.state.attendees.map(attendee =>
+      <Attendee
+        viewProfile={this.props.history.push}
+        key={attendee.userId}
+        userId={attendee.userId}
+        firstName={attendee.firstName}
+        lastName={attendee.lastName}
+        image={attendee.image} />
     );
     return (
       <div className="container my-5">
@@ -29,6 +35,19 @@ class AttendeesList extends React.Component {
         </button>
       </div>
     );
+  }
+
+  getAttendees(activityId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/reservations?activity=${activityId}`, config)
+      .then(response => response.json())
+      .then(attendees => this.setState({ attendees }))
+      .catch(error => console.error('Error:', error));
   }
 }
 
