@@ -198,17 +198,18 @@ class App extends React.Component {
               filterCriteria={this.state.filter}
               reroll={this.pointsTransaction}
               fetch={this.fetchDetail} />} />
-            <Route exact path="/profile/userId/:userId" render={props => <ProfilePage {...props}
+            <Route exact path="/profile" render={props => <ProfilePage {...props}
               points={this.state.points}
-              getPoints={this.getPoints} />} />
+              getPoints={this.getPoints}
+              loggedInUser={this.state.user} />} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}
               signIn={this.signIn} />} />
             <Route exact path="/create-an-account" render={props => <CreateAccount {...props}
               createUser={this.createUser} />} />
-            <Route exact path="/profile/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
+            <Route exact path="/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
               activityType={'Upcoming'} />} />
-            <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
+            <Route exact path="/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
               activityType={'Past'}
               getAttendees={this.getAttendees}/>} />
@@ -228,7 +229,7 @@ class App extends React.Component {
               getAttendees={this.getAttendees}
               attendees={this.state.usersAttending} />} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
-            <Route exact path="/profile/friends" render={props => <FriendList {...props} />} />
+            <Route exact path="/friends" render={props => <FriendList {...props} />} />
             <Route exact path="/profile/friends/:friendId" render={props => <MessageFriend {...props}
               user={this.state.user} />} />
           </Switch>

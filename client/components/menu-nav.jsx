@@ -73,22 +73,22 @@ function SignedInLinkList(props) {
       </div>
       <ul onClick={props.changeDrawer} >
         <li>
-          <NavLink to={`/profile/userId/${props.user.userId}`}>View Profile</NavLink>
+          <NavLink to={`/profile?userId=${props.user.userId}`}>View Profile</NavLink>
         </li>
         <li>
-          <NavLink to="/profile">Account Settings</NavLink>
+          <NavLink to={`/profile?userId=${props.user.userId}`}>Account Settings</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/upcoming-activities">Upcoming Adventures</NavLink>
+          <NavLink to={`/upcoming-activities?userId=${props.user.userId}`}>Upcoming Adventures</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/past-activities">Past Adventures</NavLink>
+          <NavLink to={`/past-activities?userId=${props.user.userId}`}>Past Adventures</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/friends">View Friends</NavLink>
+          <NavLink to={`/friends?userId=${props.user.userId}`}>View Friends</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/messages">Read Messages</NavLink>
+          <NavLink to={`/friends?userId=${props.user.userId}`}>Read Messages</NavLink>
         </li>
         <li>
           <NavLink onClick={signOut} to="/sign-in">Sign Out</NavLink>
