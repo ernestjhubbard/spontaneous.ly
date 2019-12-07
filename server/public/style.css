@@ -583,3 +583,7 @@ a:hover {
 .account-setting-input {
   border-radius: 5px;
 }
+
+.account-setting-text {
+  font-size: .75rem;
+}
