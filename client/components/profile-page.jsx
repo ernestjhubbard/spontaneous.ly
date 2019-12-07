@@ -1,13 +1,27 @@
 import React from 'react';
 
 class ProfilePage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      user: null,
+      fetchingUser: true
+    };
+  }
+
   componentDidMount() {
+    const userId = this.props.match.params.userId;
+
+    this.userInfo(userId);
     this.props.getPoints();
   }
 
   render() {
+    if (this.state.fetchingUser === true) {
+      return null;
+    }
     const profileImage = {
-      backgroundImage: `url("assets/images/users/${this.props.user.image}")`
+      backgroundImage: `url("/assets/images/users/${this.state.user.image}")`
     };
     return (
       <div className="container align-center d-flex">
@@ -18,7 +32,7 @@ class ProfilePage extends React.Component {
               style={profileImage}
             ></div>
             <h4 className="font-weight-bold text-center my-3">
-              {this.props.user.firstName} {this.props.user.lastName}
+              {this.state.user.firstName} {this.state.user.lastName}
             </h4>
           </div>
           <div className="border rounded p-3">
@@ -72,6 +86,21 @@ class ProfilePage extends React.Component {
         </div>
       </div>
     );
+  }
+
+  userInfo(userId) {
+    const userConfig = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/users?userId=${userId}`, userConfig)
+      .then(results => results.json())
+      .then(user => {
+        this.setState({ user, fetchingUser: false });
+      })
+      .catch(error => console.error('There was an error:', error.message));
   }
 }
 

@@ -224,7 +224,6 @@ class App extends React.Component {
               reroll={this.pointsTransaction}
               fetch={this.fetchDetail} />} />
             <Route exact path="/profile/:userId" render={props => <ProfilePage {...props}
-              user={this.state.user}
               points={this.state.points}
               getPoints={this.getPoints} />} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}

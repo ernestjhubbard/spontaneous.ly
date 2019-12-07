@@ -2,14 +2,25 @@
 
 $link = get_db_link();
 if ($request['method'] === 'GET') {
-  $user_id = $_SESSION['user_id'];
-  $sql_login = "SELECT userId, firstName, lastName, image
-                  FROM users
-                 WHERE userId = '$user_id'";
-  $login_query = mysqli_query($link, $sql_login);
-  $login = mysqli_fetch_assoc($login_query);
-  $response['body'] = $login;
-  send($response);
+  if (isset($request['query']['userId'])) {
+    $user_id = $request['query']['userId'];
+    $sql_login = "SELECT userId, firstName, lastName, image
+                    FROM users
+                   WHERE userId = '$user_id'";
+    $login_query = mysqli_query($link, $sql_login);
+    $login = mysqli_fetch_assoc($login_query);
+    $response['body'] = $login;
+    send($response);
+  }else {
+    $user_id = $_SESSION['user_id'];
+    $sql_login = "SELECT userId, firstName, lastName, image
+                    FROM users
+                   WHERE userId = '$user_id'";
+    $login_query = mysqli_query($link, $sql_login);
+    $login = mysqli_fetch_assoc($login_query);
+    $response['body'] = $login;
+    send($response);
+  }
 }
 
 if ($request['method'] === 'POST') {
