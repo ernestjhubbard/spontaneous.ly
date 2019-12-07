@@ -10,21 +10,27 @@ class ProfilePage extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const userId = this.props.match.params.userId;
-    this.userInfo(userId);
-    this.getPoints(userId);
+  getSearchParams() {
+    const searchParams = new URLSearchParams(window.location.search);
+    return searchParams.toString();
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props.match.params.userId !== prevProps.match.params.userId) {
-      const userId = this.props.match.params.userId;
-      this.userInfo(userId);
-      this.getPoints(userId);
+  componentDidMount() {
+    const params = this.getSearchParams();
+    this.userInfo(params);
+    this.getPoints(params);
+  }
+
+  componentDidUpdate() {
+    const params = this.getSearchParams();
+    if (params === `userId=${this.props.loggedInUser.userId}`) {
+      this.userInfo(params);
+      this.getPoints(params);
     }
   }
 
   render() {
+    const userParams = this.getSearchParams();
     if (this.state.fetchingUser === true) {
       return null;
     }
@@ -34,7 +40,7 @@ class ProfilePage extends React.Component {
     return (
       <div className="container align-center d-flex">
         <div className="profile-center m-auto">
-          <div className="profile-user-info my-5">
+          <div className="profile-user-info mt-5">
             <div
               className="profile-user-image rounded-circle m-auto"
               style={profileImage}
@@ -49,11 +55,11 @@ class ProfilePage extends React.Component {
               {this.state.points}
             </h1>
           </div>
-          <div className="profile-footer">
+          <div className="profile-footer mb-3">
             <button
               className="spon-button rounded text-white col-12"
               onClick={() => {
-                this.props.history.push('/profile/upcoming-activities');
+                this.props.history.push(`/upcoming-activities?${userParams}`);
               }}
             >
               Upcoming Adventures
@@ -61,7 +67,7 @@ class ProfilePage extends React.Component {
             <button
               className="spon-button rounded text-white col-12"
               onClick={() => {
-                this.props.history.push('/profile/past-activities');
+                this.props.history.push(`/past-activities?${userParams}`);
               }}
             >
               Past Adventures
@@ -70,7 +76,7 @@ class ProfilePage extends React.Component {
               <button
                 className="spon-button rounded text-white"
                 onClick={() => {
-                  this.props.history.push('/profile/friends');
+                  this.props.history.push(`/friends?${userParams}`);
                 }}
               >
                 Friends
@@ -78,32 +84,26 @@ class ProfilePage extends React.Component {
               <button
                 className="spon-button rounded text-white"
                 onClick={() => {
-                  this.props.history.push('/profile/messages');
+                  this.props.history.push(`/messages?${userParams}`);
                 }}
               >
                 Messages
               </button>
             </div>
+            <button
+              className="spon-button-alt rounded w-100 mx-auto"
+              onClick={() => this.props.history.goBack()}
+            >
+              Back
+            </button>
           </div>
-          <button
-            className="spon-button-alt rounded w-100 mt-1 mx-auto"
-            onClick={() => this.props.history.goBack()}
-          >
-            Back
-          </button>
         </div>
       </div>
     );
   }
 
   userInfo(userId) {
-    const userConfig = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/users?userId=${userId}`, userConfig)
+    fetch(`/api/users?${userId}`)
       .then(results => results.json())
       .then(user => {
         this.setState({ user, fetchingUser: false });
@@ -112,13 +112,7 @@ class ProfilePage extends React.Component {
   }
 
   getPoints(userId) {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/points?userId=${userId}`, config)
+    fetch(`/api/points?${userId}`)
       .then(response => response.json())
       .then(data => {
         const points = data.reduce((total, value) => total + value.value, 0);

@@ -13,7 +13,7 @@ function Activity(props) {
 
   return (
     <div className="adventure d-flex border rounded my-3" onClick={() => {
-      props.history.push(`/activity-details/${activityId}`);
+      props.history.push(`/activity-details?activityId=${activityId}`);
     }}>
       <div className="activity-thumbnail border rounded m-1" style={{ backgroundImage: `url(/assets/images/activity/${activityInfo.image}` }}></div>
       <div className="m-3">

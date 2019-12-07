@@ -21,21 +21,17 @@ class ConfirmActivity extends React.Component {
   }
 
   componentDidMount() {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/reservations?activity=${this.props.match.params.id}`, config)
+    const searchParams = new URLSearchParams(window.location.search);
+    fetch(`/api/reservations?${searchParams.toString()}`)
       .then(response => response.json())
       .then(attendees => this.setState({ attendees }))
       .catch(error => console.error('Error:', error));
 
-    this.props.fetchDetail(this.props.match.params.id);
+    this.props.fetchDetail(searchParams.toString());
   }
 
   render() {
+    const searchParams = new URLSearchParams(window.location.search);
     return (
       <div className="container my-5">
         <div className="mb-3">
@@ -56,7 +52,7 @@ class ConfirmActivity extends React.Component {
           </p>
           <p>
             <span className="bold-text">Total Guests: </span>{' '}
-            <Link to={`/activity-details/${this.props.match.params.id}/attendees/`}>
+            <Link to={`/attendees?${searchParams.toString()}`}>
               <span className="badge confirmed-badge text-white">{this.state.attendees.length}</span>
             </Link>
           </p>

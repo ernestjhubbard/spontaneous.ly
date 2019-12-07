@@ -8,13 +8,7 @@ class UpcomingOrPastActivities extends React.Component {
   }
 
   fetchActivities() {
-    const conf = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/upcoming-past-activities?activityType=${this.props.activityType}`, conf)
+    fetch(`/api/upcoming-past-activities?activityType=${this.props.activityType}`)
       .then(results => results.json())
       .then(activities => this.setState({ activities }))
       .catch(error => console.error('There was an error:', error.message));
@@ -37,7 +31,7 @@ class UpcomingOrPastActivities extends React.Component {
         <h4 className="d-flex justify-content-center">
           {`${this.props.activityType}`} Adventures
         </h4>
-        <div>
+        <div className="message-container">
           {activities.map(activityInfo => (
             <Activity
               {...this.props}
@@ -49,12 +43,14 @@ class UpcomingOrPastActivities extends React.Component {
             />
           ))}
         </div>
-        <button
-          className="spon-button-alt fixed-bottom rounded w-100"
-          onClick={() => this.props.history.goBack()}
-        >
+        <div className="button-container fixed-bottom p-3">
+          <button
+            className="spon-button-alt rounded mt-0 w-100"
+            onClick={() => this.props.history.goBack()}
+          >
           Back
-        </button>
+          </button>
+        </div>
       </div>
     );
   }

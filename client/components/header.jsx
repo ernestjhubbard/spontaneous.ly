@@ -9,7 +9,7 @@ function Header(props) {
         <img className="logo-alone"
           src="assets/images/logo-alone.png" />
       </Link>
-      <MenuNav currentView={props.currentView} user={props.user} />
+      <MenuNav signOut={props.signOut} currentView={props.currentView} user={props.user} />
     </div>
   );
 }

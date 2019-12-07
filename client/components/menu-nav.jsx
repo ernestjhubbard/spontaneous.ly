@@ -41,7 +41,7 @@ class MenuNav extends React.Component {
               <i className="fas fa-times close-icon" onClick={this.changeDrawer} />
             </div>
             {isSignedIn
-              ? <SignedInLinkList user={this.props.user} changeDrawer={this.changeDrawer} />
+              ? <SignedInLinkList signOut={this.props.signOut} user={this.props.user} changeDrawer={this.changeDrawer} />
               : <SignedOutButtons changeDrawer={this.changeDrawer} />}
           </div>
         </div>
@@ -56,15 +56,6 @@ function SignedInLinkList(props) {
   const profileImage = {
     backgroundImage: `url("/assets/images/users/${props.user.image}")`
   };
-  function signOut() {
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/users', config);
-  }
   return (
     <>
       <div className="my-5">
@@ -73,25 +64,25 @@ function SignedInLinkList(props) {
       </div>
       <ul onClick={props.changeDrawer} >
         <li>
-          <NavLink to={`/profile/userId/${props.user.userId}`}>View Profile</NavLink>
+          <NavLink to={`/profile?userId=${props.user.userId}`}>View Profile</NavLink>
         </li>
         <li>
-          <NavLink to="/profile">Account Settings</NavLink>
+          <NavLink to={`/profile?userId=${props.user.userId}`}>Account Settings</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/upcoming-activities">Upcoming Adventures</NavLink>
+          <NavLink to={`/upcoming-activities?userId=${props.user.userId}`}>Upcoming Adventures</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/past-activities">Past Adventures</NavLink>
+          <NavLink to={`/past-activities?userId=${props.user.userId}`}>Past Adventures</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/friends">View Friends</NavLink>
+          <NavLink to={`/friends?userId=${props.user.userId}`}>View Friends</NavLink>
         </li>
         <li>
-          <NavLink to="/profile/messages">Read Messages</NavLink>
+          <NavLink to={`/friends?userId=${props.user.userId}`}>Read Messages</NavLink>
         </li>
         <li>
-          <NavLink onClick={signOut} to="/sign-in">Sign Out</NavLink>
+          <NavLink onClick={props.signOut} to="/sign-in">Sign Out</NavLink>
         </li>
       </ul>
     </>

@@ -29,12 +29,11 @@ class MessageFriend extends React.Component {
     );
     return (
       <div className="container position-relative fade-in">
-        <div className="text-center mt-5 mb-3">
-          <img
-            src="/assets/images/back-arrow.png"
-            className="back-arrow mr-5"
-            onClick={() => this.props.history.goBack()}
-          /><h4>{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
+        <div className="text-center d-flex mt-5 mb-3">
+          <div className="back-chevron rounded border d-flex" onClick={() => this.props.history.goBack()}>
+            <i className="fas fa-chevron-left m-auto"></i>
+          </div>
+          <h4 className="m-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
         <div className="message-container position-absolute col-12">
           {messages}

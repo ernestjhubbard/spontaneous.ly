@@ -3,14 +3,16 @@
 $link = get_db_link();
 
 if ($request['method'] === 'GET') {
+  if (!$request['query']['cost'] || !$request['query']['points']) {
+    $sql_query = "SELECT *
+                    FROM activities
+                   WHERE dateTime > NOW()";
+  }
+
   $max_cost = $request['query']['cost'] * 70;
   $distance = $request['query']['distance'];
   $max_points = $request['query']['points'] * 15;
 
-  if (!isset($request['query']['points'])) {
-    $sql_query = "SELECT *
-                    FROM activities";
-  }
   if ($max_points === 15) {
     $sql_query = "SELECT *
                     FROM activities
