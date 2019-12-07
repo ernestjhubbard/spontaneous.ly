@@ -10,11 +10,11 @@ class AttendeesList extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getAttendees(this.props.match.params.activity);
+    this.getAttendees(this.props.match.params.activity);
   }
 
   render() {
-    const attendees = this.props.attendees.map(attendee =>
+    const attendees = this.state.attendees.map(attendee =>
       <Attendee key={attendee.userId} firstName={attendee.firstName} lastName={attendee.lastName} image={attendee.image} />
     );
     return (
@@ -29,6 +29,19 @@ class AttendeesList extends React.Component {
         </button>
       </div>
     );
+  }
+
+  getAttendees(activityId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/reservations?activity=${activityId}`, config)
+      .then(response => response.json())
+      .then(attendees => this.setState({ attendees }))
+      .catch(error => console.error('Error:', error));
   }
 }
 

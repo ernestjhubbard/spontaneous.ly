@@ -5,7 +5,7 @@ $link = get_db_link();
 if ($request['method'] === 'GET') {
   $user_id = $_SESSION['user_id'];
   $activity = $request['query']['activity'];
-  $sql_activity = "SELECT * FROM users AS u JOIN reservations AS r
+  $sql_activity = "SELECT userId, firstName, lastName, image FROM users AS u JOIN reservations AS r
                               ON u.userID = r.userId
                            WHERE r.isCancelled = 0
                              AND r.activityId = $activity
