@@ -575,3 +575,8 @@ a:hover {
 .back-chevron:hover {
   color: #f07070;
 }
+
+.custom-range::-webkit-slider-thumb {
+  background: #fff;
+  border: 1px solid #f07070;
+}
