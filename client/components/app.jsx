@@ -42,6 +42,7 @@ class App extends React.Component {
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
+    this.signOut = this.signOut.bind(this);
   }
 
   setFilter(filterObject) {
@@ -113,6 +114,17 @@ class App extends React.Component {
         }
       })
       .catch(error => console.error('There was an error:', error.message));
+  }
+
+  signOut() {
+    const config = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    this.setState({ user: null });
+    fetch('/api/users', config);
   }
 
   fileUpload(event) {
@@ -194,7 +206,7 @@ class App extends React.Component {
     return (
       <div>
         <>
-          <Header user={this.state.user} />
+          <Header signOut={this.signOut} user={this.state.user} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
               setZip={this.setZip}
@@ -220,13 +232,13 @@ class App extends React.Component {
             <Route exact path="/profile/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
               activityType={'Past'}
-              getAttendees={this.getAttendees}/>} />
+              getAttendees={this.getAttendees} />} />
             <Route exact path="/activity-details/:id/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
               activity={this.state.activityData}
               getAttendees={this.getAttendees}
               fetchDetail={this.fetchDetail}
-              reserve={this.reserveConfirmAndCancel}/>} />
+              reserve={this.reserveConfirmAndCancel} />} />
             <Route exact path="/activity-details/:id" render={props => <ActivityDetail {...props}
               user={this.state.user}
               activity={this.state.activityData}

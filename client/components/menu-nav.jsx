@@ -41,7 +41,7 @@ class MenuNav extends React.Component {
               <i className="fas fa-times close-icon" onClick={this.changeDrawer} />
             </div>
             {isSignedIn
-              ? <SignedInLinkList user={this.props.user} changeDrawer={this.changeDrawer} />
+              ? <SignedInLinkList signOut={this.props.signOut} user={this.props.user} changeDrawer={this.changeDrawer} />
               : <SignedOutButtons changeDrawer={this.changeDrawer} />}
           </div>
         </div>
@@ -56,15 +56,6 @@ function SignedInLinkList(props) {
   const profileImage = {
     backgroundImage: `url("/assets/images/users/${props.user.image}")`
   };
-  function signOut() {
-    const config = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/users', config);
-  }
   return (
     <>
       <div className="my-5">
@@ -91,7 +82,7 @@ function SignedInLinkList(props) {
           <NavLink to="/profile/messages">Read Messages</NavLink>
         </li>
         <li>
-          <NavLink onClick={signOut} to="/sign-in">Sign Out</NavLink>
+          <NavLink onClick={props.signOut} to="/sign-in">Sign Out</NavLink>
         </li>
       </ul>
     </>
