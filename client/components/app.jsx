@@ -41,7 +41,6 @@ class App extends React.Component {
     this.fetchDetail = this.fetchDetail.bind(this);
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
-    this.getPoints = this.getPoints.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
   }
 
@@ -168,21 +167,6 @@ class App extends React.Component {
       .then(message => console.error(message));
   }
 
-  getPoints() {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/points', config)
-      .then(response => response.json())
-      .then(data => {
-        const points = data.reduce((total, value) => total + value.value, 0);
-        this.setState({ points });
-      });
-  }
-
   pointsTransaction({ transactionType, activityId }) {
     const config = {
       method: 'POST',
@@ -214,8 +198,7 @@ class App extends React.Component {
               filterCriteria={this.state.filter}
               reroll={this.pointsTransaction}
               fetch={this.fetchDetail} />} />
-            <Route exact path="/profile" render={props => <ProfilePage {...props}
-              user={this.state.user}
+            <Route exact path="/profile/userId/:userId" render={props => <ProfilePage {...props}
               points={this.state.points}
               getPoints={this.getPoints} />} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}

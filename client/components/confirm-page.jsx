@@ -31,6 +31,7 @@ class ConfirmActivity extends React.Component {
   }
 
   render() {
+    const searchParams = new URLSearchParams(window.location.search);
     return (
       <div className="container my-5">
         <div className="mb-3">
@@ -51,7 +52,7 @@ class ConfirmActivity extends React.Component {
           </p>
           <p>
             <span className="bold-text">Total Guests: </span>{' '}
-            <Link to={'/attendees?activityId=60'}>
+            <Link to={`/attendees?${searchParams.toString()}`}>
               <span className="badge confirmed-badge text-white">{this.state.attendees.length}</span>
             </Link>
           </p>

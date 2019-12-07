@@ -5,11 +5,10 @@ $link = get_db_link();
 if ($request['method'] === 'GET') {
   $user_id = $_SESSION['user_id'];
   $activity = $request['query']['activityId'];
-  $sql_activity = "SELECT * FROM users AS u JOIN reservations AS r
+  $sql_activity = "SELECT u.userId, u.firstName, u.lastName, u.image FROM users AS u JOIN reservations AS r
                               ON u.userID = r.userId
                            WHERE r.isCancelled = 0
-                             AND r.activityId = $activity
-                             AND r.userId = $user_id";
+                             AND r.activityId = $activity";
   $activity_query = mysqli_query($link, $sql_activity);
   $attendees = [];
     while ($row = mysqli_fetch_assoc($activity_query)) {

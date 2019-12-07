@@ -8,8 +8,9 @@ class ActivityDetail extends React.Component {
     this.state = {
       showModal: false,
       activityData: '',
-      usersAttending: '',
-      isConfirmed: false
+      usersAttending: null,
+      isConfirmed: false,
+      isRetrieving: true
     };
     this.changeModal = this.changeModal.bind(this);
     this.checkUTC = this.checkUTC.bind(this);
@@ -26,7 +27,7 @@ class ActivityDetail extends React.Component {
     fetch(`/api/reservations?${activityParams.toString()}`)
       .then(response => response.json())
       .then(attendees => {
-        this.setState({ usersAttending: attendees });
+        this.setState({ usersAttending: attendees, isRetrieving: false });
         this.checkIfConfirmed(this.props.user.userId);
       })
       .catch(error => console.error('Error', error.message));
@@ -62,6 +63,9 @@ class ActivityDetail extends React.Component {
   }
 
   render() {
+    if (this.state.isRetrieving === true) {
+      return null;
+    }
     const isConfirmed = this.state.isConfirmed;
     let routePath = null;
     const activity = this.state.activityData;
@@ -137,7 +141,7 @@ function DynamicReserveOrCancel(props) {
         onClick={() => {
           props.history.goBack();
         }}>
-            Back
+        Back
       </button>
     </div>
   );
