@@ -11,11 +11,20 @@ class ActivityFilter extends React.Component {
     this.zip = this.props.zip;
     this.setFilter = this.props.setFilter;
     this.getFilterCriteria = this.getFilterCriteria.bind(this);
-
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   getFilterCriteria(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    const searchParams = new URLSearchParams();
+    for (const key in this.state) {
+      searchParams.set(key, this.state[key]);
+    }
+    this.props.history.push(`/activity-list?${searchParams.toString()}`);
   }
 
   render() {
@@ -23,10 +32,7 @@ class ActivityFilter extends React.Component {
       <div className="container my-5">
         <h4 className="text-center font-weight-bold mb-3">Location: {this.zip}</h4>
         <div className="rounded border p-3">
-          <form onSubmit={() => {
-            this.setFilter(this.state);
-            this.props.history.push('/activity-list');
-          }}>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="spontaneity-points" className="text-center d-block">Level of Adventure: {this.state.points}</label>
               <input name="points" type="range" className="custom-range filter-range" min="1" max="5" value={this.state.points} id="spontaneity-points" onChange={this.getFilterCriteria}/>

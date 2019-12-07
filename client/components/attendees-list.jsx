@@ -10,7 +10,8 @@ class AttendeesList extends React.Component {
   }
 
   componentDidMount() {
-    this.getAttendees(this.props.match.params.activity);
+    const searchParams = new URLSearchParams(window.location.search);
+    this.getAttendees(searchParams.toString());
   }
 
   render() {
@@ -26,25 +27,21 @@ class AttendeesList extends React.Component {
     return (
       <div className="container my-5">
         <h4 className="d-flex justify-content-center">Attendees</h4>
-        <div>{attendees}</div>
-        <button
-          className="spon-button-alt fixed-bottom rounded w-100 mt-0 mx-auto"
-          onClick={() => this.props.history.goBack()}
-        >
-          Back
-        </button>
+        <div className="message-container">{attendees}</div>
+        <div className="button-container fixed-bottom p-3">
+          <button
+            className="spon-button-alt rounded mt-0 w-100"
+            onClick={() => this.props.history.goBack()}
+          >
+            Back
+          </button>
+        </div>
       </div>
     );
   }
 
   getAttendees(activityId) {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/reservations?activity=${activityId}`, config)
+    fetch(`/api/reservations?${activityId}`)
       .then(response => response.json())
       .then(attendees => this.setState({ attendees }))
       .catch(error => console.error('Error:', error));
