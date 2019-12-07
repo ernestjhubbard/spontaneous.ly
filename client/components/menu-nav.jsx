@@ -73,7 +73,7 @@ function SignedInLinkList(props) {
       </div>
       <ul onClick={props.changeDrawer} >
         <li>
-          <NavLink to={`/profile/${props.user.userId}`}>View Profile</NavLink>
+          <NavLink to={'/profile'}>View Profile</NavLink>
         </li>
         <li>
           <NavLink to="/profile">Account Settings</NavLink>

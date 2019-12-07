@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class CancelModal extends React.Component {
   render() {
     return (
-      <div className="confirm-cancel-modal container">
+      <div className="confirm-cancel-modal container-fluid">
         <div className="inner-modal text-center p-3 rounded">
           <h3 className="mb-3">
             Are you sure you want to cancel your reservation?

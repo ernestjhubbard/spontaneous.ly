@@ -12,6 +12,10 @@ body {
   font-family: 'Roboto Mono';
 }
 
+* {
+  animation: fadein 1s;
+}
+
 .spon-button {
   background-color: #F07070;
   border: none;
@@ -53,6 +57,7 @@ body {
   background-color: #F07070;
   justify-content: space-between;
   padding: 15px;
+  z-index: 1100;
 }
 
 .logo-alone {
@@ -305,6 +310,10 @@ ul {
   margin: auto 8px auto auto;
 }
 
+.adventure {
+  cursor: pointer;
+}
+
 .activity-top-banner {
   height: 35vh;
   background-image: linear-gradient(#801d8080, #ffc0cb80);
@@ -478,7 +487,7 @@ input::placeholder {
 }
 
 .confirm-cancel-modal{
-  z-index: 1050;
+  z-index: 1200;
   top: 0;
   left: 0;
   width: 100%;
@@ -527,6 +536,33 @@ input::placeholder {
   width: calc(100% - 114px);
 }
 
-.back-arrow{
+.attendee-name {
+  width: calc(100% - 66px);
+}
+
+.fade-in {
+  animation: fadein 1.5s;
+}
+
+a {
+  color: initial;
+}
+
+a:hover {
+  color: initial;
+  text-decoration: none;
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.back-arrow {
   width: 10%;
 }

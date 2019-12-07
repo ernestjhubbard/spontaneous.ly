@@ -1,5 +1,6 @@
 import React from 'react';
 import CancelModal from './cancel-modal';
+import { Link } from 'react-router-dom';
 
 class ActivityDetail extends React.Component {
   constructor(props) {
@@ -63,16 +64,21 @@ class ActivityDetail extends React.Component {
   }
 
   render() {
+    const isConfirmed = this.state.isConfirmed;
+    let routePath = null;
     const activity = this.state.activityData;
     const background = {
       backgroundImage: `linear-gradient(#801d8080, #ffc0cb80), url(/assets/images/activity/${activity.image})`
     };
-
     const isUpcoming = this.checkUTC(this.state.activityData.dateTime);
     const showModal = this.state.showModal;
 
+    if (isConfirmed) {
+      routePath = `/activity-details/${activity.activityId}/attendees/`;
+    }
+
     return (
-      <>
+      <div>
         <div className="top-banner d-flex" style={background}>
           <div className="m-auto p-3">
             <h2 className="text-center text-white">{activity.activity}</h2>
@@ -91,10 +97,12 @@ class ActivityDetail extends React.Component {
             <p className="mb-2">
               <span className="bold-text">Cost: </span>${activity.cost}
             </p>
-            <p className="mb-0">
-              <span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">
-                {this.state.usersAttending.length}
-              </span> Users are joining in
+            <p className="mb-0 text-body">
+              <Link to={routePath}>
+                <span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">
+                  {this.state.usersAttending.length}
+                </span> Users are joining in
+              </Link>
             </p>
           </div>
           <div className="activity-description">
@@ -106,15 +114,17 @@ class ActivityDetail extends React.Component {
             </p>
           </div>
         </div>
-        {isUpcoming ? <DynamicReserveOrCancel {...this.props}
-          isConfirmed={this.state.isConfirmed}
-          changeModal={this.changeModal}
-          activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton {...this.props} />}
-        {showModal ? <CancelModal {...this.props}
-          activityId={this.props.match.params.id}
-          changeModal={this.changeModal}
-          cancel={this.props.reserve}/> : null}
-      </>
+        <div className="fade-in">
+          {isUpcoming ? <DynamicReserveOrCancel {...this.props}
+            isConfirmed={this.state.isConfirmed}
+            changeModal={this.changeModal}
+            activityId={this.props.match.params.id} /> : <BackToPastActivitiesButton {...this.props} />}
+          {showModal ? <CancelModal {...this.props}
+            activityId={this.props.match.params.id}
+            changeModal={this.changeModal}
+            cancel={this.props.reserve}/> : null}
+        </div>
+      </div>
     );
   }
 }
@@ -123,7 +133,7 @@ export default ActivityDetail;
 
 function DynamicReserveOrCancel(props) {
   return (
-    <div className="container button-container calc-button-50 p-3 fixed-bottom">
+    <div className="container-fluid button-container calc-button-50 p-3 fixed-bottom">
       <ConfirmOrCancelButton isConfirmed={props.isConfirmed} {...props} />
       <button
         className="spon-button-alt rounded mt-0"
@@ -162,7 +172,7 @@ function ConfirmOrCancelButton(props) {
 
 function BackToPastActivitiesButton(props) {
   return (
-    <div className="container button-container p-3 fixed-bottom">
+    <div className="container-fluid button-container p-3 fixed-bottom">
       <button
         className="spon-button-alt rounded w-100 mt-0 mx-auto"
         onClick={() => props.history.goBack()}>

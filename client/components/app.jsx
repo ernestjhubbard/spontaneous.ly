@@ -250,7 +250,7 @@ class App extends React.Component {
               fetchDetail={this.fetchDetail}
               transaction={this.pointsTransaction}
               reserve={this.reserveConfirmAndCancel} />} />
-            <Route exact path="/activity-details/attendees/:activity" render={props => <AttendeesList {...props}
+            <Route exact path="/activity-details/:activity/attendees/" render={props => <AttendeesList {...props}
               getAttendees={this.getAttendees}
               attendees={this.state.usersAttending} />} />
             <Route exact path="/adventures/:activity" component={StaticActivity} />
