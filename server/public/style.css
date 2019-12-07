@@ -576,7 +576,20 @@ a:hover {
   color: #f07070;
 }
 
+
 .custom-range::-webkit-slider-thumb {
   background: #fff;
   border: 1px solid #f07070;
+}
+  
+.edit-button{
+  width: 10%;
+}
+
+.account-setting-input {
+  border-radius: 5px;
+}
+
+.account-setting-text {
+  font-size: .75rem;
 }

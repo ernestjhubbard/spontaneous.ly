@@ -13,6 +13,7 @@ import ConfirmActivity from './confirm-page';
 import AttendeesList from './attendees-list';
 import MessageFriend from './message-friend';
 import FriendList from './friend-list';
+import AccountSetting from './account-setting';
 
 import {
   withRouter,
@@ -244,6 +245,7 @@ class App extends React.Component {
             <Route exact path="/friends" render={props => <FriendList {...props} />} />
             <Route exact path="/profile/friends/:friendId" render={props => <MessageFriend {...props}
               user={this.state.user} />} />
+            <Route exact path="/profile/:userId" render={props => <AccountSetting {...props}/>} />
           </Switch>
         </>
       </div>
