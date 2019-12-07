@@ -16,6 +16,14 @@ class ProfilePage extends React.Component {
     this.getPoints(userId);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.match.params.userId !== prevProps.match.params.userId) {
+      const userId = this.props.match.params.userId;
+      this.userInfo(userId);
+      this.getPoints(userId);
+    }
+  }
+
   render() {
     if (this.state.fetchingUser === true) {
       return null;

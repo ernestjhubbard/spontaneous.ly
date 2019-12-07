@@ -164,7 +164,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (4,89,0),(4,53,0),(4,39,0),(4,43,0),(4,11,0),(4,88,0),(4,87,0),(4,45,0),(4,47,0);
+INSERT INTO `reservations` VALUES (4,89,0),(4,53,0),(4,39,0),(4,43,0),(4,11,0),(4,88,0),(4,87,0),(4,45,0),(4,47,0),(1,39,0),(2,39,0);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,4 +205,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-06 20:51:41
+-- Dump completed on 2019-12-07 10:56:22
