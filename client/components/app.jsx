@@ -41,7 +41,6 @@ class App extends React.Component {
     this.fetchDetail = this.fetchDetail.bind(this);
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
     this.pointsTransaction = this.pointsTransaction.bind(this);
-    this.getPoints = this.getPoints.bind(this);
     this.getAttendees = this.getAttendees.bind(this);
   }
 
@@ -175,21 +174,6 @@ class App extends React.Component {
     fetch('/api/reservations', config)
       .then(response => response.json())
       .then(message => console.error(message));
-  }
-
-  getPoints() {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/points', config)
-      .then(response => response.json())
-      .then(data => {
-        const points = data.reduce((total, value) => total + value.value, 0);
-        this.setState({ points });
-      });
   }
 
   pointsTransaction({ transactionType, activityId }) {

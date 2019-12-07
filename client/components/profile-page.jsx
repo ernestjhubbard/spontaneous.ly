@@ -5,15 +5,15 @@ class ProfilePage extends React.Component {
     super(props);
     this.state = {
       user: null,
-      fetchingUser: true
+      fetchingUser: true,
+      points: 0
     };
   }
 
   componentDidMount() {
     const userId = this.props.match.params.userId;
-
     this.userInfo(userId);
-    this.props.getPoints();
+    this.getPoints(userId);
   }
 
   render() {
@@ -38,7 +38,7 @@ class ProfilePage extends React.Component {
           <div className="border rounded p-3">
             <h4 className="align-center text-center">Spontaneity Points</h4>
             <h1 className="profile-point-value text-center m-auto">
-              {this.props.points}
+              {this.state.points}
             </h1>
           </div>
           <div className="profile-footer">
@@ -102,6 +102,22 @@ class ProfilePage extends React.Component {
       })
       .catch(error => console.error('There was an error:', error.message));
   }
+
+  getPoints(userId) {
+    const config = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch(`/api/points?userId=${userId}`, config)
+      .then(response => response.json())
+      .then(data => {
+        const points = data.reduce((total, value) => total + value.value, 0);
+        this.setState({ points });
+      });
+  }
+
 }
 
 export default ProfilePage;

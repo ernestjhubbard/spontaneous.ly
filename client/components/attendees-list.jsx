@@ -15,7 +15,13 @@ class AttendeesList extends React.Component {
 
   render() {
     const attendees = this.state.attendees.map(attendee =>
-      <Attendee key={attendee.userId} firstName={attendee.firstName} lastName={attendee.lastName} image={attendee.image} />
+      <Attendee
+        viewProfile={this.props.history.push}
+        key={attendee.userId}
+        userId={attendee.userId}
+        firstName={attendee.firstName}
+        lastName={attendee.lastName}
+        image={attendee.image} />
     );
     return (
       <div className="container my-5">
