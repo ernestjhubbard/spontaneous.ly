@@ -31,7 +31,7 @@ class UpcomingOrPastActivities extends React.Component {
         <h4 className="d-flex justify-content-center">
           {`${this.props.activityType}`} Adventures
         </h4>
-        <div className="message-container">
+        <div className="activity-container border rounded">
           {activities.map(activityInfo => (
             <Activity
               {...this.props}
@@ -43,7 +43,7 @@ class UpcomingOrPastActivities extends React.Component {
             />
           ))}
         </div>
-        <div className="button-container fixed-bottom p-3">
+        <div className="fixed-bottom p-3">
           <button
             className="spon-button-alt rounded mt-0 w-100"
             onClick={() => this.props.history.goBack()}

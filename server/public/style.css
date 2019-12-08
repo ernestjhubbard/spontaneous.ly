@@ -372,7 +372,6 @@ ul {
 }
 
 .button-container {
-  /* box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, .2); */
   border-top: 1px solid #00000020;
   background: #fff;
 }
@@ -538,6 +537,11 @@ input::placeholder {
 .message-container {
   left: 0;
   height: calc(70vh + 2px);
+  overflow: scroll;
+}
+
+.activity-container {
+  height: 70vh;
   overflow: scroll;
 }
 
