@@ -136,7 +136,6 @@ class AccountSetting extends React.Component {
     this.setState({ userUpload });
     this.setState({ image });
   }
-
   uploadHandler() {
     const formData = new FormData();
     formData.append(
