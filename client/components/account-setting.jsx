@@ -18,10 +18,6 @@ class AccountSetting extends React.Component {
   }
 
   render() {
-    const firstName = this.state.firstName;
-    const lastName = this.state.lastName;
-    const email = this.state.email;
-    const password = this.state.password;
     return (
       <div className="container my-5">
         <h4 className="d-flex justify-content-center mb-4">Account Settings</h4>
@@ -38,7 +34,7 @@ class AccountSetting extends React.Component {
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" />
               <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ firstName })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
+                <i className="fas fa-edit fa-2x adventure-card m-auto"></i>
               </div>
             </div>
           </div>
@@ -54,7 +50,7 @@ class AccountSetting extends React.Component {
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" />
               <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ lastName })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
+                <i className="fas fa-edit fa-2x adventure-card m-auto"></i>
               </div>
             </div>
           </div>
@@ -70,7 +66,7 @@ class AccountSetting extends React.Component {
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" />
               <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ email })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
+                <i className="fas fa-edit fa-2x adventure-card m-auto"></i>
               </div>
             </div>
           </div>
@@ -86,7 +82,7 @@ class AccountSetting extends React.Component {
                 aria-label="Sizing example input"
                 aria-describedby="inputGroup-sizing-default" />
               <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ password })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
+                <i className="fas fa-edit fa-2x adventure-card m-auto"></i>
               </div>
             </div>
           </div>
@@ -136,6 +132,7 @@ class AccountSetting extends React.Component {
     this.setState({ userUpload });
     this.setState({ image });
   }
+
   uploadHandler() {
     const formData = new FormData();
     formData.append(
@@ -155,10 +152,10 @@ class AccountSetting extends React.Component {
     this.props.history.goBack();
   }
 
-  updateInfo(setting) {
+  updateInfo({ firstName, lastName, email, password, image }) {
     const config = {
-      method: 'POST',
-      body: JSON.stringify(setting),
+      method: 'PUT',
+      body: JSON.stringify({ firstName, lastName, email, password, image }),
       headers: {
         'Content-Type': 'application/json'
       }
