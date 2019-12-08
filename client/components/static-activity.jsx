@@ -75,12 +75,14 @@ class StaticActivity extends React.Component {
           />
           <p>{allContent.content.text2}</p>
         </div>
-        <button
-          className="spon-button-alt rounded w-100 mt-0 mx-auto"
-          onClick={() => this.props.history.goBack()}
-        >
+        <div className="button-container p-3">
+          <button
+            className="spon-button text-white rounded w-100 mt-0 mx-auto"
+            onClick={() => this.props.history.goBack()}
+          >
           Back
-        </button>
+          </button>
+        </div>
       </div>
     );
   }

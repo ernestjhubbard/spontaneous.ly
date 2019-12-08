@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './footer';
 import {
   Link
 } from 'react-router-dom';
@@ -18,7 +19,8 @@ class DefaultPage extends React.Component {
     this.setState({ zipcode: event.target.value });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
     this.setZip(this.state.zipcode);
     this.props.history.push('/activity-filter');
   }
@@ -34,6 +36,7 @@ class DefaultPage extends React.Component {
               <input className="input-font w-100 form-control-lg border text-center"
                 type="text"
                 placeholder="Enter your zip"
+                minLength="5"
                 maxLength="5"
                 onChange={this.handleChange}></input>
             </form>
@@ -100,6 +103,7 @@ class DefaultPage extends React.Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
