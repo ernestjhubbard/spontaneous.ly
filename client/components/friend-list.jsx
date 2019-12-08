@@ -17,7 +17,7 @@ class FriendList extends React.Component {
         key={index}
         pushMessage={this.props.history.push}
         clickFriend={this.clickFriend}
-        recipientId={friend.recipientId}
+        recipientId={friend.userId}
         image={friend.image}
         firstName={friend.firstName}
         lastName={friend.lastName}

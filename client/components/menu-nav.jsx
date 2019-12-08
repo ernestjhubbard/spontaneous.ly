@@ -67,7 +67,7 @@ function SignedInLinkList(props) {
           <NavLink to={`/profile?userId=${props.user.userId}`}>View Profile</NavLink>
         </li>
         <li>
-          <NavLink to={`/profile?userId=${props.user.userId}`}>Account Settings</NavLink>
+          <NavLink to={`/account-settings?userId=${props.user.userId}`}>Account Settings</NavLink>
         </li>
         <li>
           <NavLink to={`/upcoming-activities?userId=${props.user.userId}`}>Upcoming Adventures</NavLink>
