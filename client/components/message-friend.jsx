@@ -29,16 +29,16 @@ class MessageFriend extends React.Component {
     );
     return (
       <div className="container position-relative fade-in">
-        <div className="text-center d-flex mt-5 mb-3">
+        <div className="text-center d-flex mt-5 mb-3 justify-content-around">
           <div className="back-chevron rounded border d-flex" onClick={() => this.props.history.goBack()}>
             <i className="fas fa-chevron-left m-auto"></i>
           </div>
-          <h4 className="m-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
+          <h4 className="ml-3 my-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
         <div className="message-container position-absolute col-12">
           {messages}
         </div>
-        <div className="fixed-bottom p-3 bg-white">
+        <div className="fixed-bottom border-top p-3 bg-white">
           <form
             onSubmit={() => {
               this.sendMessage({ recipientId, message });
@@ -85,7 +85,7 @@ class MessageFriend extends React.Component {
   }
 
   componentDidMount() {
-    const recipientId = this.props.match.params.friendId;
+    const recipientId = this.props.user.userId;
     this.retrieveMessages(recipientId);
     this.getFriend(recipientId);
   }

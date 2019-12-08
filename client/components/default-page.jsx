@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './footer';
 import {
   Link
 } from 'react-router-dom';
@@ -18,7 +19,8 @@ class DefaultPage extends React.Component {
     this.setState({ zipcode: event.target.value });
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
+    event.preventDefault();
     this.setZip(this.state.zipcode);
     this.props.history.push('/activity-filter');
   }
@@ -34,6 +36,7 @@ class DefaultPage extends React.Component {
               <input className="input-font w-100 form-control-lg border text-center"
                 type="text"
                 placeholder="Enter your zip"
+                minLength="5"
                 maxLength="5"
                 onChange={this.handleChange}></input>
             </form>
@@ -42,6 +45,7 @@ class DefaultPage extends React.Component {
         <div className="bottom-nav my-5">
           <div className="bottom-text col-sm-12 mb-3">
             <h4>Spontaneous Adventures for Any Interest</h4>
+            <p>Adventures are all around you, in many shapes and forms.  See some example activities that our users participate in.</p>
           </div>
           <div className="d-flex flex-row horizontal-scroll mb-4">
             <div className="col-sm-3">
@@ -50,7 +54,7 @@ class DefaultPage extends React.Component {
                 <div className="card-body">
                   <p className="text-muted"><small>Wine and Paint</small></p>
                   <p className="text-muted mb-0">
-                    <Link to="/adventures/Wine and Paint">
+                    <Link to="/adventures?activity=wine-and-paint">
                       <small>Learn More</small>
                     </Link>
                   </p>
@@ -64,7 +68,7 @@ class DefaultPage extends React.Component {
                 <div className="card-body">
                   <p className="text-muted"><small>Pickup Basketball</small></p>
                   <p className="text-muted mb-0">
-                    <Link to="/adventures/Pickup Basketball">
+                    <Link to="/adventures?activity=pickup-basketball">
                       <small>Learn More</small>
                     </Link>
                   </p>
@@ -77,7 +81,7 @@ class DefaultPage extends React.Component {
                 <div className="card-body">
                   <p className="text-muted"><small>Yoga</small></p>
                   <p className="text-muted mb-0">
-                    <Link to="/adventures/Yoga">
+                    <Link to="/adventures?activity=yoga">
                       <small>Learn More</small>
                     </Link>
                   </p>
@@ -91,7 +95,7 @@ class DefaultPage extends React.Component {
                 <div className="card-body">
                   <p className="text-muted"><small>Parasailing</small></p>
                   <p className="text-muted mb-0">
-                    <Link to="/adventures/Parasailing">
+                    <Link to="/adventures?activity=parasailing">
                       <small>Learn More</small>
                     </Link>
                   </p>
@@ -100,6 +104,7 @@ class DefaultPage extends React.Component {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

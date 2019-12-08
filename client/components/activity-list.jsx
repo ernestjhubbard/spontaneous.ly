@@ -1,5 +1,6 @@
 import React from 'react';
 import Carousel from './carousel';
+import Footer from './footer';
 
 export default class ActivityList extends React.Component {
   constructor(props) {
@@ -34,16 +35,16 @@ export default class ActivityList extends React.Component {
         <div className="container-fluid my-5">
           <Carousel {...this.props} activities={this.state.activities} getAttendees={this.props.getAttendees} />
           <p className="text-center">Not happy with these choices?</p>
-          <p className="text-center"
-            onClick={() => {
+          <p className="text-center">
+            <a href="" className="reroll" onClick={() => {
               rerollPoints(transactionType);
-              this.props.history.push('/activity-filter');
+              this.props.history.goBack();
             }}>
-            <a href="#" className="reroll">
             Re-roll for 25 points.
             </a>
           </p>
         </div>
+        <Footer />
       </div>
     );
   }
