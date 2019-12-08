@@ -12,10 +12,8 @@ if ($request['method'] === 'GET') {
                          JOIN users
                            AS u
                            ON $user_id = u.userId
-                        WHERE ($user_id = m.senderId
-                           OR $user_id = m.recipientId)
-                          AND ($recipient_id = m.senderId
-                           OR $recipient_id = m.recipientId)";
+                        WHERE ($user_id = m.senderId OR $user_id = m.recipientId)
+                          AND ($recipient_id = m.senderId OR $recipient_id = m.recipientId)";
       $messages_query = mysqli_query($link, $sql_messages);
       $messages = [];
       while($row = mysqli_fetch_assoc($messages_query)){
