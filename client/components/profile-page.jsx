@@ -5,6 +5,7 @@ class ProfilePage extends React.Component {
     super(props);
     this.state = {
       user: null,
+      loggedInUser: props.loggedInUser,
       fetchingUser: true,
       points: 0
     };
@@ -22,8 +23,8 @@ class ProfilePage extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const params = this.getSearchParams();
-    if (prevState.user !== this.state.user) {
+    if (prevState.user.userId !== this.state.loggedInUser.userId) {
+      const params = this.getSearchParams();
       this.userInfo(params);
       this.getPoints(params);
     }
