@@ -7,20 +7,27 @@ class UpcomingOrPastActivities extends React.Component {
     this.state = { activities: [] };
   }
 
-  fetchActivities() {
-    fetch(`/api/upcoming-past-activities?activityType=${this.props.activityType}`)
+  getSearchParams() {
+    const searchParams = new URLSearchParams(window.location.search);
+    return searchParams.toString();
+  }
+
+  fetchActivities(userId) {
+    fetch(`/api/upcoming-past-activities?${userId}&activityType=${this.props.activityType}`)
       .then(results => results.json())
       .then(activities => this.setState({ activities }))
       .catch(error => console.error('There was an error:', error.message));
   }
 
   componentDidMount() {
-    this.fetchActivities();
+    const params = this.getSearchParams();
+    this.fetchActivities(params);
   }
 
   componentDidUpdate(prevType) {
+    const params = this.getSearchParams();
     if (this.props.activityType !== prevType.activityType) {
-      this.fetchActivities();
+      this.fetchActivities(params);
     }
   }
 
