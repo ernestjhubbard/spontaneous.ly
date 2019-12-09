@@ -23,8 +23,8 @@ class ProfilePage extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.user.userId !== this.state.loggedInUser.userId) {
-      const params = this.getSearchParams();
+    const params = this.getSearchParams();
+    if (prevProps.location.search !== this.props.location.search) {
       this.userInfo(params);
       this.getPoints(params);
     }
