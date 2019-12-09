@@ -1,133 +1,153 @@
 import React from 'react';
+import AccountDetail from './account-detail';
 
 class AccountSetting extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      image: '',
+      firstName: this.props.user.firstName,
+      lastName: this.props.user.lastName,
+      email: this.props.user.email,
+      image: this.props.user.image,
       password: '',
-      userUpload: {}
+      userUpload: {},
+      changeDetail: false,
+      validEmail: true,
+      validPassword: true
     };
     this.updateInfo = this.updateInfo.bind(this);
     this.uploadHandler = this.uploadHandler.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.changeDetail = this.changeDetail.bind(this);
   }
 
   render() {
     const firstName = this.state.firstName;
     const lastName = this.state.lastName;
     const email = this.state.email;
-    const password = this.state.password;
     return (
       <div className="container my-5">
         <h4 className="d-flex justify-content-center mb-4">Account Settings</h4>
-        <div className="input-group input-group-sm mb-3">
-          <label className="account-setting-text">First Name:</label>
-          <div className="input-group mb-3">
-            <div className="input-group account-setting-input w-100">
-              <input
-                type="text"
-                name="firstName"
-                value={this.state.firstName}
-                onChange={this.handleChange}
-                className="form-control"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" />
-              <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ firstName })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
+        <form onSubmit={() => {
+          event.preventDefault();
+          this.uploadHandler(this.state);
+        }}>
+          <div className="input-group input-group-sm mb-3">
+            <label className="account-setting-text">First Name:</label>
+            <div className="input-group mb-3">
+              <div className="input-group account-setting-input w-100">
+                <AccountDetail
+                  name="firstName"
+                  value={firstName}
+                  state={this.state}
+                  placeholder="Enter your First Name"
+                  type="text"
+                  changeCallback={this.handleChange}/>
+              </div>
+            </div>
+            <label className="account-setting-text">Last Name:</label>
+            <div className="input-group mb-3">
+              <div className="input-group account-setting-input w-100">
+                <AccountDetail
+                  name="lastName"
+                  value={lastName}
+                  state={this.state}
+                  placeholder="Enter your Last Name"
+                  type="text"
+                  changeCallback={this.handleChange} />
+              </div>
+            </div>
+            <label className="account-setting-text">Email:</label>
+            <div className="input-group mb-3">
+              <div className="input-group account-setting-input w-100">
+                <AccountDetail
+                  name="email"
+                  value={email}
+                  state={this.state}
+                  placeholder="example@example.com"
+                  type="email"
+                  validEmail={this.state.validEmail}
+                  changeCallback={this.handleChange} />
+              </div>
+            </div>
+            <label className="account-setting-text">Password:</label>
+            <div className="input-group mb-3">
+              <div className="input-group account-setting-input w-100">
+                <AccountDetail
+                  name="password"
+                  state={this.state}
+                  placeholder="Enter New Password"
+                  type="password"
+                  validPassword={this.state.validPassword}
+                  changeCallback={this.handleChange} />
+              </div>
+            </div>
+            <div>
+              <label className="account-setting-text">Upload Profile Picture:</label>
+              <div className="custom-file">
+                <input type="file"
+                  name="userUpload"
+                  onChange={this.fileUpload}
+                  className="custom-file-input"
+                  id="validatedCustomFile"
+                  accept="image/png, image/jpeg, image/jpg" />
+                <label className="custom-file-label"
+                  htmlFor="validatedCustomFile">{this.state.image !== '' ? this.state.image : 'Choose a file...'}</label>
+                <div className="invalid-feedback">Not a supported file type</div>
               </div>
             </div>
           </div>
-          <label className="account-setting-text">Last Name:</label>
-          <div className="input-group mb-3">
-            <div className="input-group account-setting-input w-100">
-              <input
-                type="text"
-                name="lastName"
-                value={this.state.lastName}
-                onChange={this.handleChange}
-                className="form-control"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" />
-              <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ lastName })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
-              </div>
+          <div className="fixed-bottom p-3">
+            <div className="calc-button-50">
+              <EditOrSave
+                isEditing={this.state.changeDetail}
+                changeDetailCallback={this.changeDetail} />
+              <button
+                className="spon-button-cancel rounded mt-0"
+                onClick={() => this.props.history.goBack()}>
+                Cancel
+              </button>
             </div>
           </div>
-          <label className="account-setting-text">Email:</label>
-          <div className="input-group mb-3">
-            <div className="input-group account-setting-input w-100">
-              <input
-                type="email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleChange}
-                className="form-control"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" />
-              <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ email })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
-              </div>
-            </div>
-          </div>
-          <label className="account-setting-text">Password:</label>
-          <div className="input-group mb-3">
-            <div className="input-group account-setting-input w-100">
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleChange}
-                className="form-control"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default" />
-              <div className="edit-button d-flex ml-3">
-                <i onClick={() => this.updateInfo({ password })} className="fas fa-edit fa-2x adventure-card m-auto"></i>
-              </div>
-            </div>
-          </div>
-          <div>
-            <label className="account-setting-text">Upload Profile Picture:</label>
-            <div className="custom-file">
-              <input type="file"
-                name="userUpload"
-                onChange={this.fileUpload}
-                className="custom-file-input"
-                id="validatedCustomFile"
-                accept="image/png, image/jpeg, image/jpg"
-                required />
-              <label className="custom-file-label"
-                htmlFor="validatedCustomFile">{this.state.image !== '' ? this.state.image : 'Choose a file...'}</label>
-              <div className="invalid-feedback">Not a supported file type</div>
-            </div>
-          </div>
-        </div>
-        <div className="fixed-bottom p-3">
-          <div className="calc-button-50">
-            <button
-              className="spon-button text-white rounded mt-0"
-              onClick={() => {
-                this.uploadHandler();
-              }}>
-              Save
-            </button>
-            <button
-              className="spon-button-cancel rounded mt-0"
-              onClick={() => this.props.history.goBack()}>
-              Cancel
-            </button>
-          </div>
-        </div>
+        </form>
       </div>
     );
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+
+    // Not just any text field in this case - requires the email address to have the @ and end with a valid domain
+    const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    // Minimum of eight characters, at least one letter and one number
+    const passwordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/);
+
+    if (!emailRegex.test(this.state.email)) {
+      this.setState({ validEmail: false });
+    } else {
+      this.setState({ validEmail: true });
+    }
+
+    if (!passwordRegex.test(this.state.password)) {
+      this.setState({ validPassword: false });
+    } else {
+      this.setState({ validPassword: true });
+    }
+  }
+
+  changeDetail() {
+    const updatedDetails = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password,
+      userUpload: this.state.userUpload
+    };
+
+    if (updatedDetails.firstName.length && updatedDetails.lastName.length > 2 && this.state.validEmail && this.state.validPassword) {
+      this.setState({ changeDetail: !this.state.changeDetail });
+    }
   }
 
   fileUpload(event) {
@@ -136,7 +156,8 @@ class AccountSetting extends React.Component {
     this.setState({ userUpload });
     this.setState({ image });
   }
-  uploadHandler() {
+
+  uploadHandler(userInfo) {
     const formData = new FormData();
     formData.append(
       'image',
@@ -145,7 +166,7 @@ class AccountSetting extends React.Component {
     );
     const config = {
       method: 'POST',
-      body: formData
+      body: userInfo
     };
     fetch('/api/image-upload', config)
       .then(results => results.json())
@@ -171,3 +192,10 @@ class AccountSetting extends React.Component {
 }
 
 export default AccountSetting;
+
+function EditOrSave(props) {
+  if (props.isEditing) {
+    return (<button className="spon-button text-white rounded mt-0" onClick={props.changeDetailCallback}>Save</button>);
+  }
+  return (<button className="spon-button text-white rounded mt-0" onClick={props.changeDetailCallback}>Edit</button>);
+}

@@ -13,6 +13,7 @@ if ($request['method'] === 'GET') {
   $distance = $request['query']['distance'];
   $max_points = $request['query']['points'] * 15;
 
+
   if ($max_points === 15) {
     $sql_query = "SELECT *
                     FROM activities
