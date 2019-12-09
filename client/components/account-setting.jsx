@@ -81,6 +81,7 @@ class AccountSetting extends React.Component {
                   type="password"
                   validPassword={this.state.validPassword}
                   changeCallback={this.handleChange} />
+
               </div>
             </div>
             <div>
@@ -157,7 +158,7 @@ class AccountSetting extends React.Component {
     this.setState({ image });
   }
 
-  uploadHandler(userInfo) {
+  uploadHandler() {
     const formData = new FormData();
     formData.append(
       'image',
@@ -165,8 +166,8 @@ class AccountSetting extends React.Component {
       this.state.userUpload.name
     );
     const config = {
-      method: 'POST',
-      body: userInfo
+      method: 'POST'
+      // body: userInfo
     };
     fetch('/api/image-upload', config)
       .then(results => results.json())
@@ -176,10 +177,10 @@ class AccountSetting extends React.Component {
     this.props.history.goBack();
   }
 
-  updateInfo(setting) {
+  updateInfo({ firstName, lastName, email, password, image }) {
     const config = {
-      method: 'POST',
-      body: JSON.stringify(setting),
+      method: 'PUT',
+      body: JSON.stringify({ firstName, lastName, email, password, image }),
       headers: {
         'Content-Type': 'application/json'
       }
