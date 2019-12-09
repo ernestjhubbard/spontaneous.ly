@@ -8,7 +8,8 @@ class DefaultPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      zipcode: null
+      zipcode: null,
+      unmounting: false
     };
     this.setZip = this.props.setZip;
     this.handleChange = this.handleChange.bind(this);
@@ -27,7 +28,7 @@ class DefaultPage extends React.Component {
 
   render() {
     return (
-      <div className="">
+      <div>
         <div className="center-nav d-flex">
           <div className="m-auto">
             <h1 className="text-center h2">Spontaneous.ly</h1>

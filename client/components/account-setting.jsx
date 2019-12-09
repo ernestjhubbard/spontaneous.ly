@@ -31,7 +31,9 @@ class AccountSetting extends React.Component {
         <h4 className="d-flex justify-content-center mb-4">Account Settings</h4>
         <form onSubmit={() => {
           event.preventDefault();
-          this.uploadHandler();
+          if (this.state.userUpload.lastModified) {
+            this.uploadHandler();
+          }
           this.updateInfo(this.state);
         }}>
           <div className="input-group input-group-sm mb-3">

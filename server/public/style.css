@@ -583,6 +583,8 @@ a:hover {
   width: 40px;
   color: #00000020;
   transition: .3s all;
+  left: 0;
+  top: -25%;
 }
 
 .back-chevron:hover {
