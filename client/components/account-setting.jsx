@@ -31,7 +31,8 @@ class AccountSetting extends React.Component {
         <h4 className="d-flex justify-content-center mb-4">Account Settings</h4>
         <form onSubmit={() => {
           event.preventDefault();
-          this.uploadHandler(this.state);
+          this.uploadHandler();
+          this.updateInfo(this.state);
         }}>
           <div className="input-group input-group-sm mb-3">
             <label className="account-setting-text">First Name:</label>
@@ -166,8 +167,8 @@ class AccountSetting extends React.Component {
       this.state.userUpload.name
     );
     const config = {
-      method: 'POST'
-      // body: userInfo
+      method: 'POST',
+      body: formData
     };
     fetch('/api/image-upload', config)
       .then(results => results.json())
