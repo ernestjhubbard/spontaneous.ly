@@ -6,7 +6,7 @@ if ($request['method'] === 'GET') {
   if(isset($request['query']['userId'])){
     $user_id = $request['query']['userId'];
   }
-  $sql_login = "SELECT userId, firstName, lastName, image
+  $sql_login = "SELECT userId, firstName, lastName, image, email
                   FROM users
                  WHERE userId = '$user_id'";
   $login_query = mysqli_query($link, $sql_login);

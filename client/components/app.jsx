@@ -243,7 +243,8 @@ class App extends React.Component {
             <Route exact path="/friends" render={props => <FriendList {...props} />} />
             <Route exact path="/messages/friend" render={props => <MessageFriend {...props}
               user={this.state.user} />} />
-            <Route exact path="/account-settings" render={props => <AccountSetting {...props}/>} />
+            <Route exact path="/account-settings" render={props => <AccountSetting {...props}
+              user={this.state.user} />} />
           </Switch>
         </>
       </div>
