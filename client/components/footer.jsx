@@ -7,7 +7,7 @@ function Footer() {
         <img src="/assets/images/logo-footer.png" className="footer-logo" />
         <h3 className="h4 font-color ml-3 my-auto">Spontaneous.ly</h3>
       </div>
-      <h6 className="text-center text-muted mt-3">Get Connected.  Be spontaneous.</h6>
+      <h6 className="text-center text-muted mt-3">Get connected.  Be spontaneous.</h6>
     </div>
   );
 }
