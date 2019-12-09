@@ -22,7 +22,7 @@ function Activity(props) {
         <p className="mb-0">
           <small>
             <span className="points d-inline-flex justify-content-center align-items-center mr-2">{activityInfo.points}</span>
-            Points
+            Spontaneity Points
           </small>
         </p>
       </div>

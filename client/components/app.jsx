@@ -102,7 +102,6 @@ class App extends React.Component {
           return null;
         } else {
           this.fetchUser();
-          this.getPoints();
         }
       })
       .catch(error => console.error('There was an error:', error.message));
@@ -213,7 +212,6 @@ class App extends React.Component {
               fetch={this.fetchDetail} />} />
             <Route exact path="/profile" render={props => <ProfilePage {...props}
               points={this.state.points}
-              getPoints={this.getPoints}
               loggedInUser={this.state.user} />} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}
               signIn={this.signIn} />} />
