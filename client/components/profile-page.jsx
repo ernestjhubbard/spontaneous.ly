@@ -5,7 +5,6 @@ class ProfilePage extends React.Component {
     super(props);
     this.state = {
       user: null,
-      loggedInUser: props.loggedInUser,
       fetchingUser: true,
       points: 0
     };

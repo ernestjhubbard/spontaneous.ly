@@ -99,11 +99,10 @@ class ActivityDetail extends React.Component {
               <span className="bold-text">Cost: </span>${activity.cost}
             </p>
             <p className="mb-0 text-body">
-              <Link to={routePath}>
-                <span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">
-                  {this.state.usersAttending.length}
-                </span> Users are joining in
-              </Link>
+              <AttendeeList
+                isConfirmed={isConfirmed}
+                routePath={routePath}
+                usersAttending={this.state.usersAttending}/>
             </p>
           </div>
           <div className="activity-description">
@@ -131,6 +130,25 @@ class ActivityDetail extends React.Component {
 }
 
 export default ActivityDetail;
+
+function AttendeeList(props) {
+  if (props.isConfirmed) {
+    return (
+      <Link to={props.routePath}>
+        <span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">
+          {props.usersAttending.length}
+        </span> Users are joining in
+      </Link>
+    );
+  }
+  return (
+    <>
+      <span className="user-count text-white rounded d-inline-flex justify-content-center align-items-center">
+        {props.usersAttending.length}
+      </span> Users are joining in
+    </>
+  );
+}
 
 function DynamicReserveOrCancel(props) {
   return (
