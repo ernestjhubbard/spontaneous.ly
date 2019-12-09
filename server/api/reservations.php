@@ -53,5 +53,4 @@ if ($request['method'] === 'POST') {
       send($response);
     }
   }
-
 }
