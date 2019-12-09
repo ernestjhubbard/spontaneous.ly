@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class StaticActivity extends React.Component {
   constructor(props) {
@@ -87,12 +88,12 @@ class StaticActivity extends React.Component {
           <p>{allContent.content.text2}</p>
         </div>
         <div className="button-container p-3">
-          <button
-            className="spon-button text-white rounded w-100 mt-0 mx-auto"
-            onClick={() => this.props.history.goBack()}
-          >
-          Back
-          </button>
+          <Link to="/">
+            <button
+              className="spon-button text-white rounded w-100 mt-0 mx-auto">
+              Back
+            </button>
+          </Link>
         </div>
       </div>
     );
