@@ -8,17 +8,17 @@ class Carousel extends React.Component {
       currentCard: 1,
       position: 0,
       maxCards: 6,
-      activities: []
+      activities: [],
+      timer: null
     };
-    this.startTimer = this.startTimer.bind(this);
+    // this.startTimer = this.startTimer.bind(this);
     this.moveBackward = this.moveBackward.bind(this);
     this.moveForward = this.moveForward.bind(this);
     this.getPosition = this.getPosition.bind(this);
-    this.startTimer();
   }
 
   startTimer() {
-    setInterval(this.moveForward, 5000);
+    this.setState({ timer: setInterval(this.moveForward, 5000) });
   }
 
   moveBackward() {
@@ -70,6 +70,14 @@ class Carousel extends React.Component {
       }
     }
     return position;
+  }
+
+  componentDidMount() {
+    this.startTimer();
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.timer);
   }
 
   render() {
