@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className="footer py-5 border-top bg-white">
+    <div className="footer py-5 border-top bg-white fade-in">
       <div className="d-flex justify-content-center">
         <img src="/assets/images/logo-footer.png" className="footer-logo" />
         <h3 className="h4 font-color ml-3 my-auto">Spontaneous.ly</h3>

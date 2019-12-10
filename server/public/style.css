@@ -57,7 +57,7 @@ body {
   background-color: #F07070;
   justify-content: space-between;
   padding: 1rem;
-  z-index: 1100;
+  z-index: 2000;
 }
 
 .footer {
