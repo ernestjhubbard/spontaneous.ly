@@ -60,40 +60,26 @@ class ProfilePage extends React.Component {
               className="spon-button rounded text-white col-12"
               onClick={() => {
                 this.props.history.push(`/upcoming-activities?${userParams}`);
-              }}
-            >
+              }} >
               Upcoming Adventures
             </button>
             <button
               className="spon-button rounded text-white col-12"
               onClick={() => {
                 this.props.history.push(`/past-activities?${userParams}`);
-              }}
-            >
+              }} >
               Past Adventures
             </button>
-            <div className="calc-button-50">
-              <button
-                className="spon-button rounded text-white"
-                onClick={() => {
-                  this.props.history.push(`/friends?${userParams}`);
-                }}
-              >
+            <button
+              className="spon-button rounded text-white col-12"
+              onClick={() => {
+                this.props.history.push(`/friends?${userParams}`);
+              }} >
                 Friends
-              </button>
-              <button
-                className="spon-button rounded text-white"
-                onClick={() => {
-                  this.props.history.push(`/messages?${userParams}`);
-                }}
-              >
-                Messages
-              </button>
-            </div>
+            </button>
             <button
               className="spon-button-alt rounded w-100 mx-auto"
-              onClick={() => this.props.history.goBack()}
-            >
+              onClick={() => this.props.history.goBack()} >
               Back
             </button>
           </div>
