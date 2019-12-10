@@ -180,6 +180,7 @@ body {
   position: absolute;
   transition: .3s all;
   cursor: pointer;
+  display: flex;
 }
 
 .arrow:hover {
