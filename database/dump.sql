@@ -71,30 +71,6 @@ INSERT INTO `friendRequests` VALUES (1,2,1,0),(2,1,1,0),(72,4,1,0),(4,72,1,0),(7
 UNLOCK TABLES;
 
 --
--- Table structure for table `logins`
---
-
-DROP TABLE IF EXISTS `logins`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `logins` (
-  `loginId` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
-  PRIMARY KEY (`loginId`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `logins`
---
-
-LOCK TABLES `logins` WRITE;
-/*!40000 ALTER TABLE `logins` DISABLE KEYS */;
-INSERT INTO `logins` VALUES (1,4),(2,4),(3,1),(4,4),(5,4),(6,4),(7,4),(8,1),(9,2),(10,2),(11,3),(12,3),(13,4),(14,4),(15,3),(16,1),(17,4),(18,3),(19,4),(20,4),(21,4),(22,4),(23,12),(24,4),(25,4),(26,4),(27,4),(28,4),(29,1),(30,1),(31,4),(32,4),(33,4),(34,4),(35,4),(36,2),(37,1),(38,4),(39,5),(40,5),(41,4),(42,4),(43,4),(44,4),(45,4),(46,1),(47,1),(48,13),(49,3),(50,2),(51,2),(52,4),(53,2),(54,2),(55,2),(56,2),(57,2),(58,2),(59,2),(60,2),(61,1),(62,2),(63,2),(64,2),(65,5),(66,5),(67,3),(68,63),(69,67),(70,68),(71,68),(72,68),(73,68),(74,68),(75,68),(76,68),(77,68),(78,68),(79,68),(80,68),(81,68),(82,68),(83,68),(84,68),(85,68),(86,1),(87,2),(88,3),(89,1),(90,69),(91,1),(92,4),(93,1),(94,2);
-/*!40000 ALTER TABLE `logins` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `messages`
 --
 
@@ -206,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-10  4:05:41
+-- Dump completed on 2019-12-10  4:09:25
