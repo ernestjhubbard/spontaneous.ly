@@ -49,7 +49,8 @@ class MessageFriend extends React.Component {
                 name="message"
                 onChange={this.handleChange}
                 value={this.state.message}
-                type="text" />
+                type="text"
+                autoComplete="off"/>
               <div className="input-group-append">
                 <button
                   type="submit"
@@ -109,7 +110,7 @@ class MessageFriend extends React.Component {
       }
     };
     fetch(`/api/messages?${friendId}`, userConfig)
-      .then(results => results.json())
+      .then(results => { return results.json(); })
       .then(message => this.setState({ messages: this.state.messages.concat(message) }));
   }
 

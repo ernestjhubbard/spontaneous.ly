@@ -79,9 +79,6 @@ function SignedInLinkList(props) {
           <NavLink to={`/friends?userId=${props.user.userId}`}>View Friends</NavLink>
         </li>
         <li>
-          <NavLink to={`/friends?userId=${props.user.userId}`}>Read Messages</NavLink>
-        </li>
-        <li>
           <NavLink onClick={props.signOut} to="/sign-in">Sign Out</NavLink>
         </li>
       </ul>
