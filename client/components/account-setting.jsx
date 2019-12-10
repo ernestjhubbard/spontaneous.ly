@@ -84,7 +84,7 @@ class AccountSetting extends React.Component {
             </div>
             <div>
               <label className="account-setting-text">Upload Profile Picture:</label>
-              <div className="custom-file">
+              <div className="custom-file filename">
                 <input type="file"
                   name="userUpload"
                   onChange={this.fileUpload}
