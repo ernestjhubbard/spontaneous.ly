@@ -1,4 +1,5 @@
 import React from 'react';
+import NoActivitiesModal from './no-activities-modal';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -73,6 +74,9 @@ class Carousel extends React.Component {
 
   render() {
     const currentPosition = this.getPosition();
+    if (this.props.activities.length === 0) {
+      return <NoActivitiesModal {...this.props}/>;
+    }
     const activityCard = this.props.activities.map(activity => {
       return (
         <div
