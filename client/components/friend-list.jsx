@@ -31,6 +31,7 @@ class FriendList extends React.Component {
         acceptRequest={this.acceptRequest}
       />
     );
+
     return (
       <div className="container align-center my-5">
         <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
@@ -71,14 +72,14 @@ class FriendList extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    this.setState({ friends: [] });
+    this.setState({ friends: [], whichClicked: 'All Friends' });
     fetch(`/api/friends?isAccepted=${isAccepted}`, config)
       .then(results => results.json())
       .then(data => data.map(friend => this.setState({ friends: this.state.friends.concat(friend) })));
   }
 
   checkPending(isPending) {
-    this.setState({ friends: [] });
+    this.setState({ friends: [], whichClicked: 'Pending Requests' });
     fetch(`api/friends?isPending=${isPending}`)
       .then(results => results.json())
       .then(data =>

@@ -17,7 +17,7 @@ if ($request['method'] === 'GET') {
 
 if ($request['method'] === 'POST') {
   if (isset($_SESSION['user_id'])) {
-    unset($_SESSION['user_id']);
+    session_destroy();
   } else {
     $email = $request['body']['email'];
     $password = $request['body']['password'];
