@@ -55,7 +55,8 @@ DROP TABLE IF EXISTS `friendRequests`;
 CREATE TABLE `friendRequests` (
   `senderId` int(11) NOT NULL,
   `recipientId` int(11) NOT NULL,
-  `isAccepted` tinyint(1) NOT NULL
+  `isAccepted` tinyint(1) NOT NULL,
+  `isPending` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -65,32 +66,8 @@ CREATE TABLE `friendRequests` (
 
 LOCK TABLES `friendRequests` WRITE;
 /*!40000 ALTER TABLE `friendRequests` DISABLE KEYS */;
-INSERT INTO `friendRequests` VALUES (4,1,1),(1,4,1),(4,2,1),(2,4,1),(4,3,1),(3,4,1);
+INSERT INTO `friendRequests` VALUES (1,2,1,0),(2,1,1,0),(72,4,1,0),(4,72,1,0),(76,77,1,0),(77,76,1,0),(76,77,0,1),(77,76,0,0);
 /*!40000 ALTER TABLE `friendRequests` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `logins`
---
-
-DROP TABLE IF EXISTS `logins`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `logins` (
-  `loginId` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
-  PRIMARY KEY (`loginId`)
-) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `logins`
---
-
-LOCK TABLES `logins` WRITE;
-/*!40000 ALTER TABLE `logins` DISABLE KEYS */;
-INSERT INTO `logins` VALUES (1,4),(2,4),(3,1),(4,4),(5,4),(6,4),(7,4),(8,1),(9,2),(10,2),(11,3),(12,3),(13,4),(14,4),(15,3),(16,1),(17,4),(18,3),(19,4),(20,4),(21,4),(22,4),(23,12),(24,4),(25,4),(26,4),(27,4),(28,4),(29,1),(30,1),(31,4),(32,4),(33,4),(34,4),(35,4),(36,2),(37,1),(38,4),(39,5),(40,5),(41,4),(42,4),(43,4),(44,4),(45,4),(46,1),(47,1),(48,13),(49,3),(50,2),(51,2),(52,4),(53,2),(54,2),(55,2),(56,2),(57,2),(58,2),(59,2),(60,2),(61,1),(62,2),(63,2),(64,2),(65,5),(66,5),(67,3),(68,63),(69,67),(70,68),(71,68),(72,68),(73,68),(74,68),(75,68),(76,68),(77,68),(78,68),(79,68),(80,68),(81,68),(82,68),(83,68),(84,68),(85,68),(86,1),(87,2),(88,3),(89,1),(90,69),(91,1),(92,4),(93,1),(94,2);
-/*!40000 ALTER TABLE `logins` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -140,7 +117,7 @@ CREATE TABLE `points` (
 
 LOCK TABLES `points` WRITE;
 /*!40000 ALTER TABLE `points` DISABLE KEYS */;
-INSERT INTO `points` VALUES (1,15,'reservation'),(1,15,'reservation'),(1,15,'reservation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-25,'re-roll'),(1,-25,'re-roll'),(1,-25,'re-roll'),(68,44,'reservation'),(68,40,'reservation'),(68,39,'reservation'),(68,42,'reservation'),(68,39,'reservation'),(68,45,'reservation'),(68,43,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(2,40,'reservation'),(3,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(69,44,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(1,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,-25,'reroll');
+INSERT INTO `points` VALUES (1,15,'reservation'),(1,15,'reservation'),(1,15,'reservation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-50,'cancellation'),(1,-25,'re-roll'),(1,-25,'re-roll'),(1,-25,'re-roll'),(68,44,'reservation'),(68,40,'reservation'),(68,39,'reservation'),(68,42,'reservation'),(68,39,'reservation'),(68,45,'reservation'),(68,43,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(2,40,'reservation'),(3,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(1,40,'reservation'),(69,44,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(4,40,'reservation'),(1,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,40,'reservation'),(2,-25,'reroll'),(4,-25,'reroll');
 /*!40000 ALTER TABLE `points` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,7 +141,7 @@ CREATE TABLE `reservations` (
 
 LOCK TABLES `reservations` WRITE;
 /*!40000 ALTER TABLE `reservations` DISABLE KEYS */;
-INSERT INTO `reservations` VALUES (4,89,0),(4,53,0),(4,39,0),(4,43,0),(4,11,0),(4,88,0),(4,87,0),(4,45,0),(4,47,0),(1,39,0),(2,39,0);
+INSERT INTO `reservations` VALUES (4,89,0),(4,53,0),(4,39,0),(4,43,0),(4,11,0),(4,88,0),(4,87,0),(4,45,0),(4,47,0),(1,39,0),(2,39,0),(4,40,0);
 /*!40000 ALTER TABLE `reservations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -183,7 +160,7 @@ CREATE TABLE `users` (
   `password` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,7 +169,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Laurence','Baldwin','lbaldwin@learningfuze.com','$2y$10$7.g.wDpXNeHP9uC5bMt.Ku.gAPgnhMJeSQXJIyf0lAfltZwHxlkTK','laurence.png'),(2,'Bernadette','Garza','bgarza@learningfuze.com','$2y$10$sTKIAf7JwVOpNlFfOY8EqOu7Ly5NEfRk4iOM6oPQ1Vpir6n6xPtLa','bernadette.png'),(3,'Enrique','Ramos','eramos@learningfuze.com','$2y$10$N/IfXKrBYylBIohhJpRAV.DEllWHV7cksrzDbO.YLdyh2S2YxJ2ka','enrique.png'),(4,'Laverne','Pratt','lpratt@learningfuze.com','$2y$10$EnQbA6cL9PUX0oFmFjRMveVLlYZtdnDdPDWd3NwpDb3z58QNG.iQ.','laverne.png'),(70,'joe','joe','joe@joe.com','$2y$10$d5JCBWoW0RtaO6t9B68Lh.KbHEu9XRA3mAEt13aIcaMYm8XncDnTW','joe.jpg');
+INSERT INTO `users` VALUES (1,'Laurence','Baldwin','lbaldwin@learningfuze.com','$2y$10$7.g.wDpXNeHP9uC5bMt.Ku.gAPgnhMJeSQXJIyf0lAfltZwHxlkTK','laurence.png'),(2,'Bernadette','Garza','bgarza@learningfuze.com','$2y$10$sTKIAf7JwVOpNlFfOY8EqOu7Ly5NEfRk4iOM6oPQ1Vpir6n6xPtLa','bernadette.png'),(3,'Enrique','Ramos','eramos@learningfuze.com','$2y$10$N/IfXKrBYylBIohhJpRAV.DEllWHV7cksrzDbO.YLdyh2S2YxJ2ka','enrique.png'),(4,'Laverne','Pratt','lpratt@learningfuze.com','$2y$10$EnQbA6cL9PUX0oFmFjRMveVLlYZtdnDdPDWd3NwpDb3z58QNG.iQ.','laverne.png'),(70,'joe','joe','joe@joe.com','$2y$10$d5JCBWoW0RtaO6t9B68Lh.KbHEu9XRA3mAEt13aIcaMYm8XncDnTW','joe.jpg'),(71,'Lily','Potter','lpotter@lfz.com','$2y$10$N2BvOcA4WWv3M2kt/CiMVO7QNM9QxsBbyXweUWScCbDwHn4jdrVfq','op_432.png'),(72,'Jameson','Hill','jhill@lfz.com','$2y$10$QW0u0s6RKkRpnRsfEkCy6uCFdvwilkiaAKIK/Gq/hMH/Z.a6naHpq','skynews-sam-smith-singer_4612788.jpg'),(73,'Huey','Duck','hduck@lfz.com','$2y$10$Mm/iKMu0S0SI6ssy4bQadOEGd9iAcqIU.gyro6hjpo.CEOpDjw62a','Huey_Ducktales.png'),(74,'Dewey','Duck','dduck@lfz.com','$2y$10$n4qHLA0GF12TlTeLHWeYyOhRFtanQYQ034ggJocX6E9zW9QDX5wVW','Dewey_Ducktales.png'),(75,'Louie','Duck','lduck@lfz.com','$2y$10$zDKufrc9PG8v0ZzADLQ.I.xVRAYLpGkkFH2WEyT5OUZNiAAfBCyvG','Louie_Duck.png'),(76,'Billy Bob','Thorton','bthorton@learningfuze.com','$2y$10$hezJ.cb35O9bwi2WO/elsuwyYxOp0ajR7CtsLtKmwJPzTU7kHiMXy','2018-10-11-billy-bob-thornton.jpg'),(77,'Emma','Thorn','emma@lfz.com','$2y$10$rnlDIVKmWBGLMGDou7YzA.A9tnOadf0S9z4YEwh83xj5yNFQLQK0u','Emma_Stone_at_the_39th_Mill_Valley_Film_Festival_(cropped).jpg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -205,4 +182,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-07 10:56:22
+-- Dump completed on 2019-12-10  4:09:25

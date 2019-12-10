@@ -8,6 +8,9 @@ class FriendList extends React.Component {
       friends: [],
       friendClicked: null
     };
+    this.getFriends = this.getFriends.bind(this);
+    this.checkPending = this.checkPending.bind(this);
+    this.acceptRequest = this.acceptRequest.bind(this);
   }
 
   render() {
@@ -15,12 +18,16 @@ class FriendList extends React.Component {
     const friendsArray = friends.map((friend, index) =>
       <Friend
         key={index}
+        isAccepted={friend.isAccepted}
+        user={this.props.user.userId}
         pushMessage={this.props.history.push}
         clickFriend={this.clickFriend}
+        senderId={friend.senderId}
         recipientId={friend.userId}
         image={friend.image}
         firstName={friend.firstName}
         lastName={friend.lastName}
+        acceptRequest={this.acceptRequest}
       />
     );
     return (
@@ -28,10 +35,10 @@ class FriendList extends React.Component {
         <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
         <div className="d-flex justify-content-between">
           <h4 className="">
-            <span className="badge viewing">All Friends</span>
+            <span className="badge viewing" onClick={() => this.getFriends(1)}>All Friends</span>
           </h4>
           <h4 className="">
-            <span className="badge">Pending Requests</span>
+            <span className="badge" onClick={() => this.checkPending(1)}>Pending Requests</span>
           </h4>
         </div>
         <div>{friendsArray}</div>
@@ -48,19 +55,31 @@ class FriendList extends React.Component {
   }
 
   componentDidMount() {
-    this.getFriends();
+    this.getFriends(1);
   }
 
-  getFriends() {
+  getFriends(isAccepted) {
     const config = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/friends', config)
+    this.setState({ friends: [] });
+    fetch(`/api/friends?isAccepted=${isAccepted}`, config)
       .then(results => results.json())
       .then(data => data.map(friend => this.setState({ friends: this.state.friends.concat(friend) })));
+  }
+
+  checkPending(isPending) {
+    this.setState({ friends: [] });
+    fetch(`api/friends?isPending=${isPending}`)
+      .then(results => results.json())
+      .then(data =>
+        data.map(request =>
+          this.setState({ friends: this.state.friends.concat(request) })
+        )
+      );
   }
 
   getFriendMessages(friendId) {
@@ -78,6 +97,18 @@ class FriendList extends React.Component {
   clickFriend(friendId) {
     this.setState({ friendClicked: friendId });
   }
-}
 
+  acceptRequest({ recipientId }) {
+    const config = {
+      method: 'PUT',
+      body: JSON.stringify({ recipientId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/friends', config)
+      .then(results => results.json());
+    this.checkPending();
+  }
+}
 export default FriendList;
