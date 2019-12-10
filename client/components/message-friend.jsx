@@ -43,22 +43,19 @@ class MessageFriend extends React.Component {
             onSubmit={() => {
               this.sendMessage({ recipientId, message });
               this.setState({ message: '' });
-            }}
-          >
+            }} >
             <div className="input-group">
               <input
                 className="form-control form-control-lg"
                 name="message"
                 onChange={this.handleChange}
                 value={this.state.message}
-                type="text"
-              />
+                type="text" />
               <div className="input-group-append">
                 <button
                   type="submit"
                   className="input-group-append send-button spon-button rounded text-white mt-0"
-                  value="Submit"
-                >
+                  value="Submit" >
                   Send
                 </button>
               </div>
