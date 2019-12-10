@@ -4,8 +4,8 @@ $link = get_db_link();
 $user_id = $_SESSION['user_id'];
 
 if ($request['method'] === 'GET') {
-    if(isset($request['query']['recipientId'])){
-      $recipient_id = $request['query']['recipientId'];
+    if(isset($request['query']['friendId'])){
+      $recipient_id = $request['query']['friendId'];
       $sql_messages = "SELECT *
                          FROM messages
                            AS m
@@ -22,8 +22,8 @@ if ($request['method'] === 'GET') {
       $response['body'] = $messages;
       send($response);
     }
-    else if (isset($request['query']['userId'])){
-      $friend_id = $request['query']['userId'];
+    else if (isset($request['query']['getFriendId'])){
+      $friend_id = $request['query']['getFriendId'];
       $sql_friend = "SELECT firstName, lastName, image, userId
                        FROM users
                       WHERE $friend_id = userId";

@@ -6,8 +6,8 @@ if ($request['method'] === 'GET') {
   if (isset($request['query']['userId'])) {
     $user_id = $request['query']['userId'];
   }
-    $isAccepted = $request['query']['isAccepted'];
-    $sql_get_friends = "SELECT firstName, lastName, image, userId
+  $isAccepted = $request['query']['isAccepted'];
+  $sql_get_friends = "SELECT firstName, lastName, image, userId, f.recipientId, f.senderId, f.isAccepted
                           FROM users
                             AS u
                           JOIN friendRequests
@@ -16,14 +16,14 @@ if ($request['method'] === 'GET') {
                          WHERE f.isAccepted = $isAccepted
                            AND f.senderId = $user_id
                            AND u.userId != $user_id";
-    $friends_query = mysqli_query($link, $sql_get_friends);
-    $output = [];
-    while($row = mysqli_fetch_assoc($friends_query)){
-      $output[] = $row;
-    }
-    $response['body'] = $output;
-    send($response);
+  $friends_query = mysqli_query($link, $sql_get_friends);
+  $output = [];
+  while ($row = mysqli_fetch_assoc($friends_query)) {
+    $output[] = $row;
   }
+  $response['body'] = $output;
+  send($response);
+}
 
 if ($request['method'] === 'POST') {
     $sender_id = $request['body']['senderId'];

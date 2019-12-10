@@ -15,8 +15,11 @@ class FriendList extends React.Component {
     const friendsArray = friends.map((friend, index) =>
       <Friend
         key={index}
+        isAccepted={friend.isAccepted}
+        user={this.props.user.userId}
         pushMessage={this.props.history.push}
         clickFriend={this.clickFriend}
+        senderId={friend.senderId}
         recipientId={friend.userId}
         image={friend.image}
         firstName={friend.firstName}
@@ -28,10 +31,10 @@ class FriendList extends React.Component {
         <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
         <div className="d-flex justify-content-between">
           <h4 className="">
-            <span className="badge viewing">All Friends</span>
+            <span className="badge viewing" onClick={() => this.getFriends(1)}>All Friends</span>
           </h4>
           <h4 className="">
-            <span className="badge">Pending Requests</span>
+            <span className="badge" onClick={() => this.getFriends(0)}>Pending Requests</span>
           </h4>
         </div>
         <div>{friendsArray}</div>
@@ -51,14 +54,15 @@ class FriendList extends React.Component {
     this.getFriends();
   }
 
-  getFriends() {
+  getFriends(isAccepted = 1) {
     const config = {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/friends', config)
+    this.setState({ friends: [] });
+    fetch(`/api/friends?isAccepted=${isAccepted}`, config)
       .then(results => results.json())
       .then(data => data.map(friend => this.setState({ friends: this.state.friends.concat(friend) })));
   }
@@ -79,5 +83,4 @@ class FriendList extends React.Component {
     this.setState({ friendClicked: friendId });
   }
 }
-
 export default FriendList;

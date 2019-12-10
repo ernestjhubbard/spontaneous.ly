@@ -69,6 +69,11 @@ class MessageFriend extends React.Component {
     );
   }
 
+  getSearchParams() {
+    const searchParams = new URLSearchParams(window.location.search);
+    return searchParams.toString();
+  }
+
   sendMessage({ recipientId, message }) {
     event.preventDefault();
     const userConfig = {
@@ -85,12 +90,14 @@ class MessageFriend extends React.Component {
   }
 
   componentDidMount() {
-    const recipientId = this.props.user.userId;
-    this.retrieveMessages(recipientId);
-    this.getFriend(recipientId);
+    const friend = this.getSearchParams();
+    const friendIdIndex = friend.indexOf('=');
+    const friendId = friend.slice(friendIdIndex + 1, friend.length);
+    this.retrieveMessages(friend);
+    this.getFriend(friendId);
   }
 
-  retrieveMessages(recipientId) {
+  retrieveMessages(friendId) {
     event.preventDefault();
     this.setState({ messages: [] });
     const userConfig = {
@@ -99,7 +106,7 @@ class MessageFriend extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch(`/api/messages?recipientId=${recipientId}`, userConfig)
+    fetch(`/api/messages?${friendId}`, userConfig)
       .then(results => results.json())
       .then(data => this.setState({ messages: this.state.messages.concat(data) }));
   }
@@ -111,7 +118,7 @@ class MessageFriend extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch(`/api/messages?userId=${friendId}`, userConfig)
+    fetch(`/api/messages?getFriendId=${friendId}`, userConfig)
       .then(results => results.json())
       .then(friend => this.setState({ friend }));
   }
