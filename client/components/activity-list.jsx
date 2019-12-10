@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from './carousel';
 import Footer from './footer';
+import NoActivitiesModal from './no-activities-modal';
 
 export default class ActivityList extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ export default class ActivityList extends React.Component {
           </div>
         </div>
         <div className="container-fluid my-5">
-          <Carousel {...this.props} activities={this.state.activities} getAttendees={this.props.getAttendees} />
+          {this.state.activities.length ? <Carousel {...this.props} activities={this.state.activities} getAttendees={this.props.getAttendees} /> : <NoActivitiesModal {...this.props} />}
           <p className="text-center">Not happy with these choices?</p>
           <p className="text-center">
             <a href="" className="reroll" onClick={() => {
@@ -44,7 +45,7 @@ export default class ActivityList extends React.Component {
             </a>
           </p>
         </div>
-        <Footer />
+        {this.state.activities.length ? <Footer /> : null}
       </div>
     );
   }

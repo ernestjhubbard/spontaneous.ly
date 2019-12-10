@@ -1,5 +1,4 @@
 import React from 'react';
-import NoActivitiesModal from './no-activities-modal';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -11,7 +10,7 @@ class Carousel extends React.Component {
       activities: [],
       timer: null
     };
-    // this.startTimer = this.startTimer.bind(this);
+    this.startTimer = this.startTimer.bind(this);
     this.moveBackward = this.moveBackward.bind(this);
     this.moveForward = this.moveForward.bind(this);
     this.getPosition = this.getPosition.bind(this);
@@ -82,9 +81,6 @@ class Carousel extends React.Component {
 
   render() {
     const currentPosition = this.getPosition();
-    if (this.props.activities.length === 0) {
-      return <NoActivitiesModal {...this.props}/>;
-    }
     const activityCard = this.props.activities.map(activity => {
       return (
         <div
@@ -99,8 +95,7 @@ class Carousel extends React.Component {
               onClick={() => {
                 const activityId = activity.activityId;
                 this.props.history.push(`/activity-details?activityId=${activityId}`);
-              }
-              }>Learn More</button>
+              }}>Learn More</button>
           </div>
         </div>
       );
@@ -114,10 +109,10 @@ class Carousel extends React.Component {
         </div>
         <div className="indicator">{currentPosition.currentImageArray}</div>
         <button className="arrow left" onClick={this.moveBackward}>
-          ←
+          <i className="fas fa-arrow-left m-auto"></i>
         </button>
         <button className="arrow right" onClick={this.moveForward}>
-          →
+          <i className="fas fa-arrow-right m-auto"></i>
         </button>
       </div>
     );
