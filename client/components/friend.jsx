@@ -11,7 +11,7 @@ export default function Friend(props) {
       <div className="send-message d-flex ml-3">
         <i
           className="fas fa-paper-plane fa-2x adventure-card m-auto"
-          onClick={() => props.pushMessage(`/messages/friend?userId=${props.recipientId}`)} />
+          onClick={() => props.pushMessage(`/messages?friendId=${props.recipientId}`)} />
       </div>
     </div>
   );
