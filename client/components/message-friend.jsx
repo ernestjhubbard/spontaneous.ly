@@ -12,6 +12,8 @@ class MessageFriend extends React.Component {
     this.retrieveMessages = this.retrieveMessages.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.getSearchParams = this.getSearchParams.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
@@ -40,10 +42,7 @@ class MessageFriend extends React.Component {
         </div>
         <div className="fixed-bottom border-top p-3 bg-white">
           <form
-            onSubmit={() => {
-              this.sendMessage({ recipientId, message });
-              this.setState({ message: '' });
-            }} >
+            onSubmit={() => this.handleSubmit(event, recipientId, message)} >
             <div className="input-group">
               <input
                 className="form-control form-control-lg"
@@ -66,13 +65,20 @@ class MessageFriend extends React.Component {
     );
   }
 
+  handleSubmit(event, recipientId, message) {
+    event.preventDefault();
+    const friend = this.getSearchParams();
+    this.sendMessage({ recipientId, message });
+    this.setState({ message: '' });
+    this.retrieveMessages(friend);
+  }
+
   getSearchParams() {
     const searchParams = new URLSearchParams(window.location.search);
     return searchParams.toString();
   }
 
   sendMessage({ recipientId, message }) {
-    event.preventDefault();
     const userConfig = {
       method: 'POST',
       body: JSON.stringify({ recipientId, message }),
@@ -95,7 +101,6 @@ class MessageFriend extends React.Component {
   }
 
   retrieveMessages(friendId) {
-    event.preventDefault();
     this.setState({ messages: [] });
     const userConfig = {
       method: 'GET',
@@ -105,7 +110,7 @@ class MessageFriend extends React.Component {
     };
     fetch(`/api/messages?${friendId}`, userConfig)
       .then(results => results.json())
-      .then(data => this.setState({ messages: this.state.messages.concat(data) }));
+      .then(message => this.setState({ messages: this.state.messages.concat(message) }));
   }
 
   getFriend(friendId) {

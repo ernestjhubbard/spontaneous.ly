@@ -242,7 +242,7 @@ class App extends React.Component {
             <Route exact path="/adventures" render={props => <StaticActivity {...props} />} />
             <Route exact path="/friends" render={props => <FriendList {...props}
               user={this.state.user} />} />
-            <Route exact path="/messages/friend" render={props => <MessageFriend {...props}
+            <Route exact path="/messages" render={props => <MessageFriend {...props}
               user={this.state.user} />} />
             <Route exact path="/account-settings" render={props => <AccountSetting {...props}
               user={this.state.user} />} />
