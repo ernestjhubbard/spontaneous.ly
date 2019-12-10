@@ -6,7 +6,8 @@ class FriendList extends React.Component {
     super(props);
     this.state = {
       friends: [],
-      friendClicked: null
+      friendClicked: null,
+      whichClicked: 'All Friends'
     };
     this.getFriends = this.getFriends.bind(this);
     this.checkPending = this.checkPending.bind(this);
@@ -30,15 +31,21 @@ class FriendList extends React.Component {
         acceptRequest={this.acceptRequest}
       />
     );
+
     return (
       <div className="container align-center my-5">
         <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
         <div className="d-flex justify-content-between">
           <h4 className="">
-            <span className="badge viewing" onClick={() => this.getFriends(1)}>All Friends</span>
+            <span
+              className={this.state.whichClicked === 'All Friends' ? 'badge viewing' : 'badge'}
+              onClick={() => this.getFriends(1)}>All Friends
+            </span>
           </h4>
           <h4 className="">
-            <span className="badge" onClick={() => this.checkPending(1)}>Pending Requests</span>
+            <span
+              className={this.state.whichClicked === 'Pending Requests' ? 'badge viewing' : 'badge'}
+              onClick={() => this.checkPending(1)}>Pending Requests</span>
           </h4>
         </div>
         <div>{friendsArray}</div>
@@ -65,14 +72,14 @@ class FriendList extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    this.setState({ friends: [] });
+    this.setState({ friends: [], whichClicked: 'All Friends' });
     fetch(`/api/friends?isAccepted=${isAccepted}`, config)
       .then(results => results.json())
       .then(data => data.map(friend => this.setState({ friends: this.state.friends.concat(friend) })));
   }
 
   checkPending(isPending) {
-    this.setState({ friends: [] });
+    this.setState({ friends: [], whichClicked: 'Pending Requests' });
     fetch(`api/friends?isPending=${isPending}`)
       .then(results => results.json())
       .then(data =>
