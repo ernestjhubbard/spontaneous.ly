@@ -45,8 +45,6 @@ if ($request['method'] === 'GET') {
     }
 }
 
-
-
 if ($request['method'] === 'POST') {
     $sender_id = $request['body']['senderId'];
     $recipient_id = $request['body']['recipientId'];

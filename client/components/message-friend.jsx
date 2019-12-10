@@ -12,6 +12,8 @@ class MessageFriend extends React.Component {
     this.retrieveMessages = this.retrieveMessages.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+    this.getSearchParams = this.getSearchParams.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   render() {
@@ -29,36 +31,30 @@ class MessageFriend extends React.Component {
     );
     return (
       <div className="container position-relative fade-in">
-        <div className="text-center d-flex mt-5 mb-3 justify-content-around">
-          <div className="back-chevron rounded border d-flex" onClick={() => this.props.history.goBack()}>
+        <div className="text-center d-flex mt-5 mb-3 justify-content-around position-relative">
+          <div className="back-chevron rounded border d-flex position-absolute" onClick={() => this.props.history.goBack()}>
             <i className="fas fa-chevron-left m-auto"></i>
           </div>
-          <h4 className="ml-3 my-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
+          <h4 className="m-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
         <div className="message-container position-absolute col-12">
           {messages}
         </div>
         <div className="fixed-bottom border-top p-3 bg-white">
           <form
-            onSubmit={() => {
-              this.sendMessage({ recipientId, message });
-              this.setState({ message: '' });
-            }}
-          >
+            onSubmit={() => this.handleSubmit(event, recipientId, message)} >
             <div className="input-group">
               <input
                 className="form-control form-control-lg"
                 name="message"
                 onChange={this.handleChange}
                 value={this.state.message}
-                type="text"
-              />
+                type="text" />
               <div className="input-group-append">
                 <button
                   type="submit"
                   className="input-group-append send-button spon-button rounded text-white mt-0"
-                  value="Submit"
-                >
+                  value="Submit" >
                   Send
                 </button>
               </div>
@@ -69,8 +65,20 @@ class MessageFriend extends React.Component {
     );
   }
 
-  sendMessage({ recipientId, message }) {
+  handleSubmit(event, recipientId, message) {
     event.preventDefault();
+    const friend = this.getSearchParams();
+    this.sendMessage({ recipientId, message });
+    this.setState({ message: '' });
+    this.retrieveMessages(friend);
+  }
+
+  getSearchParams() {
+    const searchParams = new URLSearchParams(window.location.search);
+    return searchParams.toString();
+  }
+
+  sendMessage({ recipientId, message }) {
     const userConfig = {
       method: 'POST',
       body: JSON.stringify({ recipientId, message }),
@@ -81,17 +89,18 @@ class MessageFriend extends React.Component {
     fetch('/api/messages', userConfig)
       .then(results => results.json())
       .then(data => data);
-    this.retrieveMessages({ recipientId });
+    this.retrieveMessages(recipientId);
   }
 
   componentDidMount() {
-    const recipientId = this.props.user.userId;
-    this.retrieveMessages(recipientId);
-    this.getFriend(recipientId);
+    const friend = this.getSearchParams();
+    const friendIdIndex = friend.indexOf('=');
+    const friendId = friend.slice(friendIdIndex + 1, friend.length);
+    this.retrieveMessages(friend);
+    this.getFriend(friendId);
   }
 
-  retrieveMessages(recipientId) {
-    event.preventDefault();
+  retrieveMessages(friendId) {
     this.setState({ messages: [] });
     const userConfig = {
       method: 'GET',
@@ -99,9 +108,9 @@ class MessageFriend extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch(`/api/messages?recipientId=${recipientId}`, userConfig)
+    fetch(`/api/messages?${friendId}`, userConfig)
       .then(results => results.json())
-      .then(data => this.setState({ messages: this.state.messages.concat(data) }));
+      .then(message => this.setState({ messages: this.state.messages.concat(message) }));
   }
 
   getFriend(friendId) {
@@ -111,7 +120,7 @@ class MessageFriend extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch(`/api/messages?userId=${friendId}`, userConfig)
+    fetch(`/api/messages?getFriendId=${friendId}`, userConfig)
       .then(results => results.json())
       .then(friend => this.setState({ friend }));
   }

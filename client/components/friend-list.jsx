@@ -111,5 +111,4 @@ class FriendList extends React.Component {
     this.checkPending();
   }
 }
-
 export default FriendList;
