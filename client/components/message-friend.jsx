@@ -83,7 +83,7 @@ class MessageFriend extends React.Component {
     fetch('/api/messages', userConfig)
       .then(results => results.json())
       .then(data => data);
-    this.retrieveMessages({ recipientId });
+    this.retrieveMessages(recipientId);
   }
 
   componentDidMount() {
