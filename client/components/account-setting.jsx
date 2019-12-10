@@ -16,6 +16,7 @@ class AccountSetting extends React.Component {
       validPassword: true
     };
     this.updateInfo = this.updateInfo.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.uploadHandler = this.uploadHandler.bind(this);
     this.fileUpload = this.fileUpload.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -29,13 +30,7 @@ class AccountSetting extends React.Component {
     return (
       <div className="container my-5">
         <h4 className="d-flex justify-content-center mb-4">Account Settings</h4>
-        <form onSubmit={() => {
-          event.preventDefault();
-          if (this.state.userUpload.lastModified) {
-            this.uploadHandler();
-          }
-          this.updateInfo(this.state);
-        }}>
+        <form onSubmit={this.handleSubmit}>
           <div className="input-group input-group-sm mb-3">
             <label className="account-setting-text">First Name:</label>
             <div className="input-group mb-3">
@@ -119,6 +114,16 @@ class AccountSetting extends React.Component {
     );
   }
 
+  handleSubmit() {
+    event.preventDefault();
+    if (Object.getOwnPropertyNames(this.state.userUpload).length === 0) {
+      this.updateInfo(this.state);
+    } else {
+      this.uploadHandler();
+    }
+    this.props.history.push(`/profile?${this.props.user.userId}`);
+  }
+
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
 
@@ -177,6 +182,7 @@ class AccountSetting extends React.Component {
       .then(data => data);
     const image = this.state.image;
     this.updateInfo({ image });
+    this.updateInfo(this.state);
     this.props.history.goBack();
   }
 
