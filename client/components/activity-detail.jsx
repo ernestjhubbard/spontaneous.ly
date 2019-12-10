@@ -183,6 +183,7 @@ function ConfirmOrCancelButton(props) {
       onClick={() => {
         props.reserve({ activityId: props.activityId });
         props.history.push(`/confirmed?activityId=${props.activityId}`);
+        props.transaction({ transactionType: 'reservation', activityId: props.activityId });
       }}>
       Confirm
     </button>

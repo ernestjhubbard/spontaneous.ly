@@ -222,8 +222,7 @@ class App extends React.Component {
               activityType={'Upcoming'} />} />
             <Route exact path="/past-activities" render={props => <UpcomingOrPastActivities {...props}
               fetchActivity={this.fetchDetail}
-              activityType={'Past'}
-              getAttendees={this.getAttendees}/>} />
+              activityType={'Past'} />} />
             <Route exact path="/confirmed" render={props => <ConfirmActivity {...props}
               attendees={this.state.usersAttending}
               activity={this.state.activityData}
@@ -234,8 +233,8 @@ class App extends React.Component {
               user={this.state.user}
               activity={this.state.activityData}
               fetchDetail={this.fetchDetail}
-              transaction={this.pointsTransaction}
-              reserve={this.reserveConfirmAndCancel} />} />
+              reserve={this.reserveConfirmAndCancel}
+              transaction={this.pointsTransaction} />} />
             <Route exact path="/attendees" render={props => <AttendeesList {...props}
               getAttendees={this.getAttendees}
               attendees={this.state.usersAttending} />} />
