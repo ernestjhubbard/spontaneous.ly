@@ -362,6 +362,11 @@ ul {
   color: #F07070;
 }
 
+.filename {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .calc-button-50 {
   display: flex;
   justify-content: space-between;
