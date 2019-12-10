@@ -6,7 +6,8 @@ class FriendList extends React.Component {
     super(props);
     this.state = {
       friends: [],
-      friendClicked: null
+      friendClicked: null,
+      pendingClicked: false
     };
     this.getFriends = this.getFriends.bind(this);
     this.checkPending = this.checkPending.bind(this);
@@ -34,19 +35,24 @@ class FriendList extends React.Component {
       <div className="container align-center my-5">
         <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
         <div className="d-flex justify-content-between">
-          <h4 className="">
-            <span className="badge viewing" onClick={() => this.getFriends(1)}>All Friends</span>
+          <h4>
+            <span className={`badge viewing-${this.state.pendingClicked}`} onClick={() => {
+              this.getFriends(1);
+              this.setState({ pendingClicked: false });
+            }}>All Friends</span>
           </h4>
-          <h4 className="">
-            <span className="badge" onClick={() => this.checkPending(1)}>Pending Requests</span>
+          <h4>
+            <span className={`badge viewing-${!this.state.pendingClicked}`} onClick={() => {
+              this.checkPending(1);
+              this.setState({ pendingClicked: true });
+            }}>Pending Requests</span>
           </h4>
         </div>
         <div>{friendsArray}</div>
         <div className="button-container fixed-bottom p-3">
           <button
             className="spon-button-alt rounded mt-0 w-100"
-            onClick={() => this.props.history.goBack()}
-          >
+            onClick={() => this.props.history.goBack()} >
             Back
           </button>
         </div>
