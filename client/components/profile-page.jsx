@@ -43,8 +43,8 @@ class ProfilePage extends React.Component {
           <div className="profile-user-info mt-5">
             <div
               className="profile-user-image rounded-circle m-auto"
-              style={profileImage}
-            ></div>
+              style={profileImage}>
+            </div>
             <h4 className="font-weight-bold text-center my-3">
               {this.state.user.firstName} {this.state.user.lastName}
             </h4>
@@ -60,26 +60,26 @@ class ProfilePage extends React.Component {
               className="spon-button rounded text-white col-12"
               onClick={() => {
                 this.props.history.push(`/upcoming-activities?${userParams}`);
-              }} >
+              }}>
               Upcoming Adventures
             </button>
             <button
               className="spon-button rounded text-white col-12"
               onClick={() => {
                 this.props.history.push(`/past-activities?${userParams}`);
-              }} >
+              }}>
               Past Adventures
             </button>
             <button
               className="spon-button rounded text-white col-12"
               onClick={() => {
                 this.props.history.push(`/friends?${userParams}`);
-              }} >
+              }}>
                 Friends
             </button>
             <button
               className="spon-button-alt rounded w-100 mx-auto"
-              onClick={() => this.props.history.goBack()} >
+              onClick={() => this.props.history.goBack()}>
               Back
             </button>
           </div>
