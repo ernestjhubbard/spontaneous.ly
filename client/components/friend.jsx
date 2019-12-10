@@ -8,9 +8,12 @@ export default function Friend(props) {
   const recipientId = props.recipientId;
   const senderId = props.senderId;
   let button;
-  const acceptReject = (<button>
-    <i className="far fa-check-circle" onClick={() => props.acceptRequest({ recipientId })}/>
-  </button>);
+  const acceptReject = (
+    <i
+      className="far fa-check-circle fa-2x adventure-card m-auto"
+      onClick={() => props.acceptRequest({ recipientId })}
+    />
+  );
   if (props.isAccepted === 1) {
     button = (
       <i
