@@ -19,19 +19,20 @@ class DefaultPage extends React.Component {
 
   handleChange() {
     this.setState({ zipcode: event.target.value });
-    const zipcodeRegex = RegExp(/(^\d{5}$)|(^\d{5}-\d{4}$)/);
-
-    if (zipcodeRegex.test(this.state.zipcode)) {
-      this.setState({ validZip: true });
-    } else {
-      this.setState({ validZip: false });
-    }
   }
 
   handleSubmit(event) {
     event.preventDefault();
+
+    const zipcodeRegex = RegExp(/(^\d{5}$)/);
+    if (zipcodeRegex.test(this.state.zipcode)) {
+      this.setState({ validZip: true });
+      this.props.history.push('/activity-filter');
+    } else {
+      this.setState({ validZip: false });
+    }
+
     this.setZip(this.state.zipcode);
-    this.props.history.push('/activity-filter');
   }
 
   render() {
