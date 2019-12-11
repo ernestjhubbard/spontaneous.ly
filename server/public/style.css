@@ -243,8 +243,6 @@ button:focus {
   transition: .3s all;
   overflow: hidden;
   display: block;
-  -webkit-transform: translate3d(0, 0, 1px);
-  transform: translate3d(0, 0, 1px);
 }
 
 .menu-closed {
