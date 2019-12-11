@@ -1,8 +1,5 @@
 import React from 'react';
 import Footer from './footer';
-import {
-  Link
-} from 'react-router-dom';
 
 class DefaultPage extends React.Component {
   constructor(props) {
@@ -62,83 +59,97 @@ class DefaultPage extends React.Component {
               example activities that our users participate in.
             </p>
           </div>
-          <div className="d-flex flex-row horizontal-scroll mb-4">
-            <Link to="/adventures?activity=wine-and-paint">
-              <div className="col-sm-3">
-                <div className="card card-size adventure-card">
-                  <img
-                    src="assets/images/wine-and-paint.jpg"
-                    className="img-info card-img-top"
-                    alt="Wine and Paint"
-                  />
-                  <div className="card-body">
-                    <p className="text-muted">
-                      <small>Wine and Paint</small>
-                    </p>
-                    <p className="font-color mb-0">
-                      <small>Click to Learn More</small>
-                    </p>
-                  </div>
+          <div className="d-flex flex-row horizontal-scroll justify-content-sm-between">
+            <div
+              className="col-sm-3"
+              onClick={() => {
+                this.props.history.push('/adventures?activity=wine-and-paint');
+              }}
+            >
+              <div className="card card-size adventure-card">
+                <img
+                  src="assets/images/wine-and-paint.jpg"
+                  className="img-info card-img-top"
+                  alt="Wine and Paint"
+                />
+                <div className="card-body">
+                  <p className="text-muted">
+                    <small>Wine and Paint</small>
+                  </p>
+                  <p className="font-color mb-0">
+                    <small>Click to Learn More</small>
+                  </p>
                 </div>
               </div>
-            </Link>
-            <Link to="/adventures?activity=pickup-basketball">
-              <div className="col-sm-3">
-                <div className="card card-size adventure-card">
-                  <img
-                    src="assets/images/pickup-basketball.jpg"
-                    className="img-info card-img-top"
-                    alt="Backetball Leagues"
-                  />
-                  <div className="card-body">
-                    <p className="text-muted">
-                      <small>Pickup Basketball</small>
-                    </p>
-                    <p className="font-color mb-0">
-                      <small>Click to Learn More</small>
-                    </p>
-                  </div>
+            </div>
+            <div
+              className="col-sm-3"
+              onClick={() => {
+                this.props.history.push(
+                  '/adventures?activity=pickup-basketball'
+                );
+              }}
+            >
+              <div className="card card-size adventure-card">
+                <img
+                  src="assets/images/pickup-basketball.jpg"
+                  className="img-info card-img-top"
+                  alt="Backetball Leagues"
+                />
+                <div className="card-body">
+                  <p className="text-muted">
+                    <small>Pickup Basketball</small>
+                  </p>
+                  <p className="font-color mb-0">
+                    <small>Click to Learn More</small>
+                  </p>
                 </div>
               </div>
-            </Link>
-            <Link to="/adventures?activity=yoga">
-              <div className="col-sm-3">
-                <div className="card card-size adventure-card">
-                  <img
-                    src="assets/images/yoga.jpg"
-                    className="img-info card-img-top"
-                    alt="Yoga"
-                  />
-                  <div className="card-body">
-                    <p className="text-muted">
-                      <small>Yoga</small>
-                    </p>
-                    <p className="font-color mb-0">
-                      <small>Click to Learn More</small>
-                    </p>
-                  </div>
+            </div>
+            <div
+              className="col-sm-3"
+              onClick={() => {
+                this.props.history.push('/adventures?activity=yoga');
+              }}
+            >
+              <div className="card card-size adventure-card">
+                <img
+                  src="assets/images/yoga.jpg"
+                  className="img-info card-img-top"
+                  alt="Yoga"
+                />
+                <div className="card-body">
+                  <p className="text-muted">
+                    <small>Yoga</small>
+                  </p>
+                  <p className="font-color mb-0">
+                    <small>Click to Learn More</small>
+                  </p>
                 </div>
               </div>
-            </Link>
-            <Link to="/adventures?activity=parasailing">
-              <div className="col-sm-3">
-                <div className="card card-size adventure-card">
-                  <img
-                    src="assets/images/parasailing.jpg"
-                    className="img-info card-img-top"
-                    alt="Parasailing"
-                  />
-                  <div className="card-body">
-                    <p className="text-muted">
-                      <small>Parasailing</small>
-                    </p>
-                    <p className="font-color mb-0">
-                      <small>Click to Learn More</small>
-                    </p>
-                  </div>
+            </div>
+            <div
+              className="col-sm-3"
+              onClick={() => {
+                this.props.history.push('/adventures?activity=parasailing');
+              }}
+            >
+              <div className="card card-size adventure-card">
+                <img
+                  src="assets/images/parasailing.jpg"
+                  className="img-info card-img-top"
+                  alt="Parasailing"
+                />
+                <div className="card-body">
+                  <p className="text-muted">
+                    <small>Parasailing</small>
+                  </p>
+                  <p className="font-color mb-0">
+                    <small>Click to Learn More</small>
+                  </p>
                 </div>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
         <Footer />
