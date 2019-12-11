@@ -1,3 +1,13 @@
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 979px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 @font-face {
   font-family: Roboto Mono;
   src: url(assets/font/RobotoMono-Regular.ttf);
@@ -10,6 +20,7 @@
 
 body {
   font-family: 'Roboto Mono';
+  -webkit-text-size-adjust: 100%;
 }
 
 * {
@@ -57,7 +68,6 @@ body {
   background-color: #F07070;
   justify-content: space-between;
   padding: 1rem;
-  z-index: 2000;
 }
 
 .footer {
@@ -181,6 +191,7 @@ body {
   transition: .3s all;
   cursor: pointer;
   display: flex;
+  color: #666;
 }
 
 .arrow:hover {
@@ -222,7 +233,6 @@ button:focus {
 }
 
 .menu {
-  z-index: 1050;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -354,8 +364,8 @@ ul {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 
 .profile-point-value {

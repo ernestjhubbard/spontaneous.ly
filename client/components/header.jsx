@@ -14,7 +14,7 @@ function Header(props) {
   );
 
   const clickable = (
-    <div className="header-bar d-flex sticky-top">
+    <div className="header-bar d-flex navbar sticky-top">
       <Link to="/">
         <img className="logo-alone"
           src="assets/images/logo-alone.png" />
