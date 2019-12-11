@@ -628,7 +628,3 @@ a:hover {
 .overlap {
   z-index: 1000;
 }
-
-.static-card-width{
-  width: 250px;
-}
