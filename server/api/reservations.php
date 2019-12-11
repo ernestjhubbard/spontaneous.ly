@@ -40,8 +40,6 @@ if ($request['method'] === 'POST') {
       $sql_reserve = "INSERT INTO reservations (userId, activityId, isCancelled)
                            VALUES ($user_id, $activity_id, $is_cancelled)";
       $reservation_query = mysqli_query($link, $sql_reserve);
-      $response['body'] = "Reservation Made";
-      send($response);
     } else {
       $reservation_status = mysqli_fetch_assoc($is_cancelled_query);
       $sql_reservation = "UPDATE reservations
@@ -49,8 +47,6 @@ if ($request['method'] === 'POST') {
                            WHERE userId = $user_id
                              AND activityId = $activity_id";
       mysqli_query($link, $sql_reservation);
-      $response['body'] = "Reservation Cancelled";
-      send($response);
     }
   }
 }
