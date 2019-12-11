@@ -128,7 +128,7 @@ class FriendList extends React.Component {
         'Content-Type': 'application/json'
       }
     };
-    fetch('/api/deny-delete-friend', config)
+    fetch('/api/deny-friend', config)
       .then(results => results.json());
     this.checkPending();
   }
