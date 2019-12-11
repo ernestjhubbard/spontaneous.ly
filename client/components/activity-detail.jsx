@@ -172,6 +172,7 @@ function ConfirmOrCancelButton(props) {
         className="spon-link-cancel rounded mt-0"
         onClick={() => {
           props.changeModal();
+          props.transaction({ transactionType: 'cancellation', activityId: props.activityId });
         }}>
         Cancel
       </button>
