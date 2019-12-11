@@ -108,11 +108,11 @@ class Carousel extends React.Component {
           </div>
         </div>
         <div className="indicator">{currentPosition.currentImageArray}</div>
-        <button className="arrow left" onClick={this.moveBackward}>
-          <i className="fas fa-arrow-left m-auto text-center"></i>
+        <button className="arrow left p-0" onClick={this.moveBackward}>
+          <i className="fas fa-arrow-left m-auto text-center w-100"></i>
         </button>
-        <button className="arrow right" onClick={this.moveForward}>
-          <i className="fas fa-arrow-right m-auto text-center"></i>
+        <button className="arrow right p-0" onClick={this.moveForward}>
+          <i className="fas fa-arrow-right m-auto text-center w-100"></i>
         </button>
       </div>
     );
