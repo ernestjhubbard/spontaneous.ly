@@ -214,7 +214,8 @@ class App extends React.Component {
               points={this.state.points}
               loggedInUser={this.state.user} />} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}
-              signIn={this.signIn} />} />
+              signIn={this.signIn}
+              user={this.state.user} />} />
             <Route exact path="/create-an-account" render={props => <CreateAccount {...props}
               createUser={this.createUser} />} />
             <Route exact path="/upcoming-activities" render={props => <UpcomingOrPastActivities {...props}
