@@ -1,3 +1,13 @@
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 979px) {
+  html {
+    font-size: 14px;
+  }
+}
+
 @font-face {
   font-family: Roboto Mono;
   src: url(assets/font/RobotoMono-Regular.ttf);
@@ -233,6 +243,8 @@ button:focus {
   transition: .3s all;
   overflow: hidden;
   display: block;
+  -webkit-transform: translate3d(0, 0, 1px);
+  transform: translate3d(0, 0, 1px);
 }
 
 .menu-closed {
