@@ -83,7 +83,7 @@ class StaticActivity extends React.Component {
           <img
             src={allContent.content.img1}
             alt={allContent.content.imgAlt}
-            className="img-fluid my-5 static-img-width"
+            className="img-fluid my-5 w-100"
           />
           <p>{allContent.content.text2}</p>
         </div>
