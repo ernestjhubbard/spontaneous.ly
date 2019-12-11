@@ -10,6 +10,7 @@ switch ($request['path']) {
   case '/api/messages':
   case '/api/friends':
   case '/api/friend-status':
+  case '/api/deny-friend':
   case '/api/points':
   case '/api/users':
   case '/api/signup':

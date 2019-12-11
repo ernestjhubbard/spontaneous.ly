@@ -4,15 +4,17 @@ export default function Friend(props) {
   const friendImage = {
     backgroundImage: `url("/assets/images/users/${props.image}")`
   };
-  const userId = props.user;
   const recipientId = props.recipientId;
-  const senderId = props.senderId;
   let button;
   const acceptReject = (
-    <i
+    <><i
       className="far fa-check-circle fa-2x adventure-card m-auto"
       onClick={() => props.acceptRequest({ recipientId })}
     />
+    <i
+      className="far fa-times-circle fa-2x adventure-card m-auto text-muted"
+      onClick={() => props.denyRequest({ recipientId })}
+    /></>
   );
   if (props.isAccepted === 1) {
     button = (
@@ -24,7 +26,7 @@ export default function Friend(props) {
       />
     );
   } else {
-    button = userId === senderId ? 'PENDING' : acceptReject;
+    button = acceptReject;
   }
   return (
     <div className="d-flex justify-content-between my-3">
