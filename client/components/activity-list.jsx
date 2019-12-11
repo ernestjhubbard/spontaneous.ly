@@ -38,7 +38,7 @@ export default class ActivityList extends React.Component {
           <p className="text-center">
             <a href="" className="reroll" onClick={() => {
               rerollPoints(transactionType);
-              this.props.history.goBack();
+              this.props.history.push('/activity-filter');
             }}>
             Re-roll for 25 points.
             </a>
