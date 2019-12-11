@@ -12,6 +12,7 @@ class FriendList extends React.Component {
     this.getFriends = this.getFriends.bind(this);
     this.checkPending = this.checkPending.bind(this);
     this.acceptRequest = this.acceptRequest.bind(this);
+    this.denyRequest = this.denyRequest.bind(this);
   }
 
   render() {
@@ -29,6 +30,7 @@ class FriendList extends React.Component {
         firstName={friend.firstName}
         lastName={friend.lastName}
         acceptRequest={this.acceptRequest}
+        denyRequest={this.denyRequest}
       />
     );
 
@@ -114,6 +116,19 @@ class FriendList extends React.Component {
       }
     };
     fetch('/api/friends', config)
+      .then(results => results.json());
+    this.checkPending();
+  }
+
+  denyRequest({ recipientId }) {
+    const config = {
+      method: 'PUT',
+      body: JSON.stringify({ recipientId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/deny-friend', config)
       .then(results => results.json());
     this.checkPending();
   }
