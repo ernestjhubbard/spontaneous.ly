@@ -628,3 +628,7 @@ a:hover {
 .overlap {
   z-index: 1000;
 }
+
+.static-img-width{
+  width: 100%;
+}
