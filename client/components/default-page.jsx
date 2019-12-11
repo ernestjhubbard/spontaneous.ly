@@ -9,6 +9,7 @@ class DefaultPage extends React.Component {
     super(props);
     this.state = {
       zipcode: null,
+      validZip: null,
       unmounting: false
     };
     this.setZip = this.props.setZip;
@@ -18,6 +19,13 @@ class DefaultPage extends React.Component {
 
   handleChange() {
     this.setState({ zipcode: event.target.value });
+    const zipcodeRegex = RegExp(/(^\d{5}$)|(^\d{5}-\d{4}$)/);
+
+    if (zipcodeRegex.test(this.state.zipcode)) {
+      this.setState({ validZip: true });
+    } else {
+      this.setState({ validZip: false });
+    }
   }
 
   handleSubmit(event) {
