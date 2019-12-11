@@ -68,7 +68,6 @@ body {
   background-color: #F07070;
   justify-content: space-between;
   padding: 1rem;
-  z-index: 4000;
 }
 
 .footer {
@@ -234,7 +233,6 @@ button:focus {
 }
 
 .menu {
-  z-index: 4000;
   width: 100%;
   height: 100%;
   position: absolute;
@@ -260,7 +258,6 @@ button:focus {
   height: 100%;
   width: 100%;
   position: fixed;
-  z-index: 4000;
 }
 
 .darkness-closed {
@@ -280,7 +277,6 @@ button:focus {
   right: 0px;
   width: 80%;
   transition: .3s all;
-  z-index: 4000;
 }
 
 .hamburger {
@@ -331,7 +327,6 @@ ul {
 
 .menu-nav-bar {
   margin: auto 8px auto auto;
-  z-index: 4000;
 }
 
 .adventure {
@@ -369,8 +364,8 @@ ul {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 
 .profile-point-value {
