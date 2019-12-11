@@ -46,7 +46,7 @@ if ($request['method'] === 'GET') {
 }
 
 if ($request['method'] === 'POST') {
-    $sender_id = $request['body']['senderId'];
+    $sender_id = $_SESSION['user_id'];
     $recipient_id = $request['body']['recipientId'];
     $add_friend_query = "INSERT INTO friendRequests (senderId, recipientId, isAccepted, isPending)
                               VALUES ($sender_id, $recipient_id, 0, 1), ($recipient_id, $sender_id, 0, 0)";
