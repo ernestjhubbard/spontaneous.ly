@@ -81,7 +81,8 @@ class ConfirmActivity extends React.Component {
             {...this.props}
             changeModal={this.changeModal}
             cancel={this.props.reserve}
-            activityId={this.props.match.params.id}
+            activityId={this.props.activity.activityId}
+            transaction={this.props.transaction}
           />
         ) : null}
       </div>
