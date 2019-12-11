@@ -20,9 +20,7 @@ if ($request['method'] === 'GET') {
 
 if ($request['method'] === 'POST') {
   $activity_id = $request['body']['activityId'];
-  if (!isset($activity_id) || !is_numeric($activity_id) || intval($activity_id) === 0) {
-    throw new ApiError('Valid Activity ID Required', 400);
-  } else {
+  if (isset($activity_id)) {
     $sql_activity = "SELECT activityId
                        FROM activities
                       WHERE activityId = $activity_id";
