@@ -18,6 +18,7 @@ class CancelModal extends React.Component {
               onClick={() => {
                 this.props.cancel({ activityId: this.props.activityId });
                 this.props.history.push('/');
+                this.props.transaction({ transactionType: 'cancellation', activityId: this.props.activityId });
               }}>Confirm</button>
             <button className="spon-button text-white rounded" onClick={() => {
               this.props.changeModal();
