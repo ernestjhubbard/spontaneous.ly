@@ -17,7 +17,10 @@ class SignIn extends React.Component {
 
   handleSubmit() {
     this.props.signIn(this.state);
-    if (this.props.user !== null) {
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
       this.props.history.push('/');
     }
   }
