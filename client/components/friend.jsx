@@ -9,10 +9,14 @@ export default function Friend(props) {
   const senderId = props.senderId;
   let button;
   const acceptReject = (
-    <i
+    <><i
       className="far fa-check-circle fa-2x adventure-card m-auto"
       onClick={() => props.acceptRequest({ recipientId })}
     />
+    <i
+      className="far fa-times-circle fa-2x adventure-card m-auto text-muted"
+      onClick={() => props.denyRequest({ recipientId })}
+    /></>
   );
   if (props.isAccepted === 1) {
     button = (
