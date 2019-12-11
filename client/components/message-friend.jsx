@@ -9,6 +9,8 @@ class MessageFriend extends React.Component {
       message: '',
       friend: {}
     };
+    this.bottomRef = React.createRef();
+    this.scrollToBottom = this.scrollToBottom.bind(this);
     this.retrieveMessages = this.retrieveMessages.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -29,6 +31,7 @@ class MessageFriend extends React.Component {
         image={m.image}
         recipientId={m.recipientId} />
     );
+    this.scrollToBottom();
     return (
       <div className="container position-relative fade-in">
         <div className="text-center d-flex mt-5 mb-3 justify-content-around position-relative">
@@ -37,8 +40,9 @@ class MessageFriend extends React.Component {
           </div>
           <h4 className="m-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
-        <div className="message-container position-absolute col-12">
+        <div className="message-container d-flex flex-column">
           {messages}
+          <div ref={this.bottomRef} id="#"></div>
         </div>
         <div className="fixed-bottom border-top p-3 bg-white">
           <form
@@ -64,6 +68,10 @@ class MessageFriend extends React.Component {
         </div>
       </div>
     );
+  }
+
+  scrollToBottom() {
+    window.scrollTo(0, this.bottomRef.offsetTop);
   }
 
   handleSubmit(event, recipientId, message) {
