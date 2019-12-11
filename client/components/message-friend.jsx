@@ -7,7 +7,8 @@ class MessageFriend extends React.Component {
     this.state = {
       messages: [],
       message: '',
-      friend: {}
+      friend: {},
+      rendering: false
     };
     this.bottomRef = React.createRef();
     this.scrollToBottom = this.scrollToBottom.bind(this);
@@ -31,7 +32,12 @@ class MessageFriend extends React.Component {
         image={m.image}
         recipientId={m.recipientId} />
     );
-    this.scrollToBottom();
+    if (this.state.rendering) {
+      const observer = new MutationObserver(this.scrollToBottom);
+      const config = { childList: true };
+      observer.observe(this.bottomRef, config);
+    }
+    // console.log(observer);
     return (
       <div className="container position-relative fade-in">
         <div className="text-center d-flex mt-5 mb-3 justify-content-around position-relative">
@@ -40,9 +46,8 @@ class MessageFriend extends React.Component {
           </div>
           <h4 className="m-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
-        <div className="message-container d-flex flex-column">
+        <div className="message-container d-flex flex-column" ref={this.bottomRef}>
           {messages}
-          <div ref={this.bottomRef} id="#"></div>
         </div>
         <div className="fixed-bottom border-top p-3 bg-white">
           <form
@@ -71,7 +76,7 @@ class MessageFriend extends React.Component {
   }
 
   scrollToBottom() {
-    window.scrollTo(0, this.bottomRef.offsetTop);
+    this.bottomRef.scrollTop = this.bottomRef.scrollHeight;
   }
 
   handleSubmit(event, recipientId, message) {
@@ -106,6 +111,7 @@ class MessageFriend extends React.Component {
     const friendId = friend.slice(friendIdIndex + 1, friend.length);
     this.retrieveMessages(friend);
     this.getFriend(friendId);
+    this.setState({ rendering: true });
   }
 
   retrieveMessages(friendId) {
