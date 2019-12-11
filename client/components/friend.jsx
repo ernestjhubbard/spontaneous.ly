@@ -21,7 +21,7 @@ export default function Friend(props) {
       <i
         className="fas fa-paper-plane fa-2x adventure-card m-auto"
         onClick={() =>
-          props.pushMessage(`/messages?userId=${recipientId}`)
+          props.pushMessage(`/messages?friendId=${recipientId}`)
         }
       />
     );
