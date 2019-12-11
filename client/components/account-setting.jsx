@@ -97,7 +97,7 @@ class AccountSetting extends React.Component {
               </div>
             </div>
           </div>
-          <div className="fixed-bottom p-3">
+          <div className="fixed-bottom p-3 overlap">
             <div className="calc-button-50">
               <EditOrSave
                 isEditing={this.state.changeDetail}
