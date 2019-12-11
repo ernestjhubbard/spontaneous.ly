@@ -62,9 +62,9 @@ class DefaultPage extends React.Component {
               example activities that our users participate in.
             </p>
           </div>
-          <div className="d-flex flex-row horizontal-scroll mb-4">
+          <div className="d-flex flex-row horizontal-scroll justify-content-sm-between">
             <Link to="/adventures?activity=wine-and-paint">
-              <div className="col-sm-3">
+              <div className="col-sm-3 static-card-width">
                 <div className="card card-size adventure-card">
                   <img
                     src="assets/images/wine-and-paint.jpg"
@@ -83,7 +83,7 @@ class DefaultPage extends React.Component {
               </div>
             </Link>
             <Link to="/adventures?activity=pickup-basketball">
-              <div className="col-sm-3">
+              <div className="col-sm-3 static-card-width">
                 <div className="card card-size adventure-card">
                   <img
                     src="assets/images/pickup-basketball.jpg"
@@ -102,7 +102,7 @@ class DefaultPage extends React.Component {
               </div>
             </Link>
             <Link to="/adventures?activity=yoga">
-              <div className="col-sm-3">
+              <div className="col-sm-3 static-card-width">
                 <div className="card card-size adventure-card">
                   <img
                     src="assets/images/yoga.jpg"
@@ -121,7 +121,7 @@ class DefaultPage extends React.Component {
               </div>
             </Link>
             <Link to="/adventures?activity=parasailing">
-              <div className="col-sm-3">
+              <div className="col-sm-3 static-card-width">
                 <div className="card card-size adventure-card">
                   <img
                     src="assets/images/parasailing.jpg"
