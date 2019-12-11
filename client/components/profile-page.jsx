@@ -6,8 +6,11 @@ class ProfilePage extends React.Component {
     this.state = {
       user: null,
       fetchingUser: true,
-      points: 0
+      points: 0,
+      userStatus: null
     };
+    this.checkFriendStatus = this.checkFriendStatus.bind(this);
+    this.addFriend = this.addFriend.bind(this);
   }
 
   getSearchParams() {
@@ -17,11 +20,12 @@ class ProfilePage extends React.Component {
 
   componentDidMount() {
     const params = this.getSearchParams();
+    this.checkFriendStatus(params);
     this.userInfo(params);
     this.getPoints(params);
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     const params = this.getSearchParams();
     if (prevProps.location.search !== this.props.location.search) {
       this.userInfo(params);
@@ -37,6 +41,25 @@ class ProfilePage extends React.Component {
     const profileImage = {
       backgroundImage: `url("/assets/images/users/${this.state.user.image}")`
     };
+
+    const userStatus = this.state.userStatus;
+    const loggedInUserId = this.props.loggedInUser.userId;
+    const equalsPosition = userParams.indexOf('=');
+    const paramId = parseInt(userParams.slice(equalsPosition + 1));
+    let friendButton;
+    if (userStatus === null) {
+      if (loggedInUserId !== paramId) {
+        friendButton = <AddFriend addFriend={this.addFriend} recipientId={paramId} />;
+      }
+    } else if (userStatus !== null) {
+      if (loggedInUserId !== paramId && userStatus.isPending === 0) {
+        friendButton = null;
+      } else if (paramId === loggedInUserId) {
+        friendButton = <ViewFriendsButton userParams={userParams} push={this.props.history.push} />;
+      } else if (userStatus.isAccepted === 0 && userStatus.isPending === 1) {
+        friendButton = <PendingFriend />;
+      }
+    }
     return (
       <div className="container align-center d-flex">
         <div className="profile-center m-auto">
@@ -70,13 +93,7 @@ class ProfilePage extends React.Component {
               }}>
               Past Adventures
             </button>
-            <button
-              className="spon-button rounded text-white col-12"
-              onClick={() => {
-                this.props.history.push(`/friends?${userParams}`);
-              }}>
-                Friends
-            </button>
+            {friendButton}
             <button
               className="spon-button-alt rounded w-100 mx-auto"
               onClick={() => this.props.history.goBack()}>
@@ -86,6 +103,18 @@ class ProfilePage extends React.Component {
         </div>
       </div>
     );
+  }
+
+  addFriend({ recipientId }) {
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ recipientId }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/friends', config);
+    this.checkFriendStatus(`userId=${recipientId}`);
   }
 
   userInfo(userId) {
@@ -106,6 +135,42 @@ class ProfilePage extends React.Component {
       });
   }
 
+  checkFriendStatus(userId) {
+    fetch(`/api/friend-status?${userId}`)
+      .then(response => response.json())
+      .then(userStatus => this.setState({ userStatus }));
+  }
+}
+function PendingFriend() {
+  const opacity = {
+    opacity: '.5'
+  };
+  return (
+    <button
+      className="spon-button rounded text-white col-12" style={opacity}>
+      Pending
+    </button>
+  );
+}
+function AddFriend(props) {
+  const recipientId = props.recipientId;
+  return (
+    <button
+      className="spon-button rounded text-white col-12"
+      onClick={() => props.addFriend({ recipientId })} >
+      Add Friend
+    </button>
+  );
+}
+
+function ViewFriendsButton(props) {
+  return (
+    <button
+      className="spon-button rounded text-white col-12"
+      onClick={() => props.push('/friends')} >
+      Friends
+    </button>
+  );
 }
 
 export default ProfilePage;
