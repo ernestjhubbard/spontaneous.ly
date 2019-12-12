@@ -122,6 +122,7 @@ class ActivityDetail extends React.Component {
             changeModal={this.changeModal}
             activityId={this.state.activityData.activityId} /> : <BackToPastActivitiesButton {...this.props} />}
           {showModal ? <CancelModal {...this.props}
+            points={this.props.points}
             activityId={this.state.activityData.activityId}
             changeModal={this.changeModal}
             cancel={this.props.reserve}/> : null}
@@ -174,7 +175,6 @@ function ConfirmOrCancelButton(props) {
         className="spon-link-cancel rounded mt-0"
         onClick={() => {
           props.changeModal();
-          props.transaction({ transactionType: 'cancellation', activityId: props.activityId });
         }}>
         Cancel
       </button>
