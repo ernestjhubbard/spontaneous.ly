@@ -45,7 +45,7 @@ class ActivityFilter extends React.Component {
               <label htmlFor="distance" className="text-center d-block">Distance: {this.state.distance} Miles</label>
               <input name="distance" type="range" className="custom-range filter-range" min="1" max="5" value={this.state.distance} id="distance" onChange={this.getFilterCriteria} />
             </div>
-            <div className="submit-div fixed-bottom container py-3">
+            <div className="submit-div fixed-bottom container py-3 overlap">
               <button className="spon-button text-white rounded w-100">Find Adventures</button>
             </div>
           </form>
