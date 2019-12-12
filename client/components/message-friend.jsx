@@ -7,8 +7,7 @@ class MessageFriend extends React.Component {
     this.state = {
       messages: [],
       message: '',
-      friend: {},
-      rendering: false
+      friend: {}
     };
     this.bottomRef = React.createRef();
     this.scrollToBottom = this.scrollToBottom.bind(this);
