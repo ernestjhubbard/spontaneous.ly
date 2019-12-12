@@ -126,7 +126,6 @@ class ActivityDetail extends React.Component {
             activityId={this.state.activityData.activityId}
             cancel={this.props.reserve}
             isUpcoming={isUpcoming}/>
-
           {showModal ? <CancelModal {...this.props}
             points={this.props.points}
             activityId={this.state.activityData.activityId}
