@@ -66,13 +66,7 @@ class App extends React.Component {
   }
 
   fetchUser() {
-    const userConfig = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/users', userConfig)
+    fetch('/api/users')
       .then(results => results.json())
       .then(user => { this.setState({ user, fetchingUser: false }); this.getPoints(user.userId); })
       .catch(error => console.error('There was an error:', error.message));
@@ -191,8 +185,7 @@ class App extends React.Component {
           <Header signOut={this.signOut} user={this.state.user} />
           <Switch>
             <Route exact path="/" render={props => <DefaultPage {...props}
-              setZip={this.setZip}
-              fetchUser={this.fetchUser} />} />
+              setZip={this.setZip} />} />
             <Route exact path="/activity-filter" render={props => <ActivityFilter {...props}
               zip={this.state.zip}
               setFilter={this.setFilter} />} />

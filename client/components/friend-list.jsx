@@ -68,14 +68,8 @@ class FriendList extends React.Component {
   }
 
   getFriends(isAccepted) {
-    const config = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
     this.setState({ friends: [], whichClicked: 'All Friends' });
-    fetch(`/api/friends?isAccepted=${isAccepted}`, config)
+    fetch(`/api/friends?isAccepted=${isAccepted}`)
       .then(results => results.json())
       .then(data => data.map(friend => this.setState({ friends: this.state.friends.concat(friend) })));
   }
@@ -92,13 +86,7 @@ class FriendList extends React.Component {
   }
 
   getFriendMessages(friendId) {
-    const userConfig = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/messages?friendId=${friendId}`, userConfig)
+    fetch(`/api/messages?friendId=${friendId}`)
       .then(results => results.json())
       .then(data => data);
   }
