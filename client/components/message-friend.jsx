@@ -119,25 +119,13 @@ class MessageFriend extends React.Component {
 
   retrieveMessages(friendId) {
     this.setState({ messages: [] });
-    const userConfig = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/messages?${friendId}`, userConfig)
+    fetch(`/api/messages?${friendId}`)
       .then(results => { return results.json(); })
       .then(message => this.setState({ messages: this.state.messages.concat(message) }));
   }
 
   getFriend(friendId) {
-    const userConfig = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch(`/api/messages?getFriendId=${friendId}`, userConfig)
+    fetch(`/api/messages?getFriendId=${friendId}`)
       .then(results => results.json())
       .then(friend => this.setState({ friend }));
   }
