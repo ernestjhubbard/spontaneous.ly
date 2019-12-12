@@ -28,11 +28,11 @@ class App extends React.Component {
       activityData: {},
       user: null,
       usersAttending: [],
-      points: 0,
       static: null,
       zip: null,
       filter: {},
-      fetchingUser: true
+      fetchingUser: true,
+      points: 0
     };
     this.setZip = this.setZip.bind(this);
     this.setFilter = this.setFilter.bind(this);
@@ -74,7 +74,7 @@ class App extends React.Component {
     };
     fetch('/api/users', userConfig)
       .then(results => results.json())
-      .then(user => this.setState({ user, fetchingUser: false }))
+      .then(user => { this.setState({ user, fetchingUser: false }); this.getPoints(user.userId); })
       .catch(error => console.error('There was an error:', error.message));
 
   }
@@ -125,6 +125,15 @@ class App extends React.Component {
 
   componentDidMount() {
     this.fetchUser();
+  }
+
+  getPoints(userId) {
+    fetch(`/api/points?${userId}`)
+      .then(response => response.json())
+      .then(data => {
+        const points = data.reduce((total, value) => total + value.value, 0);
+        this.setState({ points });
+      });
   }
 
   createUser({ firstName, lastName, email, image, password, userUpload }) {
@@ -188,6 +197,7 @@ class App extends React.Component {
               zip={this.state.zip}
               setFilter={this.setFilter} />} />
             <Route exact path="/activity-list" render={props => <ActivityList {...props}
+              points={this.state.points}
               getAttendees={this.getAttendees}
               filterCriteria={this.state.filter}
               reroll={this.pointsTransaction}
@@ -207,6 +217,7 @@ class App extends React.Component {
               fetchActivity={this.fetchDetail}
               activityType={'Past'} />} />
             <Route exact path="/confirmed" render={props => <ConfirmActivity {...props}
+              points={this.state.points}
               attendees={this.state.usersAttending}
               activity={this.state.activityData}
               getAttendees={this.getAttendees}
@@ -214,6 +225,7 @@ class App extends React.Component {
               reserve={this.reserveConfirmAndCancel}
               transaction={this.pointsTransaction}/>} />
             <Route exact path="/activity-details" render={props => <ActivityDetail {...props}
+              points={this.state.points}
               user={this.state.user}
               activity={this.state.activityData}
               fetchDetail={this.fetchDetail}

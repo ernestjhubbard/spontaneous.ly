@@ -9,6 +9,8 @@ class MessageFriend extends React.Component {
       message: '',
       friend: {}
     };
+    this.bottomRef = React.createRef();
+    this.scrollToBottom = this.scrollToBottom.bind(this);
     this.retrieveMessages = this.retrieveMessages.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
@@ -29,15 +31,16 @@ class MessageFriend extends React.Component {
         image={m.image}
         recipientId={m.recipientId} />
     );
+
     return (
-      <div className="container position-relative fade-in">
+      <div className="container position-relative">
         <div className="text-center d-flex mt-5 mb-3 justify-content-around position-relative">
           <div className="back-chevron rounded border d-flex position-absolute" onClick={() => this.props.history.goBack()}>
             <i className="fas fa-chevron-left m-auto"></i>
           </div>
           <h4 className="m-auto">{`${this.state.friend.firstName} ${this.state.friend.lastName}`}</h4>
         </div>
-        <div className="message-container position-absolute col-12">
+        <div className="message-container border rounded p-3" ref={this.bottomRef}>
           {messages}
         </div>
         <div className="fixed-bottom border-top p-3 bg-white">
@@ -66,8 +69,15 @@ class MessageFriend extends React.Component {
     );
   }
 
+  scrollToBottom() {
+    this.bottomRef.current.scrollTop = this.bottomRef.current.scrollHeight;
+  }
+
   handleSubmit(event, recipientId, message) {
     event.preventDefault();
+    if (this.state.message === '') {
+      return null;
+    }
     const friend = this.getSearchParams();
     this.sendMessage({ recipientId, message });
     this.setState({ message: '' });
@@ -98,6 +108,13 @@ class MessageFriend extends React.Component {
     const friendId = friend.slice(friendIdIndex + 1, friend.length);
     this.retrieveMessages(friend);
     this.getFriend(friendId);
+    this.setState({ rendering: true });
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.messages.length !== prevState.messages.length) {
+      this.scrollToBottom();
+    }
   }
 
   retrieveMessages(friendId) {

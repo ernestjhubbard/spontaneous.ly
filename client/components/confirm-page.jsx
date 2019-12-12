@@ -69,12 +69,14 @@ class ConfirmActivity extends React.Component {
             onClick={() => this.props.history.push('/')}>
             Back to Home
           </button>
-          <button
-            className="spon-link-cancel rounded w-100"
-            onClick={this.changeModal}
-          >
-            Cancel Reservation
-          </button>
+          {this.props.points - 50 <= 0
+            ? null
+            : <button
+              className="spon-link-cancel rounded w-100"
+              onClick={this.changeModal}
+            >
+              Cancel Reservation
+            </button>}
         </div>
         {this.state.showModal ? (
           <CancelModal

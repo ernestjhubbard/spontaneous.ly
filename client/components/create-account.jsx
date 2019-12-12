@@ -104,8 +104,9 @@ class CreateAccount extends React.Component {
             type="submit"
             className="spon-button rounded text-white w-100"
             value="Submit">Submit</button>
+          {!this.state.canSubmit ? <p className="text-danger text-center">Please fill out all fields.</p> : null}
         </form>
-      </div >
+      </div>
     );
   }
 

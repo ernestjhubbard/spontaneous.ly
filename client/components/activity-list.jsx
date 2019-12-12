@@ -27,6 +27,19 @@ export default class ActivityList extends React.Component {
   render() {
     const rerollPoints = this.props.reroll;
     const transactionType = { transactionType: 'reroll' };
+    const rerollText = (
+      <>
+        <p className="text-center">Not happy with these choices?</p>
+        <p className="text-center">
+          <a href="" className="reroll" onClick={() => {
+            rerollPoints(transactionType);
+            this.props.history.push('/activity-filter');
+          }}>
+            Re-roll for 25 points.
+          </a>
+        </p>
+      </>
+    );
     return (
       <div>
         <div className="activity-list-hero top-banner d-flex">
@@ -41,15 +54,7 @@ export default class ActivityList extends React.Component {
               activities={this.state.activities}
               getAttendees={this.props.getAttendees} />
             : <NoActivitiesModal {...this.props} />}
-          <p className="text-center">Not happy with these choices?</p>
-          <p className="text-center">
-            <a href="" className="reroll" onClick={() => {
-              rerollPoints(transactionType);
-              this.props.history.push('/activity-filter');
-            }}>
-            Re-roll for 25 points.
-            </a>
-          </p>
+          {this.props.points - 50 <= 0 ? <p>You do not have enough points to Re-roll.</p> : rerollText}
         </div>
         {this.state.activities.length && this.state.rendering
           ? <Footer />
