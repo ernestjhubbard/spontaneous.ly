@@ -617,6 +617,10 @@ a:hover {
   color: #f07070;
 }
 
+.activities-container {
+  min-height: 54vh;
+}
+
 .account-setting-input {
   border-radius: 5px;
 }
