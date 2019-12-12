@@ -31,7 +31,7 @@ class SignIn extends React.Component {
         if (user.error) {
           this.setState({ isValid: false });
         } else {
-          this.props.onSignInSuccess({ user });
+          this.props.onSignInSuccess(user);
         }
       })
       .catch(error => console.error('There was an error:', error.message));
@@ -44,12 +44,7 @@ class SignIn extends React.Component {
   }
 
   render() {
-    let validation;
-    if (this.state.isValid === false) {
-      validation = 'is-invalid';
-    } else {
-      validation = null;
-    }
+    const validation = this.state.isValid === false ? 'is-invalid' : null;
     return (
       <div className="container align-center my-5">
         <h4 className="text-center font-weight-bold mb-3">Sign In</h4>
@@ -69,7 +64,7 @@ class SignIn extends React.Component {
             type="password"
             placeholder="Password" required></input>
           <button type="submit" className="spon-button rounded text-white w-100" value="Submit">Submit</button>
-          <div className="invalid-feedback text-center">Please enter your correct login information.</div>
+          <div className="invalid-feedback text-center">Invalid email or password. Please try again.</div>
         </form>
       </div>
     );
