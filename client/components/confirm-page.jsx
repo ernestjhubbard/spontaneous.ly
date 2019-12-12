@@ -63,7 +63,7 @@ class ConfirmActivity extends React.Component {
             </span>
           </p>
         </div>
-        <div className="container mx-auto text-center fixed-bottom p-3">
+        <div className="container mx-auto text-center fixed-bottom p-3 overlap">
           <button
             className="spon-button text-white rounded w-100"
             onClick={() => this.props.history.push('/')}>
@@ -81,7 +81,8 @@ class ConfirmActivity extends React.Component {
             {...this.props}
             changeModal={this.changeModal}
             cancel={this.props.reserve}
-            activityId={this.props.match.params.id}
+            activityId={this.props.activity.activityId}
+            transaction={this.props.transaction}
           />
         ) : null}
       </div>

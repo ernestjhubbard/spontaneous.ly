@@ -28,7 +28,7 @@ class AttendeesList extends React.Component {
       <div className="container my-5">
         <h4 className="d-flex justify-content-center">Attendees</h4>
         <div className="message-container">{attendees}</div>
-        <div className="button-container fixed-bottom p-3">
+        <div className="button-container fixed-bottom p-3 overlap">
           <button
             className="spon-button-alt rounded mt-0 w-100"
             onClick={() => this.props.history.goBack()}

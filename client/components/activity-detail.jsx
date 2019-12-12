@@ -28,7 +28,9 @@ class ActivityDetail extends React.Component {
       .then(response => response.json())
       .then(attendees => {
         this.setState({ usersAttending: attendees, isRetrieving: false });
-        this.checkIfConfirmed(this.props.user.userId);
+        if (this.props.user) {
+          this.checkIfConfirmed(this.props.user.userId);
+        }
       })
       .catch(error => console.error('Error', error.message));
   }
@@ -172,6 +174,7 @@ function ConfirmOrCancelButton(props) {
         className="spon-link-cancel rounded mt-0"
         onClick={() => {
           props.changeModal();
+          props.transaction({ transactionType: 'cancellation', activityId: props.activityId });
         }}>
         Cancel
       </button>

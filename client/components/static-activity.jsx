@@ -83,14 +83,13 @@ class StaticActivity extends React.Component {
           <img
             src={allContent.content.img1}
             alt={allContent.content.imgAlt}
-            className="img-fluid my-5"
+            className="img-fluid my-5 w-100"
           />
           <p>{allContent.content.text2}</p>
         </div>
         <div className="button-container p-3">
           <Link to="/">
-            <button
-              className="spon-button text-white rounded w-100 mt-0 mx-auto">
+            <button className="spon-button text-white rounded w-100 mt-0 mx-auto">
               Back
             </button>
           </Link>

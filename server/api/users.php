@@ -17,6 +17,9 @@ if ($request['method'] === 'GET') {
 
 if ($request['method'] === 'POST') {
   if (isset($_SESSION['user_id'])) {
+    if (isset($_COOKIE[session_name()])) {
+      setcookie(session_name(), '', time() - 7000000, '/');
+    }
     session_destroy();
   } else {
     $email = $request['body']['email'];
