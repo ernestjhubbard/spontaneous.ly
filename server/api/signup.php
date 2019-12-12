@@ -8,6 +8,9 @@ if ($request['method'] === 'POST') {
   $user_last_name = $request['body']['lastName'];
   $user_image = $request['body']['image'];
   $user_password = $request['body']['password'];
+  if(!isset($request['body']['email'])){
+    throw new ApiError('All Fields are Required', 400);
+  }
   $password_hash = password_hash($user_password, PASSWORD_DEFAULT);
   $create_user = "INSERT INTO users (`email`, `firstName`, `lastName`, `image`, `password`)
                          VALUES (?,?,?,?,?)";
