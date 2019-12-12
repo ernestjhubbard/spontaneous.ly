@@ -7,7 +7,8 @@ export default class ActivityList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      activities: []
+      activities: [],
+      rendering: false
     };
   }
 
@@ -20,6 +21,7 @@ export default class ActivityList extends React.Component {
         this.setState({ activities: listedActivities });
       })
       .catch(error => console.error('Fetch error: ', error));
+    this.setState({ rendering: true });
   }
 
   render() {
@@ -47,10 +49,16 @@ export default class ActivityList extends React.Component {
           </div>
         </div>
         <div className="container-fluid my-5">
-          {this.state.activities.length ? <Carousel {...this.props} activities={this.state.activities} getAttendees={this.props.getAttendees} /> : <NoActivitiesModal {...this.props} />}
-          {this.props.points - 50 <= 0 ? <p>You do not have enough points to Re-roll your options.</p> : rerollText}
+          {this.state.activities.length && this.state.rendering
+            ? <Carousel {...this.props}
+              activities={this.state.activities}
+              getAttendees={this.props.getAttendees} />
+            : <NoActivitiesModal {...this.props} />}
+          {this.props.points - 50 <= 0 ? <p>You do not have enough points to Re-roll.</p> : rerollText}
         </div>
-        {this.state.activities.length ? <Footer /> : null}
+        {this.state.activities.length && this.state.rendering
+          ? <Footer />
+          : null}
       </div>
     );
   }

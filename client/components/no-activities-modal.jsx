@@ -4,7 +4,7 @@ class NoActivitiesModal extends React.Component {
   render() {
     return (
       <div className="confirm-cancel-modal container-fluid">
-        <div className="inner-modal text-center p-3 rounded">
+        <div className="inner-modal text-center p-3 rounded fade-in">
           <h3 className="mb-3">
             There were no activities that matched your criteria.
           </h3>

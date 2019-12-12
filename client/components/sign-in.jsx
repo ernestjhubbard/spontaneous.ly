@@ -17,12 +17,24 @@ class SignIn extends React.Component {
   }
 
   handleSubmit() {
-    this.props.signIn({ email: this.state.email, password: this.state.password });
-    if (this.props.user) {
-      this.setState({ isValid: true });
-    } else {
-      this.setState({ isValid: false });
-    }
+    event.preventDefault();
+    const config = {
+      method: 'POST',
+      body: JSON.stringify({ email: this.state.email, password: this.state.password }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+    fetch('/api/users', config)
+      .then(results => results.json())
+      .then(user => {
+        if (user.error) {
+          this.setState({ isValid: false });
+        } else {
+          this.props.onSignInSuccess(user);
+        }
+      })
+      .catch(error => console.error('There was an error:', error.message));
   }
 
   componentDidUpdate(prevProps) {

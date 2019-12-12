@@ -37,7 +37,7 @@ class App extends React.Component {
     this.setZip = this.setZip.bind(this);
     this.setFilter = this.setFilter.bind(this);
     this.fetchUser = this.fetchUser.bind(this);
-    this.signIn = this.signIn.bind(this);
+    this.onSignInSuccess = this.onSignInSuccess.bind(this);
     this.createUser = this.createUser.bind(this);
     this.fetchDetail = this.fetchDetail.bind(this);
     this.reserveConfirmAndCancel = this.reserveConfirmAndCancel.bind(this);
@@ -86,25 +86,8 @@ class App extends React.Component {
       .catch(error => console.error('Error:', error));
   }
 
-  signIn({ email, password }) {
-    event.preventDefault();
-    const config = {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-    fetch('/api/users', config)
-      .then(results => results.json())
-      .then(user => {
-        if (user.error) {
-          return null;
-        } else {
-          this.fetchUser();
-        }
-      })
-      .catch(error => console.error('There was an error:', error.message));
+  onSignInSuccess(user) {
+    this.setState({ user });
   }
 
   signOut() {
@@ -175,17 +158,16 @@ class App extends React.Component {
       .catch(error => console.error('There was an error:', error.message));
   }
 
-  reserveConfirmAndCancel({ activityId }) {
+  reserveConfirmAndCancel(activityId) {
     const config = {
       method: 'POST',
-      body: JSON.stringify({ activityId }),
+      body: JSON.stringify(activityId),
       headers: {
         'Content-Type': 'application/json'
       }
     };
     fetch('/api/reservations', config)
-      .then(response => response.json())
-      .then(message => console.error(message));
+      .catch(message => console.error('There was an error: ', message));
   }
 
   pointsTransaction({ transactionType, activityId }) {
@@ -224,7 +206,7 @@ class App extends React.Component {
               points={this.state.points}
               loggedInUser={this.state.user} />} />
             <Route exact path="/sign-in" render={props => <SignIn {...props}
-              signIn={this.signIn}
+              onSignInSuccess={this.onSignInSuccess}
               user={this.state.user} />} />
             <Route exact path="/create-an-account" render={props => <CreateAccount {...props}
               createUser={this.createUser} />} />

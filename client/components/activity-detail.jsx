@@ -1,5 +1,6 @@
 import React from 'react';
 import CancelModal from './cancel-modal';
+import ActivityDetailButtons from './activity-detail-buttons';
 import { Link } from 'react-router-dom';
 
 class ActivityDetail extends React.Component {
@@ -117,10 +118,15 @@ class ActivityDetail extends React.Component {
           </div>
         </div>
         <div className="fade-in">
-          {isUpcoming ? <DynamicReserveOrCancel {...this.props}
+          <ActivityDetailButtons {...this.props}
+            transaction={this.props.transaction}
+            user={this.props.user}
             isConfirmed={this.state.isConfirmed}
             changeModal={this.changeModal}
-            activityId={this.state.activityData.activityId} /> : <BackToPastActivitiesButton {...this.props} />}
+            activityId={this.state.activityData.activityId}
+            cancel={this.props.reserve}
+            isUpcoming={isUpcoming}/>
+
           {showModal ? <CancelModal {...this.props}
             points={this.props.points}
             activityId={this.state.activityData.activityId}
@@ -150,57 +156,5 @@ function AttendeeList(props) {
         {props.usersAttending.length}
       </span> Users are joining in
     </>
-  );
-}
-
-function DynamicReserveOrCancel(props) {
-  return (
-    <div className="container-fluid button-container calc-button-50 p-3 fixed-bottom">
-      <ConfirmOrCancelButton isConfirmed={props.isConfirmed} {...props} />
-      <button
-        className="spon-button-alt rounded mt-0"
-        onClick={() => {
-          props.history.goBack();
-        }}>
-        Back
-      </button>
-    </div>
-  );
-}
-
-function ConfirmOrCancelButton(props) {
-  if (props.isConfirmed) {
-    return (
-      <button
-        className="spon-link-cancel rounded mt-0"
-        onClick={() => {
-          props.changeModal();
-        }}>
-        Cancel
-      </button>
-    );
-  }
-  return (
-    <button
-      className="spon-button rounded text-white mt-0"
-      onClick={() => {
-        props.reserve({ activityId: props.activityId });
-        props.history.push(`/confirmed?activityId=${props.activityId}`);
-        props.transaction({ transactionType: 'reservation', activityId: props.activityId });
-      }}>
-      Confirm
-    </button>
-  );
-}
-
-function BackToPastActivitiesButton(props) {
-  return (
-    <div className="container-fluid button-container p-3 fixed-bottom">
-      <button
-        className="spon-button-alt rounded w-100 mt-0 mx-auto"
-        onClick={() => props.history.goBack()}>
-        Back
-      </button>
-    </div>
   );
 }
