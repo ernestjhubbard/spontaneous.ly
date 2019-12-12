@@ -166,17 +166,16 @@ class App extends React.Component {
       .catch(error => console.error('There was an error:', error.message));
   }
 
-  reserveConfirmAndCancel({ activityId }) {
+  reserveConfirmAndCancel(activityId) {
     const config = {
       method: 'POST',
-      body: JSON.stringify({ activityId }),
+      body: JSON.stringify(activityId),
       headers: {
         'Content-Type': 'application/json'
       }
     };
     fetch('/api/reservations', config)
-      .then(response => response.json())
-      .then(message => console.error(message));
+      .catch(message => console.error('There was an error: ', message));
   }
 
   pointsTransaction({ transactionType, activityId }) {
