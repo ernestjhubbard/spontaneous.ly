@@ -7,23 +7,28 @@ export default function Friend(props) {
   const recipientId = props.recipientId;
   let button;
   const acceptReject = (
-    <><i
-      className="far fa-check-circle fa-2x adventure-card m-auto"
-      onClick={() => props.acceptRequest({ recipientId })}
-    />
-    <i
-      className="far fa-times-circle fa-2x adventure-card m-auto text-muted"
-      onClick={() => props.denyRequest({ recipientId })}
-    /></>
+    <>
+      <div className="send-message d-flex ml-3">
+        <i
+          className="far fa-check-circle fa-2x adventure-card m-auto"
+          onClick={() => props.acceptRequest({ recipientId })}/>
+      </div>
+      <div className="send-message d-flex ml-3">
+        <i
+          className="far fa-times-circle fa-2x adventure-card m-auto text-muted"
+          onClick={() => props.denyRequest({ recipientId })}/>
+      </div>
+    </>
   );
   if (props.isAccepted === 1) {
     button = (
-      <i
-        className="fas fa-paper-plane fa-2x adventure-card m-auto"
-        onClick={() =>
-          props.pushMessage(`/messages?friendId=${recipientId}`)
-        }
-      />
+      <div className="send-message d-flex ml-3">
+        <i
+          className="fas fa-paper-plane fa-2x adventure-card m-auto"
+          onClick={() =>
+            props.pushMessage(`/messages?friendId=${recipientId}`)
+          }/>
+      </div>
     );
   } else {
     button = acceptReject;
@@ -36,9 +41,7 @@ export default function Friend(props) {
           props.pushMessage(`/profile?userId=${recipientId}`)}>
         {props.firstName} {props.lastName}
       </button>
-      <div className="send-message d-flex ml-3">
-        {button}
-      </div>
+      {button}
     </div>
   );
 }

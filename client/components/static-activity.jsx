@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Footer from './footer';
+// import { Link } from 'react-router-dom';
 
 class StaticActivity extends React.Component {
   constructor(props) {
@@ -32,23 +33,23 @@ class StaticActivity extends React.Component {
     switch (this.state.currentActivity) {
       case 'wine-and-paint':
         contentObject.heroClass = 'wine-and-paint-hero';
-        contentObject.content.headline = 'Wine and Paint';
-        contentObject.content.text1 = 'Tempus iaculis urna id volutpat lacus laoreet. Elit eget gravida cum sociis. Ornare aenean euismod elementum nisi quis eleifend. Sapien nec sagittis aliquam malesuada bibendum arcu. Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt lobortis. At urna condimentum mattis pellentesque id nibh. Cras fermentum odio eu feugiat. Suspendisse faucibus interdum posuere lorem. Eu tincidunt tortor aliquam nulla facilisi cras fermentum odio. Auctor elit sed vulputate mi. Morbi enim nunc faucibus a pellentesque sit amet porttitor eget. Pretium lectus quam id leo. Etiam sit amet nisl purus in mollis nunc sed.';
+        contentObject.content.headline = 'Search for Activities';
+        contentObject.content.text1 = 'Spontaneous.ly allows you to search for upcoming activities and adventures in your area.  There are different things to suite anyone\'s level of adventure, budget, or location.  Simply input your five-digit zipcode into the home page screen, and input your filtering options, to see the list of activities.';
         contentObject.content.img1 = '/assets/images/static/paint-img-1.jpg';
         contentObject.imgAlt = 'Abstract painting';
-        contentObject.content.text2 = 'Nunc pulvinar sapien et ligula ullamcorper malesuada proin libero. Pretium nibh ipsum consequat nisl vel. Pretium fusce id velit ut. Nunc pulvinar sapien et ligula. Ipsum consequat nisl vel pretium lectus quam id leo in. Habitant morbi tristique senectus et netus et malesuada fames ac. Elit at imperdiet dui accumsan sit amet nulla. Parturient montes nascetur ridiculus mus mauris vitae ultricies leo. Arcu felis bibendum ut tristique et. In mollis nunc sed id semper risus in. Tortor posuere ac ut consequat semper viverra nam libero. Eu tincidunt tortor aliquam nulla facilisi cras fermentum. Sit amet est placerat in. Aliquam faucibus purus in massa tempor nec. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus. Pellentesque elit eget gravida cum. Varius duis at consectetur lorem donec massa sapien faucibus. Euismod in pellentesque massa placerat duis. Vivamus at augue eget arcu dictum varius duis at.';
+        contentObject.content.text2 = 'Whether you\'re looking for a simple picnic in the park, or to go offroading in Anza Borrego, Spontaneous.ly can get you connected to the right adventure.';
         break;
       case 'pickup-basketball':
         contentObject.heroClass = 'pickup-basketball-hero';
-        contentObject.content.headline = 'Pickup Basketball';
-        contentObject.content.text1 = 'Arcu cursus euismod quis viverra nibh. Pretium lectus quam id leo in vitae turpis massa. Integer feugiat scelerisque varius morbi enim nunc. Pharetra convallis posuere morbi leo. Tellus integer feugiat scelerisque varius. Massa sapien faucibus et molestie ac. Tristique magna sit amet purus gravida. Mi in nulla posuere sollicitudin aliquam ultrices. Commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Etiam tempor orci eu lobortis elementum nibh. A lacus vestibulum sed arcu non odio euismod. Fermentum leo vel orci porta non pulvinar neque laoreet suspendisse.';
+        contentObject.content.headline = 'Gain Points';
+        contentObject.content.text1 = 'By attending events, you\'ll begin obtaining Spontaneity Points.  The more adventurous your activity is, the more points you will obtain by attending.  When logged in you\'ll be able to see all your points while viewing your profile, among other things.';
         contentObject.content.img1 = '/assets/images/static/basketball-img-1.jpg';
         contentObject.imgAlt = 'Empty Basketball Court';
-        contentObject.content.text2 = 'Eget est lorem ipsum dolor sit amet consectetur. Ac feugiat sed lectus vestibulum mattis ullamcorper velit sed ullamcorper. Pulvinar pellentesque habitant morbi tristique senectus et netus et. Aliquam sem fringilla ut morbi tincidunt augue interdum. Molestie ac feugiat sed lectus. Morbi tempus iaculis urna id volutpat lacus laoreet non curabitur. Tellus molestie nunc non blandit massa. Molestie nunc non blandit massa enim nec. Sit amet mauris commodo quis imperdiet massa. Sit amet nisl purus in mollis nunc. Faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis aliquam. Ultricies integer quis auctor elit sed vulputate mi. At augue eget arcu dictum varius duis at consectetur. Magna eget est lorem ipsum dolor sit amet consectetur adipiscing. Risus quis varius quam quisque id diam. Ac tincidunt vitae semper quis lectus nulla at volutpat.';
+        contentObject.content.text2 = 'These points serve as a means to keep track of all the different adventures you\'ve been on s.';
         break;
       case 'yoga':
         contentObject.heroClass = 'yoga-hero';
-        contentObject.content.headline = 'Yoga';
+        contentObject.content.headline = 'Connect with Others';
         contentObject.content.text1 = 'Aliquet risus feugiat in ante metus dictum at tempor. Amet venenatis urna cursus eget nunc scelerisque viverra. Mi in nulla posuere sollicitudin aliquam ultrices sagittis orci a. Ut tellus elementum sagittis vitae et leo. Molestie nunc non blandit massa enim. Habitant morbi tristique senectus et netus et. Placerat vestibulum lectus mauris ultrices eros in cursus. Turpis egestas integer eget aliquet nibh praesent tristique magna sit. Egestas erat imperdiet sed euismod nisi porta lorem. Id donec ultrices tincidunt arcu non sodales neque sodales. Id aliquet risus feugiat in ante metus. Feugiat pretium nibh ipsum consequat nisl vel. Sapien nec sagittis aliquam malesuada bibendum.';
         contentObject.content.img1 = '/assets/images/static/yoga-img-1.jpg';
         contentObject.imgAlt = 'Woman doing yoga in peaceful setting';
@@ -56,7 +57,7 @@ class StaticActivity extends React.Component {
         break;
       case 'parasailing':
         contentObject.heroClass = 'parasailing-hero';
-        contentObject.content.headline = 'Parasailing';
+        contentObject.content.headline = 'Spend to Re-Roll';
         contentObject.content.text1 = 'Sem viverra aliquet eget sit amet tellus cras adipiscing enim. Vitae aliquet nec ullamcorper sit amet risus nullam eget felis. Etiam dignissim diam quis enim lobortis scelerisque. Nulla facilisi etiam dignissim diam quis enim. Pretium fusce id velit ut tortor pretium viverra suspendisse. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique. Duis at tellus at urna condimentum mattis pellentesque id. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Massa vitae tortor condimentum lacinia quis vel eros donec ac. Sit amet nisl purus in mollis nunc sed id. Congue eu consequat ac felis donec et odio pellentesque diam. Duis ut diam quam nulla porttitor massa id neque aliquam. Mauris vitae ultricies leo integer malesuada nunc vel risus. Fringilla ut morbi tincidunt augue interdum velit euismod in pellentesque. Ut eu sem integer vitae justo eget magna fermentum iaculis.';
         contentObject.content.img1 = '/assets/images/static/parasail-img-1.jpg';
         contentObject.imgAlt = 'People parasailing along the beach';
@@ -80,20 +81,21 @@ class StaticActivity extends React.Component {
         </div>
         <div className="container-fluid my-5">
           <p>{allContent.content.text1}</p>
-          <img
+          {/* <img
             src={allContent.content.img1}
             alt={allContent.content.imgAlt}
             className="img-fluid my-5 w-100"
-          />
+          /> */}
           <p>{allContent.content.text2}</p>
         </div>
-        <div className="button-container p-3">
+        <Footer />
+        {/* <div className="button-container p-3">
           <Link to="/">
             <button className="spon-button text-white rounded w-100 mt-0 mx-auto">
               Back
             </button>
           </Link>
-        </div>
+        </div> */}
       </div>
     );
   }

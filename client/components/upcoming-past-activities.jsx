@@ -35,10 +35,15 @@ class UpcomingOrPastActivities extends React.Component {
     const activities = this.state.activities;
     return (
       <div className="container my-5">
-        <h4 className="d-flex justify-content-center">
-          {`${this.props.activityType}`} Adventures
-        </h4>
-        <div className="activity-container border rounded">
+        <div className="position-relative mb-3">
+          <div className="back-chevron rounded border d-flex position-absolute" onClick={() => this.props.history.goBack()}>
+            <i className="fas fa-chevron-left m-auto"></i>
+          </div>
+          <h4 className="d-flex justify-content-center">
+            {`${this.props.activityType}`} Adventures
+          </h4>
+        </div>
+        <div className="activity-container">
           {activities.map(activityInfo => (
             <Activity
               {...this.props}
@@ -49,14 +54,6 @@ class UpcomingOrPastActivities extends React.Component {
               activityType={this.props.activityType}
             />
           ))}
-        </div>
-        <div className="fixed-bottom p-3 overlap">
-          <button
-            className="spon-button-alt rounded mt-0 w-100"
-            onClick={() => this.props.history.goBack()}
-          >
-          Back
-          </button>
         </div>
       </div>
     );

@@ -43,7 +43,7 @@ class MessageFriend extends React.Component {
         <div className="message-container border rounded p-3" ref={this.bottomRef}>
           {messages}
         </div>
-        <div className="fixed-bottom border-top p-3 bg-white">
+        <div className="fixed-bottom border-top p-3 bg-white overlap">
           <form
             onSubmit={() => this.handleSubmit(event, recipientId, message)} >
             <div className="input-group">

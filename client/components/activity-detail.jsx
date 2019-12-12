@@ -121,6 +121,7 @@ class ActivityDetail extends React.Component {
           <ActivityDetailButtons {...this.props}
             transaction={this.props.transaction}
             user={this.props.user}
+            points={this.props.points}
             isConfirmed={this.state.isConfirmed}
             changeModal={this.changeModal}
             activityId={this.state.activityData.activityId}

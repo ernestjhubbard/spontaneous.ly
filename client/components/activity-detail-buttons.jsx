@@ -15,6 +15,7 @@ function ActivityDetailButtons(props) {
       buttons = (
         <>
           <CancelButton {...props}
+            points={props.points}
             changeModal={props.changeModal}
             transaction={props.transaction}/>
           <BackButton {...props} />
@@ -86,16 +87,28 @@ function ConfirmButton(props) {
 }
 
 function CancelButton(props) {
-  return (
-    <button
-      className="spon-link-cancel rounded mt-0"
-      onClick={() => {
-        props.changeModal();
-        props.transaction({ transactionType: 'cancellation', activityId: props.activityId });
-      }}>
+  if (props.points < 50) {
+    return (
+      <button
+        className="spon-link-cancel rounded mt-0"
+        onClick={() => {
+          props.changeModal();
+        }}>
+        Cancel
+      </button>
+    );
+  } else {
+    return (
+      <button
+        className="spon-link-cancel rounded mt-0"
+        onClick={() => {
+          props.changeModal();
+          props.transaction({ transactionType: 'cancellation', activityId: props.activityId });
+        }}>
       Cancel
-    </button>
-  );
+      </button>
+    );
+  }
 }
 
 function BackButton(props) {

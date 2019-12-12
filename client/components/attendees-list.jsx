@@ -26,16 +26,13 @@ class AttendeesList extends React.Component {
     );
     return (
       <div className="container my-5">
-        <h4 className="d-flex justify-content-center">Attendees</h4>
-        <div className="message-container">{attendees}</div>
-        <div className="button-container fixed-bottom p-3 overlap">
-          <button
-            className="spon-button-alt rounded mt-0 w-100"
-            onClick={() => this.props.history.goBack()}
-          >
-            Back
-          </button>
+        <div className="position-relative">
+          <div className="back-chevron rounded border d-flex position-absolute" onClick={() => this.props.history.goBack()}>
+            <i className="fas fa-chevron-left m-auto"></i>
+          </div>
+          <h4 className="d-flex justify-content-center">Attendees</h4>
         </div>
+        <div className="message-container">{attendees}</div>
       </div>
     );
   }

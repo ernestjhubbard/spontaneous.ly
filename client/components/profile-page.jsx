@@ -64,6 +64,9 @@ class ProfilePage extends React.Component {
       <div className="container align-center d-flex">
         <div className="profile-center m-auto">
           <div className="profile-user-info mt-5">
+            <div className="back-chevron rounded border d-flex" onClick={() => this.props.history.goBack()}>
+              <i className="fas fa-chevron-left m-auto"></i>
+            </div>
             <div
               className="profile-user-image rounded-circle m-auto"
               style={profileImage}>
@@ -94,11 +97,6 @@ class ProfilePage extends React.Component {
               Past Adventures
             </button>
             {friendButton}
-            <button
-              className="spon-button-alt rounded w-100 mx-auto"
-              onClick={() => this.props.history.goBack()}>
-              Back
-            </button>
           </div>
         </div>
       </div>
@@ -142,12 +140,9 @@ class ProfilePage extends React.Component {
   }
 }
 function PendingFriend() {
-  const opacity = {
-    opacity: '.5'
-  };
   return (
     <button
-      className="spon-button rounded text-white col-12" style={opacity}>
+      className="spon-button rounded text-white col-12 disabled">
       Pending
     </button>
   );
