@@ -10,27 +10,39 @@ class CreateAccount extends React.Component {
       password: '',
       userUpload: {},
       validEmail: null,
-      validPassword: null,
-      validFirstName: null,
-      validLastName: null,
-      canSubmit: false
+      validPassword: null
     };
     this.handleChange = this.handleChange.bind(this);
     this.imageInput = React.createRef();
     this.fileUpload = this.fileUpload.bind(this);
     this.uploadHandler = this.uploadHandler.bind(this);
-    this.validation = this.validation.bind(this);
   }
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
-    this.validation(event.target.name);
-    this.validation();
+
+    const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
+    const passwordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/);
+
+    if (event.target.name === 'email') {
+      if (!emailRegex.test(this.state.email)) {
+        this.setState({ validEmail: false });
+      } else {
+        this.setState({ validEmail: true });
+      }
+    } else if (event.target.name === 'password') {
+      if (!passwordRegex.test(this.state.password)) {
+        this.setState({ validPassword: false });
+      } else {
+        this.setState({ validPassword: true });
+      }
+    }
+
   }
 
   render() {
-    const isValidClass = 'input-font form-control form-control-lg text-center';
-    const invalidClass = 'input-font form-control form-control-lg text-center is-invalid';
+    const invalidEmail = this.state.validEmail === false ? 'is-invalid' : null;
+    const invalidPass = this.state.validPassword === false ? 'is-invalid' : null;
     return (
       <div className="container align-center my-5">
         <h4 className="text-center font-weight-bold mb-3">Create An Account</h4>
@@ -45,46 +57,48 @@ class CreateAccount extends React.Component {
           <div className="form-group" >
             <label>First Name</label>
             <input
-              className={this.state.validFirstName === false ? invalidClass : isValidClass}
+              className='input-font form-control form-control-lg text-center'
               name="firstName"
               onChange={this.handleChange}
               value={this.state.firstName}
               type="text"
               placeholder="First Name"
-            ></input>
+              required></input>
           </div>
           <div className="form-group">
             <label htmlFor="password">Last Name</label>
             <input
-              className={this.state.validLastName === false ? invalidClass : isValidClass}
+              className='input-font form-control form-control-lg text-center'
               name="lastName"
               onChange={this.handleChange}
               value={this.state.lastName}
               type="text"
               placeholder="Last Name"
-            ></input>
+              required></input>
           </div>
           <div className="form-group">
             <label htmlFor="password">Email</label>
             <input
-              className={this.state.validEmail === false ? invalidClass : isValidClass}
+              className={`input-font form-control form-control-lg ${invalidEmail} text-center`}
               name="email"
               onChange={this.handleChange}
               value={this.state.email}
               type="email"
               placeholder="Email Address"
-            ></input>
+              required></input>
+            <div className="invalid-feedback">Must be a valid email.</div>
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
-              className={this.state.validPassword === false ? invalidClass : isValidClass}
+              className={`input-font form-control form-control-lg ${invalidPass} text-center`}
               name="password"
               onChange={this.handleChange}
               value={this.state.password}
               type="password"
               placeholder="Password"
-            ></input>
+              required></input>
+            <div className="invalid-feedback">Must contain 8 characters, and at least 1 number.</div>
           </div>
           <label htmlFor="">Upload a Profile Picture</label>
           <div className="custom-file">
@@ -100,49 +114,12 @@ class CreateAccount extends React.Component {
             <div className="invalid-feedback">Not a supported file type</div>
           </div>
           <button
-            disabled={!this.state.canSubmit}
             type="submit"
             className="spon-button rounded text-white w-100"
             value="Submit">Submit</button>
-          {!this.state.canSubmit ? <p className="text-danger text-center">Please fill out all fields.</p> : null}
         </form>
       </div>
     );
-  }
-
-  validation(type) {
-    const passwordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/);
-    if (!passwordRegex.test(this.state.password)) {
-      this.setState({ validPassword: false });
-    } else {
-      this.setState({ validPassword: true });
-    }
-    const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    if (!emailRegex.test(this.state.email)) {
-      this.setState({ validEmail: false });
-    } else {
-      this.setState({ validEmail: true });
-    }
-    switch (type) {
-      case 'firstName':
-        this.setState({ validFirstName: this.state.firstName.length > 0 });
-        break;
-      case 'lastName':
-        this.setState({ validLastName: this.state.lastName.length > 0 });
-        break;
-    }
-    if (type === undefined) {
-      if (
-        this.state.validEmail === true &&
-        this.state.validPassword === true &&
-        this.state.validFirstName === true &&
-        this.state.validLastName === true
-      ) {
-        this.setState({ canSubmit: true });
-      } else {
-        this.setState({ canSubmit: false });
-      }
-    }
   }
 
   fileUpload(event) {
