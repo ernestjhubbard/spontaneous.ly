@@ -20,7 +20,9 @@ class CreateAccount extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
 
+  validation() {
     const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     const passwordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/);
 
@@ -37,7 +39,28 @@ class CreateAccount extends React.Component {
         this.setState({ validPassword: true });
       }
     }
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.email !== prevState.email) {
+      this.validation();
+    } else if (this.state.password !== prevState.password) {
+      this.validation();
+    }
+  }
+
+  handleSubmit() {
+    const userInfo = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      image: this.state.image,
+      password: this.state.password,
+      userUpload: this.state.userUpload
+    };
+    this.uploadHandler();
+    this.props.createUser(userInfo);
+    this.props.history.push('/sign-in');
   }
 
   render() {
@@ -49,11 +72,7 @@ class CreateAccount extends React.Component {
         <form
           method="post"
           encType="multipart/form-data"
-          onSubmit={() => {
-            this.uploadHandler();
-            this.props.createUser(this.state);
-            this.props.history.push('/sign-in');
-          }}>
+          onSubmit={() => this.handleSubmit()}>
           <div className="form-group" >
             <label>First Name</label>
             <input
