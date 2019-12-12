@@ -79,7 +79,6 @@ class AccountSetting extends React.Component {
                   type="password"
                   validPassword={this.state.validPassword}
                   changeCallback={this.handleChange} />
-
               </div>
             </div>
             <div>
@@ -127,9 +126,7 @@ class AccountSetting extends React.Component {
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
 
-    // Not just any text field in this case - requires the email address to have the @ and end with a valid domain
     const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    // Minimum of eight characters, at least one letter and one number
     const passwordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/);
 
     if (!emailRegex.test(this.state.email)) {

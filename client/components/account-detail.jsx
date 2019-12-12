@@ -36,10 +36,8 @@ function AccountDetail(props) {
       placeholder={placeholderText}
       value={textValue}
       type={inputType}
-      required={true}
-      onChange={event => {
-        updateCallback(event);
-      }} />;
+      onChange={event => updateCallback(event)}
+      required />;
   }
   return <p className="mb-0 form-control border bg-light text-muted">{textValue}</p>;
 }
