@@ -9,12 +9,12 @@ export default function Message(props) {
   };
   const currentUser = props.userId;
   const friend =
-    <div className="row my-3 w-100 mx-auto justify-content-end">
+    <div className="row my-2 w-100 mx-auto justify-content-end">
       <div className="d-flex p-2 border rounded"><p className="m-auto">{props.message}</p></div>
       <div className="friend-image rounded-circle p-0 float-right ml-3" style={friendImage}></div>
     </div>;
   const user =
-    <div className="row my-3 w-100 mx-auto">
+    <div className="row my-2 w-100 mx-auto">
       <div className="friend-image rounded-circle p-0 mr-3" style={userImage}></div>
       <div className="d-flex p-2 border rounded"><p className="m-auto">{props.message}</p></div>
     </div>;
