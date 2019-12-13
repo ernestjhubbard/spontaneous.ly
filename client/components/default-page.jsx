@@ -55,7 +55,7 @@ class DefaultPage extends React.Component {
           <div className="bottom-text col-sm-12 mb-3">
             <h4>Spontaneous Adventures for Any Interest</h4>
             <p>
-              Adventures are all around you, in many shapes and forms. Learn more about what Spontaneous.ly can do.
+              Adventures are all around you, in many shapes and forms. Spontaneous.ly was designed to cater to anyone&#39;s sense of adventure.  Learn more about what Spontaneous.ly can do below.
             </p>
           </div>
           <div className="d-flex flex-row horizontal-scroll justify-content-sm-between">

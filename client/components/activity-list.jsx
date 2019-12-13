@@ -19,27 +19,14 @@ export default class ActivityList extends React.Component {
       .then(activityList => {
         const listedActivities = this.state.activities.concat(activityList);
         this.setState({ activities: listedActivities });
+        if (this.state.activities.length !== null) {
+          this.setState({ rendering: true });
+        }
       })
       .catch(error => console.error('Fetch error: ', error));
-    this.setState({ rendering: true });
   }
 
   render() {
-    const rerollPoints = this.props.reroll;
-    const transactionType = { transactionType: 'reroll' };
-    const rerollText = (
-      <>
-        <p className="text-center">Not happy with these choices?</p>
-        <p className="text-center">
-          <a href="" className="reroll" onClick={() => {
-            rerollPoints(transactionType);
-            this.props.history.push('/activity-filter');
-          }}>
-            Re-roll for 25 points.
-          </a>
-        </p>
-      </>
-    );
     if (!this.state.rendering) {
       return null;
     }
@@ -57,12 +44,39 @@ export default class ActivityList extends React.Component {
               activities={this.state.activities}
               getAttendees={this.props.getAttendees} />
             : <NoActivitiesModal {...this.props} />}
-          {this.props.points - 50 <= 0 ? <p>You do not have enough points to Re-roll.</p> : rerollText}
+          {this.state.activities.length
+            ? <ReRollText {...this.props}
+              points={this.props.points}
+              rerollPoints={this.props.reroll} />
+            : null }
         </div>
         {this.state.activities.length && this.state.rendering
           ? <Footer />
           : null}
       </div>
+    );
+  }
+}
+
+function ReRollText(props) {
+  const transactionType = { transactionType: 'reroll' };
+  if (props.points - 50 <= 0) {
+    return (
+      <p className="text-center">You do not have enough points to Re-roll.</p>
+    );
+  } else {
+    return (
+      <>
+        <p className="text-center">Not happy with these choices?</p>
+        <p className="text-center">
+          <a href="" className="reroll" onClick={() => {
+            props.rerollPoints(transactionType);
+            props.history.push('/activity-filter');
+          }}>
+            Re-roll for 25 points.
+          </a>
+        </p>
+      </>
     );
   }
 }

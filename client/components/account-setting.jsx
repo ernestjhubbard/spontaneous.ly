@@ -75,7 +75,7 @@ class AccountSetting extends React.Component {
                 className={`input-group account-setting-input w-100 mb-0 form-control ${invalidPass}`}
                 value={password}
                 placeholder="••••••••••"
-                type="text"
+                type="password"
                 onChange={this.handleChange}
                 required
                 readOnly={this.state.isReadOnly} />
@@ -116,11 +116,17 @@ class AccountSetting extends React.Component {
   handleSubmit() {
     event.preventDefault();
     if (Object.getOwnPropertyNames(this.state.userUpload).length === 0) {
-      this.updateInfo(this.state);
+      this.updateInfo({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        image: this.state.image,
+        password: this.state.password
+      });
       this.uploadHandler();
-      this.props.fetchUser();
     }
-    this.props.history.goBack();
+    this.props.fetchUser();
+    this.props.history.push(`/profile?userId=${this.props.user.userId}`);
   }
 
   handleChange(event) {
@@ -192,7 +198,6 @@ class AccountSetting extends React.Component {
       userUpload: this.state.userUpload
     };
     this.updateInfo(userInfo);
-    this.props.history.goBack();
   }
 
   updateInfo({ firstName, lastName, email, password, image }) {
