@@ -125,20 +125,32 @@ class AccountSetting extends React.Component {
 
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
+  }
 
+  validation() {
     const emailRegex = RegExp(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     const passwordRegex = RegExp(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$/);
 
-    if (!emailRegex.test(this.state.email)) {
-      this.setState({ validEmail: false });
-    } else {
-      this.setState({ validEmail: true });
+    if (event.target.name === 'email') {
+      if (!emailRegex.test(this.state.email)) {
+        this.setState({ validEmail: false });
+      } else {
+        this.setState({ validEmail: true });
+      }
+    } else if (event.target.name === 'password') {
+      if (!passwordRegex.test(this.state.password)) {
+        this.setState({ validPassword: false });
+      } else {
+        this.setState({ validPassword: true });
+      }
     }
+  }
 
-    if (!passwordRegex.test(this.state.password)) {
-      this.setState({ validPassword: false });
-    } else {
-      this.setState({ validPassword: true });
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.email !== prevState.email) {
+      this.validation();
+    } else if (this.state.password !== prevState.password) {
+      this.validation();
     }
   }
 
