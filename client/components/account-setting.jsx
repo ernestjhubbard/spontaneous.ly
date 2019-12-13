@@ -124,9 +124,9 @@ class AccountSetting extends React.Component {
         password: this.state.password
       });
       this.uploadHandler();
-      this.props.fetchUser();
     }
-    this.props.history.goBack();
+    this.props.fetchUser();
+    this.props.history.push(`/profile?userId=${this.props.user.userId}`);
   }
 
   handleChange(event) {
@@ -198,7 +198,6 @@ class AccountSetting extends React.Component {
       userUpload: this.state.userUpload
     };
     this.updateInfo(userInfo);
-    this.props.history.goBack();
   }
 
   updateInfo({ firstName, lastName, email, password, image }) {
