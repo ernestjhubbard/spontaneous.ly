@@ -62,7 +62,7 @@ class DefaultPage extends React.Component {
             <div
               className="col-sm-3"
               onClick={() => {
-                this.props.history.push('/adventures?activity=wine-and-paint');
+                this.props.history.push('/adventures?info=search-for-activities');
               }}
             >
               <div className="card card-size adventure-card">
@@ -85,7 +85,7 @@ class DefaultPage extends React.Component {
               className="col-sm-3"
               onClick={() => {
                 this.props.history.push(
-                  '/adventures?activity=pickup-basketball'
+                  '/adventures?info=gain-points'
                 );
               }}
             >
@@ -108,7 +108,7 @@ class DefaultPage extends React.Component {
             <div
               className="col-sm-3"
               onClick={() => {
-                this.props.history.push('/adventures?activity=yoga');
+                this.props.history.push('/adventures?info=connect-with-others');
               }}
             >
               <div className="card card-size adventure-card">
@@ -130,7 +130,7 @@ class DefaultPage extends React.Component {
             <div
               className="col-sm-3"
               onClick={() => {
-                this.props.history.push('/adventures?activity=parasailing');
+                this.props.history.push('/adventures?info=spend-to-re-roll');
               }}
             >
               <div className="card card-size adventure-card">

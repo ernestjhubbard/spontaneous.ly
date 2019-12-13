@@ -31,7 +31,7 @@ class StaticActivity extends React.Component {
     };
 
     switch (this.state.currentActivity) {
-      case 'wine-and-paint':
+      case 'search-for-activities':
         contentObject.heroClass = 'wine-and-paint-hero';
         contentObject.content.headline = 'Search for Activities';
         contentObject.content.text1 = 'Spontaneous.ly allows you to search for upcoming activities and adventures in your area.  There are different things to suite anyone\'s level of adventure, budget, or location.  Simply input your five-digit zipcode into the home page screen, and input your filtering options, to see the list of activities.';
@@ -39,7 +39,7 @@ class StaticActivity extends React.Component {
         contentObject.imgAlt = 'Abstract painting';
         contentObject.content.text2 = 'Whether you\'re looking for a simple picnic in the park, or to go offroading in Anza Borrego, Spontaneous.ly can get you connected to the right adventure.';
         break;
-      case 'pickup-basketball':
+      case 'gain-points':
         contentObject.heroClass = 'pickup-basketball-hero';
         contentObject.content.headline = 'Gain Points';
         contentObject.content.text1 = 'By attending events, you\'ll begin obtaining Spontaneity Points.  The more adventurous your activity is, the more points you will obtain by attending.  When logged in you\'ll be able to see all your points while viewing your profile, among other things.';
@@ -47,7 +47,7 @@ class StaticActivity extends React.Component {
         contentObject.imgAlt = 'Empty Basketball Court';
         contentObject.content.text2 = 'These points serve as a testimate to your level of adventure, and provide a bit more context to all the adventures you\'ve been on since joining the app.';
         break;
-      case 'yoga':
+      case 'connect-with-others':
         contentObject.heroClass = 'yoga-hero';
         contentObject.content.headline = 'Connect with Others';
         contentObject.content.text1 = 'Once you\'ve confirmed your reservation for an activity, you can view the list of attendees for the same activity.  From there, you can choose to view the other users\' profiles, and add them as a friend.';
@@ -55,7 +55,7 @@ class StaticActivity extends React.Component {
         contentObject.imgAlt = 'Woman doing yoga in peaceful setting';
         contentObject.content.text2 = 'Once you have some friends on your friends list, send them a message to see what they\'re up to.  You\'ll also be able to see their upcoming activities to join in, or see their past activities to see what they\'ve been up to.';
         break;
-      case 'parasailing':
+      case 'spend-to-re-roll':
         contentObject.heroClass = 'parasailing-hero';
         contentObject.content.headline = 'Spend to Re-Roll';
         contentObject.content.text1 = 'The points you accumulate will allow you to re-roll or cancel your reservations.  If you aren\'t satisfied with the choices that you got based on your filtering options, you can spend 25 points to go back to the filter and perform a new search with new parameters.';
