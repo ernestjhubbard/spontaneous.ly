@@ -159,6 +159,7 @@ class AccountSetting extends React.Component {
   fileUpload(event) {
     const image = event.target.files[0].name;
     const userUpload = event.target.files[0];
+
     this.setState({ userUpload });
     this.setState({ image });
   }
