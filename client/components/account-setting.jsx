@@ -1,5 +1,4 @@
 import React from 'react';
-import AccountDetail from './account-detail';
 
 class AccountSetting extends React.Component {
   constructor(props) {
@@ -12,8 +11,9 @@ class AccountSetting extends React.Component {
       password: '',
       userUpload: {},
       changeDetail: false,
-      validEmail: true,
-      validPassword: true
+      validEmail: null,
+      validPassword: null,
+      isReadOnly: true
     };
     this.updateInfo = this.updateInfo.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +27,9 @@ class AccountSetting extends React.Component {
     const firstName = this.state.firstName;
     const lastName = this.state.lastName;
     const email = this.state.email;
+    const password = this.state.password;
+    const invalidEmail = this.state.validEmail === false ? 'is-invalid' : null;
+    const invalidPass = this.state.validPassword === false ? 'is-invalid' : null;
     return (
       <div className="container my-5">
         <h4 className="d-flex justify-content-center mb-4">Account Settings</h4>
@@ -34,52 +37,49 @@ class AccountSetting extends React.Component {
           <div className="input-group input-group-sm mb-3">
             <label className="account-setting-text">First Name:</label>
             <div className="input-group mb-3">
-              <div className="input-group account-setting-input w-100">
-                <AccountDetail
-                  name="firstName"
-                  value={firstName}
-                  state={this.state}
-                  placeholder="Enter your First Name"
-                  type="text"
-                  changeCallback={this.handleChange}/>
-              </div>
+              <input name="firstName"
+                className="input-group account-setting-input w-100 mb-0 form-control"
+                value={firstName}
+                placeholder="Enter your First Name"
+                type="text"
+                onChange={this.handleChange}
+                required
+                readOnly={this.state.isReadOnly} />
             </div>
             <label className="account-setting-text">Last Name:</label>
             <div className="input-group mb-3">
-              <div className="input-group account-setting-input w-100">
-                <AccountDetail
-                  name="lastName"
-                  value={lastName}
-                  state={this.state}
-                  placeholder="Enter your Last Name"
-                  type="text"
-                  changeCallback={this.handleChange} />
-              </div>
+              <input name="lastName"
+                className="input-group account-setting-input w-100 mb-0 form-control"
+                value={lastName}
+                placeholder="Enter your Last Name"
+                type="text"
+                onChange={this.handleChange}
+                required
+                readOnly={this.state.isReadOnly} />
             </div>
             <label className="account-setting-text">Email:</label>
             <div className="input-group mb-3">
-              <div className="input-group account-setting-input w-100">
-                <AccountDetail
-                  name="email"
-                  value={email}
-                  state={this.state}
-                  placeholder="example@example.com"
-                  type="email"
-                  validEmail={this.state.validEmail}
-                  changeCallback={this.handleChange} />
-              </div>
+              <input name="email"
+                className={`input-group account-setting-input w-100 mb-0 form-control ${invalidEmail}`}
+                value={email}
+                placeholder="Enter your Email"
+                type="text"
+                onChange={this.handleChange}
+                required
+                readOnly={this.state.isReadOnly} />
+              <div className="invalid-feedback">Must be a valid email.</div>
             </div>
             <label className="account-setting-text">Password:</label>
             <div className="input-group mb-3">
-              <div className="input-group account-setting-input w-100">
-                <AccountDetail
-                  name="password"
-                  state={this.state}
-                  placeholder="Enter New Password"
-                  type="password"
-                  validPassword={this.state.validPassword}
-                  changeCallback={this.handleChange} />
-              </div>
+              <input name="password"
+                className={`input-group account-setting-input w-100 mb-0 form-control ${invalidPass}`}
+                value={password}
+                placeholder="••••••••••"
+                type="text"
+                onChange={this.handleChange}
+                required
+                readOnly={this.state.isReadOnly} />
+              <div className="invalid-feedback">Must contain 8 characters, and at least 1 number.</div>
             </div>
             <div>
               <label className="account-setting-text">Upload Profile Picture:</label>
@@ -120,7 +120,10 @@ class AccountSetting extends React.Component {
     } else {
       this.uploadHandler();
     }
-    this.props.history.push(`/profile?${this.props.user.userId}`);
+
+    if (this.state.changeDetail === true) {
+      this.props.history.push(`/profile?${this.props.user.userId}`);
+    }
   }
 
   handleChange(event) {
@@ -163,8 +166,8 @@ class AccountSetting extends React.Component {
       userUpload: this.state.userUpload
     };
 
-    if (updatedDetails.firstName.length && updatedDetails.lastName.length > 2 && this.state.validEmail && this.state.validPassword) {
-      this.setState({ changeDetail: !this.state.changeDetail });
+    if (updatedDetails.firstName.length && updatedDetails.lastName.length > 1) {
+      this.setState({ changeDetail: !this.state.changeDetail, isReadOnly: !this.state.isReadOnly });
     }
   }
 
@@ -189,9 +192,18 @@ class AccountSetting extends React.Component {
     fetch('/api/image-upload', config)
       .then(results => results.json())
       .then(data => data);
+
     const image = this.state.image;
     this.updateInfo({ image });
-    this.updateInfo(this.state);
+    const userInfo = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      image: this.state.image,
+      password: this.state.password,
+      userUpload: this.state.userUpload
+    };
+    this.updateInfo(userInfo);
     this.props.history.goBack();
   }
 
