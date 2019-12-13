@@ -116,7 +116,13 @@ class AccountSetting extends React.Component {
   handleSubmit() {
     event.preventDefault();
     if (Object.getOwnPropertyNames(this.state.userUpload).length === 0) {
-      this.updateInfo(this.state);
+      this.updateInfo({
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        image: this.state.image,
+        password: this.state.password
+      });
       this.uploadHandler();
       this.props.fetchUser();
     }

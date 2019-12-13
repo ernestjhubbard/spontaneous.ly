@@ -84,9 +84,12 @@ class StaticActivity extends React.Component {
           <img
             src={allContent.content.img1}
             alt={allContent.content.imgAlt}
-            className="img-fluid my-5 w-100"
+            className="img-fluid my-3 w-100"
           />
           <p>{allContent.content.text2}</p>
+          <button className="spon-button text-white rounded w-100 mt-0" onClick={() =>
+            this.props.history.push('/')
+          }>Back</button>
         </div>
         <Footer />
       </div>
