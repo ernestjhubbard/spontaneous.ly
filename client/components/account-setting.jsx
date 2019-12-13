@@ -117,8 +117,8 @@ class AccountSetting extends React.Component {
     event.preventDefault();
     if (Object.getOwnPropertyNames(this.state.userUpload).length === 0) {
       this.updateInfo(this.state);
-    } else {
       this.uploadHandler();
+      this.props.fetchUser();
     }
     this.props.history.push(`/profile?${this.props.user.userId}`);
   }
