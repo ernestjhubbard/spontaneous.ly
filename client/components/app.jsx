@@ -173,6 +173,7 @@ class App extends React.Component {
       }
     };
     fetch('/api/points', config).then(response => response.json());
+    this.getPoints(`userId=${this.state.user.userId}`);
   }
 
   render() {
