@@ -233,6 +233,7 @@ class App extends React.Component {
             <Route exact path="/messages" render={props => <MessageFriend {...props}
               user={this.state.user} />} />
             <Route exact path="/account-settings" render={props => <AccountSetting {...props}
+              fetchUser={this.fetchUser}
               user={this.state.user} />} />
           </Switch>
         </>

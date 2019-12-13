@@ -117,8 +117,8 @@ class AccountSetting extends React.Component {
     event.preventDefault();
     if (Object.getOwnPropertyNames(this.state.userUpload).length === 0) {
       this.updateInfo(this.state);
-    } else {
       this.uploadHandler();
+      this.props.fetchUser();
     }
     this.props.history.goBack();
   }
@@ -161,6 +161,7 @@ class AccountSetting extends React.Component {
   fileUpload(event) {
     const image = event.target.files[0].name;
     const userUpload = event.target.files[0];
+
     this.setState({ userUpload });
     this.setState({ image });
   }
