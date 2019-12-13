@@ -155,17 +155,7 @@ class AccountSetting extends React.Component {
   }
 
   changeDetail() {
-    const updatedDetails = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password,
-      userUpload: this.state.userUpload
-    };
-
-    if (updatedDetails.firstName.length && updatedDetails.lastName.length > 1) {
-      this.setState({ changeDetail: !this.state.changeDetail, isReadOnly: !this.state.isReadOnly });
-    }
+    this.setState({ changeDetail: !this.state.changeDetail, isReadOnly: !this.state.isReadOnly });
   }
 
   fileUpload(event) {
@@ -223,7 +213,9 @@ export default AccountSetting;
 
 function EditOrSave(props) {
   if (props.isEditing) {
-    return (<button className="spon-button text-white rounded mt-0" onClick={props.changeDetailCallback}>Save</button>);
+    return (<button className="spon-button text-white rounded mt-0" onClick={() => {
+      props.changeDetailCallback();
+    }}>Save</button>);
   }
   return (<button className="spon-button text-white rounded mt-0" onClick={props.changeDetailCallback}>Edit</button>);
 }
