@@ -120,10 +120,7 @@ class AccountSetting extends React.Component {
     } else {
       this.uploadHandler();
     }
-
-    if (this.state.changeDetail === true) {
-      this.props.history.push(`/profile?${this.props.user.userId}`);
-    }
+    this.props.history.goBack();
   }
 
   handleChange(event) {
