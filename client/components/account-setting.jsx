@@ -75,7 +75,7 @@ class AccountSetting extends React.Component {
                 className={`input-group account-setting-input w-100 mb-0 form-control ${invalidPass}`}
                 value={password}
                 placeholder="••••••••••"
-                type="text"
+                type="password"
                 onChange={this.handleChange}
                 required
                 readOnly={this.state.isReadOnly} />
