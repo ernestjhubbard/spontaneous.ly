@@ -55,15 +55,14 @@ class DefaultPage extends React.Component {
           <div className="bottom-text col-sm-12 mb-3">
             <h4>Spontaneous Adventures for Any Interest</h4>
             <p>
-              Adventures are all around you, in many shapes and forms. See some
-              example activities that our users participate in.
+              Adventures are all around you, in many shapes and forms. Learn more about what Spontaneous.ly can do.
             </p>
           </div>
           <div className="d-flex flex-row horizontal-scroll justify-content-sm-between">
             <div
               className="col-sm-3"
               onClick={() => {
-                this.props.history.push('/adventures?activity=wine-and-paint');
+                this.props.history.push('/adventures?info=search-for-activities');
               }}
             >
               <div className="card card-size adventure-card">
@@ -74,7 +73,7 @@ class DefaultPage extends React.Component {
                 />
                 <div className="card-body">
                   <p className="text-muted">
-                    <small>Wine and Paint</small>
+                    <small>Search for Activities in your Area</small>
                   </p>
                   <p className="font-color mb-0">
                     <small>Click to Learn More</small>
@@ -86,7 +85,7 @@ class DefaultPage extends React.Component {
               className="col-sm-3"
               onClick={() => {
                 this.props.history.push(
-                  '/adventures?activity=pickup-basketball'
+                  '/adventures?info=gain-points'
                 );
               }}
             >
@@ -98,7 +97,7 @@ class DefaultPage extends React.Component {
                 />
                 <div className="card-body">
                   <p className="text-muted">
-                    <small>Pickup Basketball</small>
+                    <small>Gain Points for Attending Activities</small>
                   </p>
                   <p className="font-color mb-0">
                     <small>Click to Learn More</small>
@@ -109,7 +108,7 @@ class DefaultPage extends React.Component {
             <div
               className="col-sm-3"
               onClick={() => {
-                this.props.history.push('/adventures?activity=yoga');
+                this.props.history.push('/adventures?info=connect-with-others');
               }}
             >
               <div className="card card-size adventure-card">
@@ -120,7 +119,7 @@ class DefaultPage extends React.Component {
                 />
                 <div className="card-body">
                   <p className="text-muted">
-                    <small>Yoga</small>
+                    <small>Connect with Other Users Attending Activities</small>
                   </p>
                   <p className="font-color mb-0">
                     <small>Click to Learn More</small>
@@ -131,7 +130,7 @@ class DefaultPage extends React.Component {
             <div
               className="col-sm-3"
               onClick={() => {
-                this.props.history.push('/adventures?activity=parasailing');
+                this.props.history.push('/adventures?info=spend-to-re-roll');
               }}
             >
               <div className="card card-size adventure-card">
@@ -142,7 +141,7 @@ class DefaultPage extends React.Component {
                 />
                 <div className="card-body">
                   <p className="text-muted">
-                    <small>Parasailing</small>
+                    <small>Spend Points to Re-Roll See New Activities</small>
                   </p>
                   <p className="font-color mb-0">
                     <small>Click to Learn More</small>

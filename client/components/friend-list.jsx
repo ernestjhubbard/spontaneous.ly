@@ -36,7 +36,12 @@ class FriendList extends React.Component {
 
     return (
       <div className="container align-center my-5">
-        <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
+        <div className="position-relative">
+          <div className="back-chevron rounded border d-flex position-absolute" onClick={() => this.props.history.goBack()}>
+            <i className="fas fa-chevron-left m-auto"></i>
+          </div>
+          <h4 className="text-center mt-3 font-weight-bold mb-4">Friends List</h4>
+        </div>
         <div className="d-flex justify-content-between">
           <h4>
             <span className={`badge viewing-${this.state.pendingClicked}`} onClick={() => {
@@ -52,13 +57,6 @@ class FriendList extends React.Component {
           </h4>
         </div>
         <div>{friendsArray}</div>
-        <div className="button-container fixed-bottom p-3">
-          <button
-            className="spon-button-alt rounded mt-0 w-100"
-            onClick={() => this.props.history.goBack()} >
-            Back
-          </button>
-        </div>
       </div>
     );
   }

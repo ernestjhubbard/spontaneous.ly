@@ -58,6 +58,11 @@ body {
   margin-top: 1rem;
 }
 
+.disabled {
+  opacity: .5;
+  transition: .3s all;
+}
+
 .user-count {
   background: #f07070;
   width: 30px;
@@ -106,6 +111,10 @@ body {
 .location-text {
   top: 28%;
   left: 37%;
+}
+
+.card:hover {
+  cursor: pointer;
 }
 
 .card-size {

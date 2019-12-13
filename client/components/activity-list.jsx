@@ -40,6 +40,9 @@ export default class ActivityList extends React.Component {
         </p>
       </>
     );
+    if (!this.state.rendering) {
+      return null;
+    }
     return (
       <div>
         <div className="activity-list-hero top-banner d-flex">
