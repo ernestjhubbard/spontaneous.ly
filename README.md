@@ -1,3 +1,5 @@
+
+### Work in progress
 ### Spontaneous.ly
 Sponatenous.ly is an app that is designed for users that want to partake in a spontaneous adventure.  Users can:
 - Search by zip code
