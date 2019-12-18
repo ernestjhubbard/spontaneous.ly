@@ -15,6 +15,11 @@ Sponatenous.ly is an app that is designed for users that want to partake in a sp
 - Send and receive messages from friends
 - View past activities and more
 
+### Preview
+
+![alt text](preview.png)
+
+
 ### Figma
 - https://www.figma.com/file/EjwaZdxQ74QSmY26RoPJ01/Spontaneous.ly?node-id=84%3A25
 

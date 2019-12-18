@@ -1,0 +1,643 @@
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 979px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@font-face {
+  font-family: Roboto Mono;
+  src: url(assets/font/RobotoMono-Regular.ttf);
+}
+
+@font-face {
+  font-family: Roboto-Bold;
+  src: url(assets/font/RobotoMono-Bold.ttf);
+}
+
+body {
+  font-family: 'Roboto Mono';
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  animation: fadein 1s;
+}
+
+.spon-button {
+  background-color: #F07070;
+  border: none;
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.spon-button-alt {
+  background-color: #fff;
+  border: 1px solid #f07070;
+  color: #f07070;
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.spon-link-cancel {
+  background-color: #fff;
+  border: 1px solid #00000020;
+  color: #00000020;
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.spon-button-cancel {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #ccc;
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.disabled {
+  opacity: .5;
+  transition: .3s all;
+}
+
+.user-count {
+  background: #f07070;
+  width: 30px;
+  height: 30px;
+}
+
+.header-bar {
+  background-color: #F07070;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.footer {
+  padding: 1rem;
+}
+
+.logo-alone {
+  height: 2.8rem;
+  cursor: pointer;
+}
+
+.footer-logo {
+  height: 1.8rem;
+}
+
+.top-banner {
+  height: 30vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.activity-list-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url('assets/images/low-angle-photography-of-coconut-trees-804410.jpg');
+}
+
+.center-nav {
+  height: 57vh;
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url('assets/images/action-adult-balance-balancing-415176.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #fff;
+}
+
+.location-text {
+  top: 28%;
+  left: 37%;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card-size {
+  width: 100%;
+  min-width: 200px;
+  align-items: stretch;
+}
+
+.adventure-card a {
+  color: #f07070;
+}
+
+.img-info {
+  height: 20vh;
+  object-fit: cover;
+}
+
+.horizontal-scroll {
+  overflow-x: scroll;
+}
+
+.outer {
+  margin: auto;
+  position: relative;
+}
+
+.inner {
+  height: 350px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.slides {
+  transition: .3s all;
+}
+
+.indicator {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  transition: .3s all;
+  background: #fff;
+}
+
+.activeSlide {
+  background: #ccc;
+}
+
+.carousel-container {
+  height: 350px;
+  display: flex;
+}
+
+.inner-card {
+  margin: auto;
+}
+
+.learn-more-cta {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  background: #f07070;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: .3s all;
+}
+
+.learn-more-cta:hover {
+  background: #e76c6c;
+}
+
+.arrow {
+  height: 40px;
+  width: 40px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  top: 50%;
+  position: absolute;
+  transition: .3s all;
+  cursor: pointer;
+  display: flex;
+  color: #666;
+}
+
+.arrow:hover {
+  background: #f07070;
+  border-color: #f07070;
+  color: #fff;
+}
+
+.left {
+  transform: translate(-50%, -50%);
+  left: 15px;
+  z-index: 1;
+}
+
+.right {
+  transform: translate(50%, -50%);
+  right: 15px;
+  z-index: 1;
+}
+
+button:focus {
+  outline: none;
+}
+
+.current-image {
+  width: 50px;
+  height: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  display: inline-block;
+  transition: .3s all;
+  cursor: pointer;
+}
+
+.shut {
+  font-size: 2rem;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: .3s all;
+  overflow: hidden;
+  display: block;
+}
+
+.menu-closed {
+  visibility: hidden;
+}
+
+.menu-open {
+  visibility: visible;
+}
+
+.darkness {
+  background-image: linear-gradient(#00000050, #00000050);
+  height: 100%;
+  width: 100%;
+  transition: .15s all;
+  top: 0;
+  position: fixed;
+}
+
+.darkness-closed {
+  opacity: 0%;
+}
+
+.darkness-open {
+  opacity: 100%;
+}
+
+.nav-drawer {
+  padding: 0rem 2rem;
+  position: fixed;
+  height: 100%;
+  background: #fff;
+  top: 0px;
+  right: 0px;
+  width: 80%;
+  transition: .3s all;
+}
+
+.hamburger {
+  font-size: 2rem;
+  cursor: pointer;
+  transform: scaleX(1.5);
+  color: white;
+}
+
+.nav-closed {
+  transform: translateX(100%);
+}
+
+.nav-open {
+  transform: translateX(0%);
+}
+
+.nav-drawer h3 {
+  font-size: 3rem;
+  margin-block-start: .333em;
+}
+
+.nav-drawer a {
+  font-size: 1rem;
+  margin: 1rem 0em;
+  display: block;
+  color: #f07070;
+  transition: .3s all;
+  text-decoration: none;
+}
+
+.nav-drawer a:hover {
+  color: #e76c6c
+}
+
+ul {
+  padding-inline-start: 0px;
+  list-style-type: none;
+}
+
+.shut {
+  color: #000;
+}
+
+.closeIcon {
+  cursor: pointer;
+}
+
+.menu-nav-bar {
+  margin: auto 8px auto auto;
+}
+
+.adventure {
+  cursor: pointer;
+}
+
+.activity-top-banner {
+  height: 35vh;
+  background-image: linear-gradient(#801d8080, #ffc0cb80);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.activity-description {
+  margin-bottom: 7rem;
+}
+
+.confirm-button{
+  background-color: #F07070;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  width: 45%;
+}
+
+.back-button{
+  border: 1px solid #F07070;
+  color: #F07070;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  width: 45%;
+}
+.profile-user-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 150px;
+  width: 150px;
+}
+
+.profile-point-value {
+  font-size: 4rem;
+  color: #F07070;
+}
+
+.filename {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.calc-button-50 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calc-button-50 button {
+  width: calc(50% - 8px);
+}
+
+.button-container {
+  border-top: 1px solid #00000020;
+  background: #fff;
+}
+
+input::placeholder {
+  color: #ccc;
+}
+
+.input-font {
+  font-size: 1rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.activity-thumbnail {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.points {
+  width: 22px;
+  height: 22px;
+  color: #f07070;
+  border: 1px solid;
+  border-radius: 3.5px;
+}
+
+/* FRIEND PAGE BELOW - CHANGE AS NEEDED */
+
+.viewing-false {
+  background: #f07070;
+  color: #fff;
+}
+
+.friend-image {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 50px;
+  width: 50px;
+}
+
+.friend-button {
+  padding: .75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: white;
+}
+
+.send-message {
+  color: #f07070
+}
+
+/* FRIEND PAGE ABOVE - CHANGE AS NEEDED */
+
+.wine-and-paint-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/wine-and-paint.jpg);
+}
+
+.pickup-basketball-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/pickup-basketball.jpg);
+}
+
+.yoga-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/yoga.jpg);
+}
+
+.parasailing-hero {
+  background-image: linear-gradient(#801d8080, #ffc0cb80), url(assets/images/parasailing.jpg);
+}
+
+.reroll,
+.font-color {
+  color: #f07070;
+}
+
+.filter-range::-webkit-slider-thumb,
+.filter-range::-moz-range-thumb,
+.filter-range::-ms-thumb {
+  background: #fff!important;
+}
+
+.confirmation-container{
+  width: 90%;
+}
+
+.confirm-info{
+  width: 90%;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.back-home-button{
+  background-color: #f07070;
+  color: white;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.cancel-button{
+  font-size: 1.25rem;
+  background-color: white;
+  border-radius: 5px;
+  color: lightgray;
+}
+
+.bold-text{
+  font-family: 'Roboto-Bold';
+}
+
+.point{
+  background-color: #f07070;
+  border-radius: 2px;
+  color: white;
+}
+
+.confirm-cancel-modal{
+  z-index: 1200;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0,0,0, 0.5);
+  backdrop-filter: blur(3px);
+  display: flex;
+}
+
+.inner-modal {
+  margin: auto;
+  background-color: white;
+}
+
+.cancel-confirm-button{
+  background-color: #f07070;
+  color: white;
+  width: 40%;
+  height: 15%;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+
+.cancel-back-button{
+  color: #f07070;
+  background-color: white;
+  border: 1px solid;
+  border-radius: 5px;
+  width: 40%;
+  height: 15%;
+  font-size: 1.25rem;
+}
+
+.confirmed-badge {
+  background: #f07070;
+}
+
+.message-container {
+  left: 0;
+  height: calc(70vh + 2px);
+  overflow: scroll;
+}
+
+.activity-container {
+  height: 70vh;
+  overflow: scroll;
+}
+
+.friend-name {
+  width: calc(100% - 114px);
+}
+
+.attendee-name {
+  width: calc(100% - 66px);
+}
+
+.fade-in {
+  animation: fadein 1.5s;
+}
+
+a {
+  color: initial;
+}
+
+a:hover {
+  color: initial;
+  text-decoration: none;
+}
+
+@keyframes fadeout {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.back-chevron {
+  font-size: 1rem;
+  height: 40px;
+  width: 40px;
+  color: #00000020;
+  transition: .3s all;
+  left: 0;
+  top: -25%;
+}
+
+.back-chevron:hover {
+  color: #f07070;
+}
+
+
+.custom-range::-webkit-slider-thumb {
+  background: #fff;
+  border: 1px solid #f07070;
+}
+
+.edit-button{
+  color: #f07070;
+}
+
+.activities-container {
+  min-height: 54vh;
+}
+
+.account-setting-input {
+  border-radius: 5px;
+}
+
+.account-setting-text {
+  font-size: .75rem;
+}
+
+.overlap {
+  z-index: 1000;
+}
