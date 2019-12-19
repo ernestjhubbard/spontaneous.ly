@@ -17,7 +17,7 @@ Sponatenous.ly is an app that is designed for users that want to partake in a sp
 
 ### Preview
 
-![alt text](preview.png=250x250)
+![](preview.png | width=200)
 
 
 ### Figma
